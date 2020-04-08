@@ -38,6 +38,8 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     private Button btnDone = new Button("Done");
     private Button btnExit = new Button("Exit");
     private Player player;
+    private Player loadplayer;
+
 
     private TextField tfName;
     private boolean isset=false;
@@ -47,22 +49,24 @@ public class Game extends Application implements EventHandler<ActionEvent> {
         JAXBHelper.toXML(player, new FileOutputStream("player_data.xml"));
     }
     private void readxml() throws FileNotFoundException, JAXBException {
-        Player loadplayer;
         loadplayer = JAXBHelper.fromXML(Player.class, new FileInputStream("player_data.xml"));
         System.out.println(loadplayer.getName());
         System.out.println(loadplayer.getitem(0).getName());
         tfName.setText(loadplayer.getName());
         isset=true;
+        player=loadplayer;
+
 
 
     }
 
-    public void start_game()
-    {
+    public void start_game() throws FileNotFoundException, JAXBException {
+        savetoxml();
         Game_scene.set_game();
         System.out.println("starting the game now...");
         primarystage.setScene(game_scene);
         primarystage.show();
+
     }
 
 
@@ -140,7 +144,13 @@ public class Game extends Application implements EventHandler<ActionEvent> {
                     e.printStackTrace();
                 }
                 isset=false;
-               start_game();
+                try {
+                    start_game();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (JAXBException e) {
+                    e.printStackTrace();
+                }
             }
             else{
                 System.out.println("isset false!");
