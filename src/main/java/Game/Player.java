@@ -22,6 +22,9 @@ public class Player {
     public ArrayList<Item> getItems() {
         return items;
     }
+    public Item getitem(int i) {
+        return items.get(i);
+    }
 
 
     public String getName() {
