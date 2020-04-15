@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,16 +24,17 @@ import jaxb.JAXBHelper;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Game extends Application implements EventHandler<ActionEvent> {
     private Stage primarystage;
-    private GridPane game_window = Game_scene.getGame_window();
+   // URL url = new File("src/main/Game/Game.fxml").toURI().toURL(); Parent root = FXMLLoader.load(url);
+
+
     private Scene game_scene = Game_scene.getGame_scene();
     private Button btnSubmit = new Button("Submit"),btn_loaddata = new Button("Load data");
     private Button btnDone = new Button("Done");
@@ -44,11 +46,14 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     private TextField tfName;
     private boolean isset=false;
 
-    private void savetoxml() throws FileNotFoundException, JAXBException {
+    public Game() throws IOException {
+    }
+
+    public void savetoxml() throws FileNotFoundException, JAXBException {
         JAXBHelper.toXML(player, System.out);
         JAXBHelper.toXML(player, new FileOutputStream("player_data.xml"));
     }
-    private void readxml() throws FileNotFoundException, JAXBException {
+    public void readxml() throws FileNotFoundException, JAXBException {
         loadplayer = JAXBHelper.fromXML(Player.class, new FileInputStream("player_data.xml"));
         System.out.println(loadplayer.getName());
         System.out.println(loadplayer.getitem(0).getName());
@@ -56,20 +61,23 @@ public class Game extends Application implements EventHandler<ActionEvent> {
         isset=true;
         player=loadplayer;
 
-
-
     }
 
-    public void start_game() throws FileNotFoundException, JAXBException {
+    public void start_game() throws IOException, JAXBException {
         savetoxml();
-        Game_scene.set_game();
+
         System.out.println("starting the game now...");
+        Controller.setPlayer(player);
+        primarystage.setResizable(false);
         primarystage.setScene(game_scene);
         primarystage.show();
 
     }
 
+    public static void main(String[] args) {
+        launch(args);
 
+    }
 
 
     @Override
@@ -103,14 +111,6 @@ public class Game extends Application implements EventHandler<ActionEvent> {
         Scene scene = new Scene(grid,640,480);
         primarystage.setScene(scene);
         primarystage.show();
-
-
-
-
-    }
-
-    public static void main(String[] args) {
-        launch(args);
 
     }
 
@@ -149,6 +149,8 @@ public class Game extends Application implements EventHandler<ActionEvent> {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (JAXBException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
