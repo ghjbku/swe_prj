@@ -24,12 +24,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
+    //variables
     private static Player player;
     private int incr=3;
     private boolean isset=false;
     private static boolean isok=false;
     private String path_start="/demo/swe_prj/target/classes/Game/";
 
+    //fxml variables
     @FXML
     private static String playername ="playername";
     @FXML
@@ -45,7 +47,7 @@ public class Controller implements Initializable{
     @FXML
     private Button save_button;
 
-
+    //fxml methods
 
     @FXML
     private void save() throws FileNotFoundException, JAXBException {
@@ -76,16 +78,18 @@ public class Controller implements Initializable{
         }
         else{}
     }
-    public static void setPlayer(Player player2) throws IOException {
-        player = player2;
-        playername=player.getName();
-        isok=true;
-    }
+
     @FXML
     public void setpic(){
         File file = new File(path_start+"Tree1.png");
         Image image = new Image(file.toURI().toString());
         player_fig.setImage(image);
+    }
+
+    public static void setPlayer(Player player2) throws IOException {
+        player = player2;
+        playername=player.getName();
+        isok=true;
     }
 
 
