@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="600" maxWidth="800" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: BLUE;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controller">
+<Pane fx:id="root" maxHeight="600" maxWidth="800" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: BLUE;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controller">
    <children>
-      <AnchorPane layoutX="-4.0" layoutY="20.0" onMouseEntered="#setpic" prefHeight="386.0" prefWidth="607.0">
+      <AnchorPane layoutX="-4.0" layoutY="20.0" prefHeight="386.0" prefWidth="607.0">
          <children>
             <ImageView fx:id="imageView" blendMode="SRC_ATOP" cache="true" depthTest="ENABLE" fitHeight="605.0" fitWidth="805.0" focusTraversable="true" layoutY="-25.0" pickOnBounds="true">
                <image>
                   <Image url="@background.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="player_fig" fitHeight="32.0" fitWidth="32.0" layoutY="30.0" pickOnBounds="true">
+               <image>
+                  <Image url="@Player_f.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <HBox prefHeight="100.0" prefWidth="600.0">
+      <HBox prefHeight="21.0" prefWidth="600.0">
          <children>
-            <Label alignment="CENTER" prefHeight="17.0" prefWidth="91.0" style="-fx-background-color: #ff0000;" text="Player Name:" textFill="#dcf500">
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="91.0" style="-fx-background-color: #ff0000;" text="Player info:" textFill="#dcf500">
                <font>
                   <Font size="13.0" />
                </font>
@@ -38,6 +44,28 @@
                   <Font size="13.0" />
                </font>
             </Label>
+            <Button fx:id="save_button" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#save" prefHeight="20.0" prefWidth="81.0" style="-fx-background-color: RED;" text="SAVE" textAlignment="CENTER" textFill="#eeff00" HBox.hgrow="ALWAYS">
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Button>
+            <Button fx:id="load_button" alignment="CENTER" layoutX="343.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#load" prefHeight="20.0" prefWidth="81.0" style="-fx-background-color: RED;" text="LOAD" textAlignment="CENTER" textFill="#eeff00">
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </opaqueInsets>
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
          </children>
       </HBox>
    </children>

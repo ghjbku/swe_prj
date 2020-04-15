@@ -10,14 +10,12 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
-import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import jaxb.JAXBHelper;
@@ -36,14 +34,16 @@ public class Game extends Application implements EventHandler<ActionEvent> {
 
 
     private Scene game_scene = Game_scene.getGame_scene();
-    private Button btnSubmit = new Button("Submit"),btn_loaddata = new Button("Load data");
-    private Button btnDone = new Button("Done");
+    private Button btnSubmit = new Button("Submit name"),btn_loaddata = new Button("Continue");
+    private Button btnDone = new Button("Start");
     private Button btnExit = new Button("Exit");
     private Player player;
     private Player loadplayer;
+    private Label lbl_gender;
 
 
     private TextField tfName;
+    private RadioButton male=new RadioButton("Male?");
     private boolean isset=false;
 
     public Game() throws IOException {
@@ -93,17 +93,20 @@ public class Game extends Application implements EventHandler<ActionEvent> {
         HBox hbButtons = new HBox();
         hbButtons.setSpacing(10.0);
         btnSubmit.setStyle("-fx-font-size: 15pt;");
+        male.setOnAction(this);
         btnSubmit.setOnAction(this);
         btnExit.setOnAction(this);
         btnDone.setOnAction(this);
         btn_loaddata.setOnAction(this);
         Label lblName = new Label("Player name:");
+        lbl_gender =new Label("GENDER: "+player.getgender());
         tfName = new TextField();
 
 
-        hbButtons.getChildren().addAll(btnSubmit, btnDone, btnExit,btn_loaddata);
+        hbButtons.getChildren().addAll(btnSubmit, btnDone, btnExit,btn_loaddata,male);
         grid.add(lblName, 0, 0);
         grid.add(tfName, 1, 0);
+        grid.add(lbl_gender,2,0);
         grid.add(hbButtons, 0, 1, 2, 1);
 
 
@@ -111,6 +114,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
         Scene scene = new Scene(grid,640,480);
         primarystage.setScene(scene);
         primarystage.show();
+
 
     }
 
@@ -121,6 +125,18 @@ public class Game extends Application implements EventHandler<ActionEvent> {
         if(actionEvent.getSource()==btnExit){
             System.out.println("button clicked");
             System.exit(0);
+        }
+        else if (actionEvent.getSource()==male){
+            System.out.println("male clicked!");
+            if (player.getgender()=="female"){
+                player.setgender("male");
+                lbl_gender.setText("GENDER: " +player.getgender());}
+
+            else if (player.getgender()=="male")
+            {
+                player.setgender("female");
+                lbl_gender.setText("GENDER: " +player.getgender());
+            }
         }
         else if(actionEvent.getSource()==btnSubmit){
             System.out.println("Name submitted!");
@@ -161,11 +177,15 @@ public class Game extends Application implements EventHandler<ActionEvent> {
         else if(actionEvent.getSource()==btn_loaddata){
             try {
                 readxml();
+                start_game();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (JAXBException e) {
                 e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
+
 }

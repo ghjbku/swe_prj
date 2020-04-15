@@ -1,5 +1,7 @@
 package Game;
 
+import javafx.scene.shape.Circle;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -8,9 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
-@XmlType(propOrder = {"name","items"})
+@XmlType(propOrder = {"name","items","posx","posy","gender"})
 public class Player {
     private String name;
+    private String gender="female";
+    private int posx=29,posy=47;
     private ArrayList<Item> items=new ArrayList<Item>();
 
     public Player(){}
@@ -26,12 +30,31 @@ public class Player {
         return items.get(i);
     }
 
-
+    public String getgender(){
+        return gender;
+    }
+    public void setgender(String gend){
+        this.gender=gend;
+    }
     public String getName() {
         return name;
     }
     public void setName(String name){
         this.name=name;
     }
+
+    public int getPosx(){
+        return posx;
+    };
+    public int getPosy(){
+        return posy;
+    };
+    public void setPosx(int x){
+        this.posx=x;
+    };
+    public void setPosy(int y){
+        this.posy=y;
+    };
+
 
 }
