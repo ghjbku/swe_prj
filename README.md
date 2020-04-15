@@ -3,4 +3,5 @@
 
 To run the project:
     
-    mvn clean javafx:run
+    mvn clean javafx:compile
+    mvn javafx:run
