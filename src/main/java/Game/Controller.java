@@ -1,21 +1,14 @@
 package Game;
 
-import javafx.event.EventHandler;
+import Game.game_objects.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import jaxb.JAXBHelper;
 
 import javax.xml.bind.JAXBException;
@@ -29,7 +22,7 @@ public class Controller implements Initializable{
     private int incr=3;
     private boolean isset=false;
     private static boolean isok=false;
-    private String path_start="/demo/swe_prj/target/classes/Game/";
+    private String picture_path_start ="/Game/pics/";
 
     //fxml variables
     @FXML
@@ -81,8 +74,8 @@ public class Controller implements Initializable{
 
     @FXML
     public void setpic(){
-        File file = new File(path_start+"Tree1.png");
-        Image image = new Image(file.toURI().toString());
+        File file = new File(String.valueOf(getClass().getResource(picture_path_start +"Tree1.png")));
+        Image image = new Image(file.toString());
         player_fig.setImage(image);
     }
 

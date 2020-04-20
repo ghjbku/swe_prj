@@ -1,4 +1,6 @@
-package Game;
+package Game.game_objects;
+
+import Game.Game;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

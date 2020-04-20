@@ -1,36 +1,25 @@
 package Game;
 
-import Game.window.Game_scene;
+import Game.game_objects.Item;
+import Game.game_objects.Player;
+import Game.game_window.Game_scene;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.*;
-import javafx.scene.canvas.*;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import jaxb.JAXBHelper;
 
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class Game extends Application implements EventHandler<ActionEvent> {
     private Stage primarystage;
-   // URL url = new File("src/main/Game/Game.fxml").toURI().toURL(); Parent root = FXMLLoader.load(url);
 
 
     private Scene game_scene = Game_scene.getGame_scene();
@@ -38,7 +27,6 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     private Button btnDone = new Button("Start");
     private Button btnExit = new Button("Exit");
     private Player player;
-    private Player loadplayer;
     private Label lbl_gender;
 
 
@@ -54,12 +42,12 @@ public class Game extends Application implements EventHandler<ActionEvent> {
         JAXBHelper.toXML(player, new FileOutputStream("player_data.xml"));
     }
     public void readxml() throws FileNotFoundException, JAXBException {
-        loadplayer = JAXBHelper.fromXML(Player.class, new FileInputStream("player_data.xml"));
+        Player loadplayer = JAXBHelper.fromXML(Player.class, new FileInputStream("player_data.xml"));
         System.out.println(loadplayer.getName());
         System.out.println(loadplayer.getitem(0).getName());
         tfName.setText(loadplayer.getName());
         isset=true;
-        player=loadplayer;
+        player= loadplayer;
 
     }
 

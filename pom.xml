@@ -21,6 +21,13 @@
       <organization>Faculty of Informatics, University of Debrecen</organization>
       <organizationUrl>https://shrek.unideb.hu/~windsake</organizationUrl>
     </developer>
+    <developer>
+      <id>Jeszy</id>
+      <name>Péter Jeszenszky</name>
+      <email>jeszenszky.peter@inf.unideb.hu</email>
+      <organization>Faculty of Informatics, University of Debrecen</organization>
+      <organizationUrl>https://www.inf.unideb.hu/</organizationUrl>
+    </developer>
   </developers>
 
   <dependencies>

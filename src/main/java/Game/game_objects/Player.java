@@ -1,13 +1,14 @@
-package Game;
+package Game.game_objects;
 
-import javafx.scene.shape.Circle;
+import Game.Game;
+import Game.game_objects.Item;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
-import java.util.List;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 @XmlType(propOrder = {"name","items","posx","posy","gender"})

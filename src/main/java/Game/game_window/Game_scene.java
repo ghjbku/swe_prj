@@ -1,13 +1,9 @@
-package Game.window;
+package Game.game_window;
 
 import Game.Game;
-import Game.Controller;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 
@@ -22,7 +18,6 @@ public class Game_scene {
         }
     }
 
-    private static Label somelabel = new Label();
 
     public Game_scene() throws IOException {
     }

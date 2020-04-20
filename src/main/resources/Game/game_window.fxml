@@ -12,12 +12,12 @@
          <children>
             <ImageView fx:id="imageView" blendMode="SRC_ATOP" cache="true" depthTest="ENABLE" fitHeight="605.0" fitWidth="805.0" focusTraversable="true" layoutY="-25.0" pickOnBounds="true">
                <image>
-                  <Image url="@background.png" />
+                  <Image url="@pics/background.png" />
                </image>
             </ImageView>
             <ImageView fx:id="player_fig" fitHeight="32.0" fitWidth="32.0" layoutY="30.0" pickOnBounds="true">
                <image>
-                  <Image url="@Player_f.png" />
+                  <Image url="@pics/Player_f.png" />
                </image>
             </ImageView>
          </children>
