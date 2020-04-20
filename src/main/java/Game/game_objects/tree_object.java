@@ -9,17 +9,15 @@ public class Tree_object implements Entity {
     private int x,y;
     private AnchorPane pane;
 
-    public Tree_object(int x, int y, Image image, AnchorPane image_pane){
-        ImageView tree_fig=new ImageView(image);
-        this.pane=image_pane;
+    public Tree_object(int x, int y, ImageView tree_fig, AnchorPane tree_pane){
+        this.pane=tree_pane;
         this.x=x;
         this.y=y;
 
-        tree_fig.setLayoutX(0);
-        tree_fig.setLayoutY(0);
-        tree_fig.setX(x);
-        tree_fig.setY(y);
-        pane.getChildren().add(tree_fig);
+        tree_fig.setLayoutX(x);
+        tree_fig.setLayoutY(y);
+        //pane.getChildren().add(tree_fig);
+        System.out.println(tree_fig.getLayoutX()+"= "+x+", "+y+"= "+tree_fig.getLayoutY());
     }
 
     public int getx(){ return x; }
