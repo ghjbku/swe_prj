@@ -22,23 +22,24 @@ public class Collosion {
     }
     public static void Collosion_detection(Player plr) {
         if (((Math.abs(65 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 65) < dist)) && ((Math.abs(216 - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - 216) < dist))) {
-            Controller.getfound().setVisible(true);
 
-            ArrayList<Item> item = Game.getItem();
-            if (item.size()==0 || (item.size()==1 && item.get(0).getName()=="Note")){
+            ArrayList<Item> item = plr.getItems();
+            if (item.size()==0 || ((item.get(0).getName()=="Note") &&item.size()==1)){
+
                 System.out.println("item added");
             item.add(new Item("dagger", 0, 65, 216));
             plr.setItems(item);}
-            else{}
+            else if(item.size()>1){}
         } else if (((Math.abs(475 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 475) < dist)) && ((Math.abs(16 - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - 16) < dist))) {
 
-            ArrayList<Item> item = Game.getItem();
-            if (item.size()==0 || (item.size()==1 && item.get(0).getName()=="dagger")) {
+            ArrayList<Item> item = plr.getItems();
+            if (item.size()==0 || ((item.get(0).getid()==0) &&item.size()==1)){
+                Controller.setcollided();
                 System.out.println("item added");
                 item.add(new Item("Note", 1, 475, 16));
                 plr.setItems(item);
             }
-            else { }
+            else if(item.size()>1){}
 
         }
 

@@ -64,10 +64,6 @@ public class Game extends Application implements EventHandler<ActionEvent> {
 
     }
 
-    public static ArrayList<Item> getItem(){
-        return item;
-    }
-
     public static void main(String[] args) {
         launch(args);
 
@@ -134,6 +130,9 @@ public class Game extends Application implements EventHandler<ActionEvent> {
         }
         else if(actionEvent.getSource()==btnSubmit){
             System.out.println("Name submitted!");
+            if (tfName.getText().isEmpty()){
+                tfName.setPromptText("The name Can't be left empty!");
+            }
             player.setName(tfName.getText());
 
             System.out.println(player.getName());

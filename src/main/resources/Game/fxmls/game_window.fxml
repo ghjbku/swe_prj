@@ -2,10 +2,8 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <Pane fx:id="root" maxHeight="600" maxWidth="800" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: BLUE;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controller">
@@ -374,18 +372,31 @@
                         <Image url="@../pics/Tree3.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="found_text" alignment="CENTER" contentDisplay="CENTER" layoutX="235.0" layoutY="283.0" text="Found Something! Save!" textAlignment="CENTER" textFill="RED" textOverrun="WORD_ELLIPSIS" visible="false">
-                     <font>
-                        <Font name="System Bold Italic" size="24.0" />
-                     </font>
-                     <effect>
-                        <DropShadow height="35.82" radius="19.634999999999998" spread="0.51" width="44.72">
-                           <color>
-                              <Color red="0.6299999952316284" green="0.5218992829322815" blue="0.01889999955892563" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                  </Label>
+                  <ImageView fx:id="bear" fitHeight="64.0" fitWidth="64.0" layoutX="730.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pics/Bear.png" />
+                     </image>
+                  </ImageView>
+                  <AnchorPane fx:id="inventory" layoutX="561.0" layoutY="18.0" visible="false">
+                     <children>
+                        <ListView fx:id="inv" opacity="0.79" prefHeight="200.0" prefWidth="200.0" />
+                        <Button fx:id="exit_inv" layoutX="170.0" layoutY="1.0" mnemonicParsing="false" onAction="#close_inv" prefHeight="30.0" prefWidth="0.0" style="-fx-background-color: RED;" text="X" textAlignment="CENTER" textFill="#fcfcfc" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <ImageView fx:id="note_fig_inv" fitHeight="64.0" fitWidth="64.0" layoutX="13.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@../pics/Note.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="dagger_fig_inv" fitHeight="64.0" fitWidth="64.0" layoutX="27.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@../pics/dagger.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
          </children>
@@ -424,6 +435,17 @@
                </font>
             </Button>
             <Button fx:id="load_button" alignment="CENTER" layoutX="343.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#load" prefHeight="20.0" prefWidth="81.0" style="-fx-background-color: RED;" text="LOAD" textAlignment="CENTER" textFill="#eeff00">
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </opaqueInsets>
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="load_button1" alignment="CENTER" layoutX="434.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#open_inv" prefHeight="20.0" prefWidth="81.0" style="-fx-background-color: RED;" text="Inventory" textAlignment="CENTER" textFill="#eeff00">
                <opaqueInsets>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>

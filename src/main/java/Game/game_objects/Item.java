@@ -21,6 +21,7 @@ public class Item {
     public String getName(){
         return name;
     }
+    public int getid(){return id;}
 
     public int getx() {
         return x;

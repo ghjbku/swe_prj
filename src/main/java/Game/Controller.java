@@ -9,11 +9,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import jaxb.JAXBHelper;
 
 import javax.xml.bind.JAXBException;
@@ -26,9 +31,10 @@ public class Controller implements Initializable{
     private static Player player;
     private int incr=2;
     private boolean isset=false;
-    private static boolean isok=false;
+    private static boolean isok=false,collided=false;
     private static int lastx=0,lasty=0;
-    private  static Item dagger,Note;
+
+
 
 
 
@@ -40,11 +46,11 @@ public class Controller implements Initializable{
     @FXML
     private Label score_label;
     @FXML
-    private static Label found_text=new Label();
-    @FXML
     Pane root = new Pane();
     @FXML
     private static AnchorPane tree_pane= new AnchorPane();
+    @FXML
+    private AnchorPane inventory;
 
 
         //fxml_figs
@@ -52,6 +58,14 @@ public class Controller implements Initializable{
         private ImageView player_fig;
         @FXML
         private ImageView tree_fig;
+        @FXML
+        private ImageView dagger_fig;
+        @FXML
+        private ImageView dagger_fig_inv;
+        @FXML
+        private ImageView note_fig;
+        @FXML
+        private ImageView note_fig_inv;
         @FXML
         private ImageView tree_fig1;
         @FXML
@@ -186,17 +200,14 @@ public class Controller implements Initializable{
         private ImageView tree_fig66;
         @FXML
         private ImageView tree_fig67;
-        @FXML
-        private ImageView dagger_fig;
-        @FXML
-        private ImageView note_fig;
+
 
     //fxml methods
     @FXML
     private void save() throws FileNotFoundException, JAXBException {
             JAXBHelper.toXML(player, System.out);
             JAXBHelper.toXML(player, new FileOutputStream("player_data.xml"));
-            found_text.setVisible(false);
+
 
     }
 
@@ -229,6 +240,38 @@ public class Controller implements Initializable{
 
     }
 
+    @FXML
+    private void open_inv(){
+        inventory.setVisible(true);
+
+        if (player.getItems().size()==0) {}
+        else if (player.getItems().size()>1){
+                if ((player.getitem(0).getid() == 0 && player.getitem(1).getid() == 1) || (player.getitem(0).getid() == 1 && player.getitem(1).getid() == 0)) {
+                    dagger_fig_inv.setVisible(true);
+                    note_fig_inv.setVisible(true);
+                    dagger_fig.setImage(null);
+                    note_fig.setImage(null);}
+                }
+
+        else if(player.getItems().size()==1){
+                if (player.getitem(0).getid() == 1) {
+                    note_fig.setImage(null);
+                    note_fig_inv.setVisible(true);
+                }
+                else if (player.getitem(0).getid() == 0) {
+                    dagger_fig.setImage(null);
+                    dagger_fig_inv.setVisible(true);
+                }
+        }
+
+        System.out.println("clicked!");
+    }
+
+    @FXML
+    private void close_inv(){
+    inventory.setVisible(false);
+    }
+
     public static void setPlayer(Player player2) throws IOException {
         player = player2;
         playername=player.getName();
@@ -240,9 +283,7 @@ public class Controller implements Initializable{
         Tree_object temp_tree = new Tree_object(x,y,tree,tree_pane);
         return getTree(temp_tree);
     }
-    public static Label getfound(){
-        return found_text;
-    }
+
 
 
     @Override
@@ -437,9 +478,14 @@ public class Controller implements Initializable{
     }
 
     public static int getLastx(){
+
+
         return lastx;
     }
     public static int getLasty(){return lasty;}
+    public static void setcollided(){
+        collided=true;
+    }
 
 
 
