@@ -2,7 +2,7 @@
 <player>
     <name>Windsake</name>
     <items id="1">dagger</items>
-    <posx>38</posx>
-    <posy>128</posy>
+    <posx>89</posx>
+    <posy>71</posy>
     <gender>male</gender>
 </player>

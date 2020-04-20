@@ -8,7 +8,7 @@
 
 <Pane fx:id="root" maxHeight="600" maxWidth="800" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: BLUE;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controller">
    <children>
-      <AnchorPane layoutX="-4.0" layoutY="20.0" prefHeight="386.0" prefWidth="607.0">
+      <AnchorPane fx:id="image_pane" layoutX="-4.0" layoutY="20.0" prefHeight="386.0" prefWidth="607.0">
          <children>
             <ImageView fx:id="imageView" blendMode="SRC_ATOP" cache="true" depthTest="ENABLE" fitHeight="605.0" fitWidth="805.0" focusTraversable="true" layoutY="-25.0" pickOnBounds="true">
                <image>
@@ -20,7 +20,10 @@
                   <Image url="@../pics/Player_f.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="tree_fig" fitHeight="32.0" fitWidth="32.0" layoutX="38.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="tree_fig" fitHeight="32.0" fitWidth="32.0" layoutX="38.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pics/Tree2.png" />
+               </image></ImageView>
          </children>
       </AnchorPane>
       <HBox prefHeight="21.0" prefWidth="600.0">

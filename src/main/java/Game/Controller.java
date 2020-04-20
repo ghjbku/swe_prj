@@ -1,7 +1,9 @@
 package Game;
 
+import Game.game_objects.Images;
 import Game.game_objects.Player;
 import Game.game_objects.Tree_object;
+import com.sun.source.tree.Tree;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -9,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import jaxb.JAXBHelper;
 
@@ -23,9 +26,7 @@ public class Controller implements Initializable{
     private int incr=3;
     private boolean isset=false;
     private static boolean isok=false;
-    public static String picture_path_start ="/Game/pics/";
-    private static Tree_object temp_tree;
-    private static Image tempimg;
+
 
     //fxml variables
     @FXML
@@ -37,7 +38,11 @@ public class Controller implements Initializable{
     @FXML
     Pane root = new Pane();
     @FXML
+    private static AnchorPane image_pane = new AnchorPane();
+    @FXML
     private ImageView player_fig;
+    @FXML
+    private ImageView tree_fig;
 
     //fxml methods
 
@@ -60,9 +65,6 @@ public class Controller implements Initializable{
         player_fig.setLayoutX(player.getPosx());
         player_fig.setLayoutY(player.getPosy());
 
-
-        generate_trees(38,71);
-
     }
 
     @FXML
@@ -76,9 +78,7 @@ public class Controller implements Initializable{
 
     @FXML
     public void setpic(){
-        File file = new File(String.valueOf(getClass().getResource(picture_path_start +"Tree1.png")));
-        Image image = new Image(file.toString());
-        player_fig.setImage(image);
+        player_fig.setImage(Images.playerm_image);
 
     }
 
@@ -88,43 +88,46 @@ public class Controller implements Initializable{
         isok=true;
     }
 
-    private static void generate_trees(int x, int y){
-        File file = new File(String.valueOf(Controller.class.getResource(picture_path_start +"Tree1.png")));
-        tempimg= new Image(file.toString());
 
-       Tree_object temp_tree2 = new Tree_object(x,y,tempimg);
-
-       temp_tree=temp_tree2;
-
-        System.out.println(temp_tree.getx()+","+temp_tree.gety());
+    public Tree_object settrees(int x, int y, Image tree){
+        Tree_object temp_tree = new Tree_object(x,y,tree,image_pane);
+        return temp_tree;
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+       Tree_object tree = settrees(44,71,Images.tree1_image);
+        Tree_object tree2= settrees(32,71,Images.tree1_image);
+
+
 
         //player movement
         root.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.A) {
                 player.setPosx(player.getPosx()-incr);
                 player_fig.setLayoutX(player.getPosx());
-                Collosion.Collosion_detection(player,temp_tree);
+                Collosion.Collosion_detection(player,tree);
+                Collosion.Collosion_detection(player,tree2);
 
             }
             else if(e.getCode() == KeyCode.D){
                 player.setPosx(player.getPosx()+incr);
                 player_fig.setLayoutX(player.getPosx());
-                Collosion.Collosion_detection(player,temp_tree);
+                Collosion.Collosion_detection(player,tree);
+                Collosion.Collosion_detection(player,tree2);
             }
             else if(e.getCode() == KeyCode.W){
                 player.setPosy(player.getPosy()-incr);
                 player_fig.setLayoutY(player.getPosy());
-                Collosion.Collosion_detection(player,temp_tree);
+                Collosion.Collosion_detection(player,tree);
+                Collosion.Collosion_detection(player,tree2);
             }
             else if (e.getCode() == KeyCode.S){
                 player.setPosy(player.getPosy()+incr);
                 player_fig.setLayoutY(player.getPosy());
-                Collosion.Collosion_detection(player,temp_tree);
+                Collosion.Collosion_detection(player,tree);
+                Collosion.Collosion_detection(player,tree2);
             }
         });
     }
