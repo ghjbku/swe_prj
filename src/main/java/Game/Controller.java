@@ -1,6 +1,7 @@
 package Game;
 
 import Game.game_objects.Player;
+import Game.game_objects.Tree_object;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -22,7 +23,9 @@ public class Controller implements Initializable{
     private int incr=3;
     private boolean isset=false;
     private static boolean isok=false;
-    private String picture_path_start ="/Game/pics/";
+    public static String picture_path_start ="/Game/pics/";
+    private static Tree_object temp_tree;
+    private static Image tempimg;
 
     //fxml variables
     @FXML
@@ -32,13 +35,9 @@ public class Controller implements Initializable{
     @FXML
     private Label score_label;
     @FXML
-    private ImageView imageView;
-    @FXML
     Pane root = new Pane();
     @FXML
     private ImageView player_fig;
-    @FXML
-    private Button save_button;
 
     //fxml methods
 
@@ -61,6 +60,9 @@ public class Controller implements Initializable{
         player_fig.setLayoutX(player.getPosx());
         player_fig.setLayoutY(player.getPosy());
 
+
+        generate_trees(38,71);
+
     }
 
     @FXML
@@ -77,6 +79,7 @@ public class Controller implements Initializable{
         File file = new File(String.valueOf(getClass().getResource(picture_path_start +"Tree1.png")));
         Image image = new Image(file.toString());
         player_fig.setImage(image);
+
     }
 
     public static void setPlayer(Player player2) throws IOException {
@@ -85,26 +88,44 @@ public class Controller implements Initializable{
         isok=true;
     }
 
+    private static void generate_trees(int x, int y){
+        File file = new File(String.valueOf(Controller.class.getResource(picture_path_start +"Tree1.png")));
+        tempimg= new Image(file.toString());
+
+       Tree_object temp_tree2 = new Tree_object(x,y,tempimg);
+
+       temp_tree=temp_tree2;
+
+        System.out.println(temp_tree.getx()+","+temp_tree.gety());
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println(player_fig.getLayoutX()+" ," + player_fig.getLayoutY());
+
+        //player movement
         root.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.A) {
                 player.setPosx(player.getPosx()-incr);
                 player_fig.setLayoutX(player.getPosx());
+                Collosion.Collosion_detection(player,temp_tree);
 
             }
             else if(e.getCode() == KeyCode.D){
                 player.setPosx(player.getPosx()+incr);
-                player_fig.setLayoutX(player.getPosx());}
+                player_fig.setLayoutX(player.getPosx());
+                Collosion.Collosion_detection(player,temp_tree);
+            }
             else if(e.getCode() == KeyCode.W){
                 player.setPosy(player.getPosy()-incr);
                 player_fig.setLayoutY(player.getPosy());
+                Collosion.Collosion_detection(player,temp_tree);
             }
             else if (e.getCode() == KeyCode.S){
                 player.setPosy(player.getPosy()+incr);
-                player_fig.setLayoutY(player.getPosy());}
+                player_fig.setLayoutY(player.getPosy());
+                Collosion.Collosion_detection(player,temp_tree);
+            }
         });
     }
 

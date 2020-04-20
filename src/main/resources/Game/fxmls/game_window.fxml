@@ -12,14 +12,15 @@
          <children>
             <ImageView fx:id="imageView" blendMode="SRC_ATOP" cache="true" depthTest="ENABLE" fitHeight="605.0" fitWidth="805.0" focusTraversable="true" layoutY="-25.0" pickOnBounds="true">
                <image>
-                  <Image url="@pics/background.png" />
+                  <Image url="@../pics/background.png" />
                </image>
             </ImageView>
             <ImageView fx:id="player_fig" fitHeight="32.0" fitWidth="32.0" layoutY="30.0" pickOnBounds="true">
                <image>
-                  <Image url="@pics/Player_f.png" />
+                  <Image url="@../pics/Player_f.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="tree_fig" fitHeight="32.0" fitWidth="32.0" layoutX="38.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
       <HBox prefHeight="21.0" prefWidth="600.0">
