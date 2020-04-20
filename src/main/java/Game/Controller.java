@@ -31,6 +31,7 @@ public class Controller implements Initializable{
     private  static Item dagger,Note;
 
 
+
     //fxml variables
     @FXML
     private static String playername ="playername";
@@ -38,6 +39,8 @@ public class Controller implements Initializable{
     private Label playername_label=new Label(playername);
     @FXML
     private Label score_label;
+    @FXML
+    private static Label found_text=new Label();
     @FXML
     Pane root = new Pane();
     @FXML
@@ -193,6 +196,7 @@ public class Controller implements Initializable{
     private void save() throws FileNotFoundException, JAXBException {
             JAXBHelper.toXML(player, System.out);
             JAXBHelper.toXML(player, new FileOutputStream("player_data.xml"));
+            found_text.setVisible(false);
 
     }
 
@@ -235,6 +239,9 @@ public class Controller implements Initializable{
     public Tree_object settrees(int x, int y, ImageView tree){
         Tree_object temp_tree = new Tree_object(x,y,tree,tree_pane);
         return getTree(temp_tree);
+    }
+    public static Label getfound(){
+        return found_text;
     }
 
 
@@ -299,6 +306,8 @@ public class Controller implements Initializable{
 
 
                 //collosion detection
+                          //for items
+                        Collosion.Collosion_detection(player);
                 Collosion.Collosion_detection(player, getTree(tree));
                 Collosion.Collosion_detection(player, getTree(tree1));
                 Collosion.Collosion_detection(player, getTree(tree2));
@@ -331,6 +340,8 @@ public class Controller implements Initializable{
                 player_fig.setLayoutX(player.getPosx());
 
                 //collosion detection
+                        //for items
+                        Collosion.Collosion_detection(player);
                 Collosion.Collosion_detection(player, getTree(tree));
                 Collosion.Collosion_detection(player, getTree(tree1));
                 Collosion.Collosion_detection(player, getTree(tree2));
@@ -361,6 +372,8 @@ public class Controller implements Initializable{
                 player_fig.setLayoutY(player.getPosy());
 
                 //collosion detection
+                   //for items
+                     Collosion.Collosion_detection(player);
                 Collosion.Collosion_detection(player, getTree(tree));
                 Collosion.Collosion_detection(player, getTree(tree1));
                 Collosion.Collosion_detection(player, getTree(tree2));
@@ -391,6 +404,8 @@ public class Controller implements Initializable{
                 player_fig.setLayoutY(player.getPosy());
 
                 //collosion detection
+                  //for items
+                    Collosion.Collosion_detection(player);
                 Collosion.Collosion_detection(player, getTree(tree));
                 Collosion.Collosion_detection(player, getTree(tree1));
                 Collosion.Collosion_detection(player, getTree(tree2));
@@ -425,6 +440,7 @@ public class Controller implements Initializable{
         return lastx;
     }
     public static int getLasty(){return lasty;}
+
 
 
 }

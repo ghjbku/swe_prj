@@ -2,8 +2,10 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <Pane fx:id="root" maxHeight="600" maxWidth="800" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: BLUE;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controller">
@@ -372,6 +374,18 @@
                         <Image url="@../pics/Tree3.png" />
                      </image>
                   </ImageView>
+                  <Label fx:id="found_text" alignment="CENTER" contentDisplay="CENTER" layoutX="235.0" layoutY="283.0" text="Found Something! Save!" textAlignment="CENTER" textFill="RED" textOverrun="WORD_ELLIPSIS" visible="false">
+                     <font>
+                        <Font name="System Bold Italic" size="24.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="35.82" radius="19.634999999999998" spread="0.51" width="44.72">
+                           <color>
+                              <Color red="0.6299999952316284" green="0.5218992829322815" blue="0.01889999955892563" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Label>
                </children>
             </AnchorPane>
          </children>

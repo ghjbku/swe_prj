@@ -11,6 +11,8 @@ public class Item {
     @XmlAttribute
     private int x,y;
 
+    public Item(){}
+
     public Item(String name,int id,int x,int y){
     this.name=name;
     this.id=id;

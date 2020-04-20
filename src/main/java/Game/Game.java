@@ -45,6 +45,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     public void readxml() throws FileNotFoundException, JAXBException {
         Player loadplayer = JAXBHelper.fromXML(Player.class, new FileInputStream("player_data.xml"));
         System.out.println(loadplayer.getName());
+        if (!item.isEmpty())
         System.out.println(loadplayer.getitem(0).getName());
         tfName.setText(loadplayer.getName());
         isset=true;
