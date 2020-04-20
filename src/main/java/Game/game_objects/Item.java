@@ -1,11 +1,6 @@
 package Game.game_objects;
 
-import Game.Game;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Item {
@@ -13,15 +8,23 @@ public class Item {
     private String name;
     @XmlAttribute
     private int id;
+    @XmlAttribute
+    private int x,y;
 
-    public Item(){}
-
-    public Item(String name,int id){
+    public Item(String name,int id,int x,int y){
     this.name=name;
     this.id=id;
     }
 
     public String getName(){
         return name;
+    }
+
+    public int getx() {
+        return x;
+    }
+
+    public int gety() {
+        return y;
     }
 }

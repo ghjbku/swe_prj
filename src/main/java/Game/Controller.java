@@ -1,6 +1,7 @@
 package Game;
 
 import Game.game_objects.Images;
+import Game.game_objects.Item;
 import Game.game_objects.Player;
 import Game.game_objects.Tree_object;
 import com.sun.source.tree.Tree;
@@ -27,6 +28,7 @@ public class Controller implements Initializable{
     private boolean isset=false;
     private static boolean isok=false;
     private static int lastx=0,lasty=0;
+    private  static Item dagger,Note;
 
 
     //fxml variables

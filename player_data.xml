@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <player>
-    <name>Windsake</name>
-    <items id="1">dagger</items>
-    <posx>58</posx>
-    <posy>242</posy>
+    <name>windsake</name>
+    <items id="1" x="0" y="0">dagger</items>
+    <posx>83</posx>
+    <posy>213</posy>
     <gender>male</gender>
 </player>

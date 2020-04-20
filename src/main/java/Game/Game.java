@@ -28,6 +28,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     private Button btnExit = new Button("Exit");
     private Player player;
     private Label lbl_gender;
+    static ArrayList<Item> item = new ArrayList<Item>();
 
 
     private TextField tfName;
@@ -60,6 +61,10 @@ public class Game extends Application implements EventHandler<ActionEvent> {
         primarystage.setScene(game_scene);
         primarystage.show();
 
+    }
+
+    public static ArrayList<Item> getItem(){
+        return item;
     }
 
     public static void main(String[] args) {
@@ -129,9 +134,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
         else if(actionEvent.getSource()==btnSubmit){
             System.out.println("Name submitted!");
             player.setName(tfName.getText());
-            ArrayList<Item> item = new ArrayList<Item>();
-            item.add(new Item("dagger",1));
-            player.setItems(item);
+
             System.out.println(player.getName());
             isset=true;
         }
