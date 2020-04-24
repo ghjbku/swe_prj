@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class Game extends Application implements EventHandler<ActionEvent> {
     private Stage primarystage;
+    Controller controller = new Controller();
 
 
     private Scene game_scene = Game_scene.getGame_scene();
