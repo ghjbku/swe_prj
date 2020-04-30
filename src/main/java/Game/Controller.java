@@ -289,7 +289,7 @@ public class Controller implements Initializable{
 
     private void raiseScore(int score){
         if(collided){
-            score=score+1;
+            score=score+10;
             score_label.setText(((String.valueOf(score))));
             player.setscore(score);
         }
@@ -352,6 +352,14 @@ public class Controller implements Initializable{
         Tree_object tree19= settrees((int) tree_fig19.getLayoutX(), (int) tree_fig19.getLayoutY(),tree_fig19);
         Tree_object tree20 = settrees((int) tree_fig20.getLayoutX(), (int) tree_fig20.getLayoutY(),tree_fig20);
         Tree_object tree21= settrees((int) tree_fig21.getLayoutX(), (int) tree_fig21.getLayoutY(),tree_fig21);
+        Tree_object tree22= settrees((int) tree_fig22.getLayoutX(), (int) tree_fig22.getLayoutY(),tree_fig22);
+        Tree_object tree23= settrees((int) tree_fig23.getLayoutX(), (int) tree_fig23.getLayoutY(),tree_fig23);
+        Tree_object tree24= settrees((int) tree_fig24.getLayoutX(), (int) tree_fig24.getLayoutY(),tree_fig24);
+        Tree_object tree25= settrees((int) tree_fig25.getLayoutX(), (int) tree_fig25.getLayoutY(),tree_fig25);
+        Tree_object tree26= settrees((int) tree_fig26.getLayoutX(), (int) tree_fig26.getLayoutY(),tree_fig26);
+        Tree_object tree27= settrees((int) tree_fig27.getLayoutX(), (int) tree_fig27.getLayoutY(),tree_fig27);
+        Tree_object tree28= settrees((int) tree_fig28.getLayoutX(), (int) tree_fig28.getLayoutY(),tree_fig28);
+        Tree_object tree29= settrees((int) tree_fig29.getLayoutX(), (int) tree_fig29.getLayoutY(),tree_fig29);
 
 
 
@@ -408,10 +416,17 @@ public class Controller implements Initializable{
                 Collosion.Collosion_detection(this,player, getTree(tree19));
                 Collosion.Collosion_detection(this,player, getTree(tree20));
                 Collosion.Collosion_detection(this,player, getTree(tree21));
-
+                Collosion.Collosion_detection(this,player, getTree(tree22));
+                Collosion.Collosion_detection(this,player, getTree(tree23));
+                Collosion.Collosion_detection(this,player, getTree(tree24));
+                Collosion.Collosion_detection(this,player, getTree(tree25));
+                Collosion.Collosion_detection(this,player, getTree(tree26));
+                Collosion.Collosion_detection(this,player, getTree(tree27));
+                Collosion.Collosion_detection(this,player, getTree(tree28));
+                Collosion.Collosion_detection(this,player, getTree(tree29));
 
             }
-            else if(e.getCode() == KeyCode.D){
+             if(e.getCode() == KeyCode.D){
                 lastx=player.getPosx();
                 lasty=player.getPosy();
                 player.setPosx(player.getPosx()+incr);
@@ -442,8 +457,16 @@ public class Controller implements Initializable{
                 Collosion.Collosion_detection(this,player, getTree(tree19));
                 Collosion.Collosion_detection(this,player, getTree(tree20));
                 Collosion.Collosion_detection(this,player, getTree(tree21));
+                Collosion.Collosion_detection(this,player, getTree(tree22));
+                Collosion.Collosion_detection(this,player, getTree(tree23));
+                Collosion.Collosion_detection(this,player, getTree(tree24));
+                Collosion.Collosion_detection(this,player, getTree(tree25));
+                Collosion.Collosion_detection(this,player, getTree(tree26));
+                Collosion.Collosion_detection(this,player, getTree(tree27));
+                Collosion.Collosion_detection(this,player, getTree(tree28));
+                Collosion.Collosion_detection(this,player, getTree(tree29));
             }
-            else if(e.getCode() == KeyCode.W){
+             if(e.getCode() == KeyCode.W){
                 lastx=player.getPosx();
                 lasty=player.getPosy();
                 player.setPosy(player.getPosy()-incr);
@@ -474,8 +497,16 @@ public class Controller implements Initializable{
                 Collosion.Collosion_detection(this,player, getTree(tree19));
                 Collosion.Collosion_detection(this,player, getTree(tree20));
                 Collosion.Collosion_detection(this,player, getTree(tree21));
+                Collosion.Collosion_detection(this,player, getTree(tree22));
+                Collosion.Collosion_detection(this,player, getTree(tree23));
+                Collosion.Collosion_detection(this,player, getTree(tree24));
+                Collosion.Collosion_detection(this,player, getTree(tree25));
+                Collosion.Collosion_detection(this,player, getTree(tree26));
+                Collosion.Collosion_detection(this,player, getTree(tree27));
+                Collosion.Collosion_detection(this,player, getTree(tree28));
+                Collosion.Collosion_detection(this,player, getTree(tree29));
             }
-            else if (e.getCode() == KeyCode.S){
+            if (e.getCode() == KeyCode.S){
                 lastx=player.getPosx();
                 lasty=player.getPosy();
                 player.setPosy(player.getPosy()+incr);
@@ -506,6 +537,14 @@ public class Controller implements Initializable{
                 Collosion.Collosion_detection(this,player, getTree(tree19));
                 Collosion.Collosion_detection(this,player, getTree(tree20));
                 Collosion.Collosion_detection(this,player, getTree(tree21));
+                Collosion.Collosion_detection(this,player, getTree(tree22));
+                Collosion.Collosion_detection(this,player, getTree(tree23));
+                Collosion.Collosion_detection(this,player, getTree(tree24));
+                Collosion.Collosion_detection(this,player, getTree(tree25));
+                Collosion.Collosion_detection(this,player, getTree(tree26));
+                Collosion.Collosion_detection(this,player, getTree(tree27));
+                Collosion.Collosion_detection(this,player, getTree(tree28));
+                Collosion.Collosion_detection(this,player, getTree(tree29));
             }
         });
     }

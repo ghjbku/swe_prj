@@ -6,6 +6,8 @@
   <packaging>jar</packaging>
   <version>1.0</version>
 
+  <description>RPG game project for Software Engineering class.</description>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
@@ -19,16 +21,44 @@
       <name>Balázs Tóth</name>
       <email>windsake@mailbox.unideb.hu</email>
       <organization>Faculty of Informatics, University of Debrecen</organization>
-      <organizationUrl>https://shrek.unideb.hu/~windsake</organizationUrl>
-    </developer>
-    <developer>
-      <id>Jeszy</id>
-      <name>Péter Jeszenszky</name>
-      <email>jeszenszky.peter@inf.unideb.hu</email>
-      <organization>Faculty of Informatics, University of Debrecen</organization>
-      <organizationUrl>https://www.inf.unideb.hu/</organizationUrl>
+      <url>https://shrek.unideb.hu/~windsake</url>
+      <roles>
+        <role>Owner</role>
+        <role>Developer</role>
+      </roles>
     </developer>
   </developers>
+
+  <contributors>
+    <contributor>
+      <name>Péter Jeszenszky</name>
+      <email>jeszenszky.peter@inf.unideb.hu</email>
+      <roles>
+        <role>JAXBHelper class contributor</role>
+        <role>Teacher</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Márta Nagy</name>
+      <roles>
+        <role>Teacher</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Kristián Nagy</name>
+      <roles>
+        <role>helped with movement bugs</role>
+      </roles>
+    </contributor>
+  </contributors>
+
+  <scm>
+    <connection>scm:git:https://github.com/ghjbku/swe_prj.git  </connection>
+    <developerConnection>scm:git:https://github.com/ghjbku/swe_prj.git  </developerConnection>
+    <url>https://github.com/ghjbku/swe_prj.git  </url>
+    <tag>nemtom mi ez</tag>
+  </scm>
+
 
   <dependencies>
     <dependency>
