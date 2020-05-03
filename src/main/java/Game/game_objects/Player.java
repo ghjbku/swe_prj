@@ -23,10 +23,10 @@ public class Player {
     public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
-
     public ArrayList<Item> getItems() {
         return items;
     }
+
     public Item getitem(int i) {
         return items.get(i);
     }
@@ -37,6 +37,7 @@ public class Player {
     public void setgender(String gend){
         this.gender=gend;
     }
+
     public String getName() {
         return name;
     }
@@ -50,12 +51,14 @@ public class Player {
     public int getPosy(){
         return posy;
     };
+
     public void setPosx(int x){
         this.posx=x;
     };
     public void setPosy(int y){
         this.posy=y;
     };
+
     public int getscore(){return score;};
     public void setscore(int scr){score=scr;};
 

@@ -396,7 +396,7 @@
                            </image>
                         </ImageView>
                         <Label fx:id="note_desc" layoutX="87.0" layoutY="21.0" prefHeight="81.0" prefWidth="80.0" text="A strange note with some numbers on it: 42113421" visible="false" wrapText="true" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="11.0" />
-                        <Label fx:id="dagger_desc" layoutX="87.0" layoutY="108.0" prefHeight="81.0" prefWidth="80.0" text="A Dagger... It might help if fight breaks out" visible="false" wrapText="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="33.0" />
+                        <Label fx:id="dagger_desc" layoutX="87.0" layoutY="108.0" prefHeight="81.0" prefWidth="80.0" text="A Dagger... It might help if a fight breaks out" visible="false" wrapText="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="33.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="text_pane" disable="true" layoutX="104.0" layoutY="376.0" opacity="0.9" prefHeight="180.0" prefWidth="565.0" style="-fx-background-color: orange;" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="104.0" AnchorPane.rightAnchor="131.0">

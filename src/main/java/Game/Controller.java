@@ -288,7 +288,6 @@ public class Controller implements Initializable{
                 }
         }
     }
-
     @FXML
     private void close_inv(){
     inventory.setVisible(false);
@@ -302,13 +301,10 @@ public class Controller implements Initializable{
         isok=true;
     }
 
-
     public Tree_object settrees(int x, int y, ImageView tree){
         Tree_object temp_tree = new Tree_object(x,y,tree, entity_pane);
         return getTree(temp_tree);
     }
-
-
 
     private void raiseScore(int score){
         if(collided){
