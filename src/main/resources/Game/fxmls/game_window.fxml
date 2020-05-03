@@ -385,12 +385,12 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <ImageView fx:id="note_fig_inv" fitHeight="64.0" fitWidth="64.0" layoutX="13.0" layoutY="17.0" onMouseClicked="#open_desc" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.topAnchor="11.0">
+                        <ImageView fx:id="note_fig_inv" fitHeight="64.0" fitWidth="64.0" layoutX="13.0" layoutY="17.0" onMouseClicked="#open_note_desc" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.topAnchor="11.0">
                            <image>
                               <Image url="@../pics/Note.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="dagger_fig_inv" fitHeight="64.0" fitWidth="81.0" layoutX="10.0" layoutY="108.0" onMouseClicked="#open_desc" pickOnBounds="true" preserveRatio="true" visible="false">
+                        <ImageView fx:id="dagger_fig_inv" fitHeight="64.0" fitWidth="81.0" layoutX="10.0" layoutY="108.0" onMouseClicked="#open_dagger_desc" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
                               <Image url="@../pics/dagger.png" />
                            </image>

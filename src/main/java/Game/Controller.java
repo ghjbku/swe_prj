@@ -253,9 +253,13 @@ public class Controller implements Initializable{
     }
 
     @FXML
-    private void open_desc(){
+    private void open_note_desc(){
         System.out.printf("clicked desc!");
         note_desc.setVisible(true);
+    }
+    @FXML
+    private void open_dagger_desc(){
+        System.out.printf("clicked desc!");
         dagger_desc.setVisible(true);
     }
 
@@ -283,8 +287,6 @@ public class Controller implements Initializable{
                     dagger_fig_inv.setVisible(true);
                 }
         }
-
-        System.out.println("clicked!");
     }
 
     @FXML
