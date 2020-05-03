@@ -41,12 +41,16 @@ public class Controller implements Initializable{
     private Label playername_label=new Label(playername);
     @FXML
     private Label score_label = new Label();
+
     @FXML
     Pane root = new Pane();
     @FXML
     private static AnchorPane entity_pane = new AnchorPane();
     @FXML
     private AnchorPane inventory;
+    @FXML
+    private Label dagger_desc,note_desc;
+
     @FXML
     private AnchorPane text_pane;
 
@@ -249,6 +253,13 @@ public class Controller implements Initializable{
     }
 
     @FXML
+    private void open_desc(){
+        System.out.printf("clicked desc!");
+        note_desc.setVisible(true);
+        dagger_desc.setVisible(true);
+    }
+
+    @FXML
     private void open_inv(){
         inventory.setVisible(true);
 
@@ -279,6 +290,8 @@ public class Controller implements Initializable{
     @FXML
     private void close_inv(){
     inventory.setVisible(false);
+        note_desc.setVisible(false);
+        dagger_desc.setVisible(false);
     }
 
     public static void setPlayer(Player player2) throws IOException {
