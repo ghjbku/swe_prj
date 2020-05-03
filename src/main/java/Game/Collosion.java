@@ -1,9 +1,6 @@
 package Game;
 
-import Game.game_objects.Entity;
-import Game.game_objects.Item;
-import Game.game_objects.Player;
-import Game.game_objects.Tree_object;
+import Game.game_objects.*;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
@@ -17,6 +14,10 @@ public class Collosion {
 
             plr.setPosx(Controller.getLastx());
             plr.setPosy(Controller.getLasty());
+
+            if (obj.getClass().equals(Bear.class)){
+                System.out.println("its a bear!!!");
+            }
 
         }
         return true;
