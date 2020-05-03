@@ -1,9 +1,6 @@
 package Game;
 
-import Game.game_objects.Images;
-import Game.game_objects.Item;
-import Game.game_objects.Player;
-import Game.game_objects.Tree_object;
+import Game.game_objects.*;
 import com.sun.source.tree.Tree;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,11 +30,13 @@ public class Controller implements Initializable{
     private boolean isset=false;
     private static boolean isok=false,collided=false,ready=false;
     private static int lastx=0,lasty=0;
+    private Bear bear;
 
     //declaring the tree objects
     private Tree_object tree,tree1,tree2,tree3,tree4,tree5,tree6,tree7,tree8,tree9,tree10,tree11,tree12,tree13,tree14,tree15,tree16;
     private Tree_object tree17,tree18,tree19,tree20,tree21,tree22,tree23,tree24,tree25,tree26,tree27,tree28,tree29,tree30,tree31,tree32,tree33;
     private Tree_object tree34,tree35,tree36,tree37,tree38,tree39,tree40,tree41,tree42,tree43,tree44,tree45,tree46,tree47,tree48,tree49,tree50,tree51,tree52,tree53;
+    private Tree_object tree54,tree55,tree56,tree57,tree58,tree59,tree60,tree61,tree62,tree63,tree64,tree65,tree66,tree67;
 
 
 
@@ -71,6 +70,8 @@ public class Controller implements Initializable{
         private ImageView note_fig;
         @FXML
         private ImageView note_fig_inv;
+        @FXML
+        private ImageView bear_fig;
         @FXML
         private ImageView tree_fig1;
         @FXML
@@ -331,8 +332,15 @@ public class Controller implements Initializable{
         }
     }
 
+    //method for collosion detection
     private void collosionDetect(){
+        //collosion with bear
+        Collosion.Collosion_detection(this,player,bear);
+
+        //collosion detection between items and player
         Collosion.Collosion_detection(this,player);
+
+        //collosion detection between trees and player
         Collosion.Collosion_detection(this,player, getTree(tree));
         Collosion.Collosion_detection(this,player, getTree(tree1));
         Collosion.Collosion_detection(this,player, getTree(tree2));
@@ -364,14 +372,50 @@ public class Controller implements Initializable{
         Collosion.Collosion_detection(this,player, getTree(tree28));
         Collosion.Collosion_detection(this,player, getTree(tree29));
         Collosion.Collosion_detection(this,player, getTree(tree30));
-
+        Collosion.Collosion_detection(this,player, getTree(tree31));
+        Collosion.Collosion_detection(this,player, getTree(tree32));
+        Collosion.Collosion_detection(this,player, getTree(tree33));
+        Collosion.Collosion_detection(this,player, getTree(tree34));
+        Collosion.Collosion_detection(this,player, getTree(tree35));
+        Collosion.Collosion_detection(this,player, getTree(tree36));
+        Collosion.Collosion_detection(this,player, getTree(tree37));
+        Collosion.Collosion_detection(this,player, getTree(tree38));
+        Collosion.Collosion_detection(this,player, getTree(tree39));
+        Collosion.Collosion_detection(this,player, getTree(tree40));
+        Collosion.Collosion_detection(this,player, getTree(tree41));
+        Collosion.Collosion_detection(this,player, getTree(tree42));
+        Collosion.Collosion_detection(this,player, getTree(tree43));
+        Collosion.Collosion_detection(this,player, getTree(tree44));
+        Collosion.Collosion_detection(this,player, getTree(tree45));
+        Collosion.Collosion_detection(this,player, getTree(tree46));
+        Collosion.Collosion_detection(this,player, getTree(tree47));
+        Collosion.Collosion_detection(this,player, getTree(tree48));
+        Collosion.Collosion_detection(this,player, getTree(tree49));
+        Collosion.Collosion_detection(this,player, getTree(tree50));
+        Collosion.Collosion_detection(this,player, getTree(tree51));
+        Collosion.Collosion_detection(this,player, getTree(tree52));
+        Collosion.Collosion_detection(this,player, getTree(tree53));
+        Collosion.Collosion_detection(this,player, getTree(tree54));
+        Collosion.Collosion_detection(this,player, getTree(tree55));
+        Collosion.Collosion_detection(this,player, getTree(tree56));
+        Collosion.Collosion_detection(this,player, getTree(tree57));
+        Collosion.Collosion_detection(this,player, getTree(tree58));
+        Collosion.Collosion_detection(this,player, getTree(tree59));
+        Collosion.Collosion_detection(this,player, getTree(tree60));
+        Collosion.Collosion_detection(this,player, getTree(tree61));
+        Collosion.Collosion_detection(this,player, getTree(tree62));
+        Collosion.Collosion_detection(this,player, getTree(tree63));
+        Collosion.Collosion_detection(this,player, getTree(tree64));
+        Collosion.Collosion_detection(this,player, getTree(tree65));
+        Collosion.Collosion_detection(this,player, getTree(tree66));
+        Collosion.Collosion_detection(this,player, getTree(tree67));
     }
 
+    //method to initialize trees
     public void inittrees() {
          tree = settrees((int) tree_fig.getLayoutX(), (int) tree_fig.getLayoutY(),tree_fig);
-        System.out.println("tree: "+tree.getx()+","+tree.gety());
-        tree1 = settrees((int) tree_fig1.getLayoutX(), (int) tree_fig1.getLayoutY(),tree_fig1);
-        tree2 = settrees((int) tree_fig2.getLayoutX(), (int) tree_fig2.getLayoutY(),tree_fig2);
+         tree1 = settrees((int) tree_fig1.getLayoutX(), (int) tree_fig1.getLayoutY(),tree_fig1);
+         tree2 = settrees((int) tree_fig2.getLayoutX(), (int) tree_fig2.getLayoutY(),tree_fig2);
          tree3= settrees((int) tree_fig3.getLayoutX(), (int) tree_fig3.getLayoutY(),tree_fig3);
          tree4 = settrees((int) tree_fig4.getLayoutX(), (int) tree_fig4.getLayoutY(),tree_fig4);
          tree5= settrees((int) tree_fig5.getLayoutX(), (int) tree_fig5.getLayoutY(),tree_fig5);
@@ -399,14 +443,49 @@ public class Controller implements Initializable{
          tree27= settrees((int) tree_fig27.getLayoutX(), (int) tree_fig27.getLayoutY(),tree_fig27);
          tree28= settrees((int) tree_fig28.getLayoutX(), (int) tree_fig28.getLayoutY(),tree_fig28);
          tree29= settrees((int) tree_fig29.getLayoutX(), (int) tree_fig29.getLayoutY(),tree_fig29);
-        tree30= settrees((int) tree_fig30.getLayoutX(), (int) tree_fig30.getLayoutY(),tree_fig30);
-
-
+         tree30= settrees((int) tree_fig30.getLayoutX(), (int) tree_fig30.getLayoutY(),tree_fig30);
+         tree31= settrees((int) tree_fig31.getLayoutX(), (int) tree_fig31.getLayoutY(),tree_fig31);
+         tree32= settrees((int) tree_fig32.getLayoutX(), (int) tree_fig32.getLayoutY(),tree_fig32);
+         tree33= settrees((int) tree_fig33.getLayoutX(), (int) tree_fig33.getLayoutY(),tree_fig33);
+         tree34= settrees((int) tree_fig34.getLayoutX(), (int) tree_fig34.getLayoutY(),tree_fig34);
+         tree35= settrees((int) tree_fig35.getLayoutX(), (int) tree_fig35.getLayoutY(),tree_fig35);
+         tree36= settrees((int) tree_fig36.getLayoutX(), (int) tree_fig36.getLayoutY(),tree_fig36);
+         tree37= settrees((int) tree_fig37.getLayoutX(), (int) tree_fig37.getLayoutY(),tree_fig37);
+         tree38= settrees((int) tree_fig38.getLayoutX(), (int) tree_fig38.getLayoutY(),tree_fig38);
+         tree39= settrees((int) tree_fig39.getLayoutX(), (int) tree_fig39.getLayoutY(),tree_fig39);
+         tree40= settrees((int) tree_fig40.getLayoutX(), (int) tree_fig40.getLayoutY(),tree_fig40);
+         tree41= settrees((int) tree_fig41.getLayoutX(), (int) tree_fig41.getLayoutY(),tree_fig41);
+         tree42= settrees((int) tree_fig42.getLayoutX(), (int) tree_fig42.getLayoutY(),tree_fig42);
+         tree43= settrees((int) tree_fig43.getLayoutX(), (int) tree_fig43.getLayoutY(),tree_fig43);
+         tree44= settrees((int) tree_fig44.getLayoutX(), (int) tree_fig44.getLayoutY(),tree_fig44);
+         tree45= settrees((int) tree_fig45.getLayoutX(), (int) tree_fig45.getLayoutY(),tree_fig45);
+         tree46= settrees((int) tree_fig46.getLayoutX(), (int) tree_fig46.getLayoutY(),tree_fig46);
+         tree47= settrees((int) tree_fig47.getLayoutX(), (int) tree_fig47.getLayoutY(),tree_fig47);
+         tree48= settrees((int) tree_fig48.getLayoutX(), (int) tree_fig48.getLayoutY(),tree_fig48);
+         tree49= settrees((int) tree_fig49.getLayoutX(), (int) tree_fig49.getLayoutY(),tree_fig49);
+         tree50= settrees((int) tree_fig50.getLayoutX(), (int) tree_fig50.getLayoutY(),tree_fig50);
+         tree51= settrees((int) tree_fig51.getLayoutX(), (int) tree_fig51.getLayoutY(),tree_fig51);
+         tree52= settrees((int) tree_fig52.getLayoutX(), (int) tree_fig52.getLayoutY(),tree_fig52);
+         tree53= settrees((int) tree_fig53.getLayoutX(), (int) tree_fig53.getLayoutY(),tree_fig53);
+         tree54= settrees((int) tree_fig54.getLayoutX(), (int) tree_fig54.getLayoutY(),tree_fig54);
+         tree55= settrees((int) tree_fig55.getLayoutX(), (int) tree_fig55.getLayoutY(),tree_fig55);
+         tree56= settrees((int) tree_fig56.getLayoutX(), (int) tree_fig56.getLayoutY(),tree_fig56);
+         tree57= settrees((int) tree_fig57.getLayoutX(), (int) tree_fig57.getLayoutY(),tree_fig57);
+         tree58= settrees((int) tree_fig58.getLayoutX(), (int) tree_fig58.getLayoutY(),tree_fig58);
+         tree59= settrees((int) tree_fig59.getLayoutX(), (int) tree_fig59.getLayoutY(),tree_fig59);
+         tree60= settrees((int) tree_fig60.getLayoutX(), (int) tree_fig60.getLayoutY(),tree_fig60);
+         tree61= settrees((int) tree_fig61.getLayoutX(), (int) tree_fig61.getLayoutY(),tree_fig61);
+         tree62= settrees((int) tree_fig62.getLayoutX(), (int) tree_fig62.getLayoutY(),tree_fig62);
+         tree63= settrees((int) tree_fig63.getLayoutX(), (int) tree_fig63.getLayoutY(),tree_fig63);
+         tree64= settrees((int) tree_fig64.getLayoutX(), (int) tree_fig64.getLayoutY(),tree_fig64);
+         tree65= settrees((int) tree_fig65.getLayoutX(), (int) tree_fig65.getLayoutY(),tree_fig65);
+         tree66= settrees((int) tree_fig66.getLayoutX(), (int) tree_fig66.getLayoutY(),tree_fig66);
+         tree67= settrees((int) tree_fig67.getLayoutX(), (int) tree_fig67.getLayoutY(),tree_fig67);
     }
+
     public Tree_object getTree(Tree_object tree) {
         return tree;
     }
-
 
     private void movement(){
         root.setOnKeyPressed(e -> {
@@ -460,6 +539,10 @@ public class Controller implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         //initializing trees
        inittrees();
+
+       //init the bear
+        bear = new Bear(730,314,bear_fig,tree_pane);
+
         //player movement
         movement();
 

@@ -2,8 +2,8 @@
 <player>
     <name>windsake</name>
     <items id="0" x="0" y="0">dagger</items>
-    <posx>47</posx>
-    <posy>223</posy>
+    <posx>487</posx>
+    <posy>361</posy>
     <gender>male</gender>
     <score>10</score>
 </player>
