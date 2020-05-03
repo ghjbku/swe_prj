@@ -34,6 +34,11 @@ public class Controller implements Initializable{
     private static boolean isok=false,collided=false,ready=false;
     private static int lastx=0,lasty=0;
 
+    //declaring the tree objects
+    private Tree_object tree,tree1,tree2,tree3,tree4,tree5,tree6,tree7,tree8,tree9,tree10,tree11,tree12,tree13,tree14,tree15,tree16;
+    private Tree_object tree17,tree18,tree19,tree20,tree21,tree22,tree23,tree24,tree25,tree26,tree27,tree28,tree29,tree30,tree31,tree32,tree33;
+    private Tree_object tree34,tree35,tree36,tree37,tree38,tree39,tree40,tree41,tree42,tree43,tree44,tree45,tree46,tree47,tree48,tree49,tree50,tree51,tree52,tree53;
+
 
 
 
@@ -247,7 +252,8 @@ public class Controller implements Initializable{
 
         if (player.getItems().size()==0) {}
         else if (player.getItems().size()>1){
-                if ((player.getitem(0).getid() == 0 && player.getitem(1).getid() == 1) || (player.getitem(0).getid() == 1 && player.getitem(1).getid() == 0)) {
+                if ((player.getitem(0).getid() == 0 && player.getitem(1).getid() == 1) ||
+                    (player.getitem(0).getid() == 1 && player.getitem(1).getid() == 0)) {
                     dagger_fig_inv.setVisible(true);
                     note_fig_inv.setVisible(true);
                     dagger_fig.setImage(null);
@@ -325,61 +331,84 @@ public class Controller implements Initializable{
         }
     }
 
+    private void collosionDetect(){
+        Collosion.Collosion_detection(this,player);
+        Collosion.Collosion_detection(this,player, getTree(tree));
+        Collosion.Collosion_detection(this,player, getTree(tree1));
+        Collosion.Collosion_detection(this,player, getTree(tree2));
+        Collosion.Collosion_detection(this,player, getTree(tree3));
+        Collosion.Collosion_detection(this,player, getTree(tree4));
+        Collosion.Collosion_detection(this,player, getTree(tree5));
+        Collosion.Collosion_detection(this,player, getTree(tree6));
+        Collosion.Collosion_detection(this,player, getTree(tree7));
+        Collosion.Collosion_detection(this,player, getTree(tree8));
+        Collosion.Collosion_detection(this,player, getTree(tree9));
+        Collosion.Collosion_detection(this,player, getTree(tree10));
+        Collosion.Collosion_detection(this,player, getTree(tree11));
+        Collosion.Collosion_detection(this,player, getTree(tree12));
+        Collosion.Collosion_detection(this,player, getTree(tree13));
+        Collosion.Collosion_detection(this,player, getTree(tree14));
+        Collosion.Collosion_detection(this,player, getTree(tree15));
+        Collosion.Collosion_detection(this,player, getTree(tree16));
+        Collosion.Collosion_detection(this,player, getTree(tree17));
+        Collosion.Collosion_detection(this,player, getTree(tree18));
+        Collosion.Collosion_detection(this,player, getTree(tree19));
+        Collosion.Collosion_detection(this,player, getTree(tree20));
+        Collosion.Collosion_detection(this,player, getTree(tree21));
+        Collosion.Collosion_detection(this,player, getTree(tree22));
+        Collosion.Collosion_detection(this,player, getTree(tree23));
+        Collosion.Collosion_detection(this,player, getTree(tree24));
+        Collosion.Collosion_detection(this,player, getTree(tree25));
+        Collosion.Collosion_detection(this,player, getTree(tree26));
+        Collosion.Collosion_detection(this,player, getTree(tree27));
+        Collosion.Collosion_detection(this,player, getTree(tree28));
+        Collosion.Collosion_detection(this,player, getTree(tree29));
+        Collosion.Collosion_detection(this,player, getTree(tree30));
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //initializing trees
-       Tree_object tree = settrees((int) tree_fig.getLayoutX(), (int) tree_fig.getLayoutY(),tree_fig);
+    }
+
+    public void inittrees() {
+         tree = settrees((int) tree_fig.getLayoutX(), (int) tree_fig.getLayoutY(),tree_fig);
         System.out.println("tree: "+tree.getx()+","+tree.gety());
-       Tree_object tree1= settrees((int) tree_fig1.getLayoutX(), (int) tree_fig1.getLayoutY(),tree_fig1);
-        Tree_object tree2 = settrees((int) tree_fig2.getLayoutX(), (int) tree_fig2.getLayoutY(),tree_fig2);
-        Tree_object tree3= settrees((int) tree_fig3.getLayoutX(), (int) tree_fig3.getLayoutY(),tree_fig3);
-        Tree_object tree4 = settrees((int) tree_fig4.getLayoutX(), (int) tree_fig4.getLayoutY(),tree_fig4);
-        Tree_object tree5= settrees((int) tree_fig5.getLayoutX(), (int) tree_fig5.getLayoutY(),tree_fig5);
-        Tree_object tree6 = settrees((int) tree_fig6.getLayoutX(), (int) tree_fig6.getLayoutY(),tree_fig6);
-        Tree_object tree7= settrees((int) tree_fig7.getLayoutX(), (int) tree_fig7.getLayoutY(),tree_fig7);
-        Tree_object tree8 = settrees((int) tree_fig8.getLayoutX(), (int) tree_fig8.getLayoutY(),tree_fig8);
-        Tree_object tree9= settrees((int) tree_fig9.getLayoutX(), (int) tree_fig9.getLayoutY(),tree_fig9);
-        Tree_object tree10 = settrees((int) tree_fig10.getLayoutX(), (int) tree_fig10.getLayoutY(),tree_fig10);
-        Tree_object tree11= settrees((int) tree_fig11.getLayoutX(), (int) tree_fig11.getLayoutY(),tree_fig11);
-        Tree_object tree12 = settrees((int) tree_fig12.getLayoutX(), (int) tree_fig12.getLayoutY(),tree_fig12);
-        Tree_object tree13= settrees((int) tree_fig13.getLayoutX(), (int) tree_fig13.getLayoutY(),tree_fig13);
-        Tree_object tree14 = settrees((int) tree_fig14.getLayoutX(), (int) tree_fig14.getLayoutY(),tree_fig14);
-        Tree_object tree15= settrees((int) tree_fig15.getLayoutX(), (int) tree_fig15.getLayoutY(),tree_fig15);
-        Tree_object tree16 = settrees((int) tree_fig16.getLayoutX(), (int) tree_fig16.getLayoutY(),tree_fig16);
-        Tree_object tree17= settrees((int) tree_fig17.getLayoutX(), (int) tree_fig17.getLayoutY(),tree_fig17);
-        Tree_object tree18 = settrees((int) tree_fig18.getLayoutX(), (int) tree_fig18.getLayoutY(),tree_fig18);
-        Tree_object tree19= settrees((int) tree_fig19.getLayoutX(), (int) tree_fig19.getLayoutY(),tree_fig19);
-        Tree_object tree20 = settrees((int) tree_fig20.getLayoutX(), (int) tree_fig20.getLayoutY(),tree_fig20);
-        Tree_object tree21= settrees((int) tree_fig21.getLayoutX(), (int) tree_fig21.getLayoutY(),tree_fig21);
-        Tree_object tree22= settrees((int) tree_fig22.getLayoutX(), (int) tree_fig22.getLayoutY(),tree_fig22);
-        Tree_object tree23= settrees((int) tree_fig23.getLayoutX(), (int) tree_fig23.getLayoutY(),tree_fig23);
-        Tree_object tree24= settrees((int) tree_fig24.getLayoutX(), (int) tree_fig24.getLayoutY(),tree_fig24);
-        Tree_object tree25= settrees((int) tree_fig25.getLayoutX(), (int) tree_fig25.getLayoutY(),tree_fig25);
-        Tree_object tree26= settrees((int) tree_fig26.getLayoutX(), (int) tree_fig26.getLayoutY(),tree_fig26);
-        Tree_object tree27= settrees((int) tree_fig27.getLayoutX(), (int) tree_fig27.getLayoutY(),tree_fig27);
-        Tree_object tree28= settrees((int) tree_fig28.getLayoutX(), (int) tree_fig28.getLayoutY(),tree_fig28);
-        Tree_object tree29= settrees((int) tree_fig29.getLayoutX(), (int) tree_fig29.getLayoutY(),tree_fig29);
+        tree1 = settrees((int) tree_fig1.getLayoutX(), (int) tree_fig1.getLayoutY(),tree_fig1);
+        tree2 = settrees((int) tree_fig2.getLayoutX(), (int) tree_fig2.getLayoutY(),tree_fig2);
+         tree3= settrees((int) tree_fig3.getLayoutX(), (int) tree_fig3.getLayoutY(),tree_fig3);
+         tree4 = settrees((int) tree_fig4.getLayoutX(), (int) tree_fig4.getLayoutY(),tree_fig4);
+         tree5= settrees((int) tree_fig5.getLayoutX(), (int) tree_fig5.getLayoutY(),tree_fig5);
+         tree6 = settrees((int) tree_fig6.getLayoutX(), (int) tree_fig6.getLayoutY(),tree_fig6);
+         tree7= settrees((int) tree_fig7.getLayoutX(), (int) tree_fig7.getLayoutY(),tree_fig7);
+         tree8 = settrees((int) tree_fig8.getLayoutX(), (int) tree_fig8.getLayoutY(),tree_fig8);
+         tree9= settrees((int) tree_fig9.getLayoutX(), (int) tree_fig9.getLayoutY(),tree_fig9);
+         tree10 = settrees((int) tree_fig10.getLayoutX(), (int) tree_fig10.getLayoutY(),tree_fig10);
+         tree11= settrees((int) tree_fig11.getLayoutX(), (int) tree_fig11.getLayoutY(),tree_fig11);
+         tree12 = settrees((int) tree_fig12.getLayoutX(), (int) tree_fig12.getLayoutY(),tree_fig12);
+         tree13= settrees((int) tree_fig13.getLayoutX(), (int) tree_fig13.getLayoutY(),tree_fig13);
+         tree14 = settrees((int) tree_fig14.getLayoutX(), (int) tree_fig14.getLayoutY(),tree_fig14);
+         tree15= settrees((int) tree_fig15.getLayoutX(), (int) tree_fig15.getLayoutY(),tree_fig15);
+         tree16 = settrees((int) tree_fig16.getLayoutX(), (int) tree_fig16.getLayoutY(),tree_fig16);
+         tree17= settrees((int) tree_fig17.getLayoutX(), (int) tree_fig17.getLayoutY(),tree_fig17);
+         tree18 = settrees((int) tree_fig18.getLayoutX(), (int) tree_fig18.getLayoutY(),tree_fig18);
+         tree19= settrees((int) tree_fig19.getLayoutX(), (int) tree_fig19.getLayoutY(),tree_fig19);
+         tree20 = settrees((int) tree_fig20.getLayoutX(), (int) tree_fig20.getLayoutY(),tree_fig20);
+         tree21= settrees((int) tree_fig21.getLayoutX(), (int) tree_fig21.getLayoutY(),tree_fig21);
+         tree22= settrees((int) tree_fig22.getLayoutX(), (int) tree_fig22.getLayoutY(),tree_fig22);
+         tree23= settrees((int) tree_fig23.getLayoutX(), (int) tree_fig23.getLayoutY(),tree_fig23);
+         tree24= settrees((int) tree_fig24.getLayoutX(), (int) tree_fig24.getLayoutY(),tree_fig24);
+         tree25= settrees((int) tree_fig25.getLayoutX(), (int) tree_fig25.getLayoutY(),tree_fig25);
+         tree26= settrees((int) tree_fig26.getLayoutX(), (int) tree_fig26.getLayoutY(),tree_fig26);
+         tree27= settrees((int) tree_fig27.getLayoutX(), (int) tree_fig27.getLayoutY(),tree_fig27);
+         tree28= settrees((int) tree_fig28.getLayoutX(), (int) tree_fig28.getLayoutY(),tree_fig28);
+         tree29= settrees((int) tree_fig29.getLayoutX(), (int) tree_fig29.getLayoutY(),tree_fig29);
+        tree30= settrees((int) tree_fig30.getLayoutX(), (int) tree_fig30.getLayoutY(),tree_fig30);
 
 
+    }
+    public Tree_object getTree(Tree_object tree) {
+        return tree;
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //player movement
+    private void movement(){
         root.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.A) {
                 lastx=player.getPosx();
@@ -387,175 +416,78 @@ public class Controller implements Initializable{
                 player.setPosx(player.getPosx()-incr);
                 player_fig.setLayoutX(player.getPosx());
 
-
-
-
-
                 //collosion detection
-                          //for items
-                Collosion.Collosion_detection(this,player);
-                Collosion.Collosion_detection(this,player, getTree(tree));
-                Collosion.Collosion_detection(this,player, getTree(tree1));
-                Collosion.Collosion_detection(this,player, getTree(tree2));
-                Collosion.Collosion_detection(this,player, getTree(tree3));
-                Collosion.Collosion_detection(this,player, getTree(tree4));
-                Collosion.Collosion_detection(this,player, getTree(tree5));
-                Collosion.Collosion_detection(this,player, getTree(tree6));
-                Collosion.Collosion_detection(this,player, getTree(tree7));
-                Collosion.Collosion_detection(this,player, getTree(tree8));
-                Collosion.Collosion_detection(this,player, getTree(tree9));
-                Collosion.Collosion_detection(this,player, getTree(tree10));
-                Collosion.Collosion_detection(this,player, getTree(tree11));
-                Collosion.Collosion_detection(this,player, getTree(tree12));
-                Collosion.Collosion_detection(this,player, getTree(tree13));
-                Collosion.Collosion_detection(this,player, getTree(tree14));
-                Collosion.Collosion_detection(this,player, getTree(tree15));
-                Collosion.Collosion_detection(this,player, getTree(tree16));
-                Collosion.Collosion_detection(this,player, getTree(tree17));
-                Collosion.Collosion_detection(this,player, getTree(tree18));
-                Collosion.Collosion_detection(this,player, getTree(tree19));
-                Collosion.Collosion_detection(this,player, getTree(tree20));
-                Collosion.Collosion_detection(this,player, getTree(tree21));
-                Collosion.Collosion_detection(this,player, getTree(tree22));
-                Collosion.Collosion_detection(this,player, getTree(tree23));
-                Collosion.Collosion_detection(this,player, getTree(tree24));
-                Collosion.Collosion_detection(this,player, getTree(tree25));
-                Collosion.Collosion_detection(this,player, getTree(tree26));
-                Collosion.Collosion_detection(this,player, getTree(tree27));
-                Collosion.Collosion_detection(this,player, getTree(tree28));
-                Collosion.Collosion_detection(this,player, getTree(tree29));
+                //for items
+               collosionDetect();
 
             }
-             if(e.getCode() == KeyCode.D){
+            else if(e.getCode() == KeyCode.D){
                 lastx=player.getPosx();
                 lasty=player.getPosy();
                 player.setPosx(player.getPosx()+incr);
                 player_fig.setLayoutX(player.getPosx());
 
                 //collosion detection
-                        //for items
-                        Collosion.Collosion_detection(this,player);
-                Collosion.Collosion_detection(this,player, getTree(tree));
-                Collosion.Collosion_detection(this,player, getTree(tree1));
-                Collosion.Collosion_detection(this,player, getTree(tree2));
-                Collosion.Collosion_detection(this,player, getTree(tree3));
-                Collosion.Collosion_detection(this,player, getTree(tree4));
-                Collosion.Collosion_detection(this,player, getTree(tree5));
-                Collosion.Collosion_detection(this,player, getTree(tree6));
-                Collosion.Collosion_detection(this,player, getTree(tree7));
-                Collosion.Collosion_detection(this,player, getTree(tree8));
-                Collosion.Collosion_detection(this,player, getTree(tree9));
-                Collosion.Collosion_detection(this,player, getTree(tree10));
-                Collosion.Collosion_detection(this,player, getTree(tree11));
-                Collosion.Collosion_detection(this,player, getTree(tree12));
-                Collosion.Collosion_detection(this,player, getTree(tree13));
-                Collosion.Collosion_detection(this,player, getTree(tree14));
-                Collosion.Collosion_detection(this,player, getTree(tree15));
-                Collosion.Collosion_detection(this,player, getTree(tree16));
-                Collosion.Collosion_detection(this,player, getTree(tree17));
-                Collosion.Collosion_detection(this,player, getTree(tree18));
-                Collosion.Collosion_detection(this,player, getTree(tree19));
-                Collosion.Collosion_detection(this,player, getTree(tree20));
-                Collosion.Collosion_detection(this,player, getTree(tree21));
-                Collosion.Collosion_detection(this,player, getTree(tree22));
-                Collosion.Collosion_detection(this,player, getTree(tree23));
-                Collosion.Collosion_detection(this,player, getTree(tree24));
-                Collosion.Collosion_detection(this,player, getTree(tree25));
-                Collosion.Collosion_detection(this,player, getTree(tree26));
-                Collosion.Collosion_detection(this,player, getTree(tree27));
-                Collosion.Collosion_detection(this,player, getTree(tree28));
-                Collosion.Collosion_detection(this,player, getTree(tree29));
+                //for items
+               collosionDetect();
             }
-             if(e.getCode() == KeyCode.W){
+            if(e.getCode() == KeyCode.W){
                 lastx=player.getPosx();
                 lasty=player.getPosy();
                 player.setPosy(player.getPosy()-incr);
                 player_fig.setLayoutY(player.getPosy());
 
                 //collosion detection
-                   //for items
-                Collosion.Collosion_detection(this,player);
-                Collosion.Collosion_detection(this,player, getTree(tree));
-                Collosion.Collosion_detection(this,player, getTree(tree1));
-                Collosion.Collosion_detection(this,player, getTree(tree2));
-                Collosion.Collosion_detection(this,player, getTree(tree3));
-                Collosion.Collosion_detection(this,player, getTree(tree4));
-                Collosion.Collosion_detection(this,player, getTree(tree5));
-                Collosion.Collosion_detection(this,player, getTree(tree6));
-                Collosion.Collosion_detection(this,player, getTree(tree7));
-                Collosion.Collosion_detection(this,player, getTree(tree8));
-                Collosion.Collosion_detection(this,player, getTree(tree9));
-                Collosion.Collosion_detection(this,player, getTree(tree10));
-                Collosion.Collosion_detection(this,player, getTree(tree11));
-                Collosion.Collosion_detection(this,player, getTree(tree12));
-                Collosion.Collosion_detection(this,player, getTree(tree13));
-                Collosion.Collosion_detection(this,player, getTree(tree14));
-                Collosion.Collosion_detection(this,player, getTree(tree15));
-                Collosion.Collosion_detection(this,player, getTree(tree16));
-                Collosion.Collosion_detection(this,player, getTree(tree17));
-                Collosion.Collosion_detection(this,player, getTree(tree18));
-                Collosion.Collosion_detection(this,player, getTree(tree19));
-                Collosion.Collosion_detection(this,player, getTree(tree20));
-                Collosion.Collosion_detection(this,player, getTree(tree21));
-                Collosion.Collosion_detection(this,player, getTree(tree22));
-                Collosion.Collosion_detection(this,player, getTree(tree23));
-                Collosion.Collosion_detection(this,player, getTree(tree24));
-                Collosion.Collosion_detection(this,player, getTree(tree25));
-                Collosion.Collosion_detection(this,player, getTree(tree26));
-                Collosion.Collosion_detection(this,player, getTree(tree27));
-                Collosion.Collosion_detection(this,player, getTree(tree28));
-                Collosion.Collosion_detection(this,player, getTree(tree29));
+                //for items
+                collosionDetect();
             }
-            if (e.getCode() == KeyCode.S){
+            else if (e.getCode() == KeyCode.S){
                 lastx=player.getPosx();
                 lasty=player.getPosy();
                 player.setPosy(player.getPosy()+incr);
                 player_fig.setLayoutY(player.getPosy());
 
                 //collosion detection
-                  //for items
-                Collosion.Collosion_detection(this,player);
-                Collosion.Collosion_detection(this,player, getTree(tree));
-                Collosion.Collosion_detection(this,player, getTree(tree1));
-                Collosion.Collosion_detection(this,player, getTree(tree2));
-                Collosion.Collosion_detection(this,player, getTree(tree3));
-                Collosion.Collosion_detection(this,player, getTree(tree4));
-                Collosion.Collosion_detection(this,player, getTree(tree5));
-                Collosion.Collosion_detection(this,player, getTree(tree6));
-                Collosion.Collosion_detection(this,player, getTree(tree7));
-                Collosion.Collosion_detection(this,player, getTree(tree8));
-                Collosion.Collosion_detection(this,player, getTree(tree9));
-                Collosion.Collosion_detection(this,player, getTree(tree10));
-                Collosion.Collosion_detection(this,player, getTree(tree11));
-                Collosion.Collosion_detection(this,player, getTree(tree12));
-                Collosion.Collosion_detection(this,player, getTree(tree13));
-                Collosion.Collosion_detection(this,player, getTree(tree14));
-                Collosion.Collosion_detection(this,player, getTree(tree15));
-                Collosion.Collosion_detection(this,player, getTree(tree16));
-                Collosion.Collosion_detection(this,player, getTree(tree17));
-                Collosion.Collosion_detection(this,player, getTree(tree18));
-                Collosion.Collosion_detection(this,player, getTree(tree19));
-                Collosion.Collosion_detection(this,player, getTree(tree20));
-                Collosion.Collosion_detection(this,player, getTree(tree21));
-                Collosion.Collosion_detection(this,player, getTree(tree22));
-                Collosion.Collosion_detection(this,player, getTree(tree23));
-                Collosion.Collosion_detection(this,player, getTree(tree24));
-                Collosion.Collosion_detection(this,player, getTree(tree25));
-                Collosion.Collosion_detection(this,player, getTree(tree26));
-                Collosion.Collosion_detection(this,player, getTree(tree27));
-                Collosion.Collosion_detection(this,player, getTree(tree28));
-                Collosion.Collosion_detection(this,player, getTree(tree29));
+                //for items
+                collosionDetect();
             }
         });
+
+    }
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //initializing trees
+       inittrees();
+        //player movement
+        movement();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
 
     public static int getLastx(){ return lastx; }
     public static int getLasty(){return lasty;}
-    private Tree_object getTree(Tree_object tree) {
-        return tree;
-    }
+
 }
 
 
