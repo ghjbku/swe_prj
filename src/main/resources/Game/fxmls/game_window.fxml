@@ -397,13 +397,13 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="text_pane" layoutX="104.0" layoutY="376.0" prefHeight="200.0" prefWidth="565.0" style="-fx-background-color: orange;" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="104.0" AnchorPane.rightAnchor="131.0">
+                  <AnchorPane fx:id="text_pane" disable="true" layoutX="104.0" layoutY="376.0" opacity="0.9" prefHeight="180.0" prefWidth="565.0" style="-fx-background-color: orange;" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="104.0" AnchorPane.rightAnchor="131.0">
                      <children>
                         <Label alignment="CENTER" layoutX="14.0" layoutY="12.0" prefHeight="100.0" prefWidth="538.0" style="-fx-background-color: white;" text="text" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="12.5" AnchorPane.topAnchor="10.0" />
-                        <Label alignment="CENTER" layoutX="14.0" layoutY="125.0" prefHeight="20.0" prefWidth="237.0" style="-fx-background-color: gray;" text="option1" AnchorPane.leftAnchor="20.0" />
-                        <Label alignment="CENTER" layoutX="14.0" layoutY="157.0" prefHeight="20.0" prefWidth="237.0" style="-fx-background-color: gray;" text="option2" AnchorPane.leftAnchor="20.0" />
-                        <Label alignment="CENTER" layoutX="271.0" layoutY="125.0" prefHeight="20.0" prefWidth="237.0" style="-fx-background-color: gray;" text="option3" AnchorPane.rightAnchor="20.0" />
-                        <Label alignment="CENTER" layoutX="271.0" layoutY="157.0" prefHeight="20.0" prefWidth="237.0" style="-fx-background-color: gray;" text="option4" AnchorPane.rightAnchor="20.0" />
+                        <Label alignment="CENTER" layoutX="14.0" layoutY="125.0" prefHeight="20.0" prefWidth="237.0" style="-fx-background-color: gray;" text="option1" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" />
+                        <Label alignment="CENTER" layoutX="14.0" layoutY="157.0" prefHeight="20.0" prefWidth="237.0" style="-fx-background-color: gray;" text="option2" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" />
+                        <Label alignment="CENTER" layoutX="271.0" layoutY="125.0" prefHeight="20.0" prefWidth="237.0" style="-fx-background-color: gray;" text="option3" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="20.0" />
+                        <Label alignment="CENTER" layoutX="271.0" layoutY="157.0" prefHeight="20.0" prefWidth="237.0" style="-fx-background-color: gray;" text="option4" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
                </children>

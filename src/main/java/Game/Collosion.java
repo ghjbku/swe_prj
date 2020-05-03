@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 
 public class Collosion {
-    private static int dist = 8;
+    private static int dist = 10;
     public Collosion(){}
     public static boolean Collosion_detection(Controller controller,Player plr, Entity obj){
 
