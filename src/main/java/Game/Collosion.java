@@ -17,6 +17,7 @@ public class Collosion {
 
             if (obj.getClass().equals(Bear.class)){
                 System.out.println("its a bear!!!");
+                controller.open_text_pane();
             }
 
         }

@@ -1,21 +1,13 @@
 package Game;
 
 import Game.game_objects.*;
-import com.sun.source.tree.Tree;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Effect;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import jaxb.JAXBHelper;
 
 import javax.xml.bind.JAXBException;
@@ -28,7 +20,7 @@ public class Controller implements Initializable{
     private static Player player;
     private int incr=2;
     private boolean isset=false;
-    private static boolean isok=false,collided=false,ready=false;
+    private static boolean isok=false,collided=false,ready=false,can_move=true;
     private static int lastx=0,lasty=0;
     private Bear bear;
 
@@ -52,9 +44,11 @@ public class Controller implements Initializable{
     @FXML
     Pane root = new Pane();
     @FXML
-    private static AnchorPane tree_pane= new AnchorPane();
+    private static AnchorPane entity_pane = new AnchorPane();
     @FXML
     private AnchorPane inventory;
+    @FXML
+    private AnchorPane text_pane;
 
 
         //fxml_figs
@@ -213,8 +207,6 @@ public class Controller implements Initializable{
     private void save() throws FileNotFoundException, JAXBException {
             JAXBHelper.toXML(player, System.out);
             JAXBHelper.toXML(player, new FileOutputStream("player_data.xml"));
-
-
     }
 
     @FXML
@@ -229,9 +221,10 @@ public class Controller implements Initializable{
         player_fig.setLayoutX(player.getPosx());
         player_fig.setLayoutY(player.getPosy());
         isThere();
-
     }
 
+
+    //writes the name and gender of the player into the game
     @FXML
     private void setname() {
         if(isset==false){
@@ -245,6 +238,11 @@ public class Controller implements Initializable{
     public void setpic(){
         player_fig.setImage(Images.playerm_image);
 
+    }
+
+    public void open_text_pane(){
+        text_pane.setVisible(true);
+        can_move = false;
     }
 
     @FXML
@@ -288,7 +286,7 @@ public class Controller implements Initializable{
 
 
     public Tree_object settrees(int x, int y, ImageView tree){
-        Tree_object temp_tree = new Tree_object(x,y,tree,tree_pane);
+        Tree_object temp_tree = new Tree_object(x,y,tree, entity_pane);
         return getTree(temp_tree);
     }
 
@@ -489,46 +487,47 @@ public class Controller implements Initializable{
 
     private void movement(){
         root.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.A) {
-                lastx=player.getPosx();
-                lasty=player.getPosy();
-                player.setPosx(player.getPosx()-incr);
-                player_fig.setLayoutX(player.getPosx());
+            if(can_move==true) {
+                if (e.getCode() == KeyCode.A) {
+                    lastx = player.getPosx();
+                    lasty = player.getPosy();
+                    player.setPosx(player.getPosx() - incr);
+                    player_fig.setLayoutX(player.getPosx());
 
-                //collosion detection
-                //for items
-               collosionDetect();
+                    //collosion detection
+                    //for items
+                    collosionDetect();
 
-            }
-            else if(e.getCode() == KeyCode.D){
-                lastx=player.getPosx();
-                lasty=player.getPosy();
-                player.setPosx(player.getPosx()+incr);
-                player_fig.setLayoutX(player.getPosx());
+                } else if (e.getCode() == KeyCode.D) {
+                    lastx = player.getPosx();
+                    lasty = player.getPosy();
+                    player.setPosx(player.getPosx() + incr);
+                    player_fig.setLayoutX(player.getPosx());
 
-                //collosion detection
-                //for items
-               collosionDetect();
-            }
-            if(e.getCode() == KeyCode.W){
-                lastx=player.getPosx();
-                lasty=player.getPosy();
-                player.setPosy(player.getPosy()-incr);
-                player_fig.setLayoutY(player.getPosy());
+                    //collosion detection
+                    //for items
+                    collosionDetect();
+                }
+                if (e.getCode() == KeyCode.W) {
+                    lastx = player.getPosx();
+                    lasty = player.getPosy();
+                    player.setPosy(player.getPosy() - incr);
+                    player_fig.setLayoutY(player.getPosy());
 
-                //collosion detection
-                //for items
-                collosionDetect();
-            }
-            else if (e.getCode() == KeyCode.S){
-                lastx=player.getPosx();
-                lasty=player.getPosy();
-                player.setPosy(player.getPosy()+incr);
-                player_fig.setLayoutY(player.getPosy());
+                    //collosion detection
+                    //for items
+                    collosionDetect();
+                } else if (e.getCode() == KeyCode.S) {
+                    lastx = player.getPosx();
+                    lasty = player.getPosy();
+                    player.setPosy(player.getPosy() + incr);
+                    player_fig.setLayoutY(player.getPosy());
 
-                //collosion detection
-                //for items
-                collosionDetect();
+                    //collosion detection
+                    //for items
+                    collosionDetect();
+                }
+
             }
         });
 
@@ -541,7 +540,7 @@ public class Controller implements Initializable{
        inittrees();
 
        //init the bear
-        bear = new Bear(730,314,bear_fig,tree_pane);
+        bear = new Bear(730,314,bear_fig, entity_pane);
 
         //player movement
         movement();
