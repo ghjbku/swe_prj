@@ -1,5 +1,6 @@
 package Game.control_objects;
 
+import Game.Game;
 import Game.game_events.Fight;
 import Game.game_objects.*;
 import javafx.fxml.FXML;
@@ -12,22 +13,24 @@ import javafx.scene.layout.Pane;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable{
+public class ForestController implements Initializable{
     //variables
     private static Player player;
     private int incr=2;
     private boolean isset=false;
-    private static boolean isok=false;
-    private static boolean ready=false;
+    private boolean tpready=false;
     public boolean can_move=true;
     private Bear bear;
-    private Inventory inv = new Inventory(this);
     private Fight fight=new Fight(this);
     private XmlMethods xml_methods=new XmlMethods();
+    private CityController cityController=new CityController();
+    private Inventory inv = new Inventory(this);
+
 
     //declaring the tree objects
     private Tree_object tree,tree1,tree2,tree3,tree4,tree5,tree6,tree7,tree8,tree9,tree10,tree11,tree12,tree13,tree14,tree15,tree16;
@@ -214,6 +217,9 @@ public class Controller implements Initializable{
         @FXML
         private ImageView tree_fig67;
 
+    public ForestController() throws IOException {
+    }
+
 
     //fxml methods
     @FXML
@@ -227,6 +233,7 @@ public class Controller implements Initializable{
         setname();
         isset=true;
         if (loadplayer.getgender().equals("male")){setpic();}
+        if (loadplayer.getFought()){bear_fig.setVisible(false);}
         player=loadplayer;
         player_fig.setLayoutX(player.getPosx());
         player_fig.setLayoutY(player.getPosy());
@@ -310,7 +317,7 @@ public class Controller implements Initializable{
     public static void setPlayer(Player player2) {
         player = player2;
         playername=player.getName();
-        isok=true;
+        boolean isok = true;
     }
 
     public Tree_object settrees(int x, int y, ImageView tree){
@@ -353,15 +360,18 @@ public class Controller implements Initializable{
         }
     }
 
-    private void start_fight_after_bear_collides() throws CollosionException {
+    private void start_fight_after_bear_collides() throws CollosionException, FileNotFoundException, JAXBException, URISyntaxException {
         boolean can_start= Collosion.Collosion_detection(player,bear);
             if (can_start==false)
              {
-
                      fight.open_text_pane();
-
              }
         return;
+    }
+
+    private void change_to_city() throws FileNotFoundException, JAXBException, URISyntaxException {
+        if (tpready)
+        cityController.load_city(Game.getPrimarystage());
     }
 
     //method for collosion detection
@@ -371,6 +381,7 @@ public class Controller implements Initializable{
 
         //collosion detection between items and player
         Collosion.Collosion_detection_item(this,player);
+        change_to_city();
 
         //collosion detection between trees and player
         Collosion.Collosion_detection(player, getTree(tree));
@@ -530,12 +541,8 @@ public class Controller implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (CollosionException | URISyntaxException collosion_exception) {
+                    } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException collosion_exception) {
                         collosion_exception.printStackTrace();
-                    } catch (FileNotFoundException ex) {
-                        ex.printStackTrace();
-                    } catch (JAXBException ex) {
-                        ex.printStackTrace();
                     }
 
                 } if (e.getCode() == KeyCode.D) {
@@ -549,12 +556,8 @@ public class Controller implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (CollosionException | URISyntaxException collosion_exception) {
+                    } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException collosion_exception) {
                         collosion_exception.printStackTrace();
-                    } catch (FileNotFoundException ex) {
-                        ex.printStackTrace();
-                    } catch (JAXBException ex) {
-                        ex.printStackTrace();
                     }
                 }
                 if (e.getCode() == KeyCode.W) {
@@ -568,14 +571,8 @@ public class Controller implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (CollosionException collosion_exception) {
+                    } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException collosion_exception) {
                         collosion_exception.printStackTrace();
-                    } catch (FileNotFoundException ex) {
-                        ex.printStackTrace();
-                    } catch (JAXBException ex) {
-                        ex.printStackTrace();
-                    } catch (URISyntaxException ex) {
-                        ex.printStackTrace();
                     }
                 } if (e.getCode() == KeyCode.S) {
 
@@ -589,12 +586,8 @@ public class Controller implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (CollosionException | URISyntaxException collosion_exception) {
+                    } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException collosion_exception) {
                         collosion_exception.printStackTrace();
-                    } catch (FileNotFoundException ex) {
-                        ex.printStackTrace();
-                    } catch (JAXBException ex) {
-                        ex.printStackTrace();
                     }
                 }
 
@@ -647,12 +640,16 @@ public class Controller implements Initializable{
     public ImageView getDagger_fig(){return dagger_fig;}
     public ImageView getDagger_fig_inv(){return dagger_fig_inv;}
 
+    public boolean getTpReady(){return tpready;}
+
     //setters
     public void setText_pane_text(String text){text_pane_text.setText(text);}
     public void setOption1(String text){option1.setText("1. "+text);}
     public void setOption2(String text){option2.setText("2. "+text);}
     public void setOption3(String text){option3.setText("3. "+text);}
     public void setOption4(String text){option4.setText("4. "+text);}
+
+    public void setTpReady(boolean ready){tpready=ready;}
 
 }
 

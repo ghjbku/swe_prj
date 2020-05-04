@@ -1,7 +1,9 @@
 package Game.game_events;
 
-import Game.control_objects.Controller;
-import javafx.scene.control.Label;
+import Game.Game;
+import Game.control_objects.CityController;
+import Game.control_objects.ForestController;
+import Game.control_objects.XmlMethods;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
@@ -10,15 +12,16 @@ import java.net.URISyntaxException;
 import static java.lang.Thread.sleep;
 
 public class Fight {
-    Controller ctr;
+    ForestController ctr;
     private int round_counter=0;
     private boolean run =false;
 
-    public Fight(Controller controller){ ctr=controller; }
 
-    public void open_text_pane(){
+    public Fight(ForestController forestController){ ctr= forestController; }
 
-        if (round_counter==0)
+    public void open_text_pane() throws FileNotFoundException, JAXBException, URISyntaxException {
+
+        if (round_counter==0 && !(ctr.getplayer().getFought()) )
         {
             ctr.get_text_pane().setDisable(false);
             ctr.get_text_pane().setVisible(true);
@@ -27,8 +30,7 @@ public class Fight {
             if (ctr.getplayer().getItems().isEmpty() || !(ctr.getplayer().getItems().get(0).getid()==0)){ no_weapon(); }
             else { start_fight(); }
         }
-        else if(round_counter==10){
-
+        else if(round_counter==10 || ctr.getplayer().getFought()==true){
         }
 
     }
@@ -182,12 +184,15 @@ public class Fight {
 
     }
 
-     private void fight_done(int counter) throws InterruptedException {
+     private void fight_done(int counter) throws InterruptedException, FileNotFoundException, JAXBException, URISyntaxException {
         if (counter>=7 && counter<10)
         {
          end_stuff("You decide to wait for the bear...It slowly walks towards you, seemingly really weakened...\n" +
                  "As it reaches you, it lifts up its paws to strike...You prepare for the last strike!\nAnd the bear just falls to the ground, lifeless! You won, go through the city gate now!");
             round_counter=10;
+            ctr.getplayer().setFought(true);
+            XmlMethods xmlMethods = new XmlMethods();
+            xmlMethods.save(ctr.getplayer());
         }
      }
 

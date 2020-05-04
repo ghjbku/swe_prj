@@ -1,10 +1,12 @@
 package Game;
 
-import Game.control_objects.Controller;
+import Game.control_objects.CityController;
+import Game.control_objects.ForestController;
 import Game.control_objects.XmlMethods;
 import Game.game_objects.Item;
 import Game.game_objects.Player;
-import Game.game_window.GameScene;
+import Game.game_window.CityScene;
+import Game.game_window.ForestScene;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,12 +23,13 @@ import java.util.ArrayList;
 
 
 public class Game extends Application implements EventHandler<ActionEvent> {
-    private Stage primarystage;
+    private static Stage primarystage;
     private XmlMethods xml_methods=new XmlMethods();
-    Controller controller = new Controller();
+    ForestController forestController = new ForestController();
+    CityController cityController = new CityController();
 
 
-    private Scene game_scene = GameScene.getGame_scene();
+    private Scene game_scene = ForestScene.getGame_scene();
     private Button btnSubmit = new Button("Submit name"),btn_loaddata = new Button("Continue");
     private Button btnDone = new Button("Start");
     private Button btnExit = new Button("Exit");
@@ -58,14 +61,14 @@ public class Game extends Application implements EventHandler<ActionEvent> {
 
     public void start_game() throws IOException, JAXBException, URISyntaxException {
         savetoxml();
-
         System.out.println("starting the game now...");
-        Controller.setPlayer(player);
+        ForestController.setPlayer(player);
         primarystage.setResizable(false);
         primarystage.setScene(game_scene);
         primarystage.show();
 
     }
+
 
     public static void main(String[] args) {
         launch(args);
@@ -76,7 +79,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     @Override
     public void start(Stage primarystage) {
         player = new Player();
-        this.primarystage=primarystage;
+        Game.primarystage =primarystage;
 
         primarystage.setTitle("SWE_game_project");
         GridPane grid = new GridPane();
@@ -110,6 +113,8 @@ public class Game extends Application implements EventHandler<ActionEvent> {
 
 
     }
+
+    public static Stage getPrimarystage(){return primarystage;}
 
 
     @Override
@@ -148,19 +153,13 @@ public class Game extends Application implements EventHandler<ActionEvent> {
                 System.out.println("ISSET IS TRUE!");
                 try {
                     savetoxml();
-                } catch (FileNotFoundException | URISyntaxException e) {
-                    e.printStackTrace();
-                } catch (JAXBException e) {
+                } catch (FileNotFoundException | URISyntaxException | JAXBException e) {
                     e.printStackTrace();
                 }
                 isset=false;
                 try {
                     start_game();
-                } catch (FileNotFoundException | URISyntaxException e) {
-                    e.printStackTrace();
-                } catch (JAXBException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
+                } catch (URISyntaxException | JAXBException | IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -172,11 +171,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
             try {
                 readxml();
                 start_game();
-            } catch (FileNotFoundException | URISyntaxException e) {
-                e.printStackTrace();
-            } catch (JAXBException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (URISyntaxException | JAXBException | IOException e) {
                 e.printStackTrace();
             }
         }

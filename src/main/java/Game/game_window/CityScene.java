@@ -7,19 +7,19 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class GameScene {
+public class CityScene {
     private static Scene game_scene;
 
     static {
         try {
-            game_scene = new Scene(loadFXML("game_window"));
+            game_scene = new Scene(loadFXML("city_window"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
-    public GameScene() throws IOException {
+    public CityScene() throws IOException {
     }
 
     public static Scene getGame_scene(){
@@ -37,5 +37,3 @@ public class GameScene {
         return fxmlLoader.load();
     }
 }
-
-

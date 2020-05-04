@@ -1,10 +1,10 @@
 package Game.game_objects;
 
-import Game.control_objects.Controller;
+import Game.control_objects.ForestController;
 
 public class Inventory {
-    Controller ctr;
-    public Inventory(Controller controller){ ctr=controller;}
+    ForestController ctr;
+    public Inventory(ForestController forestController){ ctr= forestController;}
 
     public void open_inventory() {
         ctr.getInventory().setVisible(true);

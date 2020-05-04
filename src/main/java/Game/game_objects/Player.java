@@ -11,12 +11,13 @@ import java.util.ArrayList;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
-@XmlType(propOrder = {"name","items","posx","posy","lastx","lasty","gender","score"})
+@XmlType(propOrder = {"name","items","posx","posy","lastx","lasty","gender","score","fought"})
 public class Player {
     private String name;
     private String gender="female";
     private int posx=29,posy=47,score=0,lastx=posx,lasty=posy;
     private ArrayList<Item> items=new ArrayList<Item>();
+    private boolean fought=false;
 
     public Player(){}
 
@@ -63,6 +64,9 @@ public class Player {
 
     public int getscore(){return score;};
     public void setscore(int scr){score=scr;};
+
+    public boolean getFought(){return fought;}
+    public void setFought(boolean value){fought=value;}
 
 
 }
