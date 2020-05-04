@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class Game_scene {
+public class GameScene {
     private static Scene game_scene;
 
     static {
@@ -19,7 +19,7 @@ public class Game_scene {
     }
 
 
-    public Game_scene() throws IOException {
+    public GameScene() throws IOException {
     }
 
     public static Scene getGame_scene(){

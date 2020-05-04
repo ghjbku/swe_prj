@@ -7,13 +7,12 @@ import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class Xml_methods {
+public class XmlMethods {
 
-    public Xml_methods(){}
+    public XmlMethods(){}
 
     public void save(Player player) throws FileNotFoundException, JAXBException, URISyntaxException {
         URL path = getClass().getResource("/Game/control_objects/player_data.xml");

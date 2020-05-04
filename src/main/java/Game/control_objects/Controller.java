@@ -27,7 +27,7 @@ public class Controller implements Initializable{
     private Bear bear;
     private Inventory inv = new Inventory(this);
     private Fight fight=new Fight(this);
-    private Xml_methods xml_methods=new Xml_methods();
+    private XmlMethods xml_methods=new XmlMethods();
 
     //declaring the tree objects
     private Tree_object tree,tree1,tree2,tree3,tree4,tree5,tree6,tree7,tree8,tree9,tree10,tree11,tree12,tree13,tree14,tree15,tree16;
@@ -353,18 +353,22 @@ public class Controller implements Initializable{
         }
     }
 
-    private void start_fight_after_bear_collides() throws Collosion_Exception {
+    private void start_fight_after_bear_collides() throws CollosionException {
         boolean can_start= Collosion.Collosion_detection(player,bear);
             if (can_start==false)
              {
-                 if (player.getItems().get(0).getid()==0)
-                 fight.open_text_pane();
+                 if (player.getItems().isEmpty()){
+
+                 }
+                 else if (player.getItems().get(0).getid()==0) {
+                     fight.open_text_pane();
+                 }
              }
         return;
     }
 
     //method for collosion detection
-    private void collosionDetect() throws Collosion_Exception, FileNotFoundException, JAXBException, URISyntaxException {
+    private void collosionDetect() throws CollosionException, FileNotFoundException, JAXBException, URISyntaxException {
         //collosion with bear
         start_fight_after_bear_collides();
 
@@ -529,7 +533,7 @@ public class Controller implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (Collosion_Exception | URISyntaxException collosion_exception) {
+                    } catch (CollosionException | URISyntaxException collosion_exception) {
                         collosion_exception.printStackTrace();
                     } catch (FileNotFoundException ex) {
                         ex.printStackTrace();
@@ -548,7 +552,7 @@ public class Controller implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (Collosion_Exception | URISyntaxException collosion_exception) {
+                    } catch (CollosionException | URISyntaxException collosion_exception) {
                         collosion_exception.printStackTrace();
                     } catch (FileNotFoundException ex) {
                         ex.printStackTrace();
@@ -567,7 +571,7 @@ public class Controller implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (Collosion_Exception collosion_exception) {
+                    } catch (CollosionException collosion_exception) {
                         collosion_exception.printStackTrace();
                     } catch (FileNotFoundException ex) {
                         ex.printStackTrace();
@@ -588,7 +592,7 @@ public class Controller implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (Collosion_Exception | URISyntaxException collosion_exception) {
+                    } catch (CollosionException | URISyntaxException collosion_exception) {
                         collosion_exception.printStackTrace();
                     } catch (FileNotFoundException ex) {
                         ex.printStackTrace();

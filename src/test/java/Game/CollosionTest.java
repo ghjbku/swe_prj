@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import Game.control_objects.Collosion_Exception;
+import Game.control_objects.CollosionException;
 
 import java.io.IOException;
 
@@ -44,7 +44,7 @@ private Tree_object obj;
         plr.setPosy(5);
         obj = new Tree_object(plr.getPosx(),plr.getPosy(),test_image,anch);
         // When
-        Collosion_Exception exception = assertThrows(Collosion_Exception.class, () -> {
+        CollosionException exception = assertThrows(CollosionException.class, () -> {
             undertest.Collosion_detection(plr,obj);
         });
         assertEquals("the player is inside the object", exception.getMessage());

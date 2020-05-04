@@ -1,10 +1,10 @@
 package Game;
 
 import Game.control_objects.Controller;
-import Game.control_objects.Xml_methods;
+import Game.control_objects.XmlMethods;
 import Game.game_objects.Item;
 import Game.game_objects.Player;
-import Game.game_window.Game_scene;
+import Game.game_window.GameScene;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import jaxb.JAXBHelper;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
@@ -23,11 +22,11 @@ import java.util.ArrayList;
 
 public class Game extends Application implements EventHandler<ActionEvent> {
     private Stage primarystage;
-    private Xml_methods xml_methods=new Xml_methods();
+    private XmlMethods xml_methods=new XmlMethods();
     Controller controller = new Controller();
 
 
-    private Scene game_scene = Game_scene.getGame_scene();
+    private Scene game_scene = GameScene.getGame_scene();
     private Button btnSubmit = new Button("Submit name"),btn_loaddata = new Button("Continue");
     private Button btnDone = new Button("Start");
     private Button btnExit = new Button("Exit");

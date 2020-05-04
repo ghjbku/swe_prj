@@ -16,14 +16,22 @@ public class Fight {
     public Fight(Controller controller){ ctr=controller; }
 
     public void open_text_pane(){
-        ctr.get_text_pane().setDisable(false);
-        ctr.get_text_pane().setVisible(true);
-        ctr.can_move = false;
-        start_fight();
+        if (round_counter==0)
+        {
+            ctr.get_text_pane().setDisable(false);
+            ctr.get_text_pane().setVisible(true);
+            ctr.can_move = false;
+            start_fight();
+        }
+        else{
+
+        }
     }
 
     private void start_fight(){
-        ctr.setText_pane_text("Lets fight!");
+        ctr.setText_pane_text("You see a Bear in front of you sleeping in the grass.\n As you lurk closer it suddenly snaps its" +
+                " eyes open and looks at you.\n You remember that you found a weapon along the way here... maybe it was " +
+                "for this moment.\nThe bear suddenly lets out a horrendous roar and starts running towards you,full of killing intent!");
         ctr.setOption1("option");
         ctr.setOption2("option");
         ctr.setOption3("option");
@@ -109,7 +117,8 @@ public class Fight {
                 break;
             case 7:
                 ctr.setText_pane_text("");
-                if (option==1){ctr.raiseScore();}
+                if (option==1){ctr.raiseScore();
+                fight_done(round_counter);}
                 else if (option==2){fight_lost();}
                 else if(option==3){fight_lost();}
                 else if(option==4){fight_lost();}
@@ -129,7 +138,7 @@ public class Fight {
     }
 
      private void fight_done(int counter) throws InterruptedException {
-        if (counter==8)
+        if (counter>=7)
         {
          end_stuff("You won! Go take a look at the city gate just a few yars away of the bear corpse!");
             round_counter=10;
