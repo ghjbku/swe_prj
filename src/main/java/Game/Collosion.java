@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 public class Collosion {
     private static int dist = 10;
-    private static Fight fight=new Fight();
+    private static Controller ctr;
+    private static Fight fight;
     public Collosion(){}
     public static boolean Collosion_detection(Player plr, Entity obj) throws Collosion_Exception {
 
@@ -28,7 +29,13 @@ public class Collosion {
         return true;
     }
     public static void Collosion_detection_item(Controller controller,Player plr) {
-        if (((Math.abs(65 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 65) < dist)) && ((Math.abs(216 - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - 216) < dist))) {
+        ctr=controller;
+        fight=new Fight(ctr);
+        if
+        (
+                ((Math.abs(65 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 65) < dist))
+                && ((Math.abs(216 - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - 216) < dist))
+        ) {
 
             ArrayList<Item> item = plr.getItems();
             if (item.size()==0 || ((item.get(0).getName()=="Note") &&item.size()==1)){
@@ -38,12 +45,13 @@ public class Collosion {
             controller.setcollided();
             }
 
-            else if(item.size()>1){
+            else if(item.size()>1){}
 
-            }
-
-        } else if (((Math.abs(475 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 475) < dist)) &&
-                ((Math.abs(16 - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - 16) < dist))) {
+        }
+        else if (
+                ((Math.abs(475 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 475) < dist)) &&
+                ((Math.abs(16 - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - 16) < dist))
+                ) {
 
             ArrayList<Item> item = plr.getItems();
             if (item.size()==0 || ((item.get(0).getid()==0) &&item.size()==1)){
@@ -54,7 +62,6 @@ public class Collosion {
             }
 
             else if(item.size()>1){}
-
         }
 
     }

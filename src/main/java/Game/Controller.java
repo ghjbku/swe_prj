@@ -244,13 +244,6 @@ public class Controller implements Initializable{
 
     }
 
-    public void open_text_pane(){
-        System.out.println(text_pane.isDisable());
-        text_pane.setDisable(false);
-        System.out.println(text_pane.isDisable());
-        text_pane.setVisible(true);
-        can_move = false;
-    }
 
     @FXML
     private void open_note_desc(){
@@ -595,6 +588,8 @@ public class Controller implements Initializable{
 
 
     }
+
+    public AnchorPane get_text_pane(){return text_pane;}
 
 }
 
