@@ -238,19 +238,47 @@ public class Controller implements Initializable{
 
     @FXML
     private void option1_clicked(){
-        System.out.println("option1");
     }
     @FXML
     private void option2_clicked(){
-        System.out.println("option2");
     }
     @FXML
     private void option3_clicked(){
-        System.out.println("option3");
     }
     @FXML
     private void option4_clicked(){
-        System.out.println("option4");
+    }
+    @FXML
+    private void label_on_hover_in1(){
+        option1.setStyle("-fx-background-color:black;-fx-text-fill: green");
+    }
+    @FXML
+    private void label_on_hover_out1(){
+        option1.setStyle("-fx-background-color:gray;-fx-text-fill: black");
+    }
+    @FXML
+    private void label_on_hover_in2(){
+        option2.setStyle("-fx-background-color:black;-fx-text-fill: green");
+    }
+    @FXML
+    private void label_on_hover_out2(){
+        option2.setStyle("-fx-background-color:gray;-fx-text-fill: black");
+    }
+    @FXML
+    private void label_on_hover_in3(){
+        option3.setStyle("-fx-background-color:black;-fx-text-fill: green");
+    }
+    @FXML
+    private void label_on_hover_out3(){
+        option3.setStyle("-fx-background-color:gray;-fx-text-fill: black");
+    }
+    @FXML
+    private void label_on_hover_in4(){
+        option4.setStyle("-fx-background-color:black;-fx-text-fill: green");
+    }
+    @FXML
+    private void label_on_hover_out4(){
+        option4.setStyle("-fx-background-color:gray;-fx-text-fill: black");
     }
 
 
