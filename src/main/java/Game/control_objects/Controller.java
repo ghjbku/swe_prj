@@ -238,15 +238,19 @@ public class Controller implements Initializable{
 
     @FXML
     private void option1_clicked(){
+        fight.option1();
     }
     @FXML
     private void option2_clicked(){
+        fight.option2();
     }
     @FXML
     private void option3_clicked(){
+        fight.option3();
     }
     @FXML
     private void option4_clicked(){
+        fight.option4();
     }
     @FXML
     private void label_on_hover_in1(){
