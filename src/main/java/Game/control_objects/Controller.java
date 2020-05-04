@@ -357,13 +357,9 @@ public class Controller implements Initializable{
         boolean can_start= Collosion.Collosion_detection(player,bear);
             if (can_start==false)
              {
-                 if (player.getItems().isEmpty()){
-                     System.out.println("no items inside");
-                    fight.no_weapon();
-                 }
-                 else if (player.getItems().get(0).getid()==0) {
+
                      fight.open_text_pane();
-                 }
+
              }
         return;
     }
@@ -621,10 +617,13 @@ public class Controller implements Initializable{
     }
 
     private void is_fight_over(){
-        if (fight.getcounter()>=10){
+        if (fight.getcounter()>=10 && fight.getcounter()<55){
             if (text_pane.isVisible()) {
                 text_pane.setVisible(false);
             }
+        }
+        if (fight.getcounter()>54){
+            System.exit(0);
         }
     }
 
