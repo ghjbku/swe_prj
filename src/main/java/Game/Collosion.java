@@ -10,6 +10,9 @@ public class Collosion {
     public Collosion(){}
     public static boolean Collosion_detection(Player plr, Entity obj) throws Collosion_Exception {
 
+        if (obj.getx()==plr.getPosx() && obj.gety()==plr.getPosy()){
+            throw new Collosion_Exception("the player is inside the object");
+        }
         if ( ( (Math.abs(obj.getx()-plr.getPosx())<dist) || (Math.abs(plr.getPosx()-obj.getx())<dist) ) && ( (Math.abs(obj.gety()-plr.getPosy())<dist) || (Math.abs(plr.getPosy()-obj.gety())<dist) ) ){
 
             plr.setPosx(plr.getLastx());
@@ -21,12 +24,10 @@ public class Collosion {
             }
         return true;
         }
-        if (obj.getx()==plr.getPosx() && obj.gety()==plr.getPosy()){
-            throw new Collosion_Exception("the player is inside the object");
-        }
+
         return true;
     }
-    public static void Collosion_detection(Controller controller,Player plr) {
+    public static void Collosion_detection_item(Controller controller,Player plr) {
         if (((Math.abs(65 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 65) < dist)) && ((Math.abs(216 - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - 216) < dist))) {
 
             ArrayList<Item> item = plr.getItems();

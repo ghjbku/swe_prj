@@ -350,7 +350,7 @@ public class Controller implements Initializable{
         Collosion.Collosion_detection(player,bear);
 
         //collosion detection between items and player
-        Collosion.Collosion_detection(this,player);
+        Collosion.Collosion_detection_item(this,player);
 
         //collosion detection between trees and player
         Collosion.Collosion_detection(player, getTree(tree));

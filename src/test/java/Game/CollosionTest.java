@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CollosionTest {
 private Collosion undertest;
-private Controller controller=new Controller();
 private Player player=new Player();
 private Tree_object obj;
 
@@ -37,7 +36,6 @@ private Tree_object obj;
     @Test //Controller controller, Player plr, Entity obj
     public void testCollosion_detection_Should_Throw_collosion_exception_if_playerpos_and_objpos_is_equal() {
         // Given
-        Controller controller=this.controller;
         Player plr = player;
         ImageView test_image=new ImageView();
         AnchorPane anch = new AnchorPane();
@@ -46,7 +44,7 @@ private Tree_object obj;
         obj = new Tree_object(plr.getPosx(),plr.getPosy(),test_image,anch);
         // When
         Collosion_Exception exception = assertThrows(Collosion_Exception.class, () -> {
-            undertest.Collosion_detection(controller,plr,obj);
+            undertest.Collosion_detection(plr,obj);
         });
         assertEquals("the player is inside the object", exception.getMessage());
     }
