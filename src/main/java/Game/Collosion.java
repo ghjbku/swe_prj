@@ -1,25 +1,28 @@
 package Game;
 
 import Game.game_objects.*;
-import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 
 public class Collosion {
     private static int dist = 10;
+    private static Fight fight=new Fight();
     public Collosion(){}
-    public static boolean Collosion_detection(Controller controller,Player plr, Entity obj){
+    public static boolean Collosion_detection(Player plr, Entity obj) throws Collosion_Exception {
 
         if ( ( (Math.abs(obj.getx()-plr.getPosx())<dist) || (Math.abs(plr.getPosx()-obj.getx())<dist) ) && ( (Math.abs(obj.gety()-plr.getPosy())<dist) || (Math.abs(plr.getPosy()-obj.gety())<dist) ) ){
 
-            plr.setPosx(Controller.getLastx());
-            plr.setPosy(Controller.getLasty());
+            plr.setPosx(plr.getLastx());
+            plr.setPosy(plr.getLasty());
 
             if (obj.getClass().equals(Bear.class)){
                 System.out.println("its a bear!!!");
-                controller.open_text_pane();
+                fight.open_text_pane();
             }
-
+        return true;
+        }
+        if (obj.getx()==plr.getPosx() && obj.gety()==plr.getPosy()){
+            throw new Collosion_Exception("the player is inside the object");
         }
         return true;
     }

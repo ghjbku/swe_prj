@@ -20,8 +20,8 @@ public class Controller implements Initializable{
     private static Player player;
     private int incr=2;
     private boolean isset=false;
-    private static boolean isok=false,collided=false,ready=false,can_move=true;
-    private static int lastx=0,lasty=0;
+    private static boolean isok=false,collided=false,ready=false;
+    public boolean can_move=true;
     private Bear bear;
 
     //declaring the tree objects
@@ -52,7 +52,7 @@ public class Controller implements Initializable{
     private Label dagger_desc,note_desc;
 
     @FXML
-    private AnchorPane text_pane;
+    public AnchorPane text_pane;
 
 
         //fxml_figs
@@ -345,82 +345,82 @@ public class Controller implements Initializable{
     }
 
     //method for collosion detection
-    private void collosionDetect(){
+    private void collosionDetect() throws Collosion_Exception {
         //collosion with bear
-        Collosion.Collosion_detection(this,player,bear);
+        Collosion.Collosion_detection(player,bear);
 
         //collosion detection between items and player
         Collosion.Collosion_detection(this,player);
 
         //collosion detection between trees and player
-        Collosion.Collosion_detection(this,player, getTree(tree));
-        Collosion.Collosion_detection(this,player, getTree(tree1));
-        Collosion.Collosion_detection(this,player, getTree(tree2));
-        Collosion.Collosion_detection(this,player, getTree(tree3));
-        Collosion.Collosion_detection(this,player, getTree(tree4));
-        Collosion.Collosion_detection(this,player, getTree(tree5));
-        Collosion.Collosion_detection(this,player, getTree(tree6));
-        Collosion.Collosion_detection(this,player, getTree(tree7));
-        Collosion.Collosion_detection(this,player, getTree(tree8));
-        Collosion.Collosion_detection(this,player, getTree(tree9));
-        Collosion.Collosion_detection(this,player, getTree(tree10));
-        Collosion.Collosion_detection(this,player, getTree(tree11));
-        Collosion.Collosion_detection(this,player, getTree(tree12));
-        Collosion.Collosion_detection(this,player, getTree(tree13));
-        Collosion.Collosion_detection(this,player, getTree(tree14));
-        Collosion.Collosion_detection(this,player, getTree(tree15));
-        Collosion.Collosion_detection(this,player, getTree(tree16));
-        Collosion.Collosion_detection(this,player, getTree(tree17));
-        Collosion.Collosion_detection(this,player, getTree(tree18));
-        Collosion.Collosion_detection(this,player, getTree(tree19));
-        Collosion.Collosion_detection(this,player, getTree(tree20));
-        Collosion.Collosion_detection(this,player, getTree(tree21));
-        Collosion.Collosion_detection(this,player, getTree(tree22));
-        Collosion.Collosion_detection(this,player, getTree(tree23));
-        Collosion.Collosion_detection(this,player, getTree(tree24));
-        Collosion.Collosion_detection(this,player, getTree(tree25));
-        Collosion.Collosion_detection(this,player, getTree(tree26));
-        Collosion.Collosion_detection(this,player, getTree(tree27));
-        Collosion.Collosion_detection(this,player, getTree(tree28));
-        Collosion.Collosion_detection(this,player, getTree(tree29));
-        Collosion.Collosion_detection(this,player, getTree(tree30));
-        Collosion.Collosion_detection(this,player, getTree(tree31));
-        Collosion.Collosion_detection(this,player, getTree(tree32));
-        Collosion.Collosion_detection(this,player, getTree(tree33));
-        Collosion.Collosion_detection(this,player, getTree(tree34));
-        Collosion.Collosion_detection(this,player, getTree(tree35));
-        Collosion.Collosion_detection(this,player, getTree(tree36));
-        Collosion.Collosion_detection(this,player, getTree(tree37));
-        Collosion.Collosion_detection(this,player, getTree(tree38));
-        Collosion.Collosion_detection(this,player, getTree(tree39));
-        Collosion.Collosion_detection(this,player, getTree(tree40));
-        Collosion.Collosion_detection(this,player, getTree(tree41));
-        Collosion.Collosion_detection(this,player, getTree(tree42));
-        Collosion.Collosion_detection(this,player, getTree(tree43));
-        Collosion.Collosion_detection(this,player, getTree(tree44));
-        Collosion.Collosion_detection(this,player, getTree(tree45));
-        Collosion.Collosion_detection(this,player, getTree(tree46));
-        Collosion.Collosion_detection(this,player, getTree(tree47));
-        Collosion.Collosion_detection(this,player, getTree(tree48));
-        Collosion.Collosion_detection(this,player, getTree(tree49));
-        Collosion.Collosion_detection(this,player, getTree(tree50));
-        Collosion.Collosion_detection(this,player, getTree(tree51));
-        Collosion.Collosion_detection(this,player, getTree(tree52));
-        Collosion.Collosion_detection(this,player, getTree(tree53));
-        Collosion.Collosion_detection(this,player, getTree(tree54));
-        Collosion.Collosion_detection(this,player, getTree(tree55));
-        Collosion.Collosion_detection(this,player, getTree(tree56));
-        Collosion.Collosion_detection(this,player, getTree(tree57));
-        Collosion.Collosion_detection(this,player, getTree(tree58));
-        Collosion.Collosion_detection(this,player, getTree(tree59));
-        Collosion.Collosion_detection(this,player, getTree(tree60));
-        Collosion.Collosion_detection(this,player, getTree(tree61));
-        Collosion.Collosion_detection(this,player, getTree(tree62));
-        Collosion.Collosion_detection(this,player, getTree(tree63));
-        Collosion.Collosion_detection(this,player, getTree(tree64));
-        Collosion.Collosion_detection(this,player, getTree(tree65));
-        Collosion.Collosion_detection(this,player, getTree(tree66));
-        Collosion.Collosion_detection(this,player, getTree(tree67));
+        Collosion.Collosion_detection(player, getTree(tree));
+        Collosion.Collosion_detection(player, getTree(tree1));
+        Collosion.Collosion_detection(player, getTree(tree2));
+        Collosion.Collosion_detection(player, getTree(tree3));
+        Collosion.Collosion_detection(player, getTree(tree4));
+        Collosion.Collosion_detection(player, getTree(tree5));
+        Collosion.Collosion_detection(player, getTree(tree6));
+        Collosion.Collosion_detection(player, getTree(tree7));
+        Collosion.Collosion_detection(player, getTree(tree8));
+        Collosion.Collosion_detection(player, getTree(tree9));
+        Collosion.Collosion_detection(player, getTree(tree10));
+        Collosion.Collosion_detection(player, getTree(tree11));
+        Collosion.Collosion_detection(player, getTree(tree12));
+        Collosion.Collosion_detection(player, getTree(tree13));
+        Collosion.Collosion_detection(player, getTree(tree14));
+        Collosion.Collosion_detection(player, getTree(tree15));
+        Collosion.Collosion_detection(player, getTree(tree16));
+        Collosion.Collosion_detection(player, getTree(tree17));
+        Collosion.Collosion_detection(player, getTree(tree18));
+        Collosion.Collosion_detection(player, getTree(tree19));
+        Collosion.Collosion_detection(player, getTree(tree20));
+        Collosion.Collosion_detection(player, getTree(tree21));
+        Collosion.Collosion_detection(player, getTree(tree22));
+        Collosion.Collosion_detection(player, getTree(tree23));
+        Collosion.Collosion_detection(player, getTree(tree24));
+        Collosion.Collosion_detection(player, getTree(tree25));
+        Collosion.Collosion_detection(player, getTree(tree26));
+        Collosion.Collosion_detection(player, getTree(tree27));
+        Collosion.Collosion_detection(player, getTree(tree28));
+        Collosion.Collosion_detection(player, getTree(tree29));
+        Collosion.Collosion_detection(player, getTree(tree30));
+        Collosion.Collosion_detection(player, getTree(tree31));
+        Collosion.Collosion_detection(player, getTree(tree32));
+        Collosion.Collosion_detection(player, getTree(tree33));
+        Collosion.Collosion_detection(player, getTree(tree34));
+        Collosion.Collosion_detection(player, getTree(tree35));
+        Collosion.Collosion_detection(player, getTree(tree36));
+        Collosion.Collosion_detection(player, getTree(tree37));
+        Collosion.Collosion_detection(player, getTree(tree38));
+        Collosion.Collosion_detection(player, getTree(tree39));
+        Collosion.Collosion_detection(player, getTree(tree40));
+        Collosion.Collosion_detection(player, getTree(tree41));
+        Collosion.Collosion_detection(player, getTree(tree42));
+        Collosion.Collosion_detection(player, getTree(tree43));
+        Collosion.Collosion_detection(player, getTree(tree44));
+        Collosion.Collosion_detection(player, getTree(tree45));
+        Collosion.Collosion_detection(player, getTree(tree46));
+        Collosion.Collosion_detection(player, getTree(tree47));
+        Collosion.Collosion_detection(player, getTree(tree48));
+        Collosion.Collosion_detection(player, getTree(tree49));
+        Collosion.Collosion_detection(player, getTree(tree50));
+        Collosion.Collosion_detection(player, getTree(tree51));
+        Collosion.Collosion_detection(player, getTree(tree52));
+        Collosion.Collosion_detection(player, getTree(tree53));
+        Collosion.Collosion_detection(player, getTree(tree54));
+        Collosion.Collosion_detection(player, getTree(tree55));
+        Collosion.Collosion_detection(player, getTree(tree56));
+        Collosion.Collosion_detection(player, getTree(tree57));
+        Collosion.Collosion_detection(player, getTree(tree58));
+        Collosion.Collosion_detection(player, getTree(tree59));
+        Collosion.Collosion_detection(player, getTree(tree60));
+        Collosion.Collosion_detection(player, getTree(tree61));
+        Collosion.Collosion_detection(player, getTree(tree62));
+        Collosion.Collosion_detection(player, getTree(tree63));
+        Collosion.Collosion_detection(player, getTree(tree64));
+        Collosion.Collosion_detection(player, getTree(tree65));
+        Collosion.Collosion_detection(player, getTree(tree66));
+        Collosion.Collosion_detection(player, getTree(tree67));
     }
 
     //method to initialize trees
@@ -503,43 +503,60 @@ public class Controller implements Initializable{
         root.setOnKeyPressed(e -> {
             if(can_move==true) {
                 if (e.getCode() == KeyCode.A) {
-                    lastx = player.getPosx();
-                    lasty = player.getPosy();
+                    player.setLastx( player.getPosx());
+                    player.setLasty( player.getPosy());
                     player.setPosx(player.getPosx() - incr);
                     player_fig.setLayoutX(player.getPosx());
 
                     //collosion detection
                     //for items
-                    collosionDetect();
+                    try {
+                        collosionDetect();
+                    } catch (Collosion_Exception collosion_exception) {
+                        collosion_exception.printStackTrace();
+                    }
 
                 } else if (e.getCode() == KeyCode.D) {
-                    lastx = player.getPosx();
-                    lasty = player.getPosy();
+                    player.setLastx( player.getPosx());
+                    player.setLasty( player.getPosy());
                     player.setPosx(player.getPosx() + incr);
                     player_fig.setLayoutX(player.getPosx());
 
                     //collosion detection
                     //for items
-                    collosionDetect();
+                    try {
+                        collosionDetect();
+                    } catch (Collosion_Exception collosion_exception) {
+                        collosion_exception.printStackTrace();
+                    }
                 }
                 if (e.getCode() == KeyCode.W) {
-                    lastx = player.getPosx();
-                    lasty = player.getPosy();
+                    player.setLastx( player.getPosx());
+                    player.setLasty( player.getPosy());
                     player.setPosy(player.getPosy() - incr);
                     player_fig.setLayoutY(player.getPosy());
 
                     //collosion detection
                     //for items
-                    collosionDetect();
+                    try {
+                        collosionDetect();
+                    } catch (Collosion_Exception collosion_exception) {
+                        collosion_exception.printStackTrace();
+                    }
                 } else if (e.getCode() == KeyCode.S) {
-                    lastx = player.getPosx();
-                    lasty = player.getPosy();
+
+                    player.setLastx( player.getPosx());
+                    player.setLasty( player.getPosy());
                     player.setPosy(player.getPosy() + incr);
                     player_fig.setLayoutY(player.getPosy());
 
                     //collosion detection
                     //for items
-                    collosionDetect();
+                    try {
+                        collosionDetect();
+                    } catch (Collosion_Exception collosion_exception) {
+                        collosion_exception.printStackTrace();
+                    }
                 }
 
             }
@@ -578,11 +595,6 @@ public class Controller implements Initializable{
 
 
     }
-
-
-
-    public static int getLastx(){ return lastx; }
-    public static int getLasty(){return lasty;}
 
 }
 

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Player {
     private String name;
     private String gender="female";
-    private int posx=29,posy=47,score=0;
+    private int posx=29,posy=47,score=0,lastx=posx,lasty=posy;
     private ArrayList<Item> items=new ArrayList<Item>();
 
     public Player(){}
@@ -52,12 +52,16 @@ public class Player {
         return posy;
     };
 
+    public int getLastx() { return lastx; }
+    public int getLasty() { return lasty; }
+
+    public void setLastx(int lastx) { this.lastx = lastx; }
+    public void setLasty(int lasty) { this.lasty = lasty; }
+
     public void setPosx(int x){
         this.posx=x;
     };
-    public void setPosy(int y){
-        this.posy=y;
-    };
+    public void setPosy(int y){ this.posy=y; };
 
     public int getscore(){return score;};
     public void setscore(int scr){score=scr;};

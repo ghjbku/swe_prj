@@ -39,6 +39,10 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     public Game() throws IOException {
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     public void savetoxml() throws FileNotFoundException, JAXBException {
         JAXBHelper.toXML(player, System.out);
         JAXBHelper.toXML(player, new FileOutputStream("player_data.xml"));
