@@ -4,7 +4,7 @@
   <groupId>hu.unideb.inf</groupId>
   <artifactId>swe_proj</artifactId>
   <packaging>jar</packaging>
-  <version>1.0</version>
+  <version>1.1-alpha1</version>
 
   <description>RPG game project for Software Engineering class.</description>
 

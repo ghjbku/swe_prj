@@ -370,7 +370,7 @@ public class ForestController implements Initializable{
     }
 
     private void change_to_city() throws FileNotFoundException, JAXBException, URISyntaxException {
-        if (tpready)
+        if (tpready && player.getFought())
         cityController.load_city(Game.getPrimarystage());
     }
 
