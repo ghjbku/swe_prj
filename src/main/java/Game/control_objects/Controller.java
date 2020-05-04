@@ -236,40 +236,46 @@ public class Controller implements Initializable{
         isThere();
     }
 
+    @FXML
+    private void option1_clicked(){
+        System.out.println("option1");
+    }
+    @FXML
+    private void option2_clicked(){
+        System.out.println("option2");
+    }
+    @FXML
+    private void option3_clicked(){
+        System.out.println("option3");
+    }
+    @FXML
+    private void option4_clicked(){
+        System.out.println("option4");
+    }
+
 
     //writes the name and gender of the player into the game
     @FXML
-    private void setname() {
-        if(isset==false){
+    private void setname()
+    {
+        if(isset==false)
+        {
         playername_label.setText(playername+", "+player.getgender());
         isset=true;
         }
-        else{}
     }
+    @FXML
+    public void setpic(){ player_fig.setImage(Images.playerm_image); }
 
     @FXML
-    public void setpic(){
-        player_fig.setImage(Images.playerm_image);
-    }
-
-
+    private void open_note_desc(){ inv.open_note_desc(); }
     @FXML
-    private void open_note_desc(){
-        inv.open_note_desc();
-    }
-    @FXML
-    private void open_dagger_desc(){
-        inv.open_dagger_desc();
-    }
+    private void open_dagger_desc(){ inv.open_dagger_desc(); }
 
     @FXML
-    private void open_inv(){
-        inv.open_inventory();
-    }
+    private void open_inv(){ inv.open_inventory(); }
     @FXML
-    private void close_inv(){
-        inv.close_inventory();
-    }
+    private void close_inv(){ inv.close_inventory(); }
 
     public static void setPlayer(Player player2) {
         player = player2;
@@ -580,7 +586,7 @@ public class Controller implements Initializable{
     public Tree_object getTree(Tree_object tree) { return tree; }
     public Player getplayer(){return player;}
 
-    public Label getText_pane_text(){return text_pane_text;}
+    public Label gettext_pane_text(){return text_pane_text;}
     public Label getOption1(){return option1;}
     public Label getOption2(){return option2;}
     public Label getOption3(){return option3;}
@@ -595,6 +601,13 @@ public class Controller implements Initializable{
     public ImageView getNote_fig_inv(){return note_fig_inv;}
     public ImageView getDagger_fig(){return dagger_fig;}
     public ImageView getDagger_fig_inv(){return dagger_fig_inv;}
+
+    //setters
+    public void setText_pane_text(String text){text_pane_text.setText(text);}
+    public void setOption1(String text){option1.setText("1. "+text);}
+    public void setOption2(String text){option2.setText("2. "+text);}
+    public void setOption3(String text){option3.setText("3. "+text);}
+    public void setOption4(String text){option4.setText("4. "+text);}
 
 }
 
