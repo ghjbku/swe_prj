@@ -9,10 +9,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import jaxb.JAXBHelper;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,7 +26,8 @@ public class Controller implements Initializable{
     public boolean can_move=true;
     private Bear bear;
     private Inventory inv = new Inventory(this);
-    private Fight fight=new Fight(this);;
+    private Fight fight=new Fight(this);
+    private Xml_methods xml_methods=new Xml_methods();
 
     //declaring the tree objects
     private Tree_object tree,tree1,tree2,tree3,tree4,tree5,tree6,tree7,tree8,tree9,tree10,tree11,tree12,tree13,tree14,tree15,tree16;
@@ -216,14 +217,12 @@ public class Controller implements Initializable{
 
     //fxml methods
     @FXML
-    private void save() throws FileNotFoundException, JAXBException {
-            JAXBHelper.toXML(player, System.out);
-            JAXBHelper.toXML(player, new FileOutputStream("player_data.xml"));
+    private void save() throws FileNotFoundException, JAXBException, URISyntaxException {
+            xml_methods.save(player);
     }
-
     @FXML
-    public void load() throws FileNotFoundException, JAXBException {
-        Player loadplayer = JAXBHelper.fromXML(Player.class, new FileInputStream("player_data.xml"));
+    public void load() throws JAXBException {
+        Player loadplayer = xml_methods.load();
         System.out.println(loadplayer.getName());
         setname();
         isset=true;
@@ -236,19 +235,19 @@ public class Controller implements Initializable{
     }
 
     @FXML
-    private void option1_clicked() throws FileNotFoundException, JAXBException, InterruptedException {
+    private void option1_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
         fight.option1();
     }
     @FXML
-    private void option2_clicked() throws FileNotFoundException, JAXBException, InterruptedException {
+    private void option2_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
         fight.option2();
     }
     @FXML
-    private void option3_clicked() throws FileNotFoundException, JAXBException, InterruptedException {
+    private void option3_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
         fight.option3();
     }
     @FXML
-    private void option4_clicked() throws FileNotFoundException, JAXBException, InterruptedException {
+    private void option4_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
         fight.option4();
     }
     @FXML
@@ -320,13 +319,13 @@ public class Controller implements Initializable{
     }
 
 
-    public void raiseScore() throws FileNotFoundException, JAXBException {
+    public void raiseScore() throws FileNotFoundException, JAXBException, URISyntaxException {
             player.setscore(player.getscore()+10);
             score_label.setText(String.valueOf(player.getscore()));
             save();
     }
 
-    public void setcollided() throws FileNotFoundException, JAXBException {
+    public void setcollided() throws FileNotFoundException, JAXBException, URISyntaxException {
         raiseScore();
         isThere();
     }
@@ -358,13 +357,14 @@ public class Controller implements Initializable{
         boolean can_start= Collosion.Collosion_detection(player,bear);
             if (can_start==false)
              {
+                 if (player.getItems().get(0).getid()==0)
                  fight.open_text_pane();
              }
         return;
     }
 
     //method for collosion detection
-    private void collosionDetect() throws Collosion_Exception, FileNotFoundException, JAXBException {
+    private void collosionDetect() throws Collosion_Exception, FileNotFoundException, JAXBException, URISyntaxException {
         //collosion with bear
         start_fight_after_bear_collides();
 
@@ -529,7 +529,7 @@ public class Controller implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (Collosion_Exception collosion_exception) {
+                    } catch (Collosion_Exception | URISyntaxException collosion_exception) {
                         collosion_exception.printStackTrace();
                     } catch (FileNotFoundException ex) {
                         ex.printStackTrace();
@@ -548,7 +548,7 @@ public class Controller implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (Collosion_Exception collosion_exception) {
+                    } catch (Collosion_Exception | URISyntaxException collosion_exception) {
                         collosion_exception.printStackTrace();
                     } catch (FileNotFoundException ex) {
                         ex.printStackTrace();
@@ -573,6 +573,8 @@ public class Controller implements Initializable{
                         ex.printStackTrace();
                     } catch (JAXBException ex) {
                         ex.printStackTrace();
+                    } catch (URISyntaxException ex) {
+                        ex.printStackTrace();
                     }
                 } if (e.getCode() == KeyCode.S) {
 
@@ -586,7 +588,7 @@ public class Controller implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (Collosion_Exception collosion_exception) {
+                    } catch (Collosion_Exception | URISyntaxException collosion_exception) {
                         collosion_exception.printStackTrace();
                     } catch (FileNotFoundException ex) {
                         ex.printStackTrace();

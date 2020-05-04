@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 
 import static java.lang.Thread.sleep;
 
@@ -29,33 +30,33 @@ public class Fight {
         ctr.setOption4("option");
     };
 
-    public void option1() throws FileNotFoundException, JAXBException, InterruptedException {
+    public void option1() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
         ctr.setText_pane_text(ctr.getOption1().getText()+" clicked");
         fight(round_counter,1);
         fight_done(round_counter);
         round_counter++;
 
     };
-    public void option2() throws FileNotFoundException, JAXBException, InterruptedException {
+    public void option2() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
         ctr.setText_pane_text(ctr.getOption2().getText()+" clicked");
         fight(round_counter,2);
         fight_done(round_counter);
         round_counter++;
     };
-    public void option3() throws FileNotFoundException, JAXBException, InterruptedException {
+    public void option3() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
         ctr.setText_pane_text(ctr.getOption3().getText()+" clicked");
         fight(round_counter,3);
         fight_done(round_counter);
         round_counter++;
     };
-    public void option4() throws FileNotFoundException, JAXBException, InterruptedException {
+    public void option4() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
         ctr.setText_pane_text(ctr.getOption4().getText()+" clicked");
         fight(round_counter,4);
         fight_done(round_counter);
         round_counter++;
     };
 //42113421
-    private void fight(int round_counter,int option) throws FileNotFoundException, JAXBException, InterruptedException {
+    private void fight(int round_counter,int option) throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
         switch (round_counter) {
             case 0:
                 ctr.setText_pane_text("");

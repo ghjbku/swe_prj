@@ -7,6 +7,7 @@ import Game.game_objects.*;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class Collosion {
@@ -31,7 +32,7 @@ public class Collosion {
 
         return true;
     }
-    public static void Collosion_detection_item(Controller controller, Player plr) throws FileNotFoundException, JAXBException {
+    public static void Collosion_detection_item(Controller controller, Player plr) throws FileNotFoundException, JAXBException, URISyntaxException {
         if
         (
                 ((Math.abs(65 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 65) < dist))

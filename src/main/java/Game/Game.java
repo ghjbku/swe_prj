@@ -1,6 +1,7 @@
 package Game;
 
 import Game.control_objects.Controller;
+import Game.control_objects.Xml_methods;
 import Game.game_objects.Item;
 import Game.game_objects.Player;
 import Game.game_window.Game_scene;
@@ -16,11 +17,13 @@ import jaxb.JAXBHelper;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 
 public class Game extends Application implements EventHandler<ActionEvent> {
     private Stage primarystage;
+    private Xml_methods xml_methods=new Xml_methods();
     Controller controller = new Controller();
 
 
@@ -40,16 +43,11 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     public Game() throws IOException {
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void savetoxml() throws FileNotFoundException, JAXBException {
-        JAXBHelper.toXML(player, System.out);
-        JAXBHelper.toXML(player, new FileOutputStream("player_data.xml"));
+    public void savetoxml() throws FileNotFoundException, JAXBException, URISyntaxException {
+        xml_methods.save(player);
     }
     public void readxml() throws FileNotFoundException, JAXBException {
-        Player loadplayer = JAXBHelper.fromXML(Player.class, new FileInputStream("player_data.xml"));
+        Player loadplayer = xml_methods.load();
         System.out.println(loadplayer.getName());
         if (!item.isEmpty())
         System.out.println(loadplayer.getitem(0).getName());
@@ -59,7 +57,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
 
     }
 
-    public void start_game() throws IOException, JAXBException {
+    public void start_game() throws IOException, JAXBException, URISyntaxException {
         savetoxml();
 
         System.out.println("starting the game now...");
@@ -151,7 +149,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
                 System.out.println("ISSET IS TRUE!");
                 try {
                     savetoxml();
-                } catch (FileNotFoundException e) {
+                } catch (FileNotFoundException | URISyntaxException e) {
                     e.printStackTrace();
                 } catch (JAXBException e) {
                     e.printStackTrace();
@@ -159,7 +157,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
                 isset=false;
                 try {
                     start_game();
-                } catch (FileNotFoundException e) {
+                } catch (FileNotFoundException | URISyntaxException e) {
                     e.printStackTrace();
                 } catch (JAXBException e) {
                     e.printStackTrace();
@@ -175,7 +173,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
             try {
                 readxml();
                 start_game();
-            } catch (FileNotFoundException e) {
+            } catch (FileNotFoundException | URISyntaxException e) {
                 e.printStackTrace();
             } catch (JAXBException e) {
                 e.printStackTrace();
