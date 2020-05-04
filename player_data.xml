@@ -3,10 +3,10 @@
     <name>Windsake</name>
     <items id="0" x="0" y="0">dagger</items>
     <items id="1" x="0" y="0">Note</items>
-    <posx>671</posx>
+    <posx>719</posx>
     <posy>323</posy>
-    <lastx>671</lastx>
-    <lasty>325</lasty>
+    <lastx>719</lastx>
+    <lasty>323</lasty>
     <gender>male</gender>
-    <score>20</score>
+    <score>200</score>
 </player>

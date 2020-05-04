@@ -22,7 +22,6 @@ public class Controller implements Initializable{
     private int incr=2;
     private boolean isset=false;
     private static boolean isok=false;
-    private static boolean collided=false;
     private static boolean ready=false;
     public boolean can_move=true;
     private Bear bear;
@@ -237,19 +236,19 @@ public class Controller implements Initializable{
     }
 
     @FXML
-    private void option1_clicked() throws FileNotFoundException, JAXBException {
+    private void option1_clicked() throws FileNotFoundException, JAXBException, InterruptedException {
         fight.option1();
     }
     @FXML
-    private void option2_clicked() throws FileNotFoundException, JAXBException {
+    private void option2_clicked() throws FileNotFoundException, JAXBException, InterruptedException {
         fight.option2();
     }
     @FXML
-    private void option3_clicked() throws FileNotFoundException, JAXBException {
+    private void option3_clicked() throws FileNotFoundException, JAXBException, InterruptedException {
         fight.option3();
     }
     @FXML
-    private void option4_clicked() throws FileNotFoundException, JAXBException {
+    private void option4_clicked() throws FileNotFoundException, JAXBException, InterruptedException {
         fight.option4();
     }
     @FXML
@@ -320,17 +319,14 @@ public class Controller implements Initializable{
         return getTree(temp_tree);
     }
 
+
     public void raiseScore() throws FileNotFoundException, JAXBException {
-        if(collided){
             player.setscore(player.getscore()+10);
             score_label.setText(String.valueOf(player.getscore()));
             save();
-        }
-        else{ System.out.println(score_label.getText());}
     }
 
     public void setcollided() throws FileNotFoundException, JAXBException {
-        collided=true;
         raiseScore();
         isThere();
     }
@@ -532,6 +528,7 @@ public class Controller implements Initializable{
                     //for items
                     try {
                         collosionDetect();
+                        is_fight_over();
                     } catch (Collosion_Exception collosion_exception) {
                         collosion_exception.printStackTrace();
                     } catch (FileNotFoundException ex) {
@@ -550,6 +547,7 @@ public class Controller implements Initializable{
                     //for items
                     try {
                         collosionDetect();
+                        is_fight_over();
                     } catch (Collosion_Exception collosion_exception) {
                         collosion_exception.printStackTrace();
                     } catch (FileNotFoundException ex) {
@@ -568,6 +566,7 @@ public class Controller implements Initializable{
                     //for items
                     try {
                         collosionDetect();
+                        is_fight_over();
                     } catch (Collosion_Exception collosion_exception) {
                         collosion_exception.printStackTrace();
                     } catch (FileNotFoundException ex) {
@@ -586,6 +585,7 @@ public class Controller implements Initializable{
                     //for items
                     try {
                         collosionDetect();
+                        is_fight_over();
                     } catch (Collosion_Exception collosion_exception) {
                         collosion_exception.printStackTrace();
                     } catch (FileNotFoundException ex) {
@@ -611,6 +611,12 @@ public class Controller implements Initializable{
 
         //player movement
         movement();
+    }
+
+    private void is_fight_over(){
+        if (fight.getcounter()==-1){
+            get_text_pane().setVisible(false);
+        }
     }
 
     //getters
