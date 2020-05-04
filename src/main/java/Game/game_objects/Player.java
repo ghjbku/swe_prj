@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
-@XmlType(propOrder = {"name","items","posx","posy","gender","score"})
+@XmlType(propOrder = {"name","items","posx","posy","lastx","lasty","gender","score"})
 public class Player {
     private String name;
     private String gender="female";
@@ -51,17 +51,15 @@ public class Player {
     public int getPosy(){
         return posy;
     };
-
-    public int getLastx() { return lastx; }
-    public int getLasty() { return lasty; }
-
-    public void setLastx(int lastx) { this.lastx = lastx; }
-    public void setLasty(int lasty) { this.lasty = lasty; }
-
     public void setPosx(int x){
         this.posx=x;
     };
     public void setPosy(int y){ this.posy=y; };
+
+    public int getLastx() { return lastx; }
+    public int getLasty() { return lasty; }
+    public void setLastx(int lastx) { this.lastx = lastx; }
+    public void setLasty(int lasty) { this.lasty = lasty; }
 
     public int getscore(){return score;};
     public void setscore(int scr){score=scr;};
