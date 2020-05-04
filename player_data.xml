@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <player>
-    <name>wind</name>
+    <name>Windsake</name>
     <items id="0" x="0" y="0">dagger</items>
     <items id="1" x="0" y="0">Note</items>
-    <posx>621</posx>
-    <posy>253</posy>
-    <lastx>619</lastx>
-    <lasty>253</lasty>
+    <posx>671</posx>
+    <posy>325</posy>
+    <lastx>671</lastx>
+    <lasty>327</lasty>
     <gender>male</gender>
     <score>20</score>
 </player>

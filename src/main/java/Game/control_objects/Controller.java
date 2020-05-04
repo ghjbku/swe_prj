@@ -1,5 +1,6 @@
-package Game;
+package Game.control_objects;
 
+import Game.game_events.Fight;
 import Game.game_objects.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,10 +21,13 @@ public class Controller implements Initializable{
     private static Player player;
     private int incr=2;
     private boolean isset=false;
-    private static boolean isok=false,collided=false,ready=false;
+    private static boolean isok=false;
+    private static boolean collided=false;
+    private static boolean ready=false;
     public boolean can_move=true;
     private Bear bear;
     private Inventory inv = new Inventory(this);
+    private Fight fight=new Fight(this);;
 
     //declaring the tree objects
     private Tree_object tree,tree1,tree2,tree3,tree4,tree5,tree6,tree7,tree8,tree9,tree10,tree11,tree12,tree13,tree14,tree15,tree16;
@@ -43,34 +47,36 @@ public class Controller implements Initializable{
     @FXML
     private Label score_label = new Label();
     @FXML
-    private Label text_pane_text,option1,option2,option3,option4;
+    private Label text_pane_text;
+    @FXML
+    private Label option1,option2,option3,option4;
 
     @FXML
     Pane root = new Pane();
     @FXML
     private static AnchorPane entity_pane = new AnchorPane();
     @FXML
-    public AnchorPane inventory;
+    private AnchorPane inventory;
     @FXML
-    public Label dagger_desc,note_desc;
+    private Label dagger_desc,note_desc;
 
     @FXML
-    public AnchorPane text_pane;
+    private AnchorPane text_pane;
 
 
         //fxml_figs
         @FXML
         private ImageView player_fig;
         @FXML
-        public ImageView tree_fig;
+        private ImageView tree_fig;
         @FXML
-        public ImageView dagger_fig;
+        private ImageView dagger_fig;
         @FXML
-        public ImageView dagger_fig_inv;
+        private ImageView dagger_fig_inv;
         @FXML
-        public ImageView note_fig;
+        private ImageView note_fig;
         @FXML
-        public ImageView note_fig_inv;
+        private ImageView note_fig_inv;
         @FXML
         private ImageView bear_fig;
         @FXML
@@ -244,19 +250,16 @@ public class Controller implements Initializable{
     @FXML
     public void setpic(){
         player_fig.setImage(Images.playerm_image);
-
     }
 
 
     @FXML
     private void open_note_desc(){
-        System.out.printf("clicked desc!");
-        note_desc.setVisible(true);
+        inv.open_note_desc();
     }
     @FXML
     private void open_dagger_desc(){
-        System.out.printf("clicked desc!");
-        dagger_desc.setVisible(true);
+        inv.open_dagger_desc();
     }
 
     @FXML
@@ -265,10 +268,10 @@ public class Controller implements Initializable{
     }
     @FXML
     private void close_inv(){
-    inv.close_inventory();
+        inv.close_inventory();
     }
 
-    public static void setPlayer(Player player2) throws IOException {
+    public static void setPlayer(Player player2) {
         player = player2;
         playername=player.getName();
         isok=true;
@@ -319,12 +322,12 @@ public class Controller implements Initializable{
     }
 
     private void start_fight_after_bear_collides() throws Collosion_Exception {
-       Fight fight=new Fight(this);
-       boolean can_start=Collosion.Collosion_detection(player,bear);
-       if (can_start==false){
-       fight.open_text_pane();
-       }
-       return;
+        boolean can_start= Collosion.Collosion_detection(player,bear);
+            if (can_start==false)
+             {
+                 fight.open_text_pane();
+             }
+        return;
     }
 
     //method for collosion detection
@@ -478,10 +481,7 @@ public class Controller implements Initializable{
          tree67= settrees((int) tree_fig67.getLayoutX(), (int) tree_fig67.getLayoutY(),tree_fig67);
     }
 
-    public Tree_object getTree(Tree_object tree) {
-        return tree;
-    }
-
+    //player movement
     private void movement(){
         root.setOnKeyPressed(e -> {
             if(can_move==true) {
@@ -576,8 +576,25 @@ public class Controller implements Initializable{
         movement();
     }
 
-    public AnchorPane get_text_pane(){return text_pane;}
+    //getters
+    public Tree_object getTree(Tree_object tree) { return tree; }
     public Player getplayer(){return player;}
+
+    public Label getText_pane_text(){return text_pane_text;}
+    public Label getOption1(){return option1;}
+    public Label getOption2(){return option2;}
+    public Label getOption3(){return option3;}
+    public Label getOption4(){return option4;}
+    public Label getDagger_desc(){return dagger_desc;}
+    public Label getNote_desc(){return note_desc;}
+
+    public AnchorPane get_text_pane(){return text_pane;}
+    public AnchorPane getInventory(){return inventory;}
+
+    public ImageView getNote_fig(){return note_fig;}
+    public ImageView getNote_fig_inv(){return note_fig_inv;}
+    public ImageView getDagger_fig(){return dagger_fig;}
+    public ImageView getDagger_fig_inv(){return dagger_fig_inv;}
 
 }
 

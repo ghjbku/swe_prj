@@ -1,5 +1,6 @@
 package Game;
 
+import Game.control_objects.Controller;
 import Game.game_objects.Item;
 import Game.game_objects.Player;
 import Game.game_window.Game_scene;

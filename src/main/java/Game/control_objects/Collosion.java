@@ -1,5 +1,8 @@
-package Game;
+package Game.control_objects;
 
+import Game.Game;
+import Game.control_objects.Collosion_Exception;
+import Game.control_objects.Controller;
 import Game.game_objects.*;
 
 import javax.xml.bind.JAXBException;
@@ -28,7 +31,7 @@ public class Collosion {
 
         return true;
     }
-    public static void Collosion_detection_item(Controller controller,Player plr) throws FileNotFoundException, JAXBException {
+    public static void Collosion_detection_item(Controller controller, Player plr) throws FileNotFoundException, JAXBException {
         if
         (
                 ((Math.abs(65 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 65) < dist))
