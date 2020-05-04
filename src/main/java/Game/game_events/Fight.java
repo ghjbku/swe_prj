@@ -34,13 +34,13 @@ public class Fight {
     }
 
     private void start_fight(){
-        ctr.setText_pane_text("You see a Bear in front of you sleeping in the grass.\n As you lurk closer it suddenly snaps its" +
-                " eyes open and looks at you.\n You remember that you found a weapon along the way here... maybe it was " +
+        ctr.setText_pane_text("You see a Bear in front of you sleeping in the grass.\nAs you lurk closer it suddenly snaps its" +
+                " eyes open and looks at you.\nYou remember that you found a weapon along the way here... maybe it was " +
                 "for this moment.\nThe bear suddenly lets out a horrendous roar and starts running towards you,full of killing intent!");
-        ctr.setOption1("option");
-        ctr.setOption2("option");
-        ctr.setOption3("option");
-        ctr.setOption4("option");
+        ctr.setOption1("run away");
+        ctr.setOption2("try to play dead");
+        ctr.setOption3("try to talk it out with him");
+        ctr.setOption4("dodge the rush to the right");
     };
 
     public void option1() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
@@ -78,35 +78,60 @@ public class Fight {
     private void fight(int round_counter,int option) throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
         switch (round_counter) {
             case 0:
-                ctr.setText_pane_text("");
+                ctr.setText_pane_text("You dodged to the side, and just barely survive the rush...\nOn the other hand, the bear" +
+                        " seems to be surprised about this.\nit might be your chance to deal some damage to it!");
+                ctr.setOption1("maybe it is playing, lets wait");
+                ctr.setOption2("time to stab it in the eye");
+                ctr.setOption3("try to talk it out with him");
+                ctr.setOption4("laugh and run away");
                 if (option==1){fight_lost();}
                 else if (option==2){fight_lost();}
                 else if(option==3){fight_lost();}
                 else if(option==4){ctr.raiseScore();}
                 break;
             case 1:
-                ctr.setText_pane_text("");
+                ctr.setText_pane_text("You decided to grab your chances and thrust your blade into its eyes.\nThe bear probably didn't like " +
+                        "it,\nas you succeed in wounding it, he roars and once again rushes towards you!");
+                ctr.setOption1("what about now...? lets play dead?");
+                ctr.setOption2("lets dodge to the left now!");
+                ctr.setOption3("try to talk it out with him");
+                ctr.setOption4("hmm, dodge to the right again!");
                 if (option==1){fight_lost();}
                 else if (option==2){ctr.raiseScore();}
                 else if(option==3){fight_lost();}
                 else if(option==4){fight_lost();}
                 break;
             case 2:
-                ctr.setText_pane_text("");
+                ctr.setText_pane_text("You dodge to the left, the bear half expecting your move, lunges to the right\nsadly for him" +
+                        " you have chosen the other side... time for another punishment?");
+                ctr.setOption1("lets play it safe for now...");
+                ctr.setOption2("Alright!!! lets cut it down!");
+                ctr.setOption3("maybe i can run away now?");
+                ctr.setOption4("attack its rear!");
                 if (option==1){ctr.raiseScore();}
                 else if (option==2){fight_lost();}
                 else if(option==3){fight_lost();}
                 else if(option==4){fight_lost();}
                 break;
             case 3:
-                ctr.setText_pane_text("");
+                ctr.setText_pane_text("You decide to wait, and you have chosen the right option...\n" +
+                        "The bear who seemed like an easy prey a moment ago\nsuddenly turns back towards you and slashes with its pawns.");
+                ctr.setOption1("stand still...");
+                ctr.setOption2("cut down its pawns!");
+                ctr.setOption3("try to dodge to the left!");
+                ctr.setOption4("dodge backwards!");
                 if (option==1){ctr.raiseScore();}
                 else if (option==2){fight_lost();}
                 else if(option==3){fight_lost();}
                 else if(option==4){fight_lost();}
                 break;
             case 4:
-                ctr.setText_pane_text("");
+                ctr.setText_pane_text("You play the bear into a fool..\nThe bear, expecting you to dodge, turns its body to the left, slashing the air\n" +
+                        "maybe now you can get some damage?");
+                ctr.setOption1("stab your dagger into its head");
+                ctr.setOption2("try to slash its fore legs!");
+                ctr.setOption3("stab its hind legs.");
+                ctr.setOption4("grab the chance to run away!");
                 if (option==1){fight_lost();}
                 else if (option==2){fight_lost();}
                 else if(option==3){ctr.raiseScore();}
@@ -160,12 +185,12 @@ public class Fight {
         if (round_counter>1)
         {
          end_stuff("You fought hard, but sadly you lost this fight... but you can do it again! Good Luck!");
-            round_counter=10;
+            round_counter=55;
         }
         else
         {
          end_stuff("It wasn't a tough fight i suppose... well... sadly you lost this fight... but you can do it again! Good Luck!");
-            round_counter=10;
+            round_counter=55;
         }
      }
 
