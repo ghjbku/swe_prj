@@ -23,6 +23,7 @@ public class Controller implements Initializable{
     private static boolean isok=false,collided=false,ready=false;
     public boolean can_move=true;
     private Bear bear;
+    private Inventory inv = new Inventory(this);
 
     //declaring the tree objects
     private Tree_object tree,tree1,tree2,tree3,tree4,tree5,tree6,tree7,tree8,tree9,tree10,tree11,tree12,tree13,tree14,tree15,tree16;
@@ -41,15 +42,17 @@ public class Controller implements Initializable{
     private Label playername_label=new Label(playername);
     @FXML
     private Label score_label = new Label();
+    @FXML
+    private Label text_pane_text,option1,option2,option3,option4;
 
     @FXML
     Pane root = new Pane();
     @FXML
     private static AnchorPane entity_pane = new AnchorPane();
     @FXML
-    private AnchorPane inventory;
+    public AnchorPane inventory;
     @FXML
-    private Label dagger_desc,note_desc;
+    public Label dagger_desc,note_desc;
 
     @FXML
     public AnchorPane text_pane;
@@ -59,15 +62,15 @@ public class Controller implements Initializable{
         @FXML
         private ImageView player_fig;
         @FXML
-        private ImageView tree_fig;
+        public ImageView tree_fig;
         @FXML
-        private ImageView dagger_fig;
+        public ImageView dagger_fig;
         @FXML
-        private ImageView dagger_fig_inv;
+        public ImageView dagger_fig_inv;
         @FXML
-        private ImageView note_fig;
+        public ImageView note_fig;
         @FXML
-        private ImageView note_fig_inv;
+        public ImageView note_fig_inv;
         @FXML
         private ImageView bear_fig;
         @FXML
@@ -220,7 +223,6 @@ public class Controller implements Initializable{
         setname();
         isset=true;
         if (loadplayer.getgender().equals("male")){setpic();}
-        else{ }
         player=loadplayer;
         player_fig.setLayoutX(player.getPosx());
         player_fig.setLayoutY(player.getPosy());
@@ -259,34 +261,11 @@ public class Controller implements Initializable{
 
     @FXML
     private void open_inv(){
-        inventory.setVisible(true);
-
-        if (player.getItems().size()==0) {}
-        else if (player.getItems().size()>1){
-                if ((player.getitem(0).getid() == 0 && player.getitem(1).getid() == 1) ||
-                    (player.getitem(0).getid() == 1 && player.getitem(1).getid() == 0)) {
-                    dagger_fig_inv.setVisible(true);
-                    note_fig_inv.setVisible(true);
-                    dagger_fig.setImage(null);
-                    note_fig.setImage(null);}
-                }
-
-        else if(player.getItems().size()==1){
-                if (player.getitem(0).getid() == 1) {
-                    note_fig.setImage(null);
-                    note_fig_inv.setVisible(true);
-                }
-                else if (player.getitem(0).getid() == 0) {
-                    dagger_fig.setImage(null);
-                    dagger_fig_inv.setVisible(true);
-                }
-        }
+        inv.open_inventory();
     }
     @FXML
     private void close_inv(){
-    inventory.setVisible(false);
-        note_desc.setVisible(false);
-        dagger_desc.setVisible(false);
+    inv.close_inventory();
     }
 
     public static void setPlayer(Player player2) throws IOException {
@@ -595,28 +574,10 @@ public class Controller implements Initializable{
 
         //player movement
         movement();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     public AnchorPane get_text_pane(){return text_pane;}
+    public Player getplayer(){return player;}
 
 }
 

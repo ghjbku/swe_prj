@@ -12,5 +12,13 @@ public class Fight {
         System.out.println(ctr.get_text_pane().isDisable());
         ctr.get_text_pane().setVisible(true);
         ctr.can_move = false;
+        start_fight();
     }
+
+    private void start_fight(){};
+
+    private void option1(){};
+    private void option2(){};
+    private void option3(){};
+    private void option4(){};
 }
