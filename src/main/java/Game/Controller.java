@@ -337,10 +337,19 @@ public class Controller implements Initializable{
         }
     }
 
+    private void start_fight_after_bear_collides() throws Collosion_Exception {
+       Fight fight=new Fight(this);
+       boolean can_start=Collosion.Collosion_detection(player,bear);
+       if (can_start==false){
+       fight.open_text_pane();
+       }
+       return;
+    }
+
     //method for collosion detection
     private void collosionDetect() throws Collosion_Exception {
         //collosion with bear
-        Collosion.Collosion_detection(player,bear);
+        start_fight_after_bear_collides();
 
         //collosion detection between items and player
         Collosion.Collosion_detection_item(this,player);
@@ -509,7 +518,7 @@ public class Controller implements Initializable{
                         collosion_exception.printStackTrace();
                     }
 
-                } else if (e.getCode() == KeyCode.D) {
+                } if (e.getCode() == KeyCode.D) {
                     player.setLastx( player.getPosx());
                     player.setLasty( player.getPosy());
                     player.setPosx(player.getPosx() + incr);
@@ -536,7 +545,7 @@ public class Controller implements Initializable{
                     } catch (Collosion_Exception collosion_exception) {
                         collosion_exception.printStackTrace();
                     }
-                } else if (e.getCode() == KeyCode.S) {
+                } if (e.getCode() == KeyCode.S) {
 
                     player.setLastx( player.getPosx());
                     player.setLasty( player.getPosy());

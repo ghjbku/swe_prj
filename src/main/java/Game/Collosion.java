@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 public class Collosion {
     private static int dist = 10;
-    private static Controller ctr;
-    private static Fight fight;
     public Collosion(){}
     public static boolean Collosion_detection(Player plr, Entity obj) throws Collosion_Exception {
 
@@ -21,7 +19,7 @@ public class Collosion {
 
             if (obj.getClass().equals(Bear.class)){
                 System.out.println("its a bear!!!");
-                fight.open_text_pane();
+                return false;
             }
         return true;
         }
@@ -29,8 +27,6 @@ public class Collosion {
         return true;
     }
     public static void Collosion_detection_item(Controller controller,Player plr) {
-        ctr=controller;
-        fight=new Fight(ctr);
         if
         (
                 ((Math.abs(65 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 65) < dist))
