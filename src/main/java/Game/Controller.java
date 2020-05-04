@@ -224,6 +224,7 @@ public class Controller implements Initializable{
         player=loadplayer;
         player_fig.setLayoutX(player.getPosx());
         player_fig.setLayoutY(player.getPosy());
+        score_label.setText(String.valueOf(player.getscore()));
         isThere();
     }
 
@@ -299,16 +300,17 @@ public class Controller implements Initializable{
         return getTree(temp_tree);
     }
 
-    private void raiseScore(int score){
+    private void raiseScore(int score) throws FileNotFoundException, JAXBException {
         if(collided){
             score=score+10;
             score_label.setText(((String.valueOf(score))));
             player.setscore(score);
+            save();
         }
         else{ System.out.println(score_label.getText());}
     }
 
-    public void setcollided(){
+    public void setcollided() throws FileNotFoundException, JAXBException {
         collided=true;
         raiseScore(player.getscore());
         isThere();
@@ -347,7 +349,7 @@ public class Controller implements Initializable{
     }
 
     //method for collosion detection
-    private void collosionDetect() throws Collosion_Exception {
+    private void collosionDetect() throws Collosion_Exception, FileNotFoundException, JAXBException {
         //collosion with bear
         start_fight_after_bear_collides();
 
@@ -516,6 +518,10 @@ public class Controller implements Initializable{
                         collosionDetect();
                     } catch (Collosion_Exception collosion_exception) {
                         collosion_exception.printStackTrace();
+                    } catch (FileNotFoundException ex) {
+                        ex.printStackTrace();
+                    } catch (JAXBException ex) {
+                        ex.printStackTrace();
                     }
 
                 } if (e.getCode() == KeyCode.D) {
@@ -530,6 +536,10 @@ public class Controller implements Initializable{
                         collosionDetect();
                     } catch (Collosion_Exception collosion_exception) {
                         collosion_exception.printStackTrace();
+                    } catch (FileNotFoundException ex) {
+                        ex.printStackTrace();
+                    } catch (JAXBException ex) {
+                        ex.printStackTrace();
                     }
                 }
                 if (e.getCode() == KeyCode.W) {
@@ -544,6 +554,10 @@ public class Controller implements Initializable{
                         collosionDetect();
                     } catch (Collosion_Exception collosion_exception) {
                         collosion_exception.printStackTrace();
+                    } catch (FileNotFoundException ex) {
+                        ex.printStackTrace();
+                    } catch (JAXBException ex) {
+                        ex.printStackTrace();
                     }
                 } if (e.getCode() == KeyCode.S) {
 
@@ -558,6 +572,10 @@ public class Controller implements Initializable{
                         collosionDetect();
                     } catch (Collosion_Exception collosion_exception) {
                         collosion_exception.printStackTrace();
+                    } catch (FileNotFoundException ex) {
+                        ex.printStackTrace();
+                    } catch (JAXBException ex) {
+                        ex.printStackTrace();
                     }
                 }
 
