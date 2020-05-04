@@ -614,8 +614,10 @@ public class Controller implements Initializable{
     }
 
     private void is_fight_over(){
-        if (fight.getcounter()==-1){
-            get_text_pane().setVisible(false);
+        if (fight.getcounter()>=10){
+            if (text_pane.isVisible()) {
+                text_pane.setVisible(false);
+            }
         }
     }
 

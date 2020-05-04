@@ -124,13 +124,14 @@ public class Fight {
         ctr.getOption3().setVisible(false);
         ctr.getOption4().setVisible(false);
         ctr.can_move = true;
-        round_counter=-1;
+
     }
 
-     private void fight_done(int round_counter) throws InterruptedException {
-        if (round_counter==8)
+     private void fight_done(int counter) throws InterruptedException {
+        if (counter==8)
         {
          end_stuff("You won! Go take a look at the city gate just a few yars away of the bear corpse!");
+            round_counter=10;
         }
      }
 
@@ -138,10 +139,12 @@ public class Fight {
         if (round_counter>1)
         {
          end_stuff("You fought hard, but sadly you lost this fight... but you can do it again! Good Luck!");
+            round_counter=10;
         }
         else
         {
          end_stuff("It wasn't a tough fight i suppose... well... sadly you lost this fight... but you can do it again! Good Luck!");
+            round_counter=10;
         }
      }
 
