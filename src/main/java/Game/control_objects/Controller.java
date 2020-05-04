@@ -237,19 +237,19 @@ public class Controller implements Initializable{
     }
 
     @FXML
-    private void option1_clicked(){
+    private void option1_clicked() throws FileNotFoundException, JAXBException {
         fight.option1();
     }
     @FXML
-    private void option2_clicked(){
+    private void option2_clicked() throws FileNotFoundException, JAXBException {
         fight.option2();
     }
     @FXML
-    private void option3_clicked(){
+    private void option3_clicked() throws FileNotFoundException, JAXBException {
         fight.option3();
     }
     @FXML
-    private void option4_clicked(){
+    private void option4_clicked() throws FileNotFoundException, JAXBException {
         fight.option4();
     }
     @FXML
@@ -320,11 +320,10 @@ public class Controller implements Initializable{
         return getTree(temp_tree);
     }
 
-    private void raiseScore(int score) throws FileNotFoundException, JAXBException {
+    public void raiseScore() throws FileNotFoundException, JAXBException {
         if(collided){
-            score=score+10;
-            score_label.setText(((String.valueOf(score))));
-            player.setscore(score);
+            player.setscore(player.getscore()+10);
+            score_label.setText(String.valueOf(player.getscore()));
             save();
         }
         else{ System.out.println(score_label.getText());}
@@ -332,7 +331,7 @@ public class Controller implements Initializable{
 
     public void setcollided() throws FileNotFoundException, JAXBException {
         collided=true;
-        raiseScore(player.getscore());
+        raiseScore();
         isThere();
     }
 

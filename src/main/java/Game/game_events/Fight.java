@@ -3,6 +3,9 @@ package Game.game_events;
 import Game.control_objects.Controller;
 import javafx.scene.control.Label;
 
+import javax.xml.bind.JAXBException;
+import java.io.FileNotFoundException;
+
 public class Fight {
     Controller ctr;
     private int round_counter=0;
@@ -31,45 +34,45 @@ public class Fight {
         ctr.setOption4("option");
     };
 
-    public void option1(){
+    public void option1() throws FileNotFoundException, JAXBException {
         ctr.setText_pane_text(ctr.getOption1().getText()+" clicked");
         fight(round_counter,1);
     };
-    public void option2(){
+    public void option2() throws FileNotFoundException, JAXBException {
         ctr.setText_pane_text(ctr.getOption2().getText()+" clicked");
         fight(round_counter,2);
     };
-    public void option3(){
+    public void option3() throws FileNotFoundException, JAXBException {
         ctr.setText_pane_text(ctr.getOption3().getText()+" clicked");
         fight(round_counter,3);
     };
-    public void option4(){
+    public void option4() throws FileNotFoundException, JAXBException {
         ctr.setText_pane_text(ctr.getOption4().getText()+" clicked");
         fight(round_counter,4);
     };
-
-    private void fight(int round_counter,int option) {
+//42113421
+    private void fight(int round_counter,int option) throws FileNotFoundException, JAXBException {
         switch (round_counter) {
             case 0:
                 if (option==1){}
                 else if (option==2){}
                 else if(option==3){}
-                else if(option==4){}
+                else if(option==4){ctr.raiseScore();}
                 break;
             case 1:
                 if (option==1){}
-                else if (option==2){}
+                else if (option==2){ctr.raiseScore();}
                 else if(option==3){}
                 else if(option==4){}
                 break;
             case 2:
-                if (option==1){}
+                if (option==1){ctr.raiseScore();}
                 else if (option==2){}
                 else if(option==3){}
                 else if(option==4){}
                 break;
             case 3:
-                if (option==1){}
+                if (option==1){ctr.raiseScore();}
                 else if (option==2){}
                 else if(option==3){}
                 else if(option==4){}
@@ -77,29 +80,23 @@ public class Fight {
             case 4:
                 if (option==1){}
                 else if (option==2){}
-                else if(option==3){}
+                else if(option==3){ctr.raiseScore();}
                 else if(option==4){}
                 break;
             case 5:
                 if (option==1){}
                 else if (option==2){}
                 else if(option==3){}
-                else if(option==4){}
+                else if(option==4){ctr.raiseScore();}
                 break;
             case 6:
                 if (option==1){}
-                else if (option==2){}
+                else if (option==2){ctr.raiseScore();}
                 else if(option==3){}
                 else if(option==4){}
                 break;
             case 7:
-                if (option==1){}
-                else if (option==2){}
-                else if(option==3){}
-                else if(option==4){}
-                break;
-            case 8:
-                if (option==1){}
+                if (option==1){ctr.raiseScore();}
                 else if (option==2){}
                 else if(option==3){}
                 else if(option==4){}
