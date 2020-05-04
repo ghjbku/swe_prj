@@ -358,7 +358,8 @@ public class Controller implements Initializable{
             if (can_start==false)
              {
                  if (player.getItems().isEmpty()){
-
+                     System.out.println("no items inside");
+                    fight.no_weapon();
                  }
                  else if (player.getItems().get(0).getid()==0) {
                      fight.open_text_pane();

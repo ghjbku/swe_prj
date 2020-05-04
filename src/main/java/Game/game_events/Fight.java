@@ -16,16 +16,20 @@ public class Fight {
     public Fight(Controller controller){ ctr=controller; }
 
     public void open_text_pane(){
-        if (round_counter==0)
+        if(ctr.getplayer().getItems().isEmpty()){
+            ctr.get_text_pane().setDisable(false);
+            ctr.get_text_pane().setVisible(true);
+            ctr.can_move = false;
+            no_weapon();
+        }
+        else if (round_counter==0)
         {
             ctr.get_text_pane().setDisable(false);
             ctr.get_text_pane().setVisible(true);
             ctr.can_move = false;
             start_fight();
         }
-        else{
 
-        }
     }
 
     private void start_fight(){
@@ -43,6 +47,12 @@ public class Fight {
         fight(round_counter,1);
         fight_done(round_counter);
         round_counter++;
+
+        if (round_counter>8){
+            ctr.can_move = true;
+            end_stuff("you tried to run away, but... running away from a bear is pretty much impossible... you died");
+            System.exit(0);
+        }
 
     };
     public void option2() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
@@ -159,5 +169,16 @@ public class Fight {
      }
 
      public int getcounter(){return round_counter;}
+     public void no_weapon(){
+        round_counter=10;
+         ctr.getOption2().setVisible(false);
+         ctr.getOption3().setVisible(false);
+         ctr.getOption4().setVisible(false);
+         ctr.can_move = false;
+         ctr.gettext_pane_text().setText("You found a bear laying in the grass.\n" +
+                 "When you come closer it suddenly gets up and starts running towards you!\n" +
+                 "Sadly you have no weapon with you, the best you can do now is run!");
+         ctr.getOption1().setText("run");
+     }
 
 }
