@@ -3,12 +3,13 @@ package Game.game_objects;
 import javafx.scene.image.Image;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Images {
-    public static String picture_path_start ="/Game/pics/";
-    static File playerm_img = new File(String.valueOf(Images.class.getResource(picture_path_start +"Player_m.png")));
-
-    public static Image playerm_image=new Image(playerm_img.toString());
+   public Images() throws MalformedURLException {}
+       URL playerm_img = new URL(getClass().getResource("/Game/pics/Player_m.png").toExternalForm());
+       public Image playerm_image = new Image(playerm_img.toExternalForm());
 
 
 }

@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
+/**
+ * the class that contains the forest "level" of the game
+ */
 public class ForestScene {
     private static Scene game_scene;
 
@@ -18,10 +21,16 @@ public class ForestScene {
         }
     }
 
-
-    public ForestScene() throws IOException {
+    /**
+     * default constructor for the class
+     */
+    public ForestScene() {
     }
 
+    /**
+     * getter function for the class's game_scene for the Game class to use
+     * @return the game_scene Scene
+     */
     public static Scene getGame_scene(){
         return game_scene;
     }

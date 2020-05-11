@@ -2,7 +2,7 @@ package Game;
 
 import Game.control_objects.Collosion;
 import Game.game_objects.Player;
-import Game.game_objects.Tree_object;
+import Game.game_objects.TreeObject;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.junit.jupiter.api.AfterEach;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CollosionTest {
 private Collosion undertest;
 private Player player=new Player();
-private Tree_object obj;
+private TreeObject obj;
 
 
     public CollosionTest() throws IOException {
@@ -42,7 +42,7 @@ private Tree_object obj;
         AnchorPane anch = new AnchorPane();
         plr.setPosx(5);
         plr.setPosy(5);
-        obj = new Tree_object(plr.getPosx(),plr.getPosy(),test_image,anch);
+        obj = new TreeObject(plr.getPosx(),plr.getPosy(),test_image,anch);
         // When
         CollosionException exception = assertThrows(CollosionException.class, () -> {
             undertest.Collosion_detection(plr,obj);

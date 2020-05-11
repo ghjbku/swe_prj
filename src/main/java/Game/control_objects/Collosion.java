@@ -7,10 +7,25 @@ import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
+/**
+ * class that checks the collosion between objects and the player(later obj + obj as well)
+ */
 public class Collosion {
     private static int dist = 10;
     private CityController cityController = new CityController();
+
+    /**
+     * default constructor for the class
+     */
     public Collosion(){}
+
+    /**
+     * function that detects if the player collides with an object
+     * @param plr the player
+     * @param obj the object
+     * @return returns true if the collosion happens with inanimate objects(trees),false if with mobs(bear)
+     * @throws CollosionException happens when the player is inside the object
+     */
     public static boolean Collosion_detection(Player plr, Entity obj) throws CollosionException {
 
         if (obj.getx()==plr.getPosx() && obj.gety()==plr.getPosy()){
@@ -29,6 +44,15 @@ public class Collosion {
 
         return true;
     }
+
+    /**
+     * method that checks if the player collides with an item, adds them into the player's item data
+     * and calls the setcollided method of the ForestController class
+     * @param forestController
+     * @param plr the player
+     * @throws FileNotFoundException
+     * @throws JAXBException
+     */
     public static void Collosion_detection_item(ForestController forestController, Player plr) throws FileNotFoundException, JAXBException, URISyntaxException {
         if
         (
@@ -63,15 +87,24 @@ public class Collosion {
 
             else if(item.size()>1){}
         }
-        else if(
+
+
+    }
+
+    /**
+     * checks the collosion between the player and the city gate teleporter
+     * @param forestController
+     * @param plr the player
+     */
+    public static void Collosion_tp(ForestController forestController, Player plr){
+        if(
                 ((Math.abs(768 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 768) < dist)) &&
-                ((Math.abs(23 - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - 23) < dist))
-               )
+                        ((Math.abs(23 - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - 23) < dist))
+        )
         {
             System.out.println("collided with the teleporter!");
             forestController.setTpReady(true);
         }
-
     }
 
 

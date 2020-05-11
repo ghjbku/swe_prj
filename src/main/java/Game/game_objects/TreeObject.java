@@ -5,11 +5,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 
-public class Tree_object implements Entity {
+public class TreeObject implements Entity {
     private int x,y;
     private AnchorPane pane;
 
-    public Tree_object(int x, int y, ImageView tree_fig, AnchorPane tree_pane){
+    public TreeObject(int x, int y, ImageView tree_fig, AnchorPane tree_pane){
         this.pane=tree_pane;
         this.x=x;
         this.y=y;

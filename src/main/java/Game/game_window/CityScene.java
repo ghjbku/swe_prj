@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
+/**
+ * the class that contains the city "level" of the game
+ */
 public class CityScene {
     private static Scene game_scene;
 
@@ -19,7 +22,7 @@ public class CityScene {
     }
 
 
-    public CityScene() throws IOException {
+    public CityScene() {
     }
 
     public static Scene getGame_scene(){

@@ -13,11 +13,14 @@ import javafx.scene.layout.Pane;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the forest_window fxml file
+ */
 public class ForestController implements Initializable{
     //variables
     private static Player player;
@@ -30,13 +33,14 @@ public class ForestController implements Initializable{
     private XmlMethods xml_methods=new XmlMethods();
     private CityController cityController=new CityController();
     private Inventory inv = new Inventory(this);
+    private Images images = new Images();
 
 
     //declaring the tree objects
-    private Tree_object tree,tree1,tree2,tree3,tree4,tree5,tree6,tree7,tree8,tree9,tree10,tree11,tree12,tree13,tree14,tree15,tree16;
-    private Tree_object tree17,tree18,tree19,tree20,tree21,tree22,tree23,tree24,tree25,tree26,tree27,tree28,tree29,tree30,tree31,tree32,tree33;
-    private Tree_object tree34,tree35,tree36,tree37,tree38,tree39,tree40,tree41,tree42,tree43,tree44,tree45,tree46,tree47,tree48,tree49,tree50,tree51,tree52,tree53;
-    private Tree_object tree54,tree55,tree56,tree57,tree58,tree59,tree60,tree61,tree62,tree63,tree64,tree65,tree66,tree67;
+    private TreeObject tree,tree1,tree2,tree3,tree4,tree5,tree6,tree7,tree8,tree9,tree10,tree11,tree12,tree13,tree14,tree15,tree16;
+    private TreeObject tree17,tree18,tree19,tree20,tree21,tree22,tree23,tree24,tree25,tree26,tree27,tree28,tree29,tree30,tree31,tree32,tree33;
+    private TreeObject tree34,tree35,tree36,tree37,tree38,tree39,tree40,tree41,tree42,tree43,tree44,tree45,tree46,tree47,tree48,tree49,tree50,tree51,tree52,tree53;
+    private TreeObject tree54,tree55,tree56,tree57,tree58,tree59,tree60,tree61,tree62,tree63,tree64,tree65,tree66,tree67;
 
 
 
@@ -217,15 +221,27 @@ public class ForestController implements Initializable{
         @FXML
         private ImageView tree_fig67;
 
-    public ForestController() throws IOException {
+    /**
+     * default constructor for the class
+     */
+    public ForestController() throws MalformedURLException {
     }
 
 
     //fxml methods
+    /**
+     * method that uses the <code>XmlMethods</code> class as its base to save the playerdata into the xml file
+     * @throws FileNotFoundException
+     * @throws JAXBException
+     */
     @FXML
     private void save() throws FileNotFoundException, JAXBException, URISyntaxException {
             xml_methods.save(player);
     }
+    /**
+     * method that uses the <code>XmlMethods</code> class as its base to load the playerdata from the xml file
+     * @throws JAXBException
+     */
     @FXML
     public void load() throws JAXBException {
         Player loadplayer = xml_methods.load();
@@ -291,7 +307,9 @@ public class ForestController implements Initializable{
     }
 
 
-    //writes the name and gender of the player into the game
+    /**
+     * writes the name and gender of the player into the game
+     */
     @FXML
     private void setname()
     {
@@ -302,7 +320,7 @@ public class ForestController implements Initializable{
         }
     }
     @FXML
-    public void setpic(){ player_fig.setImage(Images.playerm_image); }
+    public void setpic(){ player_fig.setImage(images.playerm_image); }
 
     @FXML
     private void open_note_desc(){ inv.open_note_desc(); }
@@ -314,29 +332,53 @@ public class ForestController implements Initializable{
     @FXML
     private void close_inv(){ inv.close_inventory(); }
 
-    public static void setPlayer(Player player2) {
+    /**
+     * method to set the main Scene's player to this scene
+     * @param player2 player object from the Game class
+     */
+    public void setPlayer(Player player2) {
         player = player2;
         playername=player.getName();
+        playername_label.setText(playername+", "+player.getgender());
         boolean isok = true;
     }
 
-    public Tree_object settrees(int x, int y, ImageView tree){
-        Tree_object temp_tree = new Tree_object(x,y,tree, entity_pane);
+    /**
+     * a constructor for TreeObject objects, that uses the getTree function as its return value
+     * @param x x coords of the tree object
+     * @param y y coords of the tree object
+     * @param tree the image of the object
+     * @return the created temp_tree TreeObject
+     */
+    public TreeObject settrees(int x, int y, ImageView tree){
+        TreeObject temp_tree = new TreeObject(x,y,tree, entity_pane);
         return getTree(temp_tree);
     }
 
-
+    /**
+     *method that raises the player's score and then saves the data into the xml
+     * @throws FileNotFoundException
+     * @throws JAXBException
+     */
     public void raiseScore() throws FileNotFoundException, JAXBException, URISyntaxException {
             player.setscore(player.getscore()+10);
             score_label.setText(String.valueOf(player.getscore()));
             save();
     }
 
+    /**
+     * method that gets called when the player collides with an item, then calls the raiseScore and isThere methods
+     * @throws FileNotFoundException
+     * @throws JAXBException
+     */
     public void setcollided() throws FileNotFoundException, JAXBException, URISyntaxException {
         raiseScore();
         isThere();
     }
 
+    /**
+     * method that checks if the player's itemlist contains the items on the map, and if it does, makes the items disappear
+     */
     private void isThere(){
 
         if (player.getItems().isEmpty()){return;}
@@ -360,6 +402,13 @@ public class ForestController implements Initializable{
         }
     }
 
+    /**
+     * method to check if the player collided with the bear object, and if did opens the <code>fight</code> game event
+     * @throws CollosionException
+     * @throws FileNotFoundException
+     * @throws JAXBException
+     * @throws URISyntaxException
+     */
     private void start_fight_after_bear_collides() throws CollosionException, FileNotFoundException, JAXBException, URISyntaxException {
         boolean can_start= Collosion.Collosion_detection(player,bear);
             if (can_start==false)
@@ -369,18 +418,31 @@ public class ForestController implements Initializable{
         return;
     }
 
+    /**
+     * method that changes the Game class's scene into the CityScene from the ForestScene
+     * @throws FileNotFoundException
+     * @throws JAXBException
+     * @throws URISyntaxException
+     */
     private void change_to_city() throws FileNotFoundException, JAXBException, URISyntaxException {
         if (tpready && player.getFought())
         cityController.load_city(Game.getPrimarystage());
     }
 
-    //method for collosion detection
+    /**
+     * method for collosion detection
+     * @throws CollosionException
+     * @throws FileNotFoundException
+     * @throws JAXBException
+     * @throws URISyntaxException
+     */
     private void collosionDetect() throws CollosionException, FileNotFoundException, JAXBException, URISyntaxException {
         //collosion with bear
         start_fight_after_bear_collides();
 
         //collosion detection between items and player
         Collosion.Collosion_detection_item(this,player);
+        Collosion.Collosion_tp(this,player);
         change_to_city();
 
         //collosion detection between trees and player
@@ -454,7 +516,10 @@ public class ForestController implements Initializable{
         Collosion.Collosion_detection(player, getTree(tree67));
     }
 
-    //method to initialize trees
+
+    /**
+     * method to initialize trees
+     */
     public void inittrees() {
          tree = settrees((int) tree_fig.getLayoutX(), (int) tree_fig.getLayoutY(),tree_fig);
          tree1 = settrees((int) tree_fig1.getLayoutX(), (int) tree_fig1.getLayoutY(),tree_fig1);
@@ -526,7 +591,10 @@ public class ForestController implements Initializable{
          tree67= settrees((int) tree_fig67.getLayoutX(), (int) tree_fig67.getLayoutY(),tree_fig67);
     }
 
-    //player movement
+
+    /**
+     * method that deals with the player movement
+     */
     private void movement(){
         root.setOnKeyPressed(e -> {
             if(can_move==true) {
@@ -621,7 +689,7 @@ public class ForestController implements Initializable{
     }
 
     //getters
-    public Tree_object getTree(Tree_object tree) { return tree; }
+    public TreeObject getTree(TreeObject tree) { return tree; }
     public Player getplayer(){return player;}
 
     public Label gettext_pane_text(){return text_pane_text;}

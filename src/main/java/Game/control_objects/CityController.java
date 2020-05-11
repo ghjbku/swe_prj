@@ -11,6 +11,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * controller class for the city_window fxml
+ */
 public class CityController implements Initializable {
     private Player player;
     private String playername;
@@ -21,6 +24,13 @@ public class CityController implements Initializable {
          playername = player.getName();
     }
 
+    /**
+     * a method that loads the CityScene after the player uses the city gates in the ForestScene
+     * @param primarystage the Game class's stage
+     * @throws FileNotFoundException
+     * @throws JAXBException
+     * @throws URISyntaxException
+     */
     public void load_city(Stage primarystage) throws FileNotFoundException, JAXBException, URISyntaxException {
         System.out.println("Loading the city scene!");
         primarystage.setScene(CityScene.getGame_scene());

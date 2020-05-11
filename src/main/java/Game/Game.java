@@ -5,23 +5,28 @@ import Game.control_objects.ForestController;
 import Game.control_objects.XmlMethods;
 import Game.game_objects.Item;
 import Game.game_objects.Player;
-import Game.game_window.CityScene;
 import Game.game_window.ForestScene;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.*;
-import javafx.scene.control.*;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-
+/**
+ * Class for the main screen with player creation
+ */
 public class Game extends Application implements EventHandler<ActionEvent> {
     private static Stage primarystage;
     private XmlMethods xml_methods=new XmlMethods();
@@ -42,13 +47,28 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     private RadioButton male=new RadioButton("Male?");
     private boolean isset=false;
 
+    /**
+     * default constructor for the game class
+     * @throws IOException
+     */
     public Game() throws IOException {
     }
 
+    /**
+     * method that uses the <code>XmlMethods</code> class as its base to save the playerdata into the xml file
+     * @throws FileNotFoundException
+     * @throws JAXBException
+     * @throws URISyntaxException
+     */
     public void savetoxml() throws FileNotFoundException, JAXBException, URISyntaxException {
         xml_methods.save(player);
     }
-    public void readxml() throws FileNotFoundException, JAXBException {
+
+    /**
+     *  method that uses the <code>XmlMethods</code> class as its base to load the playerdata from the xml file
+     * @throws JAXBException
+     */
+    public void readxml() throws JAXBException {
         Player loadplayer = xml_methods.load();
         System.out.println(loadplayer.getName());
         if (!item.isEmpty())
@@ -59,10 +79,16 @@ public class Game extends Application implements EventHandler<ActionEvent> {
 
     }
 
+    /**
+     * method to start the game and change the stage's scene from the main screen into the first level: ForestScene
+     * @throws IOException
+     * @throws JAXBException
+     * @throws URISyntaxException
+     */
     public void start_game() throws IOException, JAXBException, URISyntaxException {
         savetoxml();
         System.out.println("starting the game now...");
-        ForestController.setPlayer(player);
+        forestController.setPlayer(player);
         primarystage.setResizable(false);
         primarystage.setScene(game_scene);
         primarystage.show();
@@ -114,6 +140,10 @@ public class Game extends Application implements EventHandler<ActionEvent> {
 
     }
 
+    /**
+     * a function that is used to get the class's stage
+     * @return primarystage, which is the Start method's parameter
+     */
     public static Stage getPrimarystage(){return primarystage;}
 
 
