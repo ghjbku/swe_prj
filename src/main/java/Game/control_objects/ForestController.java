@@ -235,7 +235,7 @@ public class ForestController implements Initializable{
      * @throws JAXBException
      */
     @FXML
-    private void save() throws FileNotFoundException, JAXBException, URISyntaxException {
+    private void save() throws FileNotFoundException, JAXBException,  MalformedURLException {
             xml_methods.save(player);
     }
     /**
@@ -243,7 +243,7 @@ public class ForestController implements Initializable{
      * @throws JAXBException
      */
     @FXML
-    public void load() throws JAXBException {
+    public void load() throws JAXBException, FileNotFoundException {
         Player loadplayer = xml_methods.load();
         System.out.println(loadplayer.getName());
         setname();
@@ -258,19 +258,19 @@ public class ForestController implements Initializable{
     }
 
     @FXML
-    private void option1_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
+    private void option1_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
         fight.option1();
     }
     @FXML
-    private void option2_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
+    private void option2_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
         fight.option2();
     }
     @FXML
-    private void option3_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
+    private void option3_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
         fight.option3();
     }
     @FXML
-    private void option4_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
+    private void option4_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
         fight.option4();
     }
     @FXML
@@ -360,7 +360,7 @@ public class ForestController implements Initializable{
      * @throws FileNotFoundException
      * @throws JAXBException
      */
-    public void raiseScore() throws FileNotFoundException, JAXBException, URISyntaxException {
+    public void raiseScore() throws FileNotFoundException, JAXBException, MalformedURLException {
             player.setscore(player.getscore()+10);
             score_label.setText(String.valueOf(player.getscore()));
             save();
@@ -371,7 +371,7 @@ public class ForestController implements Initializable{
      * @throws FileNotFoundException
      * @throws JAXBException
      */
-    public void setcollided() throws FileNotFoundException, JAXBException, URISyntaxException {
+    public void setcollided() throws FileNotFoundException, JAXBException, MalformedURLException {
         raiseScore();
         isThere();
     }
@@ -436,7 +436,7 @@ public class ForestController implements Initializable{
      * @throws JAXBException
      * @throws URISyntaxException
      */
-    private void collosionDetect() throws CollosionException, FileNotFoundException, JAXBException, URISyntaxException {
+    private void collosionDetect() throws CollosionException, FileNotFoundException, JAXBException, URISyntaxException, MalformedURLException {
         //collosion with bear
         start_fight_after_bear_collides();
 
@@ -609,7 +609,7 @@ public class ForestController implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException collosion_exception) {
+                    } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException collosion_exception) {
                         collosion_exception.printStackTrace();
                     }
 
@@ -624,7 +624,7 @@ public class ForestController implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException collosion_exception) {
+                    } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException collosion_exception) {
                         collosion_exception.printStackTrace();
                     }
                 }
@@ -639,7 +639,7 @@ public class ForestController implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException collosion_exception) {
+                    } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException collosion_exception) {
                         collosion_exception.printStackTrace();
                     }
                 } if (e.getCode() == KeyCode.S) {
@@ -654,7 +654,7 @@ public class ForestController implements Initializable{
                     try {
                         collosionDetect();
                         is_fight_over();
-                    } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException collosion_exception) {
+                    } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException collosion_exception) {
                         collosion_exception.printStackTrace();
                     }
                 }

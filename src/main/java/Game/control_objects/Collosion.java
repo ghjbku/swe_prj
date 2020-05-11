@@ -4,6 +4,7 @@ import Game.game_objects.*;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ public class Collosion {
     /**
      * default constructor for the class
      */
-    public Collosion(){}
+    public Collosion() throws MalformedURLException {}
 
     /**
      * function that detects if the player collides with an object
@@ -52,8 +53,9 @@ public class Collosion {
      * @param plr the player
      * @throws FileNotFoundException
      * @throws JAXBException
+     * @throws MalformedURLException
      */
-    public static void Collosion_detection_item(ForestController forestController, Player plr) throws FileNotFoundException, JAXBException, URISyntaxException {
+    public static void Collosion_detection_item(ForestController forestController, Player plr) throws FileNotFoundException, JAXBException, MalformedURLException {
         if
         (
                 ((Math.abs(65 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 65) < dist))

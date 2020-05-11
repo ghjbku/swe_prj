@@ -7,6 +7,7 @@ import Game.control_objects.XmlMethods;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
 import static java.lang.Thread.sleep;
@@ -19,7 +20,7 @@ public class Fight {
 
     public Fight(ForestController forestController){ ctr= forestController; }
 
-    public void open_text_pane() throws FileNotFoundException, JAXBException, URISyntaxException {
+    public void open_text_pane() {
 
         if (round_counter==0 && !(ctr.getplayer().getFought()) )
         {
@@ -45,7 +46,7 @@ public class Fight {
         ctr.setOption4("dodge the rush to the right");
     };
 
-    public void option1() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
+    public void option1() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
         ctr.setText_pane_text("sadly the bear is faster!");
         fight(round_counter,1);
         fight_done(round_counter);
@@ -58,26 +59,26 @@ public class Fight {
         }
 
     };
-    public void option2() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
+    public void option2() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
         ctr.setText_pane_text("sadly the bear is faster!");
         fight(round_counter,2);
         fight_done(round_counter);
         round_counter++;
     };
-    public void option3() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
+    public void option3() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
         ctr.setText_pane_text("sadly the bear is faster!");
         fight(round_counter,3);
         fight_done(round_counter);
         round_counter++;
     };
-    public void option4() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
+    public void option4() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
         ctr.setText_pane_text("sadly the bear is faster!");
         fight(round_counter,4);
         fight_done(round_counter);
         round_counter++;
     };
 //42113421
-    private void fight(int round_counter,int option) throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException {
+    private void fight(int round_counter,int option) throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
         switch (round_counter) {
             case 0:
                 ctr.setText_pane_text("You dodged to the side, and just barely survive the rush...\nOn the other hand, the bear" +
@@ -184,7 +185,7 @@ public class Fight {
 
     }
 
-     private void fight_done(int counter) throws InterruptedException, FileNotFoundException, JAXBException, URISyntaxException {
+     private void fight_done(int counter) throws InterruptedException, FileNotFoundException, JAXBException, MalformedURLException {
         if (counter>=7 && counter<10)
         {
          end_stuff("You decide to wait for the bear...It slowly walks towards you, seemingly really weakened...\n" +

@@ -1,25 +1,26 @@
 package Game.control_objects;
 
+import Game.Game;
 import Game.game_objects.Player;
 import jaxb.JAXBHelper;
 
 import javax.xml.bind.JAXBException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 
 /**
  * Class for the xml saving and loading methods
  */
 public class XmlMethods {
-
+    File file =new File(Game.class.getProtectionDomain().getCodeSource().getLocation().getPath());
     /**
      * default constructor for the class
      */
-    public XmlMethods(){}
+    public XmlMethods() throws MalformedURLException {}
     /**
      * method to save the player's data into an xml file
      *
@@ -27,10 +28,13 @@ public class XmlMethods {
      * @throws JAXBException if there is an error with the xml file
      * @throws FileNotFoundException if the file does not exist
      */
-    public void save(Player player) throws FileNotFoundException, JAXBException, URISyntaxException {
-        File file = new File(String.valueOf(getClass().getResourceAsStream("/Game/control_objects/player_data.xml")));
+    public void save(Player player) throws FileNotFoundException, JAXBException, MalformedURLException {
+
+
+        System.out.println("getparent: "+file.getParent());
+        System.out.println(file);
         JAXBHelper.toXML(player, System.out);
-        JAXBHelper.toXML(player, new FileOutputStream(file));
+        JAXBHelper.toXML( player, new FileOutputStream(file.getParent()+"/player_data.xml"));
     }
 
     /**
@@ -39,7 +43,7 @@ public class XmlMethods {
      * @return the xml file's data as an object
      * @throws JAXBException if there is an error with the xml file
      */
-    public Player load() throws JAXBException {
-       return JAXBHelper.fromXML(Player.class, getClass().getResourceAsStream("/Game/control_objects/player_data.xml"));
+    public Player load() throws JAXBException, FileNotFoundException {
+       return JAXBHelper.fromXML(Player.class, new FileInputStream(file.getParent()+"/player_data.xml"));
     }
 }

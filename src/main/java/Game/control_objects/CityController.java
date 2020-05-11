@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +19,9 @@ public class CityController implements Initializable {
     private Player player;
     private String playername;
     private XmlMethods xmlMethods = new XmlMethods();
+
+    public CityController() throws MalformedURLException {
+    }
 
     public void setPlayer(Player player2) {
          player = player2;

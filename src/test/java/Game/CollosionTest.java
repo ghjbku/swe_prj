@@ -27,7 +27,10 @@ private TreeObject obj;
 
     @BeforeEach
     public void setUp() {
-        undertest = new Collosion();
+        try {undertest = new Collosion();}
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @AfterEach

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <player>
     <name>Windsake</name>
-    <items id="0" x="0" y="0">dagger</items>
-    <items id="1" x="0" y="0">Note</items>
-    <posx>719</posx>
-    <posy>321</posy>
-    <lastx>719</lastx>
-    <lasty>321</lasty>
+    <posx>700</posx>
+    <posy>300</posy>
+    <lastx>700</lastx>
+    <lasty>300</lasty>
     <gender>male</gender>
-    <score>100</score>
-    <fought>true</fought>
+    <score>0</score>
+    <fought>false</fought>
 </player>

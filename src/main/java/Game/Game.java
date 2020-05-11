@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
@@ -58,9 +59,9 @@ public class Game extends Application implements EventHandler<ActionEvent> {
      * method that uses the <code>XmlMethods</code> class as its base to save the playerdata into the xml file
      * @throws FileNotFoundException
      * @throws JAXBException
-     * @throws URISyntaxException
+     * @throws MalformedURLException
      */
-    public void savetoxml() throws FileNotFoundException, JAXBException, URISyntaxException {
+    public void savetoxml() throws FileNotFoundException, JAXBException, MalformedURLException {
         xml_methods.save(player);
     }
 
@@ -68,7 +69,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
      *  method that uses the <code>XmlMethods</code> class as its base to load the playerdata from the xml file
      * @throws JAXBException
      */
-    public void readxml() throws JAXBException {
+    public void readxml() throws JAXBException, FileNotFoundException {
         Player loadplayer = xml_methods.load();
         System.out.println(loadplayer.getName());
         if (!item.isEmpty())
@@ -183,7 +184,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
                 System.out.println("ISSET IS TRUE!");
                 try {
                     savetoxml();
-                } catch (FileNotFoundException | URISyntaxException | JAXBException e) {
+                } catch (FileNotFoundException | JAXBException | MalformedURLException e) {
                     e.printStackTrace();
                 }
                 isset=false;
