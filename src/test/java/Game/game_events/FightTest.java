@@ -17,23 +17,18 @@ import org.junit.jupiter.api.Test;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FightTest {
     private Player player=new Player();
-    private Fight undertest;
+    Fight undertest;
     public FightTest(){}
 
 
     @BeforeEach
     public void setUp() {
-        try {
-            Fight undertest = new Fight();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+            undertest = new Fight();
+            System.out.println("im working");
     }
 
     @AfterEach
@@ -44,7 +39,7 @@ public class FightTest {
     public void testNoWeapon()
     {
         Player plr = player;
-        Fight test_fight=new Fight();
+        Fight test_fight=undertest;
 
        plr.setscore(10);
        plr.setgender("male");
@@ -52,11 +47,12 @@ public class FightTest {
         assertEquals("windsake",plr.getName());
         assertEquals("male",plr.getgender());
         assertEquals(10,plr.getscore());
-        assertTrue(!plr.getFought());
-        assertTrue(test_fight.getcounter()==0);
+        assertFalse(plr.getFought());
+        assertEquals(0, test_fight.getcounter());
         assertTrue(plr.getItems().isEmpty());
+        assertEquals(-1, test_fight.open_text_pane(plr));
         test_fight.setcounter(10);
-       assertEquals(-1, test_fight.open_text_pane(plr));
+       assertEquals(1, test_fight.open_text_pane(plr));
 
     }
 

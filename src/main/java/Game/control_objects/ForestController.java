@@ -33,7 +33,7 @@ public class ForestController implements Initializable{
     private boolean tpready=false;
     public boolean can_move=true;
     private Bear bear;
-    private Fight fight=new Fight(this);
+    private Fight fight=new Fight();
     private XmlMethods xml_methods=new XmlMethods();
     private CityController cityController=new CityController();
     private Inventory inv = new Inventory(this);
@@ -239,7 +239,7 @@ public class ForestController implements Initializable{
      * @throws JAXBException
      */
     @FXML
-    private void save() throws FileNotFoundException, JAXBException,  MalformedURLException {
+    private void save() throws FileNotFoundException, JAXBException {
             xml_methods.save(player);
     }
     /**
@@ -263,19 +263,19 @@ public class ForestController implements Initializable{
 
     @FXML
     private void option1_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
-        fight.option1();
+        option1();
     }
     @FXML
     private void option2_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
-        fight.option2();
+        option2();
     }
     @FXML
     private void option3_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
-        fight.option3();
+        option3();
     }
     @FXML
     private void option4_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
-        fight.option4();
+        option4();
     }
     @FXML
     private void label_on_hover_in1(){
@@ -364,7 +364,7 @@ public class ForestController implements Initializable{
      * @throws FileNotFoundException
      * @throws JAXBException
      */
-    public void raiseScore() throws FileNotFoundException, JAXBException, MalformedURLException {
+    public void raiseScore() throws FileNotFoundException, JAXBException {
             player.setscore(player.getscore()+10);
             score_label.setText(String.valueOf(player.getscore()));
             save();
@@ -406,21 +406,6 @@ public class ForestController implements Initializable{
         }
     }
 
-    /**
-     * method to check if the player collided with the bear object, and if did opens the <code>fight</code> game event
-     * @throws CollosionException
-     * @throws FileNotFoundException
-     * @throws JAXBException
-     * @throws URISyntaxException
-     */
-    private void start_fight_after_bear_collides() throws CollosionException, FileNotFoundException, JAXBException, URISyntaxException {
-        boolean can_start= Collosion.Collosion_detection(player,bear);
-            if (can_start==false)
-             {
-                     fight.open_text_pane(player);
-             }
-        return;
-    }
 
     /**
      * method that changes the Game class's scene into the CityScene from the ForestScene
@@ -918,6 +903,36 @@ public class ForestController implements Initializable{
         movement();
     }
 
+
+
+    //start of fight_event stuff
+
+
+    /**
+     * method to check if the player collided with the bear object, and if did opens the <code>fight</code> game event
+     * @throws CollosionException
+     * @throws FileNotFoundException
+     * @throws JAXBException
+     * @throws URISyntaxException
+     */
+    private void start_fight_after_bear_collides() throws CollosionException, FileNotFoundException, JAXBException, URISyntaxException {
+        boolean can_start= Collosion.Collosion_detection(player,bear);
+        if (can_start==false)
+        {
+
+            if (fight.open_text_pane(player) ==-1){
+                no_weapon();
+            }
+            else if (fight.open_text_pane(player) ==0){
+                setpane();
+                start_fight();
+            }
+            else if (fight.open_text_pane(player) ==1){
+            }
+        }
+        return;
+    }
+
     /**
      * method that checks if the fight event with the bear is over
      */
@@ -931,6 +946,195 @@ public class ForestController implements Initializable{
             System.exit(0);
         }
     }
+
+    private void start_fight(){
+        setText_pane_text("You see a Bear in front of you sleeping in the grass.\nAs you lurk closer it suddenly snaps its" +
+                " eyes open and looks at you.\nYou remember that you found a weapon along the way here... maybe it was " +
+                "for this moment.\nThe bear suddenly lets out a horrendous roar and starts running towards you,full of killing intent!");
+        setOption1("run away");
+        setOption2("try to play dead");
+        setOption3("try to talk it out with him");
+        setOption4("dodge the rush to the right");
+    };
+
+    private void end_stuff(String str) {
+        setText_pane_text(str);
+        get_text_pane().setDisable(false);
+        getOption1().setVisible(false);
+        getOption2().setVisible(false);
+        getOption3().setVisible(false);
+        getOption4().setVisible(false);
+        can_move = true;
+
+    }
+    private void fight_done(int counter) throws FileNotFoundException, JAXBException, MalformedURLException {
+        if (counter>=7 && counter<10)
+        {
+            end_stuff("You decide to wait for the bear...It slowly walks towards you, seemingly really weakened...\n" +
+                    "As it reaches you, it lifts up its paws to strike...You prepare for the last strike!\nAnd the bear just falls to the ground, lifeless! You won, go through the city gate now!");
+            fight.setcounter(10);
+            player.setFought(true);
+            save();
+        }
+    }
+
+    private void fight_lost() {
+        if (fight.getcounter()>1)
+        {
+            end_stuff("You fought hard, but sadly you lost this fight... but you can do it again! Good Luck!");
+            fight.setcounter(55);
+        }
+        else
+        {
+            end_stuff("It wasn't a tough fight i suppose... well... sadly you lost this fight... but you can do it again! Good Luck!");
+            fight.setcounter(55);
+        }
+    }
+    private void setpane(){
+        get_text_pane().setDisable(false);
+        get_text_pane().setVisible(true);
+        can_move = false;
+    }
+
+    public void no_weapon(){
+        setpane();
+        getOption2().setVisible(false);
+        getOption3().setVisible(false);
+        getOption4().setVisible(false);
+        gettext_pane_text().setText("You found a bear laying in the grass.\n" +
+                "When you come closer it suddenly gets up and starts running towards you!\n" +
+                "Sadly you have no weapon with you, the best you can do now is run!");
+        getOption1().setText("run");
+        fight.run=true;
+    }
+
+    public void option1() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
+        thefight(fight.getcounter(),1);
+        fight_done(fight.getcounter());
+        fight.setcounter(fight.getcounter()+1);
+
+        if (fight.run){
+            can_move = true;
+            end_stuff("you tried to run away, but... running away from a bear is pretty much impossible... you died");
+            fight.setcounter(55);
+        }
+
+    };
+    public void option2() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
+        thefight(fight.getcounter(),2);
+        fight_done(fight.getcounter());
+        fight.setcounter(fight.getcounter()+1);
+    };
+    public void option3() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
+        thefight(fight.getcounter(),3);
+        fight_done(fight.getcounter());
+        fight.setcounter(fight.getcounter()+1);
+    };
+    public void option4() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
+        thefight(fight.getcounter(),4);
+        fight_done(fight.getcounter());
+        fight.setcounter(fight.getcounter()+1);
+    };
+
+    private void thefight(int round_counter,int option) throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
+        switch (round_counter) {
+            case 0:
+                setText_pane_text("You dodged to the side, and just barely survive the rush...\nOn the other hand, the bear" +
+                        " seems to be surprised about this.\nit might be your chance to deal some damage to it!");
+                setOption1("maybe it is playing, lets wait");
+                setOption2("time to stab it in the eye");
+                setOption3("try to talk it out with him");
+                setOption4("laugh and run away");
+                if (option==1){fight_lost();}
+                else if (option==2){fight_lost();}
+                else if(option==3){fight_lost();}
+                else if(option==4){raiseScore();}
+                break;
+            case 1:
+                setText_pane_text("You decided to grab your chances and thrust your blade into its eyes.\nThe bear probably didn't like " +
+                        "it,\nas you succeed in wounding it, he roars and once again rushes towards you!");
+                setOption1("lets dodge to the left now!");
+                setOption2("what about now...? lets play dead?");
+                setOption3("try to talk it out with him");
+                setOption4("hmm, dodge to the right again!");
+                if (option==1){fight_lost();}
+                else if (option==2){raiseScore();}
+                else if(option==3){fight_lost();}
+                else if(option==4){fight_lost();}
+                break;
+            case 2:
+                setText_pane_text("You dodge to the left, the bear half expecting your move, lunges to the right\nsadly for him" +
+                        " you have chosen the other side... time for another punishment?");
+                setOption1("lets play it safe for now...");
+                setOption2("Alright!!! lets cut it down!");
+                setOption3("maybe i can run away now?");
+                setOption4("attack its rear!");
+                if (option==1){raiseScore();}
+                else if (option==2){fight_lost();}
+                else if(option==3){fight_lost();}
+                else if(option==4){fight_lost();}
+                break;
+            case 3:
+                setText_pane_text("You decide to wait, and you have chosen the right option...\n" +
+                        "The bear who seemed like an easy prey a moment ago\nsuddenly turns back towards you and slashes with its pawns.");
+                setOption1("try to dodge to the left!");
+                setOption2("cut down its pawns!");
+                setOption3("stand still...");
+                setOption4("dodge backwards!");
+                if (option==1){raiseScore();}
+                else if (option==2){fight_lost();}
+                else if(option==3){fight_lost();}
+                else if(option==4){fight_lost();}
+                break;
+            case 4:
+                setText_pane_text("You play the bear into a fool..\nThe bear, expecting you to dodge, turns its body to the left, slashing the air\n" +
+                        "maybe now you can get some damage?");
+                setOption1("stab your dagger into its head");
+                setOption2("try to slash its fore legs!");
+                setOption3("grab the chance to run away!");
+                setOption4("stab its hind legs.");
+                if (option==1){fight_lost();}
+                else if (option==2){fight_lost();}
+                else if(option==3){raiseScore();}
+                else if(option==4){fight_lost();}
+                break;
+            case 5:
+                setText_pane_text("You stab the beast on its hind legs!\nIt seemingly is a little exhausted now" +
+                        " and the wound on its left hindleg is bleeding constantly.\nWhat will you do now?");
+                setOption1("Time to give him more wounds!");
+                setOption2("Wait for another chance at punishment!");
+                setOption3("guess an exhausted bear might not catch me? lets run!");
+                setOption4("This time i'll be the one rushing in!");
+                if (option==1){fight_lost();}
+                else if (option==2){fight_lost();}
+                else if(option==3){fight_lost();}
+                else if(option==4){raiseScore();}
+                break;
+            case 6:
+                setText_pane_text("You once again stay patient, just standing still waiting for the bear to make its move.\n" +
+                        "It isn't a patient type on the other hand,but only slowly comes towards you...\nThe difficulty just risen!");
+                setOption1("Lets wait for any attack!");
+                setOption2("He is clearly exhausted, lets go! KILL!!!");
+                setOption3("lets slash its other leg as well!");
+                setOption4("maybe i can run away now?");
+                if (option==1){fight_lost();}
+                else if (option==2){raiseScore();}
+                else if(option==3){fight_lost();}
+                else if(option==4){fight_lost();}
+                break;
+            case 7:
+                if (option==1){raiseScore();
+                    fight_done(round_counter);}
+                else if (option==2){fight_lost();}
+                else if(option==3){fight_lost();}
+                else if(option==4){fight_lost();}
+                break;
+        }
+    }
+
+
+
+
 
     //getters
     public TreeObject getTree(TreeObject tree) { return tree; }
