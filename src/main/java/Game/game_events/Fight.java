@@ -17,8 +17,6 @@ public class Fight {
 
     public Fight(){}
 
-
-
     public int open_text_pane(Player player) {
 
         if (round_counter==0 && !(player.getFought()) )

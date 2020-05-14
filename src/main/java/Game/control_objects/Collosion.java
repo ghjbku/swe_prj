@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 /**
@@ -56,9 +55,9 @@ public class Collosion {
      * and calls the setcollided method of the ForestController class
      * @param forestController
      * @param plr the player
-     * @throws FileNotFoundException
-     * @throws JAXBException
-     * @throws MalformedURLException
+     * @throws FileNotFoundException the xml file is not found
+     * @throws JAXBException problem with the xml save/load
+     * @throws MalformedURLException url wrong
      */
     public static void Collosion_detection_item(ForestController forestController, Player plr) throws FileNotFoundException, JAXBException, MalformedURLException {
         if
