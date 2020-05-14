@@ -918,6 +918,9 @@ public class ForestController implements Initializable{
         movement();
     }
 
+    /**
+     * method that checks if the fight event with the bear is over
+     */
     private void is_fight_over(){
         if (fight.getcounter()>=10 && fight.getcounter()<55){
             if (text_pane.isVisible()) {
