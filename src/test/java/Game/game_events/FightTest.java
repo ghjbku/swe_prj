@@ -50,18 +50,22 @@ public class FightTest {
         assertEquals("male",plr.getgender());
         assertEquals(10,plr.getscore());
 
+        //leaps into the first if
         assertFalse(plr.getFought());
         assertEquals(0, test_fight.getcounter());
 
+        //no_weapon end
        assertTrue(plr.getItems().isEmpty());
        assertEquals(-1, test_fight.open_text_pane(plr));
 
-       //player.getItems().get(0).getid()==0
+
+       //thefight end
         ArrayList<Item> item = plr.getItems();
         item.add(new Item("dagger", 0, 65, 216));
         plr.setItems(item);
         assertEquals(0, test_fight.open_text_pane(plr));
 
+       //fought end
        test_fight.setcounter(10);
        assertEquals(1, test_fight.open_text_pane(plr));
 
