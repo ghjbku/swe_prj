@@ -6,11 +6,7 @@ import jaxb.JAXBHelper;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.stream.Collectors;
+
 
 /**
  * Class for the xml saving and loading methods
@@ -20,7 +16,7 @@ public class XmlMethods {
     /**
      * default constructor for the class
      */
-    public XmlMethods() throws MalformedURLException {}
+    public XmlMethods() {}
     /**
      * method to save the player's data into an xml file, outside of the jar
      *

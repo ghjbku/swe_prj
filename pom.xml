@@ -61,7 +61,7 @@
     <connection>scm:git:https://github.com/ghjbku/swe_prj.git  </connection>
     <developerConnection>scm:git:https://github.com/ghjbku/swe_prj.git  </developerConnection>
     <url>https://github.com/ghjbku/swe_prj.git  </url>
-    <tag>nemtom mi ez</tag>
+    <tag>main</tag>
   </scm>
 
 

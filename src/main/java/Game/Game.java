@@ -35,7 +35,8 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     private static Stage primarystage;
     private XmlMethods xml_methods=new XmlMethods();
     ForestController forestController = new ForestController();
-    CityController cityController = new CityController();
+    //for later
+    // CityController cityController = new CityController();
 
 
     private Scene game_scene = ForestScene.getGame_scene();
@@ -62,15 +63,15 @@ public class Game extends Application implements EventHandler<ActionEvent> {
      * method that uses the <code>XmlMethods</code> class as its base to save the playerdata into the xml file
      * @throws FileNotFoundException
      * @throws JAXBException
-     * @throws MalformedURLException
      */
-    public void savetoxml() throws FileNotFoundException, JAXBException, MalformedURLException {
+    public void savetoxml() throws FileNotFoundException, JAXBException {
         xml_methods.save(player);
     }
 
     /**
      *  method that uses the <code>XmlMethods</code> class as its base to load the playerdata from the xml file
      * @throws JAXBException
+     * @throws FileNotFoundException
      */
     public void readxml() throws JAXBException, FileNotFoundException {
         Player loadplayer = xml_methods.load();
@@ -87,9 +88,8 @@ public class Game extends Application implements EventHandler<ActionEvent> {
      * method to start the game and change the stage's scene from the main screen into the first level: ForestScene
      * @throws IOException
      * @throws JAXBException
-     * @throws URISyntaxException
      */
-    public void start_game() throws IOException, JAXBException, URISyntaxException {
+    public void start_game() throws IOException, JAXBException {
         savetoxml();
         logger.trace("starting the game now...");
         forestController.setPlayer(player);
@@ -187,13 +187,13 @@ public class Game extends Application implements EventHandler<ActionEvent> {
                 logger.trace("ISSET IS TRUE!");
                 try {
                     savetoxml();
-                } catch (FileNotFoundException | JAXBException | MalformedURLException e) {
-                    e.printStackTrace();
+                } catch (FileNotFoundException | JAXBException e) {
+                    logger.error("error occured: ",e);
                 }
                 isset=false;
                 try {
                     start_game();
-                } catch (URISyntaxException | JAXBException | IOException e) {
+                } catch (JAXBException | IOException e) {
                     logger.error("error occured: ",e);
                 }
             }
@@ -205,7 +205,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
             try {
                 readxml();
                 start_game();
-            } catch (URISyntaxException | JAXBException | IOException e) {
+            } catch (JAXBException | IOException e) {
                 logger.error("error occured: ",e);
 
             }
