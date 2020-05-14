@@ -1,15 +1,6 @@
 package Game.game_events;
-
-import Game.control_objects.ForestController;
-import Game.control_objects.XmlMethods;
 import Game.game_objects.Player;
 
-import javax.xml.bind.JAXBException;
-import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-
-import static java.lang.Thread.sleep;
 
 public class Fight {
     private int round_counter=0;
@@ -17,7 +8,7 @@ public class Fight {
 
     public Fight(){}
 
-    public int open_text_pane(Player player) {
+    public int Fight_crossroad(Player player) {
 
         if (round_counter==0 && !(player.getFought()) )
         {
@@ -27,11 +18,10 @@ public class Fight {
         else if(round_counter==10 || player.getFought()==true){
             return 1;
         }
-    return 0;
+    return -2;
     }
 
      public int getcounter(){return round_counter;}
      public void setcounter(int count){round_counter=count;}
-
 
 }

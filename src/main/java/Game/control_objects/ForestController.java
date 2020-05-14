@@ -920,14 +920,14 @@ public class ForestController implements Initializable{
         if (can_start==false)
         {
 
-            if (fight.open_text_pane(player) ==-1){
+            if (fight.Fight_crossroad(player) ==-1){
                 no_weapon();
             }
-            else if (fight.open_text_pane(player) ==0){
+            else if (fight.Fight_crossroad(player) ==0){
                 setpane();
                 start_fight();
             }
-            else if (fight.open_text_pane(player) ==1){
+            else if (fight.Fight_crossroad(player) ==1){
             }
         }
         return;

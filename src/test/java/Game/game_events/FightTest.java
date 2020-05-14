@@ -1,22 +1,11 @@
 package Game.game_events;
 
-import Game.Game;
-import Game.control_objects.Collosion;
-import Game.game_events.Fight;
 import Game.game_objects.Item;
 import Game.game_objects.Player;
-import Game.game_window.ForestScene;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.bind.JAXBException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,7 +27,7 @@ public class FightTest {
     }
 
     @Test
-    public void testNoWeapon()
+    public void testFight()
     {
         Player plr = player;
         Fight test_fight=undertest;
@@ -56,18 +45,23 @@ public class FightTest {
 
         //no_weapon end
        assertTrue(plr.getItems().isEmpty());
-       assertEquals(-1, test_fight.open_text_pane(plr));
-
+       assertEquals(-1, test_fight.Fight_crossroad(plr));
 
        //thefight end
         ArrayList<Item> item = plr.getItems();
         item.add(new Item("dagger", 0, 65, 216));
         plr.setItems(item);
-        assertEquals(0, test_fight.open_text_pane(plr));
+        assertTrue(plr.getitem(0).getid()==0);
+        assertTrue(plr.getitem(0).getName().equals("dagger"));
+        assertEquals(0, test_fight.Fight_crossroad(plr));
 
-       //fought end
-       test_fight.setcounter(10);
-       assertEquals(1, test_fight.open_text_pane(plr));
+        //fought end
+        test_fight.setcounter(10);
+        assertEquals(1, test_fight.Fight_crossroad(plr));
+
+        test_fight.setcounter(9);
+        plr.setFought(false);
+        assertEquals(-2, test_fight.Fight_crossroad(plr));
 
     }
 

@@ -24,13 +24,19 @@ public class Bear implements Entity{
         this.hp=hp_to_set;
     }
 
+    public int gethp(){return hp;}
+
     @Override
-    public int getx() {
-        return x;
+    public int getx() { return x; }
+    public void setx(int sx) {
+        x=sx;
     }
 
     @Override
     public int gety() {
         return y;
+    }
+    public void sety(int sy) {
+        y=sy;
     }
 }
