@@ -9,7 +9,7 @@ import java.net.URL;
 public class Images {
    public Images() throws MalformedURLException {}
        URL playerm_img = new URL(getClass().getResource("/Game/pics/Player_m.png").toExternalForm());
-       public Image playerm_image = new Image(playerm_img.toExternalForm());
+       private Image playerm_image = new Image(playerm_img.toExternalForm());
 
-
+       public Image getimage(){return playerm_image;}
 }

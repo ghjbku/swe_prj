@@ -324,7 +324,7 @@ public class ForestController implements Initializable{
         }
     }
     @FXML
-    public void setpic(){ player_fig.setImage(images.playerm_image); }
+    public void setpic(){ player_fig.setImage(images.getimage()); }
 
     @FXML
     private void open_note_desc(){ inv.open_note_desc(); }
