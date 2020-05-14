@@ -1,5 +1,6 @@
-package Game;
+package Game.control_objects;
 
+import Game.Game;
 import Game.control_objects.Collosion;
 import Game.game_objects.Player;
 import Game.game_objects.TreeObject;

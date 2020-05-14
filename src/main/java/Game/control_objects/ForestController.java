@@ -417,7 +417,7 @@ public class ForestController implements Initializable{
         boolean can_start= Collosion.Collosion_detection(player,bear);
             if (can_start==false)
              {
-                     fight.open_text_pane();
+                     fight.open_text_pane(player);
              }
         return;
     }

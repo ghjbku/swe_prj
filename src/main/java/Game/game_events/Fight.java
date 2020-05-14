@@ -2,6 +2,7 @@ package Game.game_events;
 
 import Game.control_objects.ForestController;
 import Game.control_objects.XmlMethods;
+import Game.game_objects.Player;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
@@ -16,22 +17,24 @@ public class Fight {
     private boolean run =false;
 
 
+    public Fight(){}
     public Fight(ForestController forestController){ ctr= forestController; }
 
-    public void open_text_pane() {
+    public int open_text_pane(Player player) {
 
-        if (round_counter==0 && !(ctr.getplayer().getFought()) )
+        if (round_counter==0 && !(player.getFought()) )
         {
             ctr.get_text_pane().setDisable(false);
             ctr.get_text_pane().setVisible(true);
             ctr.can_move = false;
 
-            if (ctr.getplayer().getItems().isEmpty() || !(ctr.getplayer().getItems().get(0).getid()==0)){ no_weapon(); }
-            else { start_fight(); }
+            if (player.getItems().isEmpty() || !(player.getItems().get(0).getid()==0)){ no_weapon(); return -1; }
+            else { start_fight(); return 0;}
         }
-        else if(round_counter==10 || ctr.getplayer().getFought()==true){
+        else if(round_counter==10 || player.getFought()==true){
+            return 1;
         }
-
+    return 0;
     }
 
     private void start_fight(){
@@ -172,7 +175,7 @@ public class Fight {
         }
     }
 
-    private void end_stuff(String str) throws InterruptedException {
+    private void end_stuff(String str) {
         ctr.setText_pane_text(str);
         ctr.get_text_pane().setDisable(false);
         ctr.getOption1().setVisible(false);
@@ -183,7 +186,7 @@ public class Fight {
 
     }
 
-     private void fight_done(int counter) throws InterruptedException, FileNotFoundException, JAXBException, MalformedURLException {
+     private void fight_done(int counter) throws FileNotFoundException, JAXBException {
         if (counter>=7 && counter<10)
         {
          end_stuff("You decide to wait for the bear...It slowly walks towards you, seemingly really weakened...\n" +
@@ -195,7 +198,7 @@ public class Fight {
         }
      }
 
-     private void fight_lost() throws InterruptedException {
+     private void fight_lost() {
         if (round_counter>1)
         {
          end_stuff("You fought hard, but sadly you lost this fight... but you can do it again! Good Luck!");
@@ -209,6 +212,7 @@ public class Fight {
      }
 
      public int getcounter(){return round_counter;}
+     public void setcounter(int count){round_counter=count;}
      public void no_weapon(){
          ctr.getOption2().setVisible(false);
          ctr.getOption3().setVisible(false);

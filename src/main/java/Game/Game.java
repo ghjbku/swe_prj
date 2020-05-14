@@ -32,7 +32,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     private static Logger logger = LoggerFactory.getLogger(Game.class);
     private static Stage primarystage;
     private XmlMethods xml_methods=new XmlMethods();
-    ForestController forestController = new ForestController();
+    private ForestController forestController = new ForestController();
     //for later
     // CityController cityController = new CityController();
 
