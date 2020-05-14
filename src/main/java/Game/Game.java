@@ -23,8 +23,6 @@ import org.slf4j.LoggerFactory;
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 /**
@@ -160,11 +158,11 @@ public class Game extends Application implements EventHandler<ActionEvent> {
         }
         else if (actionEvent.getSource()==male){
             logger.trace("male clicked!");
-            if (player.getgender()=="female"){
+            if (player.getgender().equals("female")){
                 player.setgender("male");
                 lbl_gender.setText("GENDER: " +player.getgender());}
 
-            else if (player.getgender()=="male")
+            else if (player.getgender().equals("male"))
             {
                 player.setgender("female");
                 lbl_gender.setText("GENDER: " +player.getgender());
