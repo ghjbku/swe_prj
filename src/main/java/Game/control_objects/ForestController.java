@@ -36,7 +36,7 @@ public class ForestController implements Initializable{
     private Fight fight=new Fight();
     private XmlMethods xml_methods=new XmlMethods();
     private CityController cityController=new CityController();
-    private Inventory inv = new Inventory(this);
+    private Inventory inv = new Inventory(player);
     private Images images = new Images();
 
 
@@ -326,15 +326,60 @@ public class ForestController implements Initializable{
     @FXML
     public void setpic(){ player_fig.setImage(images.getimage()); }
 
-    @FXML
-    private void open_note_desc(){ inv.open_note_desc(); }
-    @FXML
-    private void open_dagger_desc(){ inv.open_dagger_desc(); }
+
+    //inventory related stuff
+
 
     @FXML
-    private void open_inv(){ inv.open_inventory(); }
+    private void open_note_desc(){ getNote_desc().setVisible(true); }
     @FXML
-    private void close_inv(){ inv.close_inventory(); }
+    private void open_dagger_desc(){getDagger_desc().setVisible(true); }
+
+    @FXML
+    private void open_inv(){ open_inventory(); }
+    @FXML
+    private void close_inv(){ close_inventory(); }
+
+    public void open_inventory() {
+        getInventory().setVisible(true);
+
+        if (player.getItems().size() == 0) {}
+        else if (player.getItems().size() > 1)
+        {
+           logger.info("slot id 0: "+inv.getslot(0)+", slot id 1: "+inv.getslot(1));
+
+            if ((player.getitem(0).getid() == 0 && player.getitem(1).getid() == 1) ||
+                    (player.getitem(0).getid() == 1 && player.getitem(1).getid() == 0))
+            {
+                getDagger_fig_inv().setVisible(true);
+                getNote_fig_inv().setVisible(true);
+                getDagger_fig().setImage(null);
+                getNote_fig().setImage(null);
+            }
+        }
+        else if (player.getItems().size() == 1)
+        {
+            logger.info("slot id 0: "+inv.getslot(0));
+            if (player.getitem(0).getid() == 1)
+            {
+                getNote_fig().setImage(null);
+                getNote_fig_inv().setVisible(true);
+            }
+            else if (player.getitem(0).getid() == 0)
+            {
+                getDagger_fig().setImage(null);
+                getDagger_fig_inv().setVisible(true);
+            }
+        }
+    }
+
+    public void close_inventory(){
+        getInventory().setVisible(false);
+        getNote_desc().setVisible(false);
+        getDagger_desc().setVisible(false);
+    }
+
+
 
     /**
      * method to set the main Scene's player to this scene
@@ -388,9 +433,11 @@ public class ForestController implements Initializable{
         if (player.getItems().isEmpty()){return;}
         if(player.getItems().size()==1) {
             if (player.getitem(0).getid() == 0) {
+                inv.setslot(0,0);
                 dagger_fig.setImage(null);
                 dagger_fig.setDisable(true);
             } else if (player.getitem(0).getid() == 1 ) {
+                inv.setslot(0,1);
                 note_fig.setImage(null);
                 note_fig.setDisable(true);
             }
@@ -403,6 +450,12 @@ public class ForestController implements Initializable{
             note_fig.setDisable(true);
             dagger_fig.setImage(null);
             dagger_fig.setDisable(true);
+            if (player.getitem(0).getid()==0 && player.getitem(1).getid()==1){
+                inv.setslot(1,1);
+            }
+            else if (player.getitem(0).getid()==1 && player.getitem(1).getid()==0){
+                inv.setslot(1,0);
+            }
         }
     }
 
