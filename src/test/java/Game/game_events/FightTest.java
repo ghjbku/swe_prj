@@ -3,6 +3,7 @@ package Game.game_events;
 import Game.Game;
 import Game.control_objects.Collosion;
 import Game.game_events.Fight;
+import Game.game_objects.Item;
 import Game.game_objects.Player;
 import Game.game_window.ForestScene;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -47,11 +49,20 @@ public class FightTest {
         assertEquals("windsake",plr.getName());
         assertEquals("male",plr.getgender());
         assertEquals(10,plr.getscore());
+
         assertFalse(plr.getFought());
         assertEquals(0, test_fight.getcounter());
-        assertTrue(plr.getItems().isEmpty());
-        assertEquals(-1, test_fight.open_text_pane(plr));
-        test_fight.setcounter(10);
+
+       assertTrue(plr.getItems().isEmpty());
+       assertEquals(-1, test_fight.open_text_pane(plr));
+
+       //player.getItems().get(0).getid()==0
+        ArrayList<Item> item = plr.getItems();
+        item.add(new Item("dagger", 0, 65, 216));
+        plr.setItems(item);
+        assertEquals(0, test_fight.open_text_pane(plr));
+
+       test_fight.setcounter(10);
        assertEquals(1, test_fight.open_text_pane(plr));
 
     }
