@@ -10,6 +10,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
@@ -17,12 +19,14 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Controller class for the forest_window fxml file
  */
 public class ForestController implements Initializable{
     //variables
+    private static Logger logger = LoggerFactory.getLogger(ForestController.class);
     private static Player player;
     private int incr=2;
     private boolean isset=false;
@@ -245,7 +249,7 @@ public class ForestController implements Initializable{
     @FXML
     public void load() throws JAXBException, FileNotFoundException {
         Player loadplayer = xml_methods.load();
-        System.out.println(loadplayer.getName());
+        logger.trace(loadplayer.getName());
         setname();
         isset=true;
         if (loadplayer.getgender().equals("male")){setpic();}
@@ -596,70 +600,307 @@ public class ForestController implements Initializable{
      * method that deals with the player movement
      */
     private void movement(){
+        AtomicBoolean presseda= new AtomicBoolean(false);
+        AtomicBoolean pressedw= new AtomicBoolean(false);
+        AtomicBoolean presseds= new AtomicBoolean(false);
+        AtomicBoolean pressedd= new AtomicBoolean(false);
+
         root.setOnKeyPressed(e -> {
             if(can_move==true) {
-                if (e.getCode() == KeyCode.A) {
-                    player.setLastx( player.getPosx());
-                    player.setLasty( player.getPosy());
-                    player.setPosx(player.getPosx() - incr);
-                    player_fig.setLayoutX(player.getPosx());
+                if (presseda.get() ==false&&pressedw.get() ==false&&presseds.get() ==false&&pressedd.get() ==false) {
+                    if (e.getCode() == KeyCode.A) {
+                        presseda.set(true);
+                        player.setLastx(player.getPosx());
+                        player.setLasty(player.getPosy());
+                        player.setPosx(player.getPosx() - incr);
+                        player_fig.setLayoutX(player.getPosx());
 
-                    //collosion detection
-                    //for items
-                    try {
-                        collosionDetect();
-                        is_fight_over();
-                    } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException collosion_exception) {
-                        collosion_exception.printStackTrace();
+                        //collosion detection
+                        //for items
+                        try {
+                            collosionDetect();
+                            is_fight_over();
+                        } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
+                            logger.error("error occured: ", error);
+                        }
+
+                    }
+                    if (e.getCode() == KeyCode.D) {
+                        pressedd.set(true);
+                        player.setLastx(player.getPosx());
+                        player.setLasty(player.getPosy());
+                        player.setPosx(player.getPosx() + incr);
+                        player_fig.setLayoutX(player.getPosx());
+
+                        //collosion detection
+                        //for items
+                        try {
+                            collosionDetect();
+                            is_fight_over();
+                        } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
+                            logger.error("error occured: ", error);
+                        }
+                    }
+                    if (e.getCode() == KeyCode.W) {
+                        pressedw.set(true);
+                        player.setLastx(player.getPosx());
+                        player.setLasty(player.getPosy());
+                        player.setPosy(player.getPosy() - incr);
+                        player_fig.setLayoutY(player.getPosy());
+
+                        //collosion detection
+                        //for items
+                        try {
+                            collosionDetect();
+                            is_fight_over();
+                        } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException er) {
+                            logger.error("error occured: ", er);
+                        }
+                    }
+                    if (e.getCode() == KeyCode.S) {
+                        presseds.set(true);
+                        player.setLastx(player.getPosx());
+                        player.setLasty(player.getPosy());
+                        player.setPosy(player.getPosy() + incr);
+                        player_fig.setLayoutY(player.getPosy());
+
+                        //collosion detection
+                        //for items
+                        try {
+                            collosionDetect();
+                            is_fight_over();
+                        } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException er) {
+                            logger.error("error occured: ", er);
+                        }
                     }
 
-                } if (e.getCode() == KeyCode.D) {
-                    player.setLastx( player.getPosx());
-                    player.setLasty( player.getPosy());
-                    player.setPosx(player.getPosx() + incr);
-                    player_fig.setLayoutX(player.getPosx());
-
-                    //collosion detection
-                    //for items
-                    try {
-                        collosionDetect();
-                        is_fight_over();
-                    } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException collosion_exception) {
-                        collosion_exception.printStackTrace();
-                    }
                 }
-                if (e.getCode() == KeyCode.W) {
-                    player.setLastx( player.getPosx());
-                    player.setLasty( player.getPosy());
-                    player.setPosy(player.getPosy() - incr);
-                    player_fig.setLayoutY(player.getPosy());
+                else if (presseda.get()==true ||pressedw.get()==true||presseds.get()==true||pressedd.get()==true){
 
-                    //collosion detection
-                    //for items
-                    try {
-                        collosionDetect();
-                        is_fight_over();
-                    } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException collosion_exception) {
-                        collosion_exception.printStackTrace();
+                    if (presseda.get()==true){
+                        if (e.getCode() == KeyCode.A) {
+                            player.setLastx(player.getPosx());
+                            player.setLasty(player.getPosy());
+                            player.setPosx(player.getPosx() - incr);
+                            player_fig.setLayoutX(player.getPosx());
+
+                            //collosion detection
+                            //for items
+                            try {
+                                collosionDetect();
+                                is_fight_over();
+                            } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
+                                logger.error("error occured: ", error);
+                            }
+
+                        }
+                        if (e.getCode() == KeyCode.W) {
+                            player.setLastx(player.getPosx());
+                            player.setLasty(player.getPosy());
+                            player.setPosy(player.getPosy() - incr);
+                            player_fig.setLayoutY(player.getPosy());
+                            player.setPosx(player.getPosx() - incr);
+                            player_fig.setLayoutX(player.getPosx());
+
+                            //collosion detection
+                            //for items
+                            try {
+                                collosionDetect();
+                                is_fight_over();
+                            } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException er) {
+                                logger.error("error occured: ", er);
+                            }
+                        }
+                        if (e.getCode() == KeyCode.S) {
+                            player.setLastx(player.getPosx());
+                            player.setLasty(player.getPosy());
+                            player.setPosy(player.getPosy() + incr);
+                            player_fig.setLayoutY(player.getPosy());
+                            player.setPosx(player.getPosx() - incr);
+                            player_fig.setLayoutX(player.getPosx());
+
+                            //collosion detection
+                            //for items
+                            try {
+                                collosionDetect();
+                                is_fight_over();
+                            } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException er) {
+                                logger.error("error occured: ", er);
+                            }
+                        }
+
                     }
-                } if (e.getCode() == KeyCode.S) {
+                    else if (pressedw.get()==true){
+                        if (e.getCode() == KeyCode.W) {
+                            player.setLastx(player.getPosx());
+                            player.setLasty(player.getPosy());
+                            player.setPosy(player.getPosy() - incr);
+                            player_fig.setLayoutY(player.getPosy());
 
-                    player.setLastx( player.getPosx());
-                    player.setLasty( player.getPosy());
-                    player.setPosy(player.getPosy() + incr);
-                    player_fig.setLayoutY(player.getPosy());
+                            //collosion detection
+                            //for items
+                            try {
+                                collosionDetect();
+                                is_fight_over();
+                            } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException er) {
+                                logger.error("error occured: ", er);
+                            }
+                        }
+                        if (e.getCode() == KeyCode.A) {
+                            player.setLastx(player.getPosx());
+                            player.setLasty(player.getPosy());
+                            player.setPosx(player.getPosx() - incr);
+                            player_fig.setLayoutX(player.getPosx());
+                            player.setPosy(player.getPosy() - incr);
+                            player_fig.setLayoutY(player.getPosy());
 
-                    //collosion detection
-                    //for items
-                    try {
-                        collosionDetect();
-                        is_fight_over();
-                    } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException collosion_exception) {
-                        collosion_exception.printStackTrace();
+                            //collosion detection
+                            //for items
+                            try {
+                                collosionDetect();
+                                is_fight_over();
+                            } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
+                                logger.error("error occured: ", error);
+                            }
+
+                        }
+                        if (e.getCode() == KeyCode.D) {
+                            player.setLastx(player.getPosx());
+                            player.setLasty(player.getPosy());
+                            player.setPosx(player.getPosx() + incr);
+                            player_fig.setLayoutX(player.getPosx());
+                            player.setPosy(player.getPosy() - incr);
+                            player_fig.setLayoutY(player.getPosy());
+
+                            //collosion detection
+                            //for items
+                            try {
+                                collosionDetect();
+                                is_fight_over();
+                            } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
+                                logger.error("error occured: ", error);
+                            }
+                        }
                     }
+                    else if (presseds.get()==true){
+                        if (e.getCode() == KeyCode.S) {
+                            player.setLastx(player.getPosx());
+                            player.setLasty(player.getPosy());
+                            player.setPosy(player.getPosy() + incr);
+                            player_fig.setLayoutY(player.getPosy());
+
+                            //collosion detection
+                            //for items
+                            try {
+                                collosionDetect();
+                                is_fight_over();
+                            } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException er) {
+                                logger.error("error occured: ", er);
+                            }
+                        }
+                        if (e.getCode() == KeyCode.A) {
+                            player.setLastx(player.getPosx());
+                            player.setLasty(player.getPosy());
+                            player.setPosx(player.getPosx() - incr);
+                            player_fig.setLayoutX(player.getPosx());
+                            player.setPosy(player.getPosy() + incr);
+                            player_fig.setLayoutY(player.getPosy());
+
+                            //collosion detection
+                            //for items
+                            try {
+                                collosionDetect();
+                                is_fight_over();
+                            } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
+                                logger.error("error occured: ", error);
+                            }
+
+                        }
+                        if (e.getCode() == KeyCode.D) {
+                            player.setLastx(player.getPosx());
+                            player.setLasty(player.getPosy());
+                            player.setPosx(player.getPosx() + incr);
+                            player_fig.setLayoutX(player.getPosx());
+                            player.setPosy(player.getPosy() + incr);
+                            player_fig.setLayoutY(player.getPosy());
+
+                            //collosion detection
+                            //for items
+                            try {
+                                collosionDetect();
+                                is_fight_over();
+                            } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
+                                logger.error("error occured: ", error);
+                            }
+                        }
+                    }
+                    else if (pressedd.get()==true){
+                        if (e.getCode() == KeyCode.D) {
+                            player.setLastx(player.getPosx());
+                            player.setLasty(player.getPosy());
+                            player.setPosx(player.getPosx() + incr);
+                            player_fig.setLayoutX(player.getPosx());
+
+                            //collosion detection
+                            //for items
+                            try {
+                                collosionDetect();
+                                is_fight_over();
+                            } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
+                                logger.error("error occured: ", error);
+                            }
+
+                        }
+                        if (e.getCode() == KeyCode.W) {
+                            player.setLastx(player.getPosx());
+                            player.setLasty(player.getPosy());
+                            player.setPosy(player.getPosy() - incr);
+                            player_fig.setLayoutY(player.getPosy());
+                            player.setPosx(player.getPosx() + incr);
+                            player_fig.setLayoutX(player.getPosx());
+
+                            //collosion detection
+                            //for items
+                            try {
+                                collosionDetect();
+                                is_fight_over();
+                            } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException er) {
+                                logger.error("error occured: ", er);
+                            }
+                        }
+                        if (e.getCode() == KeyCode.S) {
+                            player.setLastx(player.getPosx());
+                            player.setLasty(player.getPosy());
+                            player.setPosy(player.getPosy() + incr);
+                            player_fig.setLayoutY(player.getPosy());
+                            player.setPosx(player.getPosx() + incr);
+                            player_fig.setLayoutX(player.getPosx());
+
+                            //collosion detection
+                            //for items
+                            try {
+                                collosionDetect();
+                                is_fight_over();
+                            } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException er) {
+                                logger.error("error occured: ", er);
+                            }
+                        }
+                    }
+
+
                 }
-
             }
+        });
+
+        root.setOnKeyReleased(e -> {
+            if (e.getCode() == KeyCode.A) {
+                presseda.set(false);}
+            if (e.getCode() == KeyCode.W) {
+                pressedw.set(false);}
+            if (e.getCode() == KeyCode.S) {
+                presseds.set(false);}
+            if (e.getCode() == KeyCode.D) {
+                pressedd.set(false);}
         });
 
     }

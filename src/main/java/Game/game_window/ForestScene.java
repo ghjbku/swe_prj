@@ -4,6 +4,8 @@ import Game.Game;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -11,13 +13,14 @@ import java.io.IOException;
  * the class that contains the forest "level" of the game
  */
 public class ForestScene {
+    private static Logger logger = LoggerFactory.getLogger(ForestScene.class);
     private static Scene game_scene;
 
     static {
         try {
             game_scene = new Scene(loadFXML("forest_window"));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("error occured: ",e);
         }
     }
 

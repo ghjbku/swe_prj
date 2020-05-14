@@ -22,23 +22,20 @@ public class XmlMethods {
      */
     public XmlMethods() throws MalformedURLException {}
     /**
-     * method to save the player's data into an xml file
+     * method to save the player's data into an xml file, outside of the jar
      *
      * @param player the player object to save into the xml
      * @throws JAXBException if there is an error with the xml file
      * @throws FileNotFoundException if the file does not exist
      */
-    public void save(Player player) throws FileNotFoundException, JAXBException, MalformedURLException {
+    public void save(Player player) throws FileNotFoundException, JAXBException {
 
-
-        System.out.println("getparent: "+file.getParent());
-        System.out.println(file);
         JAXBHelper.toXML(player, System.out);
         JAXBHelper.toXML( player, new FileOutputStream(file.getParent()+"/player_data.xml"));
     }
 
     /**
-     *  function that loads the player data from an external xml file
+     *  function that loads the player data from an external xml file, outside of the jar
      *
      * @return the xml file's data as an object
      * @throws JAXBException if there is an error with the xml file

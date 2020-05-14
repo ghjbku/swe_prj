@@ -1,7 +1,5 @@
 package Game.game_events;
 
-import Game.Game;
-import Game.control_objects.CityController;
 import Game.control_objects.ForestController;
 import Game.control_objects.XmlMethods;
 

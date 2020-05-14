@@ -17,6 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
  * Class for the main screen with player creation
  */
 public class Game extends Application implements EventHandler<ActionEvent> {
+    private static Logger logger = LoggerFactory.getLogger(Game.class);
     private static Stage primarystage;
     private XmlMethods xml_methods=new XmlMethods();
     ForestController forestController = new ForestController();
@@ -71,9 +74,9 @@ public class Game extends Application implements EventHandler<ActionEvent> {
      */
     public void readxml() throws JAXBException, FileNotFoundException {
         Player loadplayer = xml_methods.load();
-        System.out.println(loadplayer.getName());
+        logger.info("player name: "+loadplayer.getName());
         if (!item.isEmpty())
-        System.out.println(loadplayer.getitem(0).getName());
+            logger.trace(loadplayer.getitem(0).getName());
         tfName.setText(loadplayer.getName());
         isset=true;
         player= loadplayer;
@@ -88,7 +91,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
      */
     public void start_game() throws IOException, JAXBException, URISyntaxException {
         savetoxml();
-        System.out.println("starting the game now...");
+        logger.trace("starting the game now...");
         forestController.setPlayer(player);
         primarystage.setResizable(false);
         primarystage.setScene(game_scene);
@@ -152,11 +155,11 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
 
         if(actionEvent.getSource()==btnExit){
-            System.out.println("button clicked");
+            logger.trace("button clicked");
             System.exit(0);
         }
         else if (actionEvent.getSource()==male){
-            System.out.println("male clicked!");
+            logger.trace("male clicked!");
             if (player.getgender()=="female"){
                 player.setgender("male");
                 lbl_gender.setText("GENDER: " +player.getgender());}
@@ -168,20 +171,20 @@ public class Game extends Application implements EventHandler<ActionEvent> {
             }
         }
         else if(actionEvent.getSource()==btnSubmit){
-            System.out.println("Name submitted!");
+            logger.trace("Name submitted!");
             if (tfName.getText().isEmpty()){
                 tfName.setPromptText("The name Can't be left empty!");
             }
             player.setName(tfName.getText());
 
-            System.out.println(player.getName());
+            logger.info("player name: "+player.getName());
             isset=true;
         }
         else if(actionEvent.getSource()==btnDone){
-            System.out.println("done button clicked!!!");
+            logger.trace("done button clicked!!!");
 
             if(isset){
-                System.out.println("ISSET IS TRUE!");
+                logger.trace("ISSET IS TRUE!");
                 try {
                     savetoxml();
                 } catch (FileNotFoundException | JAXBException | MalformedURLException e) {
@@ -191,11 +194,11 @@ public class Game extends Application implements EventHandler<ActionEvent> {
                 try {
                     start_game();
                 } catch (URISyntaxException | JAXBException | IOException e) {
-                    e.printStackTrace();
+                    logger.error("error occured: ",e);
                 }
             }
             else{
-                System.out.println("isset false!");
+                logger.trace("isset false!");
             }
         }
         else if(actionEvent.getSource()==btn_loaddata){
@@ -203,7 +206,8 @@ public class Game extends Application implements EventHandler<ActionEvent> {
                 readxml();
                 start_game();
             } catch (URISyntaxException | JAXBException | IOException e) {
-                e.printStackTrace();
+                logger.error("error occured: ",e);
+
             }
         }
     }
