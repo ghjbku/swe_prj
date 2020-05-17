@@ -22,14 +22,11 @@ public class Images {
     public Image getimage(String str) {
         if (str.equals("p")) {
             return playerm_image;
-        }
-        else if (str.equals("b")){
+        } else if (str.equals("b")) {
             return bear_image;
-        }
-        else if (str.equals("wh")){
+        } else if (str.equals("wh")) {
             return waterh_image;
-        }
-        else if (str.equals("ws")){
+        } else if (str.equals("ws")) {
             return sign_image;
         }
         return null;

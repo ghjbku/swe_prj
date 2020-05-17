@@ -259,7 +259,7 @@ public class ForestController implements Initializable {
         setname();
         isset = true;
         if (loadplayer.getgender().equals("male")) {
-            setpic(player_fig,"p");
+            setpic(player_fig, "p");
         }
         if (loadplayer.getFought()) {
             bear_fig.setVisible(false);
@@ -344,7 +344,7 @@ public class ForestController implements Initializable {
     }
 
     @FXML
-    public void setpic(ImageView fig,String str) {
+    public void setpic(ImageView fig, String str) {
         fig.setImage(images.getimage(str));
     }
 
@@ -909,7 +909,7 @@ public class ForestController implements Initializable {
             if (signevent.Sign_crossroad() == 1) {
                 is_sign_event = true;
                 setpane();
-                setpic(event_fig,"ws");
+                setpic(event_fig, "ws");
                 eventfig_scale(1.1);
                 set_sign_event();
             }
@@ -918,13 +918,13 @@ public class ForestController implements Initializable {
 
     private void set_sign_event() {
         setText_pane_text("You see a Sign in front of you just beside a big pond and on it there is a strange drawing, but you\n" +
-                " can't work out what it means. But you recognise some fish with teeth from all that.\n" +
+                " can't work out what it means. You do recognise however some fish with teeth from all that.\n" +
                 "Suddenly you hear a woman's cry for help, and it seems like it comes from the water in front of you!\n" +
                 "You decide to:");
         setOption1("go away,it was just the wind");
         setOption2("try to take a look who it is");
         setOption3("no time to waste, jump in and save her");
-        setOption4("yell to make sure you didnt hallucinate");
+        setOption4("yell to make sure you didn't hallucinate");
     }
 
     /**
@@ -955,7 +955,7 @@ public class ForestController implements Initializable {
                     signevent_lost("You decided to jump into the water to save the lady.\n" +
                             "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
                             "It is a water hag, sadly it is too late to do anything now...\nYou died.");
-                    setpic(event_fig,"wh");
+                    setpic(event_fig, "wh");
                     eventfig_scale(1.5);
                 } else if (option == 4) {
                     raiseScore();
@@ -966,7 +966,7 @@ public class ForestController implements Initializable {
                     signevent_lost("You decided to jump into the water to save the lady.\n" +
                             "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
                             "It is a water hag, sadly it is too late to do anything now...\nYou died.");
-                    setpic(event_fig,"wh");
+                    setpic(event_fig, "wh");
                     eventfig_scale(1.5);
                 } else if (option == 2) {
                     signevent_lost("You decide to take a look at who it is who is crying for help.\n" +
@@ -974,7 +974,7 @@ public class ForestController implements Initializable {
                             "You died.");
                 } else if (option == 3) {
                     raiseScore();
-                    setpic(event_fig,"wh");
+                    setpic(event_fig, "wh");
                     eventfig_scale(1.5);
                     end_stuff("You decide to walk away.\nWhen you turn around the woman suddenly leaps out of the water, trying to consume you" +
                             "\nShe was a water hag preying on humans.Luckily it was cursed and can't get away from the water.\nA" +
@@ -983,7 +983,8 @@ public class ForestController implements Initializable {
                 break;
         }
     }
-    private void eventfig_scale(double scale){
+
+    private void eventfig_scale(double scale) {
         event_fig.setScaleX(scale);
         event_fig.setScaleY(scale);
     }
@@ -1104,7 +1105,7 @@ public class ForestController implements Initializable {
                 no_weapon();
             } else if (fight.Fight_crossroad(player) == 0) {
                 setpane();
-                setpic(event_fig,"b");
+                setpic(event_fig, "b");
                 start_fight();
             } else if (fight.Fight_crossroad(player) == 1) {
             }
