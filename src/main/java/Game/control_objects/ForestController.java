@@ -923,6 +923,14 @@ public class ForestController implements Initializable {
         setOption4("yell to make sure you didnt hallucinate");
     }
 
+    /**
+     * gets called when the player haven't triggered the sign event before (in the current save).
+     *
+     * @param round_counter the signevent's round_counter.
+     * @param option        the option the player chooses.
+     * @throws FileNotFoundException throws if the xml does not exists.
+     * @throws JAXBException         throws if there is an error with the xml.
+     */
     private void theSignEvent(int round_counter, int option) throws FileNotFoundException, JAXBException {
         switch (round_counter) {
             case 0:
@@ -933,20 +941,29 @@ public class ForestController implements Initializable {
                 setOption3("i have a bad feeling, lets go");
                 getOption4().setVisible(false);
                 if (option == 1) {
-                    fight_lost();
+                    end_stuff("you decide to just go away and do not care about the lady in the pond...\n" +
+                            "Not a nice thing to do, but it's your choice...");
                 } else if (option == 2) {
-                    fight_lost();
+                    signevent_lost("You decide to take a look at who it is who is crying for help.\n" +
+                            "As you come closer to the body of water, a hand suddenly catches you and drags you into the water.\n" +
+                            "You died.");
                 } else if (option == 3) {
-                    fight_lost();
+                    signevent_lost("You decided to jump into the water to save the lady.\n" +
+                            "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
+                            "It is a water hag, sadly it is too late to do anything now...\nYou died.");
                 } else if (option == 4) {
                     raiseScore();
                 }
                 break;
             case 1:
                 if (option == 1) {
-
+                    signevent_lost("You decided to jump into the water to save the lady.\n" +
+                            "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
+                            "It is a water hag, sadly it is too late to do anything now...\nYou died.");
                 } else if (option == 2) {
-
+                    signevent_lost("You decide to take a look at who it is who is crying for help.\n" +
+                            "As you come closer to the body of water, a hand suddenly catches you and drags you into the water.\n" +
+                            "You died.");
                 } else if (option == 3) {
                     raiseScore();
                     end_stuff("You decide to walk away.\nWhen you turn around the woman suddenly leaps out of the water, trying to consume you" +
@@ -957,10 +974,15 @@ public class ForestController implements Initializable {
         }
     }
 
+    private void signevent_lost(String str) {
+        end_stuff(str);
+        signevent.setcounter(55);
+    }
+
 
     public void option1() throws FileNotFoundException, JAXBException, MalformedURLException {
         if (is_sign_event) {
-            theSignEvent(signevent.getcounter(),1);
+            theSignEvent(signevent.getcounter(), 1);
             signevent.setcounter(signevent.getcounter() + 1);
 
         } else {
@@ -979,7 +1001,7 @@ public class ForestController implements Initializable {
 
     public void option2() throws FileNotFoundException, JAXBException, MalformedURLException {
         if (is_sign_event) {
-            theSignEvent(signevent.getcounter(),2);
+            theSignEvent(signevent.getcounter(), 2);
             signevent.setcounter(signevent.getcounter() + 1);
         } else {
             thefight(fight.getcounter(), 2);
@@ -990,7 +1012,7 @@ public class ForestController implements Initializable {
 
     public void option3() throws FileNotFoundException, JAXBException, MalformedURLException {
         if (is_sign_event) {
-            theSignEvent(signevent.getcounter(),3);
+            theSignEvent(signevent.getcounter(), 3);
             signevent.setcounter(signevent.getcounter() + 1);
         } else {
             thefight(fight.getcounter(), 3);
@@ -1001,7 +1023,7 @@ public class ForestController implements Initializable {
 
     public void option4() throws FileNotFoundException, JAXBException, MalformedURLException {
         if (is_sign_event) {
-            theSignEvent(signevent.getcounter(),4);
+            theSignEvent(signevent.getcounter(), 4);
             signevent.setcounter(signevent.getcounter() + 1);
         } else {
             thefight(fight.getcounter(), 4);
@@ -1012,6 +1034,7 @@ public class ForestController implements Initializable {
 
     /**
      * The method makes the buttons invisible and let the player move again.
+     *
      * @param str the message to display on the textfield.
      */
     private void end_stuff(String str) {
@@ -1024,6 +1047,30 @@ public class ForestController implements Initializable {
         can_move = true;
     }
 
+    /**
+     * method that checks if the fight event with the bear is over
+     */
+    private void is_event_over() {
+        if (is_sign_event) {
+            if (signevent.getcounter() > 0 && signevent.getcounter() < 54) {
+                if (text_pane.isVisible()) {
+                    text_pane.setVisible(false);
+                }
+            }
+            if (signevent.getcounter() > 54) {
+                System.exit(0);
+            }
+        } else {
+            if (fight.getcounter() >= 10 && fight.getcounter() < 55) {
+                if (text_pane.isVisible()) {
+                    text_pane.setVisible(false);
+                }
+            }
+            if (fight.getcounter() > 54) {
+                System.exit(0);
+            }
+        }
+    }
 
     //start of fight_event stuff
 
@@ -1048,29 +1095,6 @@ public class ForestController implements Initializable {
     }
 
     /**
-     * method that checks if the fight event with the bear is over
-     */
-    private void is_event_over() {
-        if (is_sign_event){
-            if (signevent.getcounter()>0){
-                if (text_pane.isVisible()) {
-                    text_pane.setVisible(false);
-                }
-            }
-        }
-        else {
-            if (fight.getcounter() >= 10 && fight.getcounter() < 55) {
-                if (text_pane.isVisible()) {
-                    text_pane.setVisible(false);
-                }
-            }
-            if (fight.getcounter() > 54) {
-                System.exit(0);
-            }
-        }
-    }
-
-    /**
      * gets called when the player is ready to fight(not fought yet and has dagger).
      */
     private void start_fight() {
@@ -1085,9 +1109,10 @@ public class ForestController implements Initializable {
 
     /**
      * the method gets called when the player wins the fight against the bear.
+     *
      * @param counter the fight class's round_counter
      * @throws FileNotFoundException throws if the xml file doesnt exist
-     * @throws JAXBException throws if there is an error with the xml file
+     * @throws JAXBException         throws if there is an error with the xml file
      */
     private void fight_done(int counter) throws FileNotFoundException, JAXBException {
         if (counter >= 7 && counter < 10) {
