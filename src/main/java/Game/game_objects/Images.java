@@ -16,6 +16,8 @@ public class Images {
     private Image bear_image = new Image(bear_img.toExternalForm());
     URL waterh_img = new URL(getClass().getResource("/Game/pics/waterhag.png").toExternalForm());
     private Image waterh_image = new Image(waterh_img.toExternalForm());
+    URL sign_img = new URL(getClass().getResource("/Game/pics/wooden_sign.png").toExternalForm());
+    private Image sign_image = new Image(sign_img.toExternalForm());
 
     public Image getimage(String str) {
         if (str.equals("p")) {
@@ -26,6 +28,9 @@ public class Images {
         }
         else if (str.equals("wh")){
             return waterh_image;
+        }
+        else if (str.equals("ws")){
+            return sign_image;
         }
         return null;
     }

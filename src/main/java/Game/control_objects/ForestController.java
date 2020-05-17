@@ -909,7 +909,8 @@ public class ForestController implements Initializable {
             if (signevent.Sign_crossroad() == 1) {
                 is_sign_event = true;
                 setpane();
-                setpic(event_fig,"b");
+                setpic(event_fig,"ws");
+                eventfig_scale(1.1);
                 set_sign_event();
             }
         }
@@ -955,6 +956,7 @@ public class ForestController implements Initializable {
                             "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
                             "It is a water hag, sadly it is too late to do anything now...\nYou died.");
                     setpic(event_fig,"wh");
+                    eventfig_scale(1.5);
                 } else if (option == 4) {
                     raiseScore();
                 }
@@ -965,6 +967,7 @@ public class ForestController implements Initializable {
                             "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
                             "It is a water hag, sadly it is too late to do anything now...\nYou died.");
                     setpic(event_fig,"wh");
+                    eventfig_scale(1.5);
                 } else if (option == 2) {
                     signevent_lost("You decide to take a look at who it is who is crying for help.\n" +
                             "As you come closer to the body of water, a hand suddenly catches you and drags you into the water.\n" +
@@ -972,12 +975,17 @@ public class ForestController implements Initializable {
                 } else if (option == 3) {
                     raiseScore();
                     setpic(event_fig,"wh");
+                    eventfig_scale(1.5);
                     end_stuff("You decide to walk away.\nWhen you turn around the woman suddenly leaps out of the water, trying to consume you" +
                             "\nShe was a water hag preying on humans.Luckily it was cursed and can't get away from the water.\nA" +
                             " hand appears from the depths and drags the hag back into the pond.");
                 }
                 break;
         }
+    }
+    private void eventfig_scale(double scale){
+        event_fig.setScaleX(scale);
+        event_fig.setScaleY(scale);
     }
 
     private void signevent_lost(String str) {
