@@ -1,6 +1,5 @@
 package Game;
 
-import Game.control_objects.CityController;
 import Game.control_objects.ForestController;
 import Game.control_objects.XmlMethods;
 import Game.game_objects.Item;

@@ -63,30 +63,32 @@ public class Collosion {
      * @throws MalformedURLException url wrong
      */
     public static void Collosion_detection_item(ForestController forestController, Player plr) throws FileNotFoundException, JAXBException, MalformedURLException {
+        final int d_x=65,d_y=216;
+        final int n_x=475,n_y=16;
         if
         (
-                ((Math.abs(65 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 65) < dist))
-                        && ((Math.abs(216 - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - 216) < dist))
+                ((Math.abs(d_x - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - d_x) < dist))
+                        && ((Math.abs(d_y - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - d_y) < dist))
         ) {
 
             ArrayList<Item> item = plr.getItems();
             if (item.size() == 0 || ((item.get(0).getName() == "Note") && item.size() == 1)) {
                 logger.trace("item added");
-                item.add(new Item("dagger", 0, 65, 216));
+                item.add(new Item("dagger", 0, d_x, d_y));
                 plr.setItems(item);
                 forestController.setcollided();
             } else if (item.size() > 1) {
             }
 
         } else if (
-                ((Math.abs(475 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 475) < dist)) &&
-                        ((Math.abs(16 - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - 16) < dist))
+                ((Math.abs(n_x - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - n_x) < dist)) &&
+                        ((Math.abs(n_y - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - n_y) < dist))
         ) {
 
             ArrayList<Item> item = plr.getItems();
             if (item.size() == 0 || ((item.get(0).getid() == 0) && item.size() == 1)) {
                 logger.trace("item added");
-                item.add(new Item("Note", 1, 475, 16));
+                item.add(new Item("Note", 1, n_x, n_y));
                 plr.setItems(item);
                 forestController.setcollided();
             } else if (item.size() > 1) {
@@ -103,13 +105,26 @@ public class Collosion {
      * @param plr              the player
      */
     public static void Collosion_tp(ForestController forestController, Player plr) {
+        final int tp_x=768,tp_y=23;
         if (
-                ((Math.abs(768 - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - 768) < dist)) &&
-                        ((Math.abs(23 - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - 23) < dist))
+                ((Math.abs(tp_x - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - tp_x) < dist)) &&
+                        ((Math.abs(tp_y - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - tp_y) < dist))
         ) {
             logger.trace("collided with the teleporter!");
             forestController.setTpReady(true);
         }
+    }
+
+    public static boolean Collosion_sign(Player plr) {
+        final int sign_x=0,sign_y=0;
+        if (
+                ((Math.abs(sign_x - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - sign_x) < dist)) &&
+                ((Math.abs(sign_y - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - sign_y) < dist))
+        ) {
+            logger.trace("collided with the sign!");
+            return true;
+        }
+        return false;
     }
 
 

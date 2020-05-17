@@ -510,6 +510,7 @@ public class ForestController implements Initializable {
         //collosion detection between items and player
         Collosion.Collosion_detection_item(this, player);
         Collosion.Collosion_tp(this, player);
+        Collosion.Collosion_sign(player);
         change_to_city();
 
         //collosion detection between trees and player
