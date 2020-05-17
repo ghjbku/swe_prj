@@ -443,7 +443,7 @@ public class ForestController implements Initializable {
      * @throws FileNotFoundException
      * @throws JAXBException
      */
-    public void setcollided() throws FileNotFoundException, JAXBException, MalformedURLException {
+    public void setcollided() throws FileNotFoundException, JAXBException {
         raiseScore();
         isThere();
     }
@@ -483,110 +483,11 @@ public class ForestController implements Initializable {
     }
 
 
-    /**
-     * method that changes the Game class's scene into the CityScene from the ForestScene
-     *
-     * @throws FileNotFoundException
-     * @throws JAXBException
-     * @throws URISyntaxException
-     */
-    private void change_to_city() throws FileNotFoundException, JAXBException, URISyntaxException {
-        if (Collosion.Collosion_tp(player)) {
-            setTpReady(true);
-            if (tpready && player.getFought()) {
-                cityController.load_city(Game.getPrimarystage());
-            }
-        }
-    }
 
 
-    /**
-     * method for collosion detection
-     *
-     * @throws CollosionException
-     * @throws FileNotFoundException
-     * @throws JAXBException
-     * @throws URISyntaxException
-     */
-    private void collosionDetect() throws CollosionException, FileNotFoundException, JAXBException, URISyntaxException, MalformedURLException {
-        //collosion with bear
-        start_fight_after_bear_collides();
 
-        //collosion detection between items and player
-        Collosion.Collosion_detection_item(this, player);
-        Collosion.Collosion_sign(player);
-        change_to_city();
 
-        //collosion detection between trees and player
-        Collosion.Collosion_detection(player, getTree(tree));
-        Collosion.Collosion_detection(player, getTree(tree1));
-        Collosion.Collosion_detection(player, getTree(tree2));
-        Collosion.Collosion_detection(player, getTree(tree3));
-        Collosion.Collosion_detection(player, getTree(tree4));
-        Collosion.Collosion_detection(player, getTree(tree5));
-        Collosion.Collosion_detection(player, getTree(tree6));
-        Collosion.Collosion_detection(player, getTree(tree7));
-        Collosion.Collosion_detection(player, getTree(tree8));
-        Collosion.Collosion_detection(player, getTree(tree9));
-        Collosion.Collosion_detection(player, getTree(tree10));
-        Collosion.Collosion_detection(player, getTree(tree11));
-        Collosion.Collosion_detection(player, getTree(tree12));
-        Collosion.Collosion_detection(player, getTree(tree13));
-        Collosion.Collosion_detection(player, getTree(tree14));
-        Collosion.Collosion_detection(player, getTree(tree15));
-        Collosion.Collosion_detection(player, getTree(tree16));
-        Collosion.Collosion_detection(player, getTree(tree17));
-        Collosion.Collosion_detection(player, getTree(tree18));
-        Collosion.Collosion_detection(player, getTree(tree19));
-        Collosion.Collosion_detection(player, getTree(tree20));
-        Collosion.Collosion_detection(player, getTree(tree21));
-        Collosion.Collosion_detection(player, getTree(tree22));
-        Collosion.Collosion_detection(player, getTree(tree23));
-        Collosion.Collosion_detection(player, getTree(tree24));
-        Collosion.Collosion_detection(player, getTree(tree25));
-        Collosion.Collosion_detection(player, getTree(tree26));
-        Collosion.Collosion_detection(player, getTree(tree27));
-        Collosion.Collosion_detection(player, getTree(tree28));
-        Collosion.Collosion_detection(player, getTree(tree29));
-        Collosion.Collosion_detection(player, getTree(tree30));
-        Collosion.Collosion_detection(player, getTree(tree31));
-        Collosion.Collosion_detection(player, getTree(tree32));
-        Collosion.Collosion_detection(player, getTree(tree33));
-        Collosion.Collosion_detection(player, getTree(tree34));
-        Collosion.Collosion_detection(player, getTree(tree35));
-        Collosion.Collosion_detection(player, getTree(tree36));
-        Collosion.Collosion_detection(player, getTree(tree37));
-        Collosion.Collosion_detection(player, getTree(tree38));
-        Collosion.Collosion_detection(player, getTree(tree39));
-        Collosion.Collosion_detection(player, getTree(tree40));
-        Collosion.Collosion_detection(player, getTree(tree41));
-        Collosion.Collosion_detection(player, getTree(tree42));
-        Collosion.Collosion_detection(player, getTree(tree43));
-        Collosion.Collosion_detection(player, getTree(tree44));
-        Collosion.Collosion_detection(player, getTree(tree45));
-        Collosion.Collosion_detection(player, getTree(tree46));
-        Collosion.Collosion_detection(player, getTree(tree47));
-        Collosion.Collosion_detection(player, getTree(tree48));
-        Collosion.Collosion_detection(player, getTree(tree49));
-        Collosion.Collosion_detection(player, getTree(tree50));
-        Collosion.Collosion_detection(player, getTree(tree51));
-        Collosion.Collosion_detection(player, getTree(tree52));
-        Collosion.Collosion_detection(player, getTree(tree53));
-        Collosion.Collosion_detection(player, getTree(tree54));
-        Collosion.Collosion_detection(player, getTree(tree55));
-        Collosion.Collosion_detection(player, getTree(tree56));
-        Collosion.Collosion_detection(player, getTree(tree57));
-        Collosion.Collosion_detection(player, getTree(tree58));
-        Collosion.Collosion_detection(player, getTree(tree59));
-        Collosion.Collosion_detection(player, getTree(tree60));
-        Collosion.Collosion_detection(player, getTree(tree61));
-        Collosion.Collosion_detection(player, getTree(tree62));
-        Collosion.Collosion_detection(player, getTree(tree63));
-        Collosion.Collosion_detection(player, getTree(tree64));
-        Collosion.Collosion_detection(player, getTree(tree65));
-        Collosion.Collosion_detection(player, getTree(tree66));
-        Collosion.Collosion_detection(player, getTree(tree67));
-    }
+
 
 
     /**
@@ -986,19 +887,52 @@ public class ForestController implements Initializable {
         movement();
     }
 
+    /**
+     * method that changes the Game class's scene into the CityScene from the ForestScene
+     *
+     * @throws FileNotFoundException
+     * @throws JAXBException
+     * @throws URISyntaxException
+     */
+    private void change_to_city() throws FileNotFoundException, JAXBException, URISyntaxException {
+        if (Collosion.Collosion_tp(player)) {
+            setTpReady(true);
+            if (tpready && player.getFought()) {
+                cityController.load_city(Game.getPrimarystage());
+            }
+        }
+    }
+
+    /**
+     * method to start the event when the player collides with the sign near the pond.
+     */
+    private void start_sign_event(){
+        if (Collosion.Collosion_sign(player)){
+            setpane();
+            set_sign_event();
+        }
+    }
+
+    private void set_sign_event(){
+        setText_pane_text("You see a Bear in front of you sleeping in the grass.\nAs you lurk closer it suddenly snaps its" +
+                " eyes open and looks at you.\nYou remember that you found a weapon along the way here... maybe it was " +
+                "for this moment.\nThe bear suddenly lets out a horrendous roar and starts running towards you,full of killing intent!");
+        setOption1("run away");
+        setOption2("try to play dead");
+        setOption3("try to talk it out with him");
+        setOption4("dodge the rush to the right");
+    }
+
 
     //start of fight_event stuff
 
 
     /**
-     * method to check if the player collided with the bear object, and if did opens the <code>fight</code> game event
+     * method to check if the player collided with the bear object, and if did opens the <code>fight</code> game event.
      *
-     * @throws CollosionException
-     * @throws FileNotFoundException
-     * @throws JAXBException
-     * @throws URISyntaxException
+     * @throws CollosionException throws when the player and the object is at the exact same pixel coordinate.
      */
-    private void start_fight_after_bear_collides() throws CollosionException, FileNotFoundException, JAXBException, URISyntaxException {
+    private void start_fight_after_bear_collides() throws CollosionException {
         boolean can_start = Collosion.Collosion_detection(player, bear);
         if (can_start == false) {
 
@@ -1085,7 +1019,7 @@ public class ForestController implements Initializable {
         fight.run = true;
     }
 
-    public void option1() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
+    public void option1() throws FileNotFoundException, JAXBException, MalformedURLException {
         thefight(fight.getcounter(), 1);
         fight_done(fight.getcounter());
         fight.setcounter(fight.getcounter() + 1);
@@ -1099,28 +1033,28 @@ public class ForestController implements Initializable {
     }
 
 
-    public void option2() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
+    public void option2() throws FileNotFoundException, JAXBException, MalformedURLException {
         thefight(fight.getcounter(), 2);
         fight_done(fight.getcounter());
         fight.setcounter(fight.getcounter() + 1);
     }
 
 
-    public void option3() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
+    public void option3() throws FileNotFoundException, JAXBException, MalformedURLException {
         thefight(fight.getcounter(), 3);
         fight_done(fight.getcounter());
         fight.setcounter(fight.getcounter() + 1);
     }
 
 
-    public void option4() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
+    public void option4() throws FileNotFoundException, JAXBException, MalformedURLException {
         thefight(fight.getcounter(), 4);
         fight_done(fight.getcounter());
         fight.setcounter(fight.getcounter() + 1);
     }
 
 
-    private void thefight(int round_counter, int option) throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
+    private void thefight(int round_counter, int option) throws FileNotFoundException, JAXBException, MalformedURLException {
         switch (round_counter) {
             case 0:
                 setText_pane_text("You dodged to the side, and just barely survive the rush...\nOn the other hand, the bear" +
@@ -1255,6 +1189,95 @@ public class ForestController implements Initializable {
                 break;
         }
     }
+
+    /**
+     * method for collosion detection
+     *
+     * @throws CollosionException
+     * @throws FileNotFoundException
+     * @throws JAXBException
+     * @throws URISyntaxException
+     */
+    private void collosionDetect() throws CollosionException, FileNotFoundException, JAXBException, URISyntaxException, MalformedURLException {
+        //collosion with bear
+        start_fight_after_bear_collides();
+
+        //collosion detection between items and player
+        Collosion.Collosion_detection_item(this, player);
+        start_sign_event();
+        change_to_city();
+
+        //collosion detection between trees and player
+        Collosion.Collosion_detection(player, getTree(tree));
+        Collosion.Collosion_detection(player, getTree(tree1));
+        Collosion.Collosion_detection(player, getTree(tree2));
+        Collosion.Collosion_detection(player, getTree(tree3));
+        Collosion.Collosion_detection(player, getTree(tree4));
+        Collosion.Collosion_detection(player, getTree(tree5));
+        Collosion.Collosion_detection(player, getTree(tree6));
+        Collosion.Collosion_detection(player, getTree(tree7));
+        Collosion.Collosion_detection(player, getTree(tree8));
+        Collosion.Collosion_detection(player, getTree(tree9));
+        Collosion.Collosion_detection(player, getTree(tree10));
+        Collosion.Collosion_detection(player, getTree(tree11));
+        Collosion.Collosion_detection(player, getTree(tree12));
+        Collosion.Collosion_detection(player, getTree(tree13));
+        Collosion.Collosion_detection(player, getTree(tree14));
+        Collosion.Collosion_detection(player, getTree(tree15));
+        Collosion.Collosion_detection(player, getTree(tree16));
+        Collosion.Collosion_detection(player, getTree(tree17));
+        Collosion.Collosion_detection(player, getTree(tree18));
+        Collosion.Collosion_detection(player, getTree(tree19));
+        Collosion.Collosion_detection(player, getTree(tree20));
+        Collosion.Collosion_detection(player, getTree(tree21));
+        Collosion.Collosion_detection(player, getTree(tree22));
+        Collosion.Collosion_detection(player, getTree(tree23));
+        Collosion.Collosion_detection(player, getTree(tree24));
+        Collosion.Collosion_detection(player, getTree(tree25));
+        Collosion.Collosion_detection(player, getTree(tree26));
+        Collosion.Collosion_detection(player, getTree(tree27));
+        Collosion.Collosion_detection(player, getTree(tree28));
+        Collosion.Collosion_detection(player, getTree(tree29));
+        Collosion.Collosion_detection(player, getTree(tree30));
+        Collosion.Collosion_detection(player, getTree(tree31));
+        Collosion.Collosion_detection(player, getTree(tree32));
+        Collosion.Collosion_detection(player, getTree(tree33));
+        Collosion.Collosion_detection(player, getTree(tree34));
+        Collosion.Collosion_detection(player, getTree(tree35));
+        Collosion.Collosion_detection(player, getTree(tree36));
+        Collosion.Collosion_detection(player, getTree(tree37));
+        Collosion.Collosion_detection(player, getTree(tree38));
+        Collosion.Collosion_detection(player, getTree(tree39));
+        Collosion.Collosion_detection(player, getTree(tree40));
+        Collosion.Collosion_detection(player, getTree(tree41));
+        Collosion.Collosion_detection(player, getTree(tree42));
+        Collosion.Collosion_detection(player, getTree(tree43));
+        Collosion.Collosion_detection(player, getTree(tree44));
+        Collosion.Collosion_detection(player, getTree(tree45));
+        Collosion.Collosion_detection(player, getTree(tree46));
+        Collosion.Collosion_detection(player, getTree(tree47));
+        Collosion.Collosion_detection(player, getTree(tree48));
+        Collosion.Collosion_detection(player, getTree(tree49));
+        Collosion.Collosion_detection(player, getTree(tree50));
+        Collosion.Collosion_detection(player, getTree(tree51));
+        Collosion.Collosion_detection(player, getTree(tree52));
+        Collosion.Collosion_detection(player, getTree(tree53));
+        Collosion.Collosion_detection(player, getTree(tree54));
+        Collosion.Collosion_detection(player, getTree(tree55));
+        Collosion.Collosion_detection(player, getTree(tree56));
+        Collosion.Collosion_detection(player, getTree(tree57));
+        Collosion.Collosion_detection(player, getTree(tree58));
+        Collosion.Collosion_detection(player, getTree(tree59));
+        Collosion.Collosion_detection(player, getTree(tree60));
+        Collosion.Collosion_detection(player, getTree(tree61));
+        Collosion.Collosion_detection(player, getTree(tree62));
+        Collosion.Collosion_detection(player, getTree(tree63));
+        Collosion.Collosion_detection(player, getTree(tree64));
+        Collosion.Collosion_detection(player, getTree(tree65));
+        Collosion.Collosion_detection(player, getTree(tree66));
+        Collosion.Collosion_detection(player, getTree(tree67));
+    }
+
 
 
     //getters
