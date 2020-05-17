@@ -20,7 +20,7 @@
                   <Image url="@../pics/Player_f.png" />
                </image>
             </ImageView>
-            <AnchorPane fx:id="entity_pane" layoutX="16.0" layoutY="-15.0" prefHeight="586.0" prefWidth="800.0">
+            <AnchorPane fx:id="entity_pane" prefHeight="586.0" prefWidth="772.0">
                <children>
                   <ImageView fx:id="tree_fig" fitHeight="32.0" fitWidth="32.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -574,6 +574,7 @@ public class ForestController implements Initializable {
 
         root.setOnKeyPressed(e -> {
             if (can_move == true) {
+                isThere();
                 if (presseda.get() == false && pressedw.get() == false && presseds.get() == false && pressedd.get() == false) {
                     if (e.getCode() == KeyCode.A) {
                         presseda.set(true);
