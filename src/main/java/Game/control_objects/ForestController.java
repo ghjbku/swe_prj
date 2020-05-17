@@ -1010,7 +1010,6 @@ public class ForestController implements Initializable {
             } else if (fight.Fight_crossroad(player) == 1) {
             }
         }
-        return;
     }
 
     /**
@@ -1036,8 +1035,6 @@ public class ForestController implements Initializable {
         setOption3("try to talk it out with him");
         setOption4("dodge the rush to the right");
     }
-
-    ;
 
     private void end_stuff(String str) {
         setText_pane_text(str);
@@ -1101,7 +1098,6 @@ public class ForestController implements Initializable {
 
     }
 
-    ;
 
     public void option2() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
         thefight(fight.getcounter(), 2);
@@ -1109,7 +1105,6 @@ public class ForestController implements Initializable {
         fight.setcounter(fight.getcounter() + 1);
     }
 
-    ;
 
     public void option3() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
         thefight(fight.getcounter(), 3);
@@ -1117,7 +1112,6 @@ public class ForestController implements Initializable {
         fight.setcounter(fight.getcounter() + 1);
     }
 
-    ;
 
     public void option4() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
         thefight(fight.getcounter(), 4);
@@ -1125,7 +1119,6 @@ public class ForestController implements Initializable {
         fight.setcounter(fight.getcounter() + 1);
     }
 
-    ;
 
     private void thefight(int round_counter, int option) throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
         switch (round_counter) {
@@ -1269,10 +1262,6 @@ public class ForestController implements Initializable {
         return tree;
     }
 
-    public Player getplayer() {
-        return player;
-    }
-
     public Label gettext_pane_text() {
         return text_pane_text;
     }
@@ -1323,10 +1312,6 @@ public class ForestController implements Initializable {
 
     public ImageView getDagger_fig_inv() {
         return dagger_fig_inv;
-    }
-
-    public boolean getTpReady() {
-        return tpready;
     }
 
     //setters
