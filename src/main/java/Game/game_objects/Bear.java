@@ -3,40 +3,46 @@ package Game.game_objects;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-public class Bear implements Entity{
-    private int x,y,hp=10;
+public class Bear implements Entity {
+    private int x, y, hp = 10;
     private ImageView bear;
     private AnchorPane pane;
 
 
-    public Bear(int x,int y, ImageView bear_image, AnchorPane bear_pane){
-        this.x=x;
-        this.y=y;
-        this.bear=bear_image;
-        this.pane=bear_pane;
+    public Bear(int x, int y, ImageView bear_image, AnchorPane bear_pane) {
+        this.x = x;
+        this.y = y;
+        this.bear = bear_image;
+        this.pane = bear_pane;
 
         bear_image.setLayoutX(x);
         bear_image.setLayoutY(y);
     }
 
 
-    public void sethp(int hp_to_set){
-        this.hp=hp_to_set;
+    public void sethp(int hp_to_set) {
+        this.hp = hp_to_set;
     }
 
-    public int gethp(){return hp;}
+    public int gethp() {
+        return hp;
+    }
 
     @Override
-    public int getx() { return x; }
+    public int getx() {
+        return x;
+    }
+
     public void setx(int sx) {
-        x=sx;
+        x = sx;
     }
 
     @Override
     public int gety() {
         return y;
     }
+
     public void sety(int sy) {
-        y=sy;
+        y = sy;
     }
 }

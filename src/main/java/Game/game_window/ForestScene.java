@@ -20,7 +20,7 @@ public class ForestScene {
         try {
             game_scene = new Scene(loadFXML("forest_window"));
         } catch (IOException e) {
-            logger.error("error occured: ",e);
+            logger.error("error occured: ", e);
         }
     }
 
@@ -32,12 +32,12 @@ public class ForestScene {
 
     /**
      * getter function for the class's game_scene for the Game class to use
+     *
      * @return the game_scene Scene
      */
-    public static Scene getGame_scene(){
+    public static Scene getGame_scene() {
         return game_scene;
     }
-
 
 
     static void setRoot(String fxml) throws IOException {
@@ -45,7 +45,7 @@ public class ForestScene {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("/Game/fxmls/"+fxml + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("/Game/fxmls/" + fxml + ".fxml"));
         return fxmlLoader.load();
     }
 }

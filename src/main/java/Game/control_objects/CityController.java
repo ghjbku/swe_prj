@@ -29,19 +29,20 @@ public class CityController implements Initializable {
     }
 
     public void setPlayer(Player player2) {
-         player = player2;
-         playername = player.getName();
+        player = player2;
+        playername = player.getName();
     }
 
     /**
      * a method that loads the CityScene after the player uses the city gates in the ForestScene
+     *
      * @param primarystage the Game class's stage
      * @throws FileNotFoundException
      * @throws JAXBException
      * @throws URISyntaxException
      */
     public void load_city(Stage primarystage) throws FileNotFoundException, JAXBException, URISyntaxException {
-       logger.info("Loading the city scene!");
+        logger.info("Loading the city scene!");
         primarystage.setScene(CityScene.getGame_scene());
         primarystage.show();
     }

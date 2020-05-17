@@ -20,7 +20,7 @@ public class CityScene {
         try {
             game_scene = new Scene(loadFXML("city_window"));
         } catch (IOException e) {
-            logger.error("error occured: ",e);
+            logger.error("error occured: ", e);
         }
     }
 
@@ -28,10 +28,9 @@ public class CityScene {
     public CityScene() {
     }
 
-    public static Scene getGame_scene(){
+    public static Scene getGame_scene() {
         return game_scene;
     }
-
 
 
     static void setRoot(String fxml) throws IOException {
@@ -39,7 +38,7 @@ public class CityScene {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("/Game/fxmls/"+fxml + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("/Game/fxmls/" + fxml + ".fxml"));
         return fxmlLoader.load();
     }
 }

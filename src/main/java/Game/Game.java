@@ -26,19 +26,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Class for the main screen with player creation
+ * Class for the main screen with player creation.
  */
 public class Game extends Application implements EventHandler<ActionEvent> {
     private static Logger logger = LoggerFactory.getLogger(Game.class);
     private static Stage primarystage;
-    private XmlMethods xml_methods=new XmlMethods();
+    private XmlMethods xml_methods = new XmlMethods();
     private ForestController forestController = new ForestController();
     //for later
     // CityController cityController = new CityController();
 
 
     private Scene game_scene = ForestScene.getGame_scene();
-    private Button btnSubmit = new Button("Submit name"),btn_loaddata = new Button("Continue");
+    private Button btnSubmit = new Button("Submit name"), btn_loaddata = new Button("Continue");
     private Button btnDone = new Button("Start");
     private Button btnExit = new Button("Exit");
     private Player player;
@@ -47,18 +47,20 @@ public class Game extends Application implements EventHandler<ActionEvent> {
 
 
     private TextField tfName;
-    private RadioButton male=new RadioButton("Male?");
-    private boolean isset=false;
+    private RadioButton male = new RadioButton("Male?");
+    private boolean isset = false;
 
     /**
-     * default constructor for the game class
+     * default constructor for the game class.
+     *
      * @throws IOException
      */
     public Game() throws IOException {
     }
 
     /**
-     * method that uses the <code>XmlMethods</code> class as its base to save the playerdata into the xml file
+     * method that uses the <code>XmlMethods</code> class as its base to save the playerdata into the xml file.
+     *
      * @throws FileNotFoundException
      * @throws JAXBException
      */
@@ -67,23 +69,26 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     }
 
     /**
-     *  method that uses the <code>XmlMethods</code> class as its base to load the playerdata from the xml file
+     * method that uses the <code>XmlMethods</code> class as its base to load the playerdata from the xml .
+     *
      * @throws JAXBException
      * @throws FileNotFoundException
      */
     public void readxml() throws JAXBException, FileNotFoundException {
         Player loadplayer = xml_methods.load();
-        logger.info("player name: "+loadplayer.getName());
-        if (!item.isEmpty())
+        logger.info("player name: " + loadplayer.getName());
+        if (!item.isEmpty()) {
             logger.trace(loadplayer.getitem(0).getName());
+        }
         tfName.setText(loadplayer.getName());
-        isset=true;
-        player= loadplayer;
+        isset = true;
+        player = loadplayer;
 
     }
 
     /**
-     * method to start the game and change the stage's scene from the main screen into the first level: ForestScene
+     * method to start the game and change the stage's scene from the main screen into the first level: ForestScene.
+     *
      * @throws IOException
      * @throws JAXBException
      */
@@ -107,7 +112,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     @Override
     public void start(Stage primarystage) {
         player = new Player();
-        Game.primarystage =primarystage;
+        Game.primarystage = primarystage;
 
         primarystage.setTitle("SWE_game_project");
         GridPane grid = new GridPane();
@@ -123,19 +128,18 @@ public class Game extends Application implements EventHandler<ActionEvent> {
         btnDone.setOnAction(this);
         btn_loaddata.setOnAction(this);
         Label lblName = new Label("Player name:");
-        lbl_gender =new Label("GENDER: "+player.getgender());
+        lbl_gender = new Label("GENDER: " + player.getgender());
         tfName = new TextField();
 
 
-        hbButtons.getChildren().addAll(btnSubmit, btnDone, btnExit,btn_loaddata,male);
+        hbButtons.getChildren().addAll(btnSubmit, btnDone, btnExit, btn_loaddata, male);
         grid.add(lblName, 0, 0);
         grid.add(tfName, 1, 0);
-        grid.add(lbl_gender,2,0);
+        grid.add(lbl_gender, 2, 0);
         grid.add(hbButtons, 0, 1, 2, 1);
 
 
-
-        Scene scene = new Scene(grid,640,480);
+        Scene scene = new Scene(grid, 640, 480);
         primarystage.setScene(scene);
         primarystage.show();
 
@@ -143,68 +147,64 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     }
 
     /**
-     * a function that is used to get the class's stage
+     * a function that is used to get the class's stage.
+     *
      * @return primarystage, which is the Start method's parameter
      */
-    public static Stage getPrimarystage(){return primarystage;}
+    public static Stage getPrimarystage() {
+        return primarystage;
+    }
 
 
     @Override
     public void handle(ActionEvent actionEvent) {
 
-        if(actionEvent.getSource()==btnExit){
+        if (actionEvent.getSource() == btnExit) {
             logger.trace("button clicked");
             System.exit(0);
-        }
-        else if (actionEvent.getSource()==male){
+        } else if (actionEvent.getSource() == male) {
             logger.trace("male clicked!");
-            if (player.getgender().equals("female")){
+            if (player.getgender().equals("female")) {
                 player.setgender("male");
-                lbl_gender.setText("GENDER: " +player.getgender());}
-
-            else if (player.getgender().equals("male"))
-            {
+                lbl_gender.setText("GENDER: " + player.getgender());
+            } else if (player.getgender().equals("male")) {
                 player.setgender("female");
-                lbl_gender.setText("GENDER: " +player.getgender());
+                lbl_gender.setText("GENDER: " + player.getgender());
             }
-        }
-        else if(actionEvent.getSource()==btnSubmit){
+        } else if (actionEvent.getSource() == btnSubmit) {
             logger.trace("Name submitted!");
-            if (tfName.getText().isEmpty()){
+            if (tfName.getText().isEmpty()) {
                 tfName.setPromptText("The name Can't be left empty!");
             }
             player.setName(tfName.getText());
 
-            logger.info("player name: "+player.getName());
-            isset=true;
-        }
-        else if(actionEvent.getSource()==btnDone){
+            logger.info("player name: " + player.getName());
+            isset = true;
+        } else if (actionEvent.getSource() == btnDone) {
             logger.trace("done button clicked!!!");
 
-            if(isset){
+            if (isset) {
                 logger.trace("ISSET IS TRUE!");
                 try {
                     savetoxml();
                 } catch (FileNotFoundException | JAXBException e) {
-                    logger.error("error occured: ",e);
+                    logger.error("error occured: ", e);
                 }
-                isset=false;
+                isset = false;
                 try {
                     start_game();
                 } catch (JAXBException | IOException e) {
-                    logger.error("error occured: ",e);
+                    logger.error("error occured: ", e);
                 }
-            }
-            else{
+            } else {
                 logger.trace("isset false!");
             }
-        }
-        else if(actionEvent.getSource()==btn_loaddata){
+        } else if (actionEvent.getSource() == btn_loaddata) {
             try {
                 readxml();
                 start_game();
             } catch (JAXBException | IOException e) {
-                logger.error("error occured: ",e);
+                logger.error("error occured: ", e);
 
             }
         }

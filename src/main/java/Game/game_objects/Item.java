@@ -9,19 +9,23 @@ public class Item {
     @XmlAttribute
     private int id;
     @XmlAttribute
-    private int x,y;
+    private int x, y;
 
-    public Item(){}
-
-    public Item(String name,int id,int x,int y){
-    this.name=name;
-    this.id=id;
+    public Item() {
     }
 
-    public String getName(){
+    public Item(String name, int id, int x, int y) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public String getName() {
         return name;
     }
-    public int getid(){return id;}
+
+    public int getid() {
+        return id;
+    }
 
     public int getx() {
         return x;
