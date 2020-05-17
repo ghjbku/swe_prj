@@ -12,7 +12,7 @@ public class Images {
 
     URL playerm_img = new URL(getClass().getResource("/Game/pics/Player_m.png").toExternalForm());
     private Image playerm_image = new Image(playerm_img.toExternalForm());
-    URL bear_img = new URL(getClass().getResource("/Game/pics/Bear.png").toExternalForm());
+    URL bear_img = new URL(getClass().getResource("/Game/pics/bear_image.png").toExternalForm());
     private Image bear_image = new Image(bear_img.toExternalForm());
     URL waterh_img = new URL(getClass().getResource("/Game/pics/waterhag.png").toExternalForm());
     private Image waterh_image = new Image(waterh_img.toExternalForm());

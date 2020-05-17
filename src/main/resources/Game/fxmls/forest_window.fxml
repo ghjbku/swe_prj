@@ -399,7 +399,7 @@
                         <Label fx:id="dagger_desc" layoutX="87.0" layoutY="108.0" prefHeight="81.0" prefWidth="80.0" text="A Dagger... It might help if a fight breaks out" visible="false" wrapText="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="33.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="text_pane" disable="true" layoutX="104.0" layoutY="376.0" opacity="0.9" prefHeight="180.0" prefWidth="565.0" style="-fx-background-color: orange;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="104.0" AnchorPane.rightAnchor="131.0">
+                  <AnchorPane fx:id="text_pane" disable="true" layoutX="104.0" layoutY="376.0" opacity="0.9" prefHeight="180.0" prefWidth="565.0" style="-fx-background-color: orange;" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="104.0" AnchorPane.rightAnchor="131.0">
                      <children>
                         <Label fx:id="text_pane_text" alignment="CENTER" layoutX="14.0" layoutY="12.0" prefHeight="100.0" prefWidth="538.0" style="-fx-background-color: white;" text="text" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="12.5" AnchorPane.topAnchor="10.0" />
                         <Label fx:id="option1" alignment="CENTER" layoutX="14.0" layoutY="125.0" onMouseClicked="#option1_clicked" onMouseEntered="#label_on_hover_in1" onMouseExited="#label_on_hover_out1" prefHeight="20.0" prefWidth="237.0" style="-fx-background-color: gray;" text="option1" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" />
@@ -408,7 +408,7 @@
                         <Label fx:id="option4" alignment="CENTER" layoutX="271.0" layoutY="157.0" onMouseClicked="#option4_clicked" onMouseEntered="#label_on_hover_in4" onMouseExited="#label_on_hover_out4" prefHeight="20.0" prefWidth="237.0" style="-fx-background-color: gray;" text="option4" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
-                  <ImageView fx:id="event_fig" fitHeight="450.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="200.0" AnchorPane.rightAnchor="200.0">
+                  <ImageView fx:id="event_fig" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false" AnchorPane.bottomAnchor="250.0" AnchorPane.rightAnchor="260.0">
                      <image>
                         <Image url="@../pics/waterhag.png" />
                      </image>
