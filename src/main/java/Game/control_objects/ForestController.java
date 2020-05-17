@@ -2,6 +2,7 @@ package Game.control_objects;
 
 import Game.Game;
 import Game.game_events.Fight;
+import Game.game_events.SignEvent;
 import Game.game_objects.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,9 +32,11 @@ public class ForestController implements Initializable {
     private int incr = 2;
     private boolean isset = false;
     private boolean tpready = false;
-    public boolean can_move = true;
+    private boolean can_move = true;
+    private boolean is_sign_event = false;
     private Bear bear;
     private Fight fight = new Fight();
+    private SignEvent signevent = new SignEvent();
     private XmlMethods xml_methods = new XmlMethods();
     private CityController cityController = new CityController();
     private Inventory inv = new Inventory(player);
@@ -483,13 +486,6 @@ public class ForestController implements Initializable {
     }
 
 
-
-
-
-
-
-
-
     /**
      * method to initialize trees
      */
@@ -588,7 +584,7 @@ public class ForestController implements Initializable {
                         //for items
                         try {
                             collosionDetect();
-                            is_fight_over();
+                            is_event_over();
                         } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
                             logger.error("error occured: ", error);
                         }
@@ -605,7 +601,7 @@ public class ForestController implements Initializable {
                         //for items
                         try {
                             collosionDetect();
-                            is_fight_over();
+                            is_event_over();
                         } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
                             logger.error("error occured: ", error);
                         }
@@ -621,7 +617,7 @@ public class ForestController implements Initializable {
                         //for items
                         try {
                             collosionDetect();
-                            is_fight_over();
+                            is_event_over();
                         } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException er) {
                             logger.error("error occured: ", er);
                         }
@@ -637,7 +633,7 @@ public class ForestController implements Initializable {
                         //for items
                         try {
                             collosionDetect();
-                            is_fight_over();
+                            is_event_over();
                         } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException er) {
                             logger.error("error occured: ", er);
                         }
@@ -656,7 +652,7 @@ public class ForestController implements Initializable {
                             //for items
                             try {
                                 collosionDetect();
-                                is_fight_over();
+                                is_event_over();
                             } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
                                 logger.error("error occured: ", error);
                             }
@@ -674,7 +670,7 @@ public class ForestController implements Initializable {
                             //for items
                             try {
                                 collosionDetect();
-                                is_fight_over();
+                                is_event_over();
                             } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException er) {
                                 logger.error("error occured: ", er);
                             }
@@ -691,7 +687,7 @@ public class ForestController implements Initializable {
                             //for items
                             try {
                                 collosionDetect();
-                                is_fight_over();
+                                is_event_over();
                             } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException er) {
                                 logger.error("error occured: ", er);
                             }
@@ -708,7 +704,7 @@ public class ForestController implements Initializable {
                             //for items
                             try {
                                 collosionDetect();
-                                is_fight_over();
+                                is_event_over();
                             } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException er) {
                                 logger.error("error occured: ", er);
                             }
@@ -725,7 +721,7 @@ public class ForestController implements Initializable {
                             //for items
                             try {
                                 collosionDetect();
-                                is_fight_over();
+                                is_event_over();
                             } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
                                 logger.error("error occured: ", error);
                             }
@@ -743,7 +739,7 @@ public class ForestController implements Initializable {
                             //for items
                             try {
                                 collosionDetect();
-                                is_fight_over();
+                                is_event_over();
                             } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
                                 logger.error("error occured: ", error);
                             }
@@ -759,7 +755,7 @@ public class ForestController implements Initializable {
                             //for items
                             try {
                                 collosionDetect();
-                                is_fight_over();
+                                is_event_over();
                             } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException er) {
                                 logger.error("error occured: ", er);
                             }
@@ -776,7 +772,7 @@ public class ForestController implements Initializable {
                             //for items
                             try {
                                 collosionDetect();
-                                is_fight_over();
+                                is_event_over();
                             } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
                                 logger.error("error occured: ", error);
                             }
@@ -794,7 +790,7 @@ public class ForestController implements Initializable {
                             //for items
                             try {
                                 collosionDetect();
-                                is_fight_over();
+                                is_event_over();
                             } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
                                 logger.error("error occured: ", error);
                             }
@@ -810,7 +806,7 @@ public class ForestController implements Initializable {
                             //for items
                             try {
                                 collosionDetect();
-                                is_fight_over();
+                                is_event_over();
                             } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
                                 logger.error("error occured: ", error);
                             }
@@ -828,7 +824,7 @@ public class ForestController implements Initializable {
                             //for items
                             try {
                                 collosionDetect();
-                                is_fight_over();
+                                is_event_over();
                             } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException er) {
                                 logger.error("error occured: ", er);
                             }
@@ -845,7 +841,7 @@ public class ForestController implements Initializable {
                             //for items
                             try {
                                 collosionDetect();
-                                is_fight_over();
+                                is_event_over();
                             } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException er) {
                                 logger.error("error occured: ", er);
                             }
@@ -906,21 +902,126 @@ public class ForestController implements Initializable {
     /**
      * method to start the event when the player collides with the sign near the pond.
      */
-    private void start_sign_event(){
-        if (Collosion.Collosion_sign(player)){
-            setpane();
-            set_sign_event();
+    private void start_sign_event() {
+        if (Collosion.Collosion_sign(player)) {
+            if (signevent.Sign_crossroad() == 1) {
+                is_sign_event = true;
+                setpane();
+                set_sign_event();
+            }
         }
     }
 
-    private void set_sign_event(){
-        setText_pane_text("You see a Bear in front of you sleeping in the grass.\nAs you lurk closer it suddenly snaps its" +
-                " eyes open and looks at you.\nYou remember that you found a weapon along the way here... maybe it was " +
-                "for this moment.\nThe bear suddenly lets out a horrendous roar and starts running towards you,full of killing intent!");
-        setOption1("run away");
-        setOption2("try to play dead");
-        setOption3("try to talk it out with him");
-        setOption4("dodge the rush to the right");
+    private void set_sign_event() {
+        setText_pane_text("You see a Sign in front of you just beside a big pond and on it there is a strange drawing, but you\n" +
+                " can't work out what it means. But you recognise some fish with teeth from all that.\n" +
+                "Suddenly you hear a woman's cry for help, and it seems like it comes from the water in front of you!\n" +
+                "You decide to:");
+        setOption1("go away,it was just the wind");
+        setOption2("try to take a look who it is");
+        setOption3("no time to waste, jump in and save her");
+        setOption4("yell to make sure you didnt hallucinate");
+    }
+
+    private void theSignEvent(int round_counter, int option) throws FileNotFoundException, JAXBException {
+        switch (round_counter) {
+            case 0:
+                setText_pane_text("You decide to yell to her just to make sure you did not hallucinate.\n" +
+                        "You do hear her again, but for some reason the sound feels like it comes just beside your ears.");
+                setOption1("no time to waste, jump in and save her");
+                setOption2("time to go look around");
+                setOption3("i have a bad feeling, lets go");
+                getOption4().setVisible(false);
+                if (option == 1) {
+                    fight_lost();
+                } else if (option == 2) {
+                    fight_lost();
+                } else if (option == 3) {
+                    fight_lost();
+                } else if (option == 4) {
+                    raiseScore();
+                }
+                break;
+            case 1:
+                if (option == 1) {
+
+                } else if (option == 2) {
+
+                } else if (option == 3) {
+                    raiseScore();
+                    end_stuff("You decide to walk away.\nWhen you turn around the woman suddenly leaps out of the water, trying to consume you" +
+                            "\nShe was a water hag preying on humans.Luckily it was cursed and can't get away from the water.\nA" +
+                            " hand appears from the depths and drags the hag back into the pond.");
+                }
+                break;
+        }
+    }
+
+
+    public void option1() throws FileNotFoundException, JAXBException, MalformedURLException {
+        if (is_sign_event) {
+            theSignEvent(signevent.getcounter(),1);
+            signevent.setcounter(signevent.getcounter() + 1);
+
+        } else {
+            thefight(fight.getcounter(), 1);
+            fight_done(fight.getcounter());
+            fight.setcounter(fight.getcounter() + 1);
+
+            if (fight.run) {
+                can_move = true;
+                end_stuff("you tried to run away, but... running away from a bear is pretty much impossible... you died");
+                fight.setcounter(55);
+            }
+        }
+
+    }
+
+    public void option2() throws FileNotFoundException, JAXBException, MalformedURLException {
+        if (is_sign_event) {
+            theSignEvent(signevent.getcounter(),2);
+            signevent.setcounter(signevent.getcounter() + 1);
+        } else {
+            thefight(fight.getcounter(), 2);
+            fight_done(fight.getcounter());
+            fight.setcounter(fight.getcounter() + 1);
+        }
+    }
+
+    public void option3() throws FileNotFoundException, JAXBException, MalformedURLException {
+        if (is_sign_event) {
+            theSignEvent(signevent.getcounter(),3);
+            signevent.setcounter(signevent.getcounter() + 1);
+        } else {
+            thefight(fight.getcounter(), 3);
+            fight_done(fight.getcounter());
+            fight.setcounter(fight.getcounter() + 1);
+        }
+    }
+
+    public void option4() throws FileNotFoundException, JAXBException, MalformedURLException {
+        if (is_sign_event) {
+            theSignEvent(signevent.getcounter(),4);
+            signevent.setcounter(signevent.getcounter() + 1);
+        } else {
+            thefight(fight.getcounter(), 4);
+            fight_done(fight.getcounter());
+            fight.setcounter(fight.getcounter() + 1);
+        }
+    }
+
+    /**
+     * The method makes the buttons invisible and let the player move again.
+     * @param str the message to display on the textfield.
+     */
+    private void end_stuff(String str) {
+        setText_pane_text(str);
+        get_text_pane().setDisable(false);
+        getOption1().setVisible(false);
+        getOption2().setVisible(false);
+        getOption3().setVisible(false);
+        getOption4().setVisible(false);
+        can_move = true;
     }
 
 
@@ -949,17 +1050,29 @@ public class ForestController implements Initializable {
     /**
      * method that checks if the fight event with the bear is over
      */
-    private void is_fight_over() {
-        if (fight.getcounter() >= 10 && fight.getcounter() < 55) {
-            if (text_pane.isVisible()) {
-                text_pane.setVisible(false);
+    private void is_event_over() {
+        if (is_sign_event){
+            if (signevent.getcounter()>0){
+                if (text_pane.isVisible()) {
+                    text_pane.setVisible(false);
+                }
             }
         }
-        if (fight.getcounter() > 54) {
-            System.exit(0);
+        else {
+            if (fight.getcounter() >= 10 && fight.getcounter() < 55) {
+                if (text_pane.isVisible()) {
+                    text_pane.setVisible(false);
+                }
+            }
+            if (fight.getcounter() > 54) {
+                System.exit(0);
+            }
         }
     }
 
+    /**
+     * gets called when the player is ready to fight(not fought yet and has dagger).
+     */
     private void start_fight() {
         setText_pane_text("You see a Bear in front of you sleeping in the grass.\nAs you lurk closer it suddenly snaps its" +
                 " eyes open and looks at you.\nYou remember that you found a weapon along the way here... maybe it was " +
@@ -970,18 +1083,13 @@ public class ForestController implements Initializable {
         setOption4("dodge the rush to the right");
     }
 
-    private void end_stuff(String str) {
-        setText_pane_text(str);
-        get_text_pane().setDisable(false);
-        getOption1().setVisible(false);
-        getOption2().setVisible(false);
-        getOption3().setVisible(false);
-        getOption4().setVisible(false);
-        can_move = true;
-
-    }
-
-    private void fight_done(int counter) throws FileNotFoundException, JAXBException, MalformedURLException {
+    /**
+     * the method gets called when the player wins the fight against the bear.
+     * @param counter the fight class's round_counter
+     * @throws FileNotFoundException throws if the xml file doesnt exist
+     * @throws JAXBException throws if there is an error with the xml file
+     */
+    private void fight_done(int counter) throws FileNotFoundException, JAXBException {
         if (counter >= 7 && counter < 10) {
             end_stuff("You decide to wait for the bear...It slowly walks towards you, seemingly really weakened...\n" +
                     "As it reaches you, it lifts up its paws to strike...You prepare for the last strike!\nAnd the bear just falls to the ground, lifeless! You won, go through the city gate now!");
@@ -991,6 +1099,9 @@ public class ForestController implements Initializable {
         }
     }
 
+    /**
+     * method that gets called if the player chooses the wrong option in the fight.
+     */
     private void fight_lost() {
         if (fight.getcounter() > 1) {
             end_stuff("You fought hard, but sadly you lost this fight... but you can do it again! Good Luck!");
@@ -1001,12 +1112,18 @@ public class ForestController implements Initializable {
         }
     }
 
+    /**
+     * method to make the text gui appear.
+     */
     private void setpane() {
         get_text_pane().setDisable(false);
         get_text_pane().setVisible(true);
         can_move = false;
     }
 
+    /**
+     * method that gets called if the player collides with the bear without getting the dagger first.
+     */
     public void no_weapon() {
         setpane();
         getOption2().setVisible(false);
@@ -1017,40 +1134,6 @@ public class ForestController implements Initializable {
                 "Sadly you have no weapon with you, the best you can do now is run!");
         getOption1().setText("run");
         fight.run = true;
-    }
-
-    public void option1() throws FileNotFoundException, JAXBException, MalformedURLException {
-        thefight(fight.getcounter(), 1);
-        fight_done(fight.getcounter());
-        fight.setcounter(fight.getcounter() + 1);
-
-        if (fight.run) {
-            can_move = true;
-            end_stuff("you tried to run away, but... running away from a bear is pretty much impossible... you died");
-            fight.setcounter(55);
-        }
-
-    }
-
-
-    public void option2() throws FileNotFoundException, JAXBException, MalformedURLException {
-        thefight(fight.getcounter(), 2);
-        fight_done(fight.getcounter());
-        fight.setcounter(fight.getcounter() + 1);
-    }
-
-
-    public void option3() throws FileNotFoundException, JAXBException, MalformedURLException {
-        thefight(fight.getcounter(), 3);
-        fight_done(fight.getcounter());
-        fight.setcounter(fight.getcounter() + 1);
-    }
-
-
-    public void option4() throws FileNotFoundException, JAXBException, MalformedURLException {
-        thefight(fight.getcounter(), 4);
-        fight_done(fight.getcounter());
-        fight.setcounter(fight.getcounter() + 1);
     }
 
 
@@ -1277,7 +1360,6 @@ public class ForestController implements Initializable {
         Collosion.Collosion_detection(player, getTree(tree66));
         Collosion.Collosion_detection(player, getTree(tree67));
     }
-
 
 
     //getters
