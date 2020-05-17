@@ -101,22 +101,22 @@ public class Collosion {
     /**
      * checks the collosion between the player and the city gate teleporter
      *
-     * @param forestController uses the controller's setter method
      * @param plr              the player
      */
-    public static void Collosion_tp(ForestController forestController, Player plr) {
+    public static boolean Collosion_tp(Player plr) {
         final int tp_x=768,tp_y=23;
         if (
                 ((Math.abs(tp_x - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - tp_x) < dist)) &&
                         ((Math.abs(tp_y - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - tp_y) < dist))
         ) {
             logger.trace("collided with the teleporter!");
-            forestController.setTpReady(true);
+            return true;
         }
+        return false;
     }
 
     public static boolean Collosion_sign(Player plr) {
-        final int sign_x=0,sign_y=0;
+        final int sign_x=59,sign_y=409;
         if (
                 ((Math.abs(sign_x - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - sign_x) < dist)) &&
                 ((Math.abs(sign_y - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - sign_y) < dist))

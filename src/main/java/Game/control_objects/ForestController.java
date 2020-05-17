@@ -491,9 +491,14 @@ public class ForestController implements Initializable {
      * @throws URISyntaxException
      */
     private void change_to_city() throws FileNotFoundException, JAXBException, URISyntaxException {
-        if (tpready && player.getFought())
-            cityController.load_city(Game.getPrimarystage());
+        if (Collosion.Collosion_tp(player)) {
+            setTpReady(true);
+            if (tpready && player.getFought()) {
+                cityController.load_city(Game.getPrimarystage());
+            }
+        }
     }
+
 
     /**
      * method for collosion detection
@@ -509,7 +514,6 @@ public class ForestController implements Initializable {
 
         //collosion detection between items and player
         Collosion.Collosion_detection_item(this, player);
-        Collosion.Collosion_tp(this, player);
         Collosion.Collosion_sign(player);
         change_to_city();
 

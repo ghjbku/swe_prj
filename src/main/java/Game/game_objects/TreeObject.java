@@ -16,7 +16,6 @@ public class TreeObject implements Entity {
 
         tree_fig.setLayoutX(x);
         tree_fig.setLayoutY(y);
-        System.out.println(tree_fig.getLayoutX() + "= " + x + ", " + y + "= " + tree_fig.getLayoutY());
     }
 
     public int getx() {
