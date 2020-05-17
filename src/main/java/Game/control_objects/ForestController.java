@@ -79,6 +79,8 @@ public class ForestController implements Initializable {
     @FXML
     private ImageView player_fig;
     @FXML
+    private ImageView event_fig;
+    @FXML
     private ImageView tree_fig;
     @FXML
     private ImageView dagger_fig;
@@ -257,7 +259,7 @@ public class ForestController implements Initializable {
         setname();
         isset = true;
         if (loadplayer.getgender().equals("male")) {
-            setpic();
+            setpic(player_fig,"p");
         }
         if (loadplayer.getFought()) {
             bear_fig.setVisible(false);
@@ -342,8 +344,8 @@ public class ForestController implements Initializable {
     }
 
     @FXML
-    public void setpic() {
-        player_fig.setImage(images.getimage());
+    public void setpic(ImageView fig,String str) {
+        fig.setImage(images.getimage(str));
     }
 
 
@@ -907,6 +909,7 @@ public class ForestController implements Initializable {
             if (signevent.Sign_crossroad() == 1) {
                 is_sign_event = true;
                 setpane();
+                setpic(event_fig,"b");
                 set_sign_event();
             }
         }
@@ -951,6 +954,7 @@ public class ForestController implements Initializable {
                     signevent_lost("You decided to jump into the water to save the lady.\n" +
                             "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
                             "It is a water hag, sadly it is too late to do anything now...\nYou died.");
+                    setpic(event_fig,"wh");
                 } else if (option == 4) {
                     raiseScore();
                 }
@@ -960,12 +964,14 @@ public class ForestController implements Initializable {
                     signevent_lost("You decided to jump into the water to save the lady.\n" +
                             "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
                             "It is a water hag, sadly it is too late to do anything now...\nYou died.");
+                    setpic(event_fig,"wh");
                 } else if (option == 2) {
                     signevent_lost("You decide to take a look at who it is who is crying for help.\n" +
                             "As you come closer to the body of water, a hand suddenly catches you and drags you into the water.\n" +
                             "You died.");
                 } else if (option == 3) {
                     raiseScore();
+                    setpic(event_fig,"wh");
                     end_stuff("You decide to walk away.\nWhen you turn around the woman suddenly leaps out of the water, trying to consume you" +
                             "\nShe was a water hag preying on humans.Luckily it was cursed and can't get away from the water.\nA" +
                             " hand appears from the depths and drags the hag back into the pond.");
@@ -1055,6 +1061,7 @@ public class ForestController implements Initializable {
             if (signevent.getcounter() > 0 && signevent.getcounter() < 54) {
                 if (text_pane.isVisible()) {
                     text_pane.setVisible(false);
+                    event_fig.setVisible(false);
                 }
             }
             if (signevent.getcounter() > 54) {
@@ -1064,6 +1071,7 @@ public class ForestController implements Initializable {
             if (fight.getcounter() >= 10 && fight.getcounter() < 55) {
                 if (text_pane.isVisible()) {
                     text_pane.setVisible(false);
+                    event_fig.setVisible(false);
                 }
             }
             if (fight.getcounter() > 54) {
@@ -1088,6 +1096,7 @@ public class ForestController implements Initializable {
                 no_weapon();
             } else if (fight.Fight_crossroad(player) == 0) {
                 setpane();
+                setpic(event_fig,"b");
                 start_fight();
             } else if (fight.Fight_crossroad(player) == 1) {
             }
@@ -1141,6 +1150,7 @@ public class ForestController implements Initializable {
      * method to make the text gui appear.
      */
     private void setpane() {
+        event_fig.setVisible(true);
         get_text_pane().setDisable(false);
         get_text_pane().setVisible(true);
         can_move = false;
