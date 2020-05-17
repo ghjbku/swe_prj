@@ -1,6 +1,5 @@
 package Game.game_objects;
 
-import Game.game_events.Fight;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.junit.jupiter.api.AfterEach;
