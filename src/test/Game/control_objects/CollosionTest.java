@@ -1,7 +1,5 @@
 package Game.control_objects;
 
-import Game.Game;
-import Game.control_objects.Collosion;
 import Game.game_objects.Player;
 import Game.game_objects.TreeObject;
 import javafx.scene.image.ImageView;
@@ -9,7 +7,6 @@ import javafx.scene.layout.AnchorPane;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import Game.control_objects.CollosionException;
 
 import java.io.IOException;
 

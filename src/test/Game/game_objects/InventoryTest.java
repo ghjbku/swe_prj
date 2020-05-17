@@ -1,14 +1,10 @@
 package Game.game_objects;
 
-import Game.game_objects.Inventory;
-import Game.game_objects.Player;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class InventoryTest {

@@ -1,5 +1,6 @@
 package Game.game_events;
 
+import Game.game_events.Fight;
 import Game.game_objects.Item;
 import Game.game_objects.Player;
 import org.junit.jupiter.api.AfterEach;
