@@ -12,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WellEventTest {
     private Player player = new Player();
-    private SignEvent undertest;
+    private WellEvent undertest;
     public WellEventTest(){}
 
     @BeforeEach
     public void setUp() {
-        undertest = new SignEvent();
+        undertest = new WellEvent();
         System.out.println("im working");
     }
 
@@ -31,10 +31,13 @@ public class WellEventTest {
             ArrayList<Item> item = player.getItems();
             item.add(new Item("Rope", 2, 0, 0));
             player.setItems(item);
+        System.out.println("size: "+player.getItems().size()+","+player.getitem(0).getName());
 
-        assertEquals(1, undertest.Sign_crossroad(player));
+        assertEquals(1, undertest.Well_crossroad(player));
+        item.remove(0);
+        assertEquals(0, undertest.Well_crossroad(player));
         undertest.setcounter(5);
-        assertEquals(0, undertest.Sign_crossroad(player));
+        assertEquals(0, undertest.Well_crossroad(player));
     }
 
 
