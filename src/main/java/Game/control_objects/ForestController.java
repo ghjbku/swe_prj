@@ -905,6 +905,152 @@ public class ForestController implements Initializable {
         }
     }
 
+    //mutual event functions
+
+    /**
+     * method to make the text gui appear.
+     */
+    private void setpane() {
+        event_fig.setVisible(true);
+        get_text_pane().setDisable(false);
+        getOption1().setVisible(true);
+        getOption2().setVisible(true);
+        getOption3().setVisible(true);
+        getOption4().setVisible(true);
+        get_text_pane().setVisible(true);
+        can_move = false;
+    }
+
+    public void option1() throws FileNotFoundException, JAXBException, MalformedURLException {
+        if (is_sign_event) {
+            theSignEvent(signevent.getcounter(), 1);
+            signevent.setcounter(signevent.getcounter() + 1);
+
+        }
+        else if (is_well_event) {
+            theWellEvent(wellevent.getcounter(), 1);
+            wellevent.setcounter(wellevent.getcounter() + 1);
+        }
+        else {
+            thefight(fight.getcounter(), 1);
+            fight_done(fight.getcounter());
+            fight.setcounter(fight.getcounter() + 1);
+
+            if (fight.run) {
+                can_move = true;
+                end_stuff("you tried to run away, but... running away from a bear is pretty much impossible... you died");
+                fight.setcounter(55);
+            }
+        }
+
+    }
+
+    public void option2() throws FileNotFoundException, JAXBException, MalformedURLException {
+        if (is_sign_event) {
+            theSignEvent(signevent.getcounter(), 2);
+            signevent.setcounter(signevent.getcounter() + 1);
+        }
+        else if (is_well_event) {
+            theWellEvent(wellevent.getcounter(), 1);
+            wellevent.setcounter(wellevent.getcounter() + 1);
+        }
+        else {
+            thefight(fight.getcounter(), 2);
+            fight_done(fight.getcounter());
+            fight.setcounter(fight.getcounter() + 1);
+        }
+    }
+
+    public void option3() throws FileNotFoundException, JAXBException, MalformedURLException {
+        if (is_sign_event) {
+            theSignEvent(signevent.getcounter(), 3);
+            signevent.setcounter(signevent.getcounter() + 1);
+        }
+        else if (is_well_event) {
+            theWellEvent(wellevent.getcounter(), 1);
+            wellevent.setcounter(wellevent.getcounter() + 1);
+        }
+        else {
+            thefight(fight.getcounter(), 3);
+            fight_done(fight.getcounter());
+            fight.setcounter(fight.getcounter() + 1);
+        }
+    }
+
+    public void option4() throws FileNotFoundException, JAXBException, MalformedURLException {
+        if (is_sign_event) {
+            theSignEvent(signevent.getcounter(), 4);
+            signevent.setcounter(signevent.getcounter() + 1);
+        }
+        else if (is_well_event) {
+            theWellEvent(wellevent.getcounter(), 1);
+            wellevent.setcounter(wellevent.getcounter() + 1);
+        }
+        else {
+            thefight(fight.getcounter(), 4);
+            fight_done(fight.getcounter());
+            fight.setcounter(fight.getcounter() + 1);
+        }
+    }
+
+    /**
+     * The method makes the buttons invisible and let the player move again.
+     *
+     * @param str the message to display on the textfield.
+     */
+    private void end_stuff(String str) {
+        setText_pane_text(str);
+        get_text_pane().setDisable(false);
+        getOption1().setVisible(false);
+        getOption2().setVisible(false);
+        getOption3().setVisible(false);
+        getOption4().setVisible(false);
+        can_move = true;
+    }
+
+    /**
+     * method that checks if the event is over
+     */
+    private void is_event_over() {
+        if (is_sign_event) {
+            if (signevent.getcounter() > 0 && signevent.getcounter() < 54) {
+                if (text_pane.isVisible()) {
+                    text_pane.setVisible(false);
+                    event_fig.setVisible(false);
+                    is_sign_event = false;
+                }
+            }
+            if (signevent.getcounter() > 54) {
+                System.exit(0);
+            }
+        }
+        else if(is_well_event){
+            if (wellevent.getcounter() > 0 && wellevent.getcounter() < 54) {
+                if (text_pane.isVisible()) {
+                    text_pane.setVisible(false);
+                    event_fig.setVisible(false);
+                    is_well_event = false;
+                }
+            }
+            if (wellevent.getcounter() > 54) {
+                System.exit(0);
+            }
+        }
+        else {
+            if (fight.getcounter() >= 10 && fight.getcounter() < 55) {
+                if (text_pane.isVisible()) {
+                    text_pane.setVisible(false);
+                    event_fig.setVisible(false);
+                }
+            }
+            if (fight.getcounter() > 54) {
+                System.exit(0);
+            }
+        }
+    }
+
+    //sign event stuff
+
     /**
      * method to start the event when the player collides with the sign near the pond.
      */
@@ -932,7 +1078,7 @@ public class ForestController implements Initializable {
     }
 
     /**
-     * gets called when the player haven't triggered the sign event before (in the current save).
+     * gets called when the player haven't triggered the sign event before
      *
      * @param round_counter the signevent's round_counter.
      * @param option        the option the player chooses.
@@ -1002,100 +1148,7 @@ public class ForestController implements Initializable {
     }
 
 
-    public void option1() throws FileNotFoundException, JAXBException, MalformedURLException {
-        if (is_sign_event) {
-            theSignEvent(signevent.getcounter(), 1);
-            signevent.setcounter(signevent.getcounter() + 1);
 
-        } else {
-            thefight(fight.getcounter(), 1);
-            fight_done(fight.getcounter());
-            fight.setcounter(fight.getcounter() + 1);
-
-            if (fight.run) {
-                can_move = true;
-                end_stuff("you tried to run away, but... running away from a bear is pretty much impossible... you died");
-                fight.setcounter(55);
-            }
-        }
-
-    }
-
-    public void option2() throws FileNotFoundException, JAXBException, MalformedURLException {
-        if (is_sign_event) {
-            theSignEvent(signevent.getcounter(), 2);
-            signevent.setcounter(signevent.getcounter() + 1);
-        } else {
-            thefight(fight.getcounter(), 2);
-            fight_done(fight.getcounter());
-            fight.setcounter(fight.getcounter() + 1);
-        }
-    }
-
-    public void option3() throws FileNotFoundException, JAXBException, MalformedURLException {
-        if (is_sign_event) {
-            theSignEvent(signevent.getcounter(), 3);
-            signevent.setcounter(signevent.getcounter() + 1);
-        } else {
-            thefight(fight.getcounter(), 3);
-            fight_done(fight.getcounter());
-            fight.setcounter(fight.getcounter() + 1);
-        }
-    }
-
-    public void option4() throws FileNotFoundException, JAXBException, MalformedURLException {
-        if (is_sign_event) {
-            theSignEvent(signevent.getcounter(), 4);
-            signevent.setcounter(signevent.getcounter() + 1);
-        } else {
-            thefight(fight.getcounter(), 4);
-            fight_done(fight.getcounter());
-            fight.setcounter(fight.getcounter() + 1);
-        }
-    }
-
-    /**
-     * The method makes the buttons invisible and let the player move again.
-     *
-     * @param str the message to display on the textfield.
-     */
-    private void end_stuff(String str) {
-        setText_pane_text(str);
-        get_text_pane().setDisable(false);
-        getOption1().setVisible(false);
-        getOption2().setVisible(false);
-        getOption3().setVisible(false);
-        getOption4().setVisible(false);
-        can_move = true;
-    }
-
-    /**
-     * method that checks if the fight event with the bear is over
-     */
-    private void is_event_over() {
-        if (is_sign_event) {
-            if (signevent.getcounter() > 0 && signevent.getcounter() < 54) {
-                if (text_pane.isVisible()) {
-                    text_pane.setVisible(false);
-                    event_fig.setVisible(false);
-                    is_sign_event = false;
-                }
-            }
-            if (signevent.getcounter() > 54) {
-                System.exit(0);
-            }
-        } else if (!is_sign_event) {
-            if (fight.getcounter() >= 10 && fight.getcounter() < 55) {
-                if (text_pane.isVisible()) {
-                    text_pane.setVisible(false);
-                    event_fig.setVisible(false);
-                }
-            }
-            if (fight.getcounter() > 54) {
-                System.exit(0);
-            }
-        }
-    }
 
     //well event stuff
 
@@ -1120,6 +1173,65 @@ public class ForestController implements Initializable {
         setOption2("try to take a look who it is");
         setOption3("no time to waste, jump in and save her");
         setOption4("yell to make sure you didn't hallucinate");
+    }
+
+    /**
+     * gets called when the player haven't triggered the well event before
+     *
+     * @param round_counter the wellevent's round_counter.
+     * @param option        the option the player chooses.
+     * @throws FileNotFoundException throws if the xml does not exists.
+     * @throws JAXBException         throws if there is an error with the xml.
+     */
+    private void theWellEvent(int round_counter, int option) throws FileNotFoundException, JAXBException {
+        switch (round_counter) {
+            case 0:
+                setText_pane_text("You decide to yell to her just to make sure you did not hallucinate.\n" +
+                        "You do hear her again, but for some reason the sound feels like it comes just beside your ears.");
+                setOption1("no time to waste, jump in and save her");
+                setOption2("time to go look around");
+                setOption3("i have a bad feeling, lets go");
+                getOption4().setVisible(false);
+                if (option == 1) {
+                    end_stuff("you decide to just go away and do not care about the lady in the pond...\n" +
+                            "Not a nice thing to do, but it's your choice...");
+                    player.setWellevent_done(true);
+                } else if (option == 2) {
+                    signevent_lost("You decide to take a look at who it is who is crying for help.\n" +
+                            "As you come closer to the body of water, a hand suddenly catches you and drags you into the water.\n" +
+                            "You died.");
+                } else if (option == 3) {
+                    signevent_lost("You decided to jump into the water to save the lady.\n" +
+                            "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
+                            "It is a water hag, sadly it is too late to do anything now...\nYou died.");
+                    setpic(event_fig, "wh");
+                    eventfig_scale(1.5);
+                } else if (option == 4) {
+                    raiseScore();
+                }
+                break;
+            case 1:
+                if (option == 1) {
+                    signevent_lost("You decided to jump into the water to save the lady.\n" +
+                            "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
+                            "It is a water hag, sadly it is too late to do anything now...\nYou died.");
+                    setpic(event_fig, "wh");
+                    eventfig_scale(1.5);
+                } else if (option == 2) {
+                    signevent_lost("You decide to take a look at who it is who is crying for help.\n" +
+                            "As you come closer to the body of water, a hand suddenly catches you and drags you into the water.\n" +
+                            "You died.");
+                } else if (option == 3) {
+                    raiseScore();
+                    setpic(event_fig, "wh");
+                    eventfig_scale(1.5);
+                    end_stuff("You decide to walk away.\nWhen you turn around the woman suddenly leaps out of the water, trying to consume you" +
+                            "\nShe was a water hag preying on humans.Luckily it was cursed and can't get away from the water.\nA" +
+                            " hand appears from the depths and drags the hag back into the pond.");
+                    player.setWellevent_done(true);
+                }
+                break;
+        }
     }
 
 
@@ -1190,19 +1302,6 @@ public class ForestController implements Initializable {
         }
     }
 
-    /**
-     * method to make the text gui appear.
-     */
-    private void setpane() {
-        event_fig.setVisible(true);
-        get_text_pane().setDisable(false);
-        getOption1().setVisible(true);
-        getOption2().setVisible(true);
-        getOption3().setVisible(true);
-        getOption4().setVisible(true);
-        get_text_pane().setVisible(true);
-        can_move = false;
-    }
 
     /**
      * method that gets called if the player collides with the bear without getting the dagger first.
