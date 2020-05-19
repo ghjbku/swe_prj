@@ -1197,11 +1197,11 @@ public class ForestController implements Initializable {
                             "Not a nice thing to do, but it's your choice...");
                     player.setWellevent_done(true);
                 } else if (option == 2) {
-                    signevent_lost("You decide to take a look at who it is who is crying for help.\n" +
+                    wellevent_lost("You decide to take a look at who it is who is crying for help.\n" +
                             "As you come closer to the body of water, a hand suddenly catches you and drags you into the water.\n" +
                             "You died.");
                 } else if (option == 3) {
-                    signevent_lost("You decided to jump into the water to save the lady.\n" +
+                    wellevent_lost("You decided to jump into the water to save the lady.\n" +
                             "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
                             "It is a water hag, sadly it is too late to do anything now...\nYou died.");
                     setpic(event_fig, "wh");
@@ -1212,13 +1212,13 @@ public class ForestController implements Initializable {
                 break;
             case 1:
                 if (option == 1) {
-                    signevent_lost("You decided to jump into the water to save the lady.\n" +
+                    wellevent_lost("You decided to jump into the water to save the lady.\n" +
                             "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
                             "It is a water hag, sadly it is too late to do anything now...\nYou died.");
                     setpic(event_fig, "wh");
                     eventfig_scale(1.5);
                 } else if (option == 2) {
-                    signevent_lost("You decide to take a look at who it is who is crying for help.\n" +
+                    wellevent_lost("You decide to take a look at who it is who is crying for help.\n" +
                             "As you come closer to the body of water, a hand suddenly catches you and drags you into the water.\n" +
                             "You died.");
                 } else if (option == 3) {
@@ -1232,6 +1232,12 @@ public class ForestController implements Initializable {
                 }
                 break;
         }
+    }
+
+    private void wellevent_lost(String str) {
+        end_stuff(str);
+        wellevent.setcounter(55);
+        player.setWellevent_done(true);
     }
 
 
