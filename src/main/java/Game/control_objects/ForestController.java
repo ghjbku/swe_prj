@@ -239,7 +239,7 @@ public class ForestController implements Initializable {
     /**
      * method that uses the <code>XmlMethods</code> class as its base to save the playerdata into the xml file
      *
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException throws if the xml does not exists.
      * @throws JAXBException
      */
     @FXML
@@ -249,7 +249,7 @@ public class ForestController implements Initializable {
 
     /**
      * method that uses the <code>XmlMethods</code> class as its base to load the playerdata from the xml file
-     *
+     * @throws FileNotFoundException throws if the xml does not exists.
      * @throws JAXBException
      */
     @FXML
@@ -433,7 +433,7 @@ public class ForestController implements Initializable {
     /**
      * method that raises the player's score and then saves the data into the xml
      *
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException throws if the xml does not exists.
      * @throws JAXBException
      */
     public void raiseScore() throws FileNotFoundException, JAXBException {
@@ -445,7 +445,7 @@ public class ForestController implements Initializable {
     /**
      * method that gets called when the player collides with an item, then calls the raiseScore and isThere methods
      *
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException throws if the xml does not exists.
      * @throws JAXBException
      */
     public void setcollided() throws FileNotFoundException, JAXBException {
@@ -889,7 +889,7 @@ public class ForestController implements Initializable {
     /**
      * method that changes the Game class's scene into the CityScene from the ForestScene
      *
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException throws if the xml does not exists.
      * @throws JAXBException
      * @throws URISyntaxException
      */
@@ -1322,7 +1322,7 @@ public class ForestController implements Initializable {
      * method for collosion detection
      *
      * @throws CollosionException
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException throws if the xml does not exists.
      * @throws JAXBException
      * @throws URISyntaxException
      */
