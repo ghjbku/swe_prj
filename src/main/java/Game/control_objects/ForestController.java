@@ -907,7 +907,7 @@ public class ForestController implements Initializable {
      */
     private void start_sign_event() {
         if (Collosion.Collosion_sign(player)) {
-            if (signevent.Sign_crossroad() == 1) {
+            if (signevent.Sign_crossroad(player) == 1) {
                 is_sign_event = true;
                 setpane();
                 setpic(event_fig, "ws");
@@ -948,6 +948,7 @@ public class ForestController implements Initializable {
                 if (option == 1) {
                     end_stuff("you decide to just go away and do not care about the lady in the pond...\n" +
                             "Not a nice thing to do, but it's your choice...");
+                    player.setSignevent_done(true);
                 } else if (option == 2) {
                     signevent_lost("You decide to take a look at who it is who is crying for help.\n" +
                             "As you come closer to the body of water, a hand suddenly catches you and drags you into the water.\n" +
@@ -980,7 +981,7 @@ public class ForestController implements Initializable {
                     end_stuff("You decide to walk away.\nWhen you turn around the woman suddenly leaps out of the water, trying to consume you" +
                             "\nShe was a water hag preying on humans.Luckily it was cursed and can't get away from the water.\nA" +
                             " hand appears from the depths and drags the hag back into the pond.");
-                    is_sign_event=false;
+                    player.setSignevent_done(true);
                 }
                 break;
         }
@@ -994,7 +995,7 @@ public class ForestController implements Initializable {
     private void signevent_lost(String str) {
         end_stuff(str);
         signevent.setcounter(55);
-        is_sign_event=false;
+        player.setSignevent_done(true);
     }
 
 
@@ -1074,6 +1075,7 @@ public class ForestController implements Initializable {
                 if (text_pane.isVisible()) {
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
+                    is_sign_event=false;
                 }
             }
             if (signevent.getcounter() > 54) {

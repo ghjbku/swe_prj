@@ -7,9 +7,9 @@ public class SignEvent {
 
     public SignEvent(){}
 
-    public int Sign_crossroad() {
+    public int Sign_crossroad(Player player) {
 
-        if (round_counter == 0 ) {
+        if (round_counter == 0 && !player.getSignevent_done()) {
                 return 1;
             }
         else {
