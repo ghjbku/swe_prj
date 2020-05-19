@@ -3,6 +3,7 @@ package Game.control_objects;
 import Game.Game;
 import Game.game_events.Fight;
 import Game.game_events.SignEvent;
+import Game.game_events.WellEvent;
 import Game.game_objects.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,10 +34,11 @@ public class ForestController implements Initializable {
     private boolean isset = false;
     private boolean tpready = false;
     private boolean can_move = true;
-    private boolean is_sign_event = false;
+    private boolean is_sign_event = false, is_well_event = false;
     private Bear bear;
     private Fight fight = new Fight();
     private SignEvent signevent = new SignEvent();
+    private WellEvent wellevent = new WellEvent();
     private XmlMethods xml_methods = new XmlMethods();
     private CityController cityController = new CityController();
     private Inventory inv = new Inventory(player);
@@ -249,6 +251,7 @@ public class ForestController implements Initializable {
 
     /**
      * method that uses the <code>XmlMethods</code> class as its base to load the playerdata from the xml file
+     *
      * @throws FileNotFoundException throws if the xml does not exists.
      * @throws JAXBException
      */
@@ -1075,13 +1078,13 @@ public class ForestController implements Initializable {
                 if (text_pane.isVisible()) {
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
-                    is_sign_event=false;
+                    is_sign_event = false;
                 }
             }
             if (signevent.getcounter() > 54) {
                 System.exit(0);
             }
-        } else if(!is_sign_event){
+        } else if (!is_sign_event) {
             if (fight.getcounter() >= 10 && fight.getcounter() < 55) {
                 if (text_pane.isVisible()) {
                     text_pane.setVisible(false);
@@ -1093,6 +1096,32 @@ public class ForestController implements Initializable {
             }
         }
     }
+
+    //well event stuff
+
+    private void start_well_event() {
+        if (Collosion.Collosion_well(player)) {
+            if (wellevent.Well_crossroad(player) == 1) {
+                is_well_event = true;
+                setpane();
+                setpic(event_fig, "ws");
+                eventfig_scale(1.1);
+                set_well_event();
+            }
+        }
+    }
+
+    private void set_well_event() {
+        setText_pane_text("You see a Sign in front of you just beside a big pond and on it there is a strange drawing, but you\n" +
+                " can't work out what it means. You do recognise however some fish with teeth from all that.\n" +
+                "Suddenly you hear a woman's cry for help, and it seems like it comes from the water in front of you!\n" +
+                "You decide to:");
+        setOption1("go away,it was just the wind");
+        setOption2("try to take a look who it is");
+        setOption3("no time to waste, jump in and save her");
+        setOption4("yell to make sure you didn't hallucinate");
+    }
+
 
     //start of fight_event stuff
 
@@ -1330,10 +1359,10 @@ public class ForestController implements Initializable {
     /**
      * method for collosion detection
      *
-     * @throws CollosionException
+     * @throws CollosionException    throws when the play and the object is in the same coordinates
      * @throws FileNotFoundException throws if the xml does not exists.
-     * @throws JAXBException
-     * @throws URISyntaxException
+     * @throws JAXBException         throws when something is wrong with the xml file.
+     * @throws URISyntaxException    throws when the URI does not contain a valid path
      */
     private void collosionDetect() throws CollosionException, FileNotFoundException, JAXBException, URISyntaxException, MalformedURLException {
         //collosion with bear
@@ -1342,6 +1371,7 @@ public class ForestController implements Initializable {
         //collosion detection between items and player
         Collosion.Collosion_detection_item(this, player);
         start_sign_event();
+        start_well_event();
         change_to_city();
 
         //collosion detection between trees and player

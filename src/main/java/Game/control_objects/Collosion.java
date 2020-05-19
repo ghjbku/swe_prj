@@ -44,7 +44,6 @@ public class Collosion {
             plr.setPosy(plr.getLasty());
 
             if (obj.getClass().equals(Bear.class)) {
-                System.out.println("collided with bear");
                 return false;
             }
             return true;
@@ -126,6 +125,18 @@ public class Collosion {
             return true;
         }
         return false;
+    }
+    public static boolean Collosion_well(Player plr){
+        final int well_x=725,well_y=533;
+        if (
+                ((Math.abs(well_x - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - well_x) < dist)) &&
+                        ((Math.abs(well_y - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - well_y) < dist))
+        ) {
+            logger.trace("collided with the well!");
+            return true;
+        }
+        return false;
+
     }
 
 

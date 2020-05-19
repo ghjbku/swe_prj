@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
-@XmlType(propOrder = {"name", "items", "posx", "posy", "lastx", "lasty", "gender", "score", "fought","signevent_done"})
+@XmlType(propOrder = {"name", "items", "posx", "posy", "lastx", "lasty", "gender", "score", "fought","wellevent_done","signevent_done"})
 public class Player {
     private String name;
     private String gender = "female";
@@ -19,6 +19,7 @@ public class Player {
     private ArrayList<Item> items = new ArrayList<Item>();
     private boolean fought = false;
     private boolean signevent_done =false;
+    private boolean wellevent_done=false;
 
     public Player() {
     }
@@ -101,11 +102,13 @@ public class Player {
         return fought;
     }
     public boolean getSignevent_done(){return signevent_done;}
+    public boolean getWellevent_done(){return wellevent_done;}
 
     public void setFought(boolean value) {
         fought = value;
     }
     public void setSignevent_done(boolean value){signevent_done=value;}
+    public void setWellevent_done(boolean value){wellevent_done=value;}
 
 
 }
