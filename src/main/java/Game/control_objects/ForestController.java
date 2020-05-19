@@ -545,22 +545,6 @@ public class ForestController implements Initializable {
                 note_fig.setDisable(true);
             }
         }
-        /*else if (
-                (player.getitem(0).getid() == 0 && player.getitem(1).getid() == 1) ||
-                        (player.getitem(1).getid() == 0 && player.getitem(0).getid() == 1)||
-                        (player.getitem(2).getid() == 0 && player.getitem(0).getid() == 1)||
-                        (player.getitem(0).getid() == 0 && player.getitem(2).getid() == 1)
-        ) {
-            note_fig.setImage(null);
-            note_fig.setDisable(true);
-            dagger_fig.setImage(null);
-            dagger_fig.setDisable(true);
-            if (player.getitem(0).getid() == 0 && player.getitem(1).getid() == 1) {
-                inv.setslot(1, 1);
-            } else if (player.getitem(0).getid() == 1 && player.getitem(1).getid() == 0) {
-                inv.setslot(1, 0);
-            }
-        }*/
     }
 
 
@@ -662,8 +646,8 @@ public class ForestController implements Initializable {
                         //collosion detection
                         //for items
                         try {
-                            collosionDetect();
                             is_event_over();
+                            collosionDetect();
                         } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
                             logger.error("error occured: ", error);
                         }
@@ -679,8 +663,8 @@ public class ForestController implements Initializable {
                         //collosion detection
                         //for items
                         try {
-                            collosionDetect();
                             is_event_over();
+                            collosionDetect();
                         } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
                             logger.error("error occured: ", error);
                         }
@@ -695,8 +679,8 @@ public class ForestController implements Initializable {
                         //collosion detection
                         //for items
                         try {
-                            collosionDetect();
                             is_event_over();
+                            collosionDetect();
                         } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException er) {
                             logger.error("error occured: ", er);
                         }
@@ -711,8 +695,8 @@ public class ForestController implements Initializable {
                         //collosion detection
                         //for items
                         try {
-                            collosionDetect();
                             is_event_over();
+                            collosionDetect();
                         } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException er) {
                             logger.error("error occured: ", er);
                         }
@@ -730,8 +714,8 @@ public class ForestController implements Initializable {
                             //collosion detection
                             //for items
                             try {
-                                collosionDetect();
                                 is_event_over();
+                                collosionDetect();
                             } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
                                 logger.error("error occured: ", error);
                             }
@@ -748,8 +732,8 @@ public class ForestController implements Initializable {
                             //collosion detection
                             //for items
                             try {
-                                collosionDetect();
                                 is_event_over();
+                                collosionDetect();
                             } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException er) {
                                 logger.error("error occured: ", er);
                             }
@@ -765,8 +749,8 @@ public class ForestController implements Initializable {
                             //collosion detection
                             //for items
                             try {
-                                collosionDetect();
                                 is_event_over();
+                                collosionDetect();
                             } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException er) {
                                 logger.error("error occured: ", er);
                             }
@@ -782,8 +766,8 @@ public class ForestController implements Initializable {
                             //collosion detection
                             //for items
                             try {
-                                collosionDetect();
                                 is_event_over();
+                                collosionDetect();
                             } catch (CollosionException | FileNotFoundException | JAXBException | URISyntaxException | MalformedURLException er) {
                                 logger.error("error occured: ", er);
                             }
@@ -799,8 +783,8 @@ public class ForestController implements Initializable {
                             //collosion detection
                             //for items
                             try {
-                                collosionDetect();
                                 is_event_over();
+                                collosionDetect();
                             } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
                                 logger.error("error occured: ", error);
                             }
@@ -817,8 +801,8 @@ public class ForestController implements Initializable {
                             //collosion detection
                             //for items
                             try {
-                                collosionDetect();
                                 is_event_over();
+                                collosionDetect();
                             } catch (CollosionException | URISyntaxException | FileNotFoundException | JAXBException | MalformedURLException error) {
                                 logger.error("error occured: ", error);
                             }
@@ -1099,7 +1083,9 @@ public class ForestController implements Initializable {
         }
         else if(is_well_event){
             if (wellevent.getcounter() > 0 && wellevent.getcounter() < 54) {
+                System.out.println("here");
                 if (text_pane.isVisible()) {
+                    System.out.println("inside");
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
                     is_well_event = false;
@@ -1248,17 +1234,17 @@ public class ForestController implements Initializable {
 
     private void start_well_event() {
         if (Collosion.Collosion_well(player)) {
+            is_well_event = true;
             if (wellevent.Well_crossroad(player) == -1){
-                System.out.println("here");
-                is_well_event = true;
                 get_text_pane().setDisable(false);
-                getOption1().setVisible(false);
+                getOption1().setVisible(true);
                 getOption2().setVisible(false);
                 getOption3().setVisible(false);
                 getOption4().setVisible(false);
                 get_text_pane().setVisible(true);
                 setText_pane_text("You need a rope to get down the well...\nLook around!");
-                wellevent.setcounter(5);
+                wellevent.setcounter(-1);
+                setOption1("okay");
             }
             else if (wellevent.Well_crossroad(player) == 1) {
                 is_well_event = true;
@@ -1291,6 +1277,12 @@ public class ForestController implements Initializable {
      */
     private void theWellEvent(int round_counter, int option) throws FileNotFoundException, JAXBException {
         switch (round_counter) {
+            case -1:
+                if (option == 1){
+                    wellevent.setcounter(0);
+                    text_pane.setVisible(false);
+                }
+                break;
             case 0:
                 setText_pane_text("You decide to yell to her just to make sure you did not hallucinate.\n" +
                         "You do hear her again, but for some reason the sound feels like it comes just beside your ears.");
