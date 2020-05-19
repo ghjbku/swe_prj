@@ -1241,6 +1241,9 @@ public class ForestController implements Initializable {
                 eventfig_scale(1.1);
                 set_well_event();
             }
+            else if (wellevent.Well_crossroad(player)==0){
+                logger.info("its 0 bruh");
+            }
         }
     }
 
