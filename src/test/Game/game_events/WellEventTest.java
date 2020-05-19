@@ -35,7 +35,7 @@ public class WellEventTest {
 
         assertEquals(1, undertest.Well_crossroad(player));
         item.remove(0);
-        assertEquals(0, undertest.Well_crossroad(player));
+        assertEquals(-1, undertest.Well_crossroad(player));
         undertest.setcounter(5);
         assertEquals(0, undertest.Well_crossroad(player));
     }

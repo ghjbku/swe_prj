@@ -11,7 +11,7 @@ public class WellEvent {
 
         if (round_counter == 0 && !player.getWellevent_done()) {
             if (player.getItems().size()==0){
-                return 0;
+                return -1;
             }
             else if (player.getItems().size()==1){
                 if (player.getItems().get(0).getName().equals("Rope")){
