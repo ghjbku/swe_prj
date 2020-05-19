@@ -18,6 +18,8 @@ public class Images {
     private Image waterh_image = new Image(waterh_img.toExternalForm());
     URL sign_img = new URL(getClass().getResource("/Game/pics/wooden_sign.png").toExternalForm());
     private Image sign_image = new Image(sign_img.toExternalForm());
+    URL well_img = new URL(getClass().getResource("/Game/pics/well.png").toExternalForm());
+    private Image well_image = new Image(well_img.toExternalForm());
 
     public Image getimage(String str) {
         if (str.equals("p")) {
@@ -28,6 +30,9 @@ public class Images {
             return waterh_image;
         } else if (str.equals("ws")) {
             return sign_image;
+        }
+        else if (str.equals("well")) {
+            return well_image;
         }
         return null;
     }

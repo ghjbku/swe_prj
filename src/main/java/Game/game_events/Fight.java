@@ -13,7 +13,7 @@ public class Fight {
     public int Fight_crossroad(Player player) {
 
         if (round_counter == 0 && !(player.getFought())) {
-            if (player.getItems().isEmpty() || !(player.getItems().get(0).getid() == 0)) {
+            if (player.getItems().isEmpty() || !(player.getItems().get(0).getid() == 0)||!(player.getItems().get(1).getid() == 0)) {
                 return -1;
             } else {
                 return 0;

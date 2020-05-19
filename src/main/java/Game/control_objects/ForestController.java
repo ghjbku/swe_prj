@@ -1157,7 +1157,7 @@ public class ForestController implements Initializable {
             if (wellevent.Well_crossroad(player) == 1) {
                 is_well_event = true;
                 setpane();
-                setpic(event_fig, "ws");
+                setpic(event_fig, "well");
                 eventfig_scale(1.1);
                 set_well_event();
             }
@@ -1204,7 +1204,7 @@ public class ForestController implements Initializable {
                     wellevent_lost("You decided to jump into the water to save the lady.\n" +
                             "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
                             "It is a water hag, sadly it is too late to do anything now...\nYou died.");
-                    setpic(event_fig, "wh");
+                    setpic(event_fig, "well");
                     eventfig_scale(1.5);
                 } else if (option == 4) {
                     raiseScore();
@@ -1215,7 +1215,7 @@ public class ForestController implements Initializable {
                     wellevent_lost("You decided to jump into the water to save the lady.\n" +
                             "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
                             "It is a water hag, sadly it is too late to do anything now...\nYou died.");
-                    setpic(event_fig, "wh");
+                    setpic(event_fig, "well");
                     eventfig_scale(1.5);
                 } else if (option == 2) {
                     wellevent_lost("You decide to take a look at who it is who is crying for help.\n" +
@@ -1223,7 +1223,7 @@ public class ForestController implements Initializable {
                             "You died.");
                 } else if (option == 3) {
                     raiseScore();
-                    setpic(event_fig, "wh");
+                    setpic(event_fig, "well");
                     eventfig_scale(1.5);
                     end_stuff("You decide to walk away.\nWhen you turn around the woman suddenly leaps out of the water, trying to consume you" +
                             "\nShe was a water hag preying on humans.Luckily it was cursed and can't get away from the water.\nA" +
