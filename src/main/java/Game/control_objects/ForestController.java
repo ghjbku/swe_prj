@@ -980,6 +980,7 @@ public class ForestController implements Initializable {
                     end_stuff("You decide to walk away.\nWhen you turn around the woman suddenly leaps out of the water, trying to consume you" +
                             "\nShe was a water hag preying on humans.Luckily it was cursed and can't get away from the water.\nA" +
                             " hand appears from the depths and drags the hag back into the pond.");
+                    is_sign_event=false;
                 }
                 break;
         }
@@ -993,6 +994,7 @@ public class ForestController implements Initializable {
     private void signevent_lost(String str) {
         end_stuff(str);
         signevent.setcounter(55);
+        is_sign_event=false;
     }
 
 
@@ -1077,7 +1079,7 @@ public class ForestController implements Initializable {
             if (signevent.getcounter() > 54) {
                 System.exit(0);
             }
-        } else {
+        } else if(!is_sign_event){
             if (fight.getcounter() >= 10 && fight.getcounter() < 55) {
                 if (text_pane.isVisible()) {
                     text_pane.setVisible(false);
@@ -1105,6 +1107,7 @@ public class ForestController implements Initializable {
             if (fight.Fight_crossroad(player) == -1) {
                 no_weapon();
             } else if (fight.Fight_crossroad(player) == 0) {
+                logger.info("its inside");
                 setpane();
                 setpic(event_fig, "b");
                 start_fight();
@@ -1162,6 +1165,10 @@ public class ForestController implements Initializable {
     private void setpane() {
         event_fig.setVisible(true);
         get_text_pane().setDisable(false);
+        getOption1().setVisible(true);
+        getOption2().setVisible(true);
+        getOption3().setVisible(true);
+        getOption4().setVisible(true);
         get_text_pane().setVisible(true);
         can_move = false;
     }

@@ -44,6 +44,7 @@ public class Collosion {
             plr.setPosy(plr.getLasty());
 
             if (obj.getClass().equals(Bear.class)) {
+                System.out.println("collided with bear");
                 return false;
             }
             return true;
