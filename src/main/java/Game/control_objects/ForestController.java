@@ -20,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -380,10 +381,14 @@ public class ForestController implements Initializable {
 
         if (player.getItems().size() == 0) {
         } else if (player.getItems().size() > 1) {
-            logger.info("slot id 0: " + inv.getslot(0) + ", slot id 1: " + inv.getslot(1));
+            logger.info("slot id 0: " + inv.getslot(0) + ", slot id 1: " + inv.getslot(1)+", slot id 2: "+ inv.getslot(2));
 
-            if ((player.getitem(0).getid() == 0 && player.getitem(1).getid() == 1) ||
-                    (player.getitem(0).getid() == 1 && player.getitem(1).getid() == 0)) {
+            if (    (player.getitem(1).getid() == 1 && player.getitem(0).getid() == 0) ||
+                    (player.getitem(0).getid() == 1 && player.getitem(1).getid() == 0) ||
+                    (player.getitem(2).getid() == 1 && player.getitem(1).getid() == 0) ||
+                    (player.getitem(2).getid() == 1 && player.getitem(0).getid() == 0) ||
+                    (player.getitem(1).getid() == 1 && player.getitem(2).getid() == 0) ||
+                    (player.getitem(0).getid() == 1 && player.getitem(2).getid() == 0)) {
                 getDagger_fig_inv().setVisible(true);
                 getNote_fig_inv().setVisible(true);
                 getDagger_fig().setImage(null);
@@ -394,7 +399,24 @@ public class ForestController implements Initializable {
             if (player.getitem(0).getid() == 1) {
                 getNote_fig().setImage(null);
                 getNote_fig_inv().setVisible(true);
-            } else if (player.getitem(0).getid() == 0) {
+            }
+            else if (player.getitem(1).getid()==1){
+                getNote_fig().setImage(null);
+                getNote_fig_inv().setVisible(true);
+            }
+            else if (player.getitem(2).getid()==1){
+                getNote_fig().setImage(null);
+                getNote_fig_inv().setVisible(true);
+            }
+            if (player.getitem(0).getid() == 0) {
+                getDagger_fig().setImage(null);
+                getDagger_fig_inv().setVisible(true);
+            }
+            else if (player.getitem(1).getid()==0){
+                getDagger_fig().setImage(null);
+                getDagger_fig_inv().setVisible(true);
+            }
+            else if (player.getitem(2).getid()==0){
                 getDagger_fig().setImage(null);
                 getDagger_fig_inv().setVisible(true);
             }
@@ -464,19 +486,70 @@ public class ForestController implements Initializable {
         if (player.getItems().isEmpty()) {
             return;
         }
-        if (player.getItems().size() == 1) {
-            if (player.getitem(0).getid() == 0) {
+        if (player.getItems().size() == 1){
+            if (player.getitem(0).getid() == 0){
                 inv.setslot(0, 0);
                 dagger_fig.setImage(null);
                 dagger_fig.setDisable(true);
-            } else if (player.getitem(0).getid() == 1) {
+            }
+            if (player.getitem(0).getid() == 1){
                 inv.setslot(0, 1);
                 note_fig.setImage(null);
                 note_fig.setDisable(true);
             }
-        } else if (
+
+        }
+        else if (player.getItems().size() == 2){
+            if (player.getitem(0).getid() == 0||player.getitem(1).getid() == 0){
+                if (player.getitem(0).getid() == 0){
+                    inv.setslot(0, 0);}
+                else if(player.getitem(1).getid() == 0){
+                    inv.setslot(1, 0);
+                }
+                dagger_fig.setImage(null);
+                dagger_fig.setDisable(true);
+            }
+            if (player.getitem(0).getid() == 1||player.getitem(1).getid() == 1){
+                if (player.getitem(0).getid() == 1){
+                    inv.setslot(0, 1);}
+                else if(player.getitem(1).getid() == 1){
+                    inv.setslot(1, 1);
+                }
+                note_fig.setImage(null);
+                note_fig.setDisable(true);
+            }
+        }
+       else if (player.getItems().size() == 3) {
+            if (player.getitem(0).getid() == 0||player.getitem(1).getid() == 0||player.getitem(2).getid() == 0) {
+                if (player.getitem(0).getid() == 0){
+                inv.setslot(0, 0);}
+                else if(player.getitem(1).getid() == 0){
+                    inv.setslot(1, 0);
+                }
+                else if(player.getitem(2).getid() == 0){
+                    inv.setslot(2, 0);
+                }
+                dagger_fig.setImage(null);
+                dagger_fig.setDisable(true);
+            }
+            if (player.getitem(0).getid() == 1 ||player.getitem(1).getid() == 1||player.getitem(2).getid() == 1) {
+                if (player.getitem(0).getid() == 1){
+                    inv.setslot(0, 1);}
+                else if(player.getitem(1).getid() == 1){
+                    inv.setslot(1, 1);
+                }
+                else if(player.getitem(2).getid() == 1){
+                    inv.setslot(2, 1);
+                }
+                note_fig.setImage(null);
+                note_fig.setDisable(true);
+            }
+        }
+        /*else if (
                 (player.getitem(0).getid() == 0 && player.getitem(1).getid() == 1) ||
-                        (player.getitem(0).getid() == 1 && player.getitem(1).getid() == 0)
+                        (player.getitem(1).getid() == 0 && player.getitem(0).getid() == 1)||
+                        (player.getitem(2).getid() == 0 && player.getitem(0).getid() == 1)||
+                        (player.getitem(0).getid() == 0 && player.getitem(2).getid() == 1)
         ) {
             note_fig.setImage(null);
             note_fig.setDisable(true);
@@ -487,7 +560,7 @@ public class ForestController implements Initializable {
             } else if (player.getitem(0).getid() == 1 && player.getitem(1).getid() == 0) {
                 inv.setslot(1, 0);
             }
-        }
+        }*/
     }
 
 
@@ -1113,6 +1186,7 @@ public class ForestController implements Initializable {
                 }
                 break;
             case 1:
+                setOption1("next");
                 if (option == 1) {
                     signevent_lost("You decided to jump into the water to save the lady.\n" +
                             "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
@@ -1131,6 +1205,23 @@ public class ForestController implements Initializable {
                             "\nShe was a water hag preying on humans.Luckily it was cursed and can't get away from the water.\nA" +
                             " hand appears from the depths and drags the hag back into the pond.");
                     player.setSignevent_done(true);
+                    getOption1().setVisible(true);
+                }
+                break;
+            case 2:
+                if (option == 1) {
+                    end_stuff("as you look back you see that from where the hag stood, a rope appeared.\n" +
+                            "Seems like as if it was made from the hag's hair though...");
+                    ArrayList<Item> item = player.getItems();
+                    if (item.size() == 0 || ((item.get(0).getid() == 0) && item.size() == 1)||
+                       ((item.get(0).getid() == 1) && item.size() == 1) ||
+                       ((item.get(1).getid() == 0) && item.size() == 2) ||
+                       ((item.get(1).getid() == 1) && item.size() == 2)) {
+                        logger.trace("item added");
+                        item.add(new Item("Rope", 2, 0, 0));
+                        player.setItems(item);
+                    } else if (item.size() > 2) {
+                    }
                 }
                 break;
         }

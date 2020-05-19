@@ -72,12 +72,16 @@ public class Collosion {
         ) {
 
             ArrayList<Item> item = plr.getItems();
-            if (item.size() == 0 || ((item.get(0).getName() == "Note") && item.size() == 1)) {
+            if (item.size() == 0 || ((item.get(0).getid() == 1) && item.size() == 1)||
+                    ((item.get(0).getid() == 2) && item.size() == 1) ||
+                    ((item.get(1).getid() == 1) && item.size() == 2) ||
+                    ((item.get(1).getid() == 2) && item.size() == 2)) {
+
                 logger.trace("item added");
                 item.add(new Item("dagger", 0, d_x, d_y));
                 plr.setItems(item);
                 forestController.setcollided();
-            } else if (item.size() > 1) {
+            } else if (item.size() > 2) {
             }
 
         } else if (
@@ -86,12 +90,15 @@ public class Collosion {
         ) {
 
             ArrayList<Item> item = plr.getItems();
-            if (item.size() == 0 || ((item.get(0).getid() == 0) && item.size() == 1)) {
+            if (item.size() == 0 || ((item.get(0).getid() == 0) && item.size() == 1)||
+                    ((item.get(0).getid() == 2) && item.size() == 1) ||
+                    ((item.get(1).getid() == 0) && item.size() == 2) ||
+                    ((item.get(1).getid() == 2) && item.size() == 2))  {
                 logger.trace("item added");
                 item.add(new Item("Note", 1, n_x, n_y));
                 plr.setItems(item);
                 forestController.setcollided();
-            } else if (item.size() > 1) {
+            } else if (item.size() > 2) {
             }
         }
 

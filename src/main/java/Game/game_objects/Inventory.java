@@ -1,7 +1,7 @@
 package Game.game_objects;
 
 public class Inventory {
-    private int[] slot = new int[2];
+    private int[] slot = new int[3];
     private Player player;
 
     public Inventory(Player plr) {
