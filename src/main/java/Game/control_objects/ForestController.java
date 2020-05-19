@@ -1256,6 +1256,7 @@ public class ForestController implements Initializable {
                 getOption4().setVisible(false);
                 get_text_pane().setVisible(true);
                 setText_pane_text("You need a rope to get down the well...\nLook around!");
+                is_well_event = true;
                 wellevent.setcounter(5);
             }
             else if (wellevent.Well_crossroad(player) == 1) {
