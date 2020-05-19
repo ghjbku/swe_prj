@@ -1249,6 +1249,8 @@ public class ForestController implements Initializable {
     private void start_well_event() {
         if (Collosion.Collosion_well(player)) {
             if (wellevent.Well_crossroad(player) == -1){
+                System.out.println("here");
+                is_well_event = true;
                 get_text_pane().setDisable(false);
                 getOption1().setVisible(false);
                 getOption2().setVisible(false);
@@ -1256,7 +1258,6 @@ public class ForestController implements Initializable {
                 getOption4().setVisible(false);
                 get_text_pane().setVisible(true);
                 setText_pane_text("You need a rope to get down the well...\nLook around!");
-                is_well_event = true;
                 wellevent.setcounter(5);
             }
             else if (wellevent.Well_crossroad(player) == 1) {
