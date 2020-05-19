@@ -1340,13 +1340,32 @@ public class ForestController implements Initializable {
                 setOption3("Right again!");
                 if (option == 1) {
                     raiseScore();
-                    eventfig_scale(1.5);
+
                 } else if (option == 2) {
                     wellevent_lost("Well, you run to the box to throw it at him, but...\n" +
                             "well... it's your choice... The skele just threw the halbert at you... going all the way through...\nYou died.");
                 } else if (option == 3) {
                     wellevent_lost("You seriously started reading when a random skeleton can stab you anytime???\n" +
                             "Well, he just did... You died.");
+                }
+                break;
+            case 3:
+                setText_pane_text("You go left...\n" +
+                        "The skeleton, surprised at your actions, couldn't respond in time...\n" +
+                        "Now he's falling nicely... but wait... sh*t, it grabs your legs and pulls you down\n" +
+                        "Luckily you fall into water... you climb out of it and look around...another crossroads:");
+                setOption1("T");
+                setOption2("l");
+                setOption3("");
+                if (option == 1) {
+                    raiseScore();
+
+                } else if (option == 2) {
+                    wellevent_lost("Well, you go forward...\n" +
+                            "Suddenly a thousand arrows shoot from the walls, making you into a man-made hedgehog...You died.");
+                } else if (option == 3) {
+                    wellevent_lost("Surely going right again is the answer...right?...\n" +
+                            "Sadly not quite... From above you, a huge rock falls down,making you into some "+player.getName()+" Pancakes... You died.");
                 }
                 break;
         }
