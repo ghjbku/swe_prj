@@ -17,12 +17,14 @@ public class WellEvent {
                 if (player.getItems().get(0).getName().equals("Rope")){
                     return 1;
                 }
+                else return -1;
             }
             else if (player.getItems().size()==2){
                 if (player.getItems().get(0).getName().equals("Rope")||
                     player.getItems().get(1).getName().equals("Rope")){
                     return 1;
                 }
+                else return -1;
             }
             else if (player.getItems().size()==3){
                 if (player.getItems().get(0).getName().equals("Rope")||
@@ -30,6 +32,7 @@ public class WellEvent {
                     player.getItems().get(2).getName().equals("Rope")){
                     return 1;
                 }
+                else return -1;
             }
             return 0;
         }
