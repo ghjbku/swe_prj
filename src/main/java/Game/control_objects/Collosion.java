@@ -83,6 +83,7 @@ public class Collosion {
                 forestController.setcollided();
             } else if (item.size() > 2) {
             }
+            else{}
 
         } else if (
                 ((Math.abs(n_x - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - n_x) < dist)) &&

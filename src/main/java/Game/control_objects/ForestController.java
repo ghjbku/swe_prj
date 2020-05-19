@@ -1068,6 +1068,12 @@ public class ForestController implements Initializable {
                 System.exit(0);
             }
         } else if (is_well_event) {
+            if (wellevent.getcounter()==-1){
+                text_pane.setVisible(false);
+                event_fig.setVisible(false);
+                is_well_event = false;
+                wellevent.setcounter(0);
+            }
             if (wellevent.getcounter() > 0 && wellevent.getcounter() < 54) {
                 if (text_pane.isVisible()) {
                     text_pane.setVisible(false);
@@ -1248,14 +1254,12 @@ public class ForestController implements Initializable {
     }
 
     private void set_well_event() {
-        setText_pane_text("You see a Sign in front of you just beside a big pond and on it there is a strange drawing, but you\n" +
-                " can't work out what it means. You do recognise however some fish with teeth from all that.\n" +
-                "Suddenly you hear a woman's cry for help, and it seems like it comes from the water in front of you!\n" +
-                "You decide to:");
-        setOption1("go away,it was just the wind");
-        setOption2("try to take a look who it is");
-        setOption3("no time to waste, jump in and save her");
-        setOption4("yell to make sure you didn't hallucinate");
+        setText_pane_text("You see a well in front of you, and you remember having a rope with you.\nAfter climbing into the pipe" +
+                " you see that inside it's more like a labirinth... You decide to head:");
+        setOption1("out...i don't care anymore...");
+        setOption2("Left");
+        setOption3("Right");
+        setOption4("Forward");
     }
 
     /**
@@ -1270,64 +1274,85 @@ public class ForestController implements Initializable {
         switch (round_counter) {
             case -5:
                 if (option == 1) {
-                    wellevent.setcounter(-1);
+                    wellevent.setcounter(-2);
                     end_stuff("You need a rope to get down there... look around!");
                 }
             break;
 
             case 0:
-                setText_pane_text("You decide to yell to her just to make sure you did not hallucinate.\n" +
-                        "You do hear her again, but for some reason the sound feels like it comes just beside your ears.");
-                setOption1("no time to waste, jump in and save her");
-                setOption2("time to go look around");
-                setOption3("i have a bad feeling, lets go");
-                getOption4().setVisible(false);
+                setText_pane_text("You decide to see what's on the right.\n" +
+                        "As you turn on the corner something runs through the place in front of you.\n" +
+                        "It was just a rat... you look around and see a box,a candle and a letter, you decide to go and see:");
+                setOption1("The letter");
+                setOption2("Bruh lets just go back...");
+                setOption3("The box");
+                setOption4("The candle");
                 if (option == 1) {
-                    end_stuff("you decide to just go away and do not care about the lady in the pond...\n" +
-                            "Not a nice thing to do, but it's your choice...");
+                    end_stuff("you decide to just go away and do not care about the possible loot...\n" +
+                            "well... it's your choice...");
                     player.setWellevent_done(true);
                 } else if (option == 2) {
-                    wellevent_lost("You decide to take a look at who it is who is crying for help.\n" +
-                            "As you come closer to the body of water, a hand suddenly catches you and drags you into the water.\n" +
+                    wellevent_lost("You decide to take a look at what is on the left side.\n" +
+                            "As you turn on the corner, something suddenly leaps on you and the next moment everything fades to black.\n" +
                             "You died.");
                 } else if (option == 3) {
-                    wellevent_lost("You decided to jump into the water to save the lady.\n" +
-                            "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
-                            "It is a water hag, sadly it is too late to do anything now...\nYou died.");
-                    setpic(event_fig, "well");
-                    eventfig_scale(1.5);
-                } else if (option == 4) {
                     raiseScore();
+
+                } else if (option == 4) {
+                    wellevent_lost("You walk slowly forward...\n When suddenly the ground beneath you crumbles apart...\n" +
+                            "You died.");
                 }
                 break;
             case 1:
+                     setText_pane_text("You decide to get the candle.\n" +
+                        "Good thinking, after you light the candle you can finally see and just in time...\n" +
+                        "A skeleton appears in front of the door, you have to act quickly or you might die...\n" +
+                        "You decide to look around and see a hole just beside the door...");
+                    setOption1("Push that thing down!!!");
+                    setOption2("Get the box and throw it at him!");
+                    setOption3("The letter...maybe it has anything?");
+                    getOption4().setVisible(false);
                 if (option == 1) {
-                    wellevent_lost("You decided to jump into the water to save the lady.\n" +
-                            "As your body touches the surface of the water, you finally see the 'lady' you wanted to save...\n" +
-                            "It is a water hag, sadly it is too late to do anything now...\nYou died.");
-                    setpic(event_fig, "well");
+                    wellevent_lost("You decided to take a look at the letter.\n" +
+                            "As you pick it up and start reading its content, someone grabs you from behind...\n" +
+                            "You look back and see it's a skeleton, but its too late...You died.");
                     eventfig_scale(1.5);
                 } else if (option == 2) {
-                    wellevent_lost("You decide to take a look at who it is who is crying for help.\n" +
-                            "As you come closer to the body of water, a hand suddenly catches you and drags you into the water.\n" +
-                            "You died.");
+                    end_stuff("you decide to just go away and do not care about the possible loot...\n" +
+                            "well... it's your choice...");
                 } else if (option == 3) {
-                    raiseScore();
-                    setpic(event_fig, "well");
                     eventfig_scale(1.5);
-                    end_stuff("You decide to walk away.\nWhen you turn around the woman suddenly leaps out of the water, trying to consume you" +
-                            "\nShe was a water hag preying on humans.Luckily it was cursed and can't get away from the water.\nA" +
-                            " hand appears from the depths and drags the hag back into the pond.");
-                    player.setWellevent_done(true);
+                    wellevent_lost("You decide to walk towards the box to see what is inside.\n" +
+                            "Looking inside you see it contains...NOTHING???\nSuddnely you hear a scary voice from behind you. You take a look...\n" +
+                            "It's a skeleton. As you try to grab throw the box towards it, the skeleton thrusts its halberd into you... You died.");
+                }
+                else if (option == 4) {
+                    raiseScore();
+                }
+                break;
+            case 2:
+                setText_pane_text("You push that thing down...\n" +
+                        "The skeleton, surprised at your actions, couldn't respond in time...\n" +
+                        "Now he's falling nicely... but wait... sh*t, it grabs your legs and pulls you down\n" +
+                        "Luckily you fall into water... you climb out of it and look around...another crossroads:");
+                setOption1("This time go Left");
+                setOption2("lets just go forwards");
+                setOption3("Right again!");
+                if (option == 1) {
+                    raiseScore();
+                    eventfig_scale(1.5);
+                } else if (option == 2) {
+                    wellevent_lost("Well, you run to the box to throw it at him, but...\n" +
+                            "well... it's your choice... The skele just threw the halbert at you... going all the way through...\nYou died.");
+                } else if (option == 3) {
+                    wellevent_lost("You seriously started reading when a random skeleton can stab you anytime???\n" +
+                            "Well, he just did... You died.");
                 }
                 break;
         }
     }
 
-    private void wellevent_rope(String str){
-        end_stuff(str);
-        wellevent.setcounter(1);
-    }
+//player.setWellevent_done(true);
 
     private void wellevent_lost(String str) {
         end_stuff(str);
