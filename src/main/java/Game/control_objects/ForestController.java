@@ -35,7 +35,7 @@ public class ForestController implements Initializable {
     private boolean isset = false;
     private boolean tpready = false;
     private boolean can_move = true;
-    private boolean is_sign_event = false, is_well_event = false;
+    private boolean is_fight_event = false, is_sign_event = false, is_well_event = false;
     private Bear bear;
     private Fight fight = new Fight();
     private SignEvent signevent = new SignEvent();
@@ -381,9 +381,9 @@ public class ForestController implements Initializable {
 
         if (player.getItems().size() == 0) {
         } else if (player.getItems().size() > 1) {
-            logger.info("slot id 0: " + inv.getslot(0) + ", slot id 1: " + inv.getslot(1)+", slot id 2: "+ inv.getslot(2));
+            logger.info("slot id 0: " + inv.getslot(0) + ", slot id 1: " + inv.getslot(1) + ", slot id 2: " + inv.getslot(2));
 
-            if (    (player.getitem(1).getid() == 1 && player.getitem(0).getid() == 0) ||
+            if ((player.getitem(1).getid() == 1 && player.getitem(0).getid() == 0) ||
                     (player.getitem(0).getid() == 1 && player.getitem(1).getid() == 0) ||
                     (player.getitem(2).getid() == 1 && player.getitem(1).getid() == 0) ||
                     (player.getitem(2).getid() == 1 && player.getitem(0).getid() == 0) ||
@@ -399,24 +399,20 @@ public class ForestController implements Initializable {
             if (player.getitem(0).getid() == 1) {
                 getNote_fig().setImage(null);
                 getNote_fig_inv().setVisible(true);
-            }
-            else if (player.getitem(1).getid()==1){
+            } else if (player.getitem(1).getid() == 1) {
                 getNote_fig().setImage(null);
                 getNote_fig_inv().setVisible(true);
-            }
-            else if (player.getitem(2).getid()==1){
+            } else if (player.getitem(2).getid() == 1) {
                 getNote_fig().setImage(null);
                 getNote_fig_inv().setVisible(true);
             }
             if (player.getitem(0).getid() == 0) {
                 getDagger_fig().setImage(null);
                 getDagger_fig_inv().setVisible(true);
-            }
-            else if (player.getitem(1).getid()==0){
+            } else if (player.getitem(1).getid() == 0) {
                 getDagger_fig().setImage(null);
                 getDagger_fig_inv().setVisible(true);
-            }
-            else if (player.getitem(2).getid()==0){
+            } else if (player.getitem(2).getid() == 0) {
                 getDagger_fig().setImage(null);
                 getDagger_fig_inv().setVisible(true);
             }
@@ -486,59 +482,55 @@ public class ForestController implements Initializable {
         if (player.getItems().isEmpty()) {
             return;
         }
-        if (player.getItems().size() == 1){
-            if (player.getitem(0).getid() == 0){
+        if (player.getItems().size() == 1) {
+            if (player.getitem(0).getid() == 0) {
                 inv.setslot(0, 0);
                 dagger_fig.setImage(null);
                 dagger_fig.setDisable(true);
             }
-            if (player.getitem(0).getid() == 1){
+            if (player.getitem(0).getid() == 1) {
                 inv.setslot(0, 1);
                 note_fig.setImage(null);
                 note_fig.setDisable(true);
             }
 
-        }
-        else if (player.getItems().size() == 2){
-            if (player.getitem(0).getid() == 0||player.getitem(1).getid() == 0){
-                if (player.getitem(0).getid() == 0){
-                    inv.setslot(0, 0);}
-                else if(player.getitem(1).getid() == 0){
+        } else if (player.getItems().size() == 2) {
+            if (player.getitem(0).getid() == 0 || player.getitem(1).getid() == 0) {
+                if (player.getitem(0).getid() == 0) {
+                    inv.setslot(0, 0);
+                } else if (player.getitem(1).getid() == 0) {
                     inv.setslot(1, 0);
                 }
                 dagger_fig.setImage(null);
                 dagger_fig.setDisable(true);
             }
-            if (player.getitem(0).getid() == 1||player.getitem(1).getid() == 1){
-                if (player.getitem(0).getid() == 1){
-                    inv.setslot(0, 1);}
-                else if(player.getitem(1).getid() == 1){
+            if (player.getitem(0).getid() == 1 || player.getitem(1).getid() == 1) {
+                if (player.getitem(0).getid() == 1) {
+                    inv.setslot(0, 1);
+                } else if (player.getitem(1).getid() == 1) {
                     inv.setslot(1, 1);
                 }
                 note_fig.setImage(null);
                 note_fig.setDisable(true);
             }
-        }
-       else if (player.getItems().size() == 3) {
-            if (player.getitem(0).getid() == 0||player.getitem(1).getid() == 0||player.getitem(2).getid() == 0) {
-                if (player.getitem(0).getid() == 0){
-                inv.setslot(0, 0);}
-                else if(player.getitem(1).getid() == 0){
+        } else if (player.getItems().size() == 3) {
+            if (player.getitem(0).getid() == 0 || player.getitem(1).getid() == 0 || player.getitem(2).getid() == 0) {
+                if (player.getitem(0).getid() == 0) {
+                    inv.setslot(0, 0);
+                } else if (player.getitem(1).getid() == 0) {
                     inv.setslot(1, 0);
-                }
-                else if(player.getitem(2).getid() == 0){
+                } else if (player.getitem(2).getid() == 0) {
                     inv.setslot(2, 0);
                 }
                 dagger_fig.setImage(null);
                 dagger_fig.setDisable(true);
             }
-            if (player.getitem(0).getid() == 1 ||player.getitem(1).getid() == 1||player.getitem(2).getid() == 1) {
-                if (player.getitem(0).getid() == 1){
-                    inv.setslot(0, 1);}
-                else if(player.getitem(1).getid() == 1){
+            if (player.getitem(0).getid() == 1 || player.getitem(1).getid() == 1 || player.getitem(2).getid() == 1) {
+                if (player.getitem(0).getid() == 1) {
+                    inv.setslot(0, 1);
+                } else if (player.getitem(1).getid() == 1) {
                     inv.setslot(1, 1);
-                }
-                else if(player.getitem(2).getid() == 1){
+                } else if (player.getitem(2).getid() == 1) {
                     inv.setslot(2, 1);
                 }
                 note_fig.setImage(null);
@@ -978,17 +970,18 @@ public class ForestController implements Initializable {
         can_move = false;
     }
 
-    public void option1() throws FileNotFoundException, JAXBException, MalformedURLException {
+    public void option1() throws FileNotFoundException, JAXBException {
         if (is_sign_event) {
             theSignEvent(signevent.getcounter(), 1);
             signevent.setcounter(signevent.getcounter() + 1);
 
-        }
-        else if (is_well_event) {
+        }  if (is_well_event) {
+            System.out.println("counter: "+wellevent.getcounter());
             theWellEvent(wellevent.getcounter(), 1);
             wellevent.setcounter(wellevent.getcounter() + 1);
         }
-        else {
+         if (is_fight_event) {
+            System.out.println("im here");
             thefight(fight.getcounter(), 1);
             fight_done(fight.getcounter());
             fight.setcounter(fight.getcounter() + 1);
@@ -1006,12 +999,10 @@ public class ForestController implements Initializable {
         if (is_sign_event) {
             theSignEvent(signevent.getcounter(), 2);
             signevent.setcounter(signevent.getcounter() + 1);
-        }
-        else if (is_well_event) {
+        } else if (is_well_event) {
             theWellEvent(wellevent.getcounter(), 1);
             wellevent.setcounter(wellevent.getcounter() + 1);
-        }
-        else {
+        } else if (is_fight_event) {
             thefight(fight.getcounter(), 2);
             fight_done(fight.getcounter());
             fight.setcounter(fight.getcounter() + 1);
@@ -1022,12 +1013,10 @@ public class ForestController implements Initializable {
         if (is_sign_event) {
             theSignEvent(signevent.getcounter(), 3);
             signevent.setcounter(signevent.getcounter() + 1);
-        }
-        else if (is_well_event) {
+        } else if (is_well_event) {
             theWellEvent(wellevent.getcounter(), 1);
             wellevent.setcounter(wellevent.getcounter() + 1);
-        }
-        else {
+        } else if (is_fight_event) {
             thefight(fight.getcounter(), 3);
             fight_done(fight.getcounter());
             fight.setcounter(fight.getcounter() + 1);
@@ -1038,12 +1027,10 @@ public class ForestController implements Initializable {
         if (is_sign_event) {
             theSignEvent(signevent.getcounter(), 4);
             signevent.setcounter(signevent.getcounter() + 1);
-        }
-        else if (is_well_event) {
+        } else if (is_well_event) {
             theWellEvent(wellevent.getcounter(), 1);
             wellevent.setcounter(wellevent.getcounter() + 1);
-        }
-        else {
+        } else if (is_fight_event) {
             thefight(fight.getcounter(), 4);
             fight_done(fight.getcounter());
             fight.setcounter(fight.getcounter() + 1);
@@ -1080,26 +1067,24 @@ public class ForestController implements Initializable {
             if (signevent.getcounter() > 54) {
                 System.exit(0);
             }
-        }
-        else if(is_well_event){
+        } else if (is_well_event) {
             if (wellevent.getcounter() > 0 && wellevent.getcounter() < 54) {
-                System.out.println("here");
                 if (text_pane.isVisible()) {
-                    System.out.println("inside");
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
                     is_well_event = false;
                 }
             }
-            if (wellevent.getcounter() > 54) {
+            if (wellevent.getcounter() >= 55 ) {
                 System.exit(0);
             }
-        }
-        else {
+
+        } else if (is_fight_event){
             if (fight.getcounter() >= 10 && fight.getcounter() < 55) {
                 if (text_pane.isVisible()) {
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
+                    is_fight_event=false;
                 }
             }
             if (fight.getcounter() > 54) {
@@ -1199,14 +1184,14 @@ public class ForestController implements Initializable {
                     end_stuff("as you look back you see that from where the hag stood, a rope appeared.\n" +
                             "Seems like as if it was made from the hag's hair though...");
                     ArrayList<Item> item = player.getItems();
-                    if (item.size() == 0 || ((item.get(0).getid() == 0) && item.size() == 1)||
-                       ((item.get(0).getid() == 1) && item.size() == 1) ||
-                       ((item.get(1).getid() == 0) && item.size() == 2) ||
-                       ((item.get(1).getid() == 1) && item.size() == 2)) {
+                    if (item.size() == 0 || ((item.get(0).getid() == 0) && item.size() == 1) ||
+                            ((item.get(0).getid() == 1) && item.size() == 1) ||
+                            ((item.get(1).getid() == 0) && item.size() == 2) ||
+                            ((item.get(1).getid() == 1) && item.size() == 2)) {
                         logger.trace("item added");
                         item.add(new Item("Rope", 2, 0, 0));
                         player.setItems(item);
-                        if (wellevent.getcounter()==5){
+                        if (wellevent.getcounter() == 5) {
                             wellevent.setcounter(0);
                         }
                     } else if (item.size() > 2) {
@@ -1228,25 +1213,28 @@ public class ForestController implements Initializable {
     }
 
 
-
-
     //well event stuff
 
     private void start_well_event() {
         if (Collosion.Collosion_well(player)) {
-            is_well_event = true;
-            if (wellevent.Well_crossroad(player) == -1){
+            System.out.println(wellevent.getcounter());
+            if (wellevent.Well_crossroad(player) == -1) {
+
                 get_text_pane().setDisable(false);
+                can_move=false;
+                is_well_event = true;
+                event_fig.setVisible(true);
+                setpic(event_fig, "well");
                 getOption1().setVisible(true);
                 getOption2().setVisible(false);
                 getOption3().setVisible(false);
                 getOption4().setVisible(false);
                 get_text_pane().setVisible(true);
-                setText_pane_text("You need a rope to get down the well...\nLook around!");
-                wellevent.setcounter(-1);
-                setOption1("okay");
-            }
-            else if (wellevent.Well_crossroad(player) == 1) {
+                setText_pane_text("You need a rope to get down there... look around!");
+                setOption1("okay!");
+                wellevent.setcounter(-5);
+
+            } else if (wellevent.Well_crossroad(player) == 1) {
                 is_well_event = true;
                 setpane();
                 setpic(event_fig, "well");
@@ -1277,12 +1265,13 @@ public class ForestController implements Initializable {
      */
     private void theWellEvent(int round_counter, int option) throws FileNotFoundException, JAXBException {
         switch (round_counter) {
-            case -1:
-                if (option == 1){
-                    wellevent.setcounter(0);
-                    text_pane.setVisible(false);
+            case -5:
+                if (option == 1) {
+                    wellevent.setcounter(-1);
+                    end_stuff("You need a rope to get down there... look around!");
                 }
-                break;
+            break;
+
             case 0:
                 setText_pane_text("You decide to yell to her just to make sure you did not hallucinate.\n" +
                         "You do hear her again, but for some reason the sound feels like it comes just beside your ears.");
@@ -1332,6 +1321,11 @@ public class ForestController implements Initializable {
         }
     }
 
+    private void wellevent_rope(String str){
+        end_stuff(str);
+        wellevent.setcounter(1);
+    }
+
     private void wellevent_lost(String str) {
         end_stuff(str);
         wellevent.setcounter(55);
@@ -1350,11 +1344,13 @@ public class ForestController implements Initializable {
     private void start_fight_after_bear_collides() throws CollosionException {
         boolean can_start = Collosion.Collosion_detection(player, bear);
         if (can_start == false) {
+            is_fight_event=true;
 
             if (fight.Fight_crossroad(player) == -1) {
+                setpic(event_fig, "b");
                 no_weapon();
             } else if (fight.Fight_crossroad(player) == 0) {
-                logger.info("its inside");
+                logger.info("its inside fight");
                 setpane();
                 setpic(event_fig, "b");
                 start_fight();
@@ -1423,7 +1419,7 @@ public class ForestController implements Initializable {
     }
 
 
-    private void thefight(int round_counter, int option) throws FileNotFoundException, JAXBException, MalformedURLException {
+    private void thefight(int round_counter, int option) throws FileNotFoundException, JAXBException {
         switch (round_counter) {
             case 0:
                 setText_pane_text("You dodged to the side, and just barely survive the rush...\nOn the other hand, the bear" +
