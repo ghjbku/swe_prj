@@ -376,25 +376,13 @@ public class ForestController implements Initializable {
         close_inventory();
     }
 
+    //todo
     public void open_inventory() {
         getInventory().setVisible(true);
 
         if (player.getItems().size() == 0) {
-        } else if (player.getItems().size() > 1) {
-            logger.info("slot id 0: " + inv.getslot(0) + ", slot id 1: " + inv.getslot(1) + ", slot id 2: " + inv.getslot(2));
-
-            if ((player.getitem(1).getid() == 1 && player.getitem(0).getid() == 0) ||
-                    (player.getitem(0).getid() == 1 && player.getitem(1).getid() == 0) ||
-                    (player.getitem(2).getid() == 1 && player.getitem(1).getid() == 0) ||
-                    (player.getitem(2).getid() == 1 && player.getitem(0).getid() == 0) ||
-                    (player.getitem(1).getid() == 1 && player.getitem(2).getid() == 0) ||
-                    (player.getitem(0).getid() == 1 && player.getitem(2).getid() == 0)) {
-                getDagger_fig_inv().setVisible(true);
-                getNote_fig_inv().setVisible(true);
-                getDagger_fig().setImage(null);
-                getNote_fig().setImage(null);
-            }
-        } else if (player.getItems().size() == 1) {
+        }
+        else if (player.getItems().size() == 1) {
             logger.info("slot id 0: " + inv.getslot(0));
             if (player.getitem(0).getid() == 1) {
                 getNote_fig().setImage(null);
@@ -415,6 +403,21 @@ public class ForestController implements Initializable {
             } else if (player.getitem(2).getid() == 0) {
                 getDagger_fig().setImage(null);
                 getDagger_fig_inv().setVisible(true);
+            }
+        }
+        else if (player.getItems().size() > 2) {
+            logger.info("slot id 0: " + inv.getslot(0) + ", slot id 1: " + inv.getslot(1) + ", slot id 2: " + inv.getslot(2));
+
+            if ((player.getitem(1).getid() == 1 && player.getitem(0).getid() == 0) ||
+                    (player.getitem(0).getid() == 1 && player.getitem(1).getid() == 0) ||
+                    (player.getitem(2).getid() == 1 && player.getitem(1).getid() == 0) ||
+                    (player.getitem(2).getid() == 1 && player.getitem(0).getid() == 0) ||
+                    (player.getitem(1).getid() == 1 && player.getitem(2).getid() == 0) ||
+                    (player.getitem(0).getid() == 1 && player.getitem(2).getid() == 0)) {
+                getDagger_fig_inv().setVisible(true);
+                getNote_fig_inv().setVisible(true);
+                getDagger_fig().setImage(null);
+                getNote_fig().setImage(null);
             }
         }
     }
@@ -975,13 +978,14 @@ public class ForestController implements Initializable {
             theSignEvent(signevent.getcounter(), 1);
             signevent.setcounter(signevent.getcounter() + 1);
 
-        }  if (is_well_event) {
-            System.out.println("counter: "+wellevent.getcounter());
+        }
+        if (is_well_event) {
+            logger.info("counter: " + wellevent.getcounter());
             theWellEvent(wellevent.getcounter(), 1);
             wellevent.setcounter(wellevent.getcounter() + 1);
         }
-         if (is_fight_event) {
-            System.out.println("im here");
+        if (is_fight_event) {
+            logger.info("im here,inside fight");
             thefight(fight.getcounter(), 1);
             fight_done(fight.getcounter());
             fight.setcounter(fight.getcounter() + 1);
@@ -1000,7 +1004,7 @@ public class ForestController implements Initializable {
             theSignEvent(signevent.getcounter(), 2);
             signevent.setcounter(signevent.getcounter() + 1);
         } else if (is_well_event) {
-            theWellEvent(wellevent.getcounter(), 1);
+            theWellEvent(wellevent.getcounter(), 2);
             wellevent.setcounter(wellevent.getcounter() + 1);
         } else if (is_fight_event) {
             thefight(fight.getcounter(), 2);
@@ -1014,7 +1018,7 @@ public class ForestController implements Initializable {
             theSignEvent(signevent.getcounter(), 3);
             signevent.setcounter(signevent.getcounter() + 1);
         } else if (is_well_event) {
-            theWellEvent(wellevent.getcounter(), 1);
+            theWellEvent(wellevent.getcounter(), 3);
             wellevent.setcounter(wellevent.getcounter() + 1);
         } else if (is_fight_event) {
             thefight(fight.getcounter(), 3);
@@ -1028,7 +1032,7 @@ public class ForestController implements Initializable {
             theSignEvent(signevent.getcounter(), 4);
             signevent.setcounter(signevent.getcounter() + 1);
         } else if (is_well_event) {
-            theWellEvent(wellevent.getcounter(), 1);
+            theWellEvent(wellevent.getcounter(), 4);
             wellevent.setcounter(wellevent.getcounter() + 1);
         } else if (is_fight_event) {
             thefight(fight.getcounter(), 4);
@@ -1068,7 +1072,7 @@ public class ForestController implements Initializable {
                 System.exit(0);
             }
         } else if (is_well_event) {
-            if (wellevent.getcounter()==-1){
+            if (wellevent.getcounter() == -1) {
                 text_pane.setVisible(false);
                 event_fig.setVisible(false);
                 is_well_event = false;
@@ -1081,16 +1085,16 @@ public class ForestController implements Initializable {
                     is_well_event = false;
                 }
             }
-            if (wellevent.getcounter() >= 55 ) {
+            if (wellevent.getcounter() >= 55) {
                 System.exit(0);
             }
 
-        } else if (is_fight_event){
+        } else if (is_fight_event) {
             if (fight.getcounter() >= 10 && fight.getcounter() < 55) {
                 if (text_pane.isVisible()) {
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
-                    is_fight_event=false;
+                    is_fight_event = false;
                 }
             }
             if (fight.getcounter() > 54) {
@@ -1116,6 +1120,9 @@ public class ForestController implements Initializable {
         }
     }
 
+    /**
+     * setting the beginning text for the event
+     */
     private void set_sign_event() {
         setText_pane_text("You see a Sign in front of you just beside a big pond and on it there is a strange drawing, but you\n" +
                 " can't work out what it means. You do recognise however some fish with teeth from all that.\n" +
@@ -1223,11 +1230,11 @@ public class ForestController implements Initializable {
 
     private void start_well_event() {
         if (Collosion.Collosion_well(player)) {
-            System.out.println(wellevent.getcounter());
+            logger.info("counter in well event: "+wellevent.getcounter());
             if (wellevent.Well_crossroad(player) == -1) {
 
                 get_text_pane().setDisable(false);
-                can_move=false;
+                can_move = false;
                 is_well_event = true;
                 event_fig.setVisible(true);
                 setpic(event_fig, "well");
@@ -1246,13 +1253,15 @@ public class ForestController implements Initializable {
                 setpic(event_fig, "well");
                 eventfig_scale(1.1);
                 set_well_event();
-            }
-            else if (wellevent.Well_crossroad(player)==0){
+            } else if (wellevent.Well_crossroad(player) == 0) {
                 logger.info("its 0 bruh");
             }
         }
     }
 
+    /**
+     * setting the beginning text for the event
+     */
     private void set_well_event() {
         setText_pane_text("You see a well in front of you, and you remember having a rope with you.\nAfter climbing into the pipe" +
                 " you see that inside it's more like a labirinth... You decide to head:");
@@ -1277,7 +1286,7 @@ public class ForestController implements Initializable {
                     wellevent.setcounter(-2);
                     end_stuff("You need a rope to get down there... look around!");
                 }
-            break;
+                break;
 
             case 0:
                 setText_pane_text("You decide to see what's on the right.\n" +
@@ -1304,14 +1313,14 @@ public class ForestController implements Initializable {
                 }
                 break;
             case 1:
-                     setText_pane_text("You decide to get the candle.\n" +
+                setText_pane_text("You decide to get the candle.\n" +
                         "Good thinking, after you light the candle you can finally see and just in time...\n" +
                         "A skeleton appears in front of the door, you have to act quickly or you might die...\n" +
                         "You decide to look around and see a hole just beside the door...");
-                    setOption1("Push that thing down!!!");
-                    setOption2("Get the box and throw it at him!");
-                    setOption3("The letter...maybe it has anything?");
-                    getOption4().setVisible(false);
+                setOption1("Push that thing down!!!");
+                setOption2("Get the box and throw it at him!");
+                setOption3("The letter...maybe it has anything?");
+                getOption4().setVisible(false);
                 if (option == 1) {
                     wellevent_lost("You decided to take a look at the letter.\n" +
                             "As you pick it up and start reading its content, someone grabs you from behind...\n" +
@@ -1325,8 +1334,7 @@ public class ForestController implements Initializable {
                     wellevent_lost("You decide to walk towards the box to see what is inside.\n" +
                             "Looking inside you see it contains...NOTHING???\nSuddnely you hear a scary voice from behind you. You take a look...\n" +
                             "It's a skeleton. As you try to grab throw the box towards it, the skeleton thrusts its halberd into you... You died.");
-                }
-                else if (option == 4) {
+                } else if (option == 4) {
                     raiseScore();
                 }
                 break;
@@ -1351,12 +1359,11 @@ public class ForestController implements Initializable {
                 break;
             case 3:
                 setText_pane_text("You go left...\n" +
-                        "The skeleton, surprised at your actions, couldn't respond in time...\n" +
-                        "Now he's falling nicely... but wait... sh*t, it grabs your legs and pulls you down\n" +
-                        "Luckily you fall into water... you climb out of it and look around...another crossroads:");
-                setOption1("T");
-                setOption2("l");
-                setOption3("");
+                        "You walk for quite a long time in the darkness and this way seems endless...\n" +
+                        "You reach another crossroads, quite annoyed already, you decide to:");
+                setOption1("meh, go forward now?");
+                setOption2("Left of course.");
+                setOption3("Right again...");
                 if (option == 1) {
                     raiseScore();
 
@@ -1365,18 +1372,78 @@ public class ForestController implements Initializable {
                             "Suddenly a thousand arrows shoot from the walls, making you into a man-made hedgehog...You died.");
                 } else if (option == 3) {
                     wellevent_lost("Surely going right again is the answer...right?...\n" +
-                            "Sadly not quite... From above you, a huge rock falls down,making you into some "+player.getName()+" Pancakes... You died.");
+                            "Sadly not quite... From above you, a huge rock falls down,making you into some " + player.getName() + " Pancakes... You died.");
                 }
                 break;
+            case 4:
+                setText_pane_text("You just follow the 'road' forward...\n" +
+                        "This time it doesn't take long until you reach a big 'room'. As you look around you see\n" +
+                        "A skeleton, but it's different than the other one...as it's dead?\n" +
+                        "Well laying next to it is a bow with a few arrows.");
+                setOption1("well...take it?");
+                getOption2().setVisible(false);
+                getOption3().setVisible(false);
+                getOption4().setVisible(false);
+                if (option == 1) {
+                    raiseScore();
+
+                } else if (option == 2) {
+                    wellevent_lost("Well, you go go left...\n" +
+                            "You walk for so long you don't even remember anything anymore...\n" +
+                            "years and years moving on and you are still just walking on the path...\n" +
+                            "Suddenly you see a light on the end of this path,but... it's not what you hoped for... You died.");
+                } else if (option == 3) {
+                    wellevent_lost("You try to take the road on the right...\n" +
+                            "The next thing you see is your body laying on the floor,unmoving.\n" +
+                            "Guess you died? But why?");
+                }
+                break;
+            case 5:
+                if (option == 1) {
+                    raiseScore();
+                    end_stuff("You take the bow, and as soon as the bow is in your hands, the walls behind the skeleton\n" +
+                            "suddenly start moving and reveal a path, which seems to go back to where you came from, above the ground.");
+                    player.setWellevent_done(true);
+                    wellevent_take_rope_give_bow();
+                }
+
+
         }
     }
 
-//player.setWellevent_done(true);
 
     private void wellevent_lost(String str) {
         end_stuff(str);
         wellevent.setcounter(55);
         player.setWellevent_done(true);
+    }
+
+    private void wellevent_take_rope_give_bow() {
+        ArrayList<Item> item = player.getItems();
+        if (item.size() == 1) {
+            if (item.get(0).getid() == 2) {
+                item.remove(0);
+            }
+        } else if (item.size() == 2) {
+            if (item.get(1).getid() == 2) {
+                item.remove(1);
+            } else if (item.get(0).getid() == 2) {
+                item.remove(0);
+            }
+        } else if (item.size() == 3) {
+            if (item.get(1).getid() == 2) {
+                item.remove(1);
+            } else if (item.get(0).getid() == 2) {
+                item.remove(0);
+            } else if (item.get(2).getid() == 2) {
+                item.remove(2);
+            }
+        }
+
+        logger.trace("item added");
+        item.add(new Item("bow", 0, 0, 0));
+        player.setItems(item);
+
     }
 
 
@@ -1391,7 +1458,7 @@ public class ForestController implements Initializable {
     private void start_fight_after_bear_collides() throws CollosionException {
         boolean can_start = Collosion.Collosion_detection(player, bear);
         if (can_start == false) {
-            is_fight_event=true;
+            is_fight_event = true;
 
             if (fight.Fight_crossroad(player) == -1) {
                 setpic(event_fig, "b");
