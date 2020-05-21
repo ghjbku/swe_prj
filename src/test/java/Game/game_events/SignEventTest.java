@@ -25,6 +25,7 @@ public class SignEventTest {
     @Test
     public void testSignEvent(){
         assertEquals(1, undertest.Sign_crossroad(player));
+        player.setSignevent_done(true);
         undertest.setcounter(5);
         assertEquals(0, undertest.Sign_crossroad(player));
     }

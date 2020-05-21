@@ -1431,7 +1431,7 @@ public class ForestController implements Initializable {
                 if (option == 1) {
                     raiseScore();
                     end_stuff("You take the bow, and as soon as you get the bow into your hands, the walls behind the skeleton\n" +
-                            "suddenly start moving and reveal a path, which seems to go back to where you came from, above the ground.");
+                            "suddenly start moving and reveal a path,\n which seems to go back to where you came from, above the ground.");
                     player.setWellevent_done(true);
                     wellevent_take_rope_give_bow();
                 }
