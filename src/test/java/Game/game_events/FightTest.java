@@ -65,4 +65,32 @@ public class FightTest {
 
     }
 
+    @Test
+    public void testFight_false_branches(){
+        Player plr = player;
+        Fight test_fight=undertest;
+        ArrayList<Item> item = plr.getItems();
+        item.add(new Item("Note", 1, 0, 0));
+        plr.setItems(item);
+        //inventory size 1, not dagger
+        assertEquals(-1, test_fight.Fight_crossroad(plr));
+
+        item.add(new Item("dagger", 0, 0, 0));
+        plr.setItems(item);
+        //inventory size 2, there is dagger
+        assertEquals(0, test_fight.Fight_crossroad(plr));
+
+        item.remove(1);
+        item.add(new Item("Rope", 2, 0, 0));
+        plr.setItems(item);
+        //inv size 2, no dagger
+        assertEquals(-1, test_fight.Fight_crossroad(plr));
+
+        item.add(new Item("dagger", 0, 0, 0));
+        plr.setItems(item);
+        //inv size 3, there is dagger
+        assertEquals(0, test_fight.Fight_crossroad(plr));
+
+    }
+
 }
