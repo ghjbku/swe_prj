@@ -38,7 +38,8 @@ public class Collosion {
         if (obj.getx() == plr.getPosx() && obj.gety() == plr.getPosy()) {
             throw new CollosionException("the player is inside the object");
         }
-        if (((Math.abs(obj.getx() - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - obj.getx()) < dist)) && ((Math.abs(obj.gety() - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - obj.gety()) < dist))) {
+        if (((Math.abs(obj.getx() - plr.getPosx()) < dist) || (Math.abs(plr.getPosx() - obj.getx()) < dist))
+                && ((Math.abs(obj.gety() - plr.getPosy()) < dist) || (Math.abs(plr.getPosy() - obj.gety()) < dist))) {
 
             plr.setPosx(plr.getLastx());
             plr.setPosy(plr.getLasty());

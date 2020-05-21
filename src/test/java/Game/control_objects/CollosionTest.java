@@ -1,5 +1,7 @@
 package Game.control_objects;
 
+import Game.game_objects.Bear;
+import Game.game_objects.Entity;
 import Game.game_objects.Player;
 import Game.game_objects.TreeObject;
 import javafx.scene.image.ImageView;
@@ -35,7 +37,7 @@ public class CollosionTest {
     public void tearDown() {
     }
 
-    @Test //Controller controller, Player plr, Entity obj
+    @Test //Player plr, Entity obj
     public void testCollosion_detection_Should_Throw_collosion_exception_if_playerpos_and_objpos_is_equal() {
         // Given
         Player plr = player;
@@ -49,6 +51,22 @@ public class CollosionTest {
             undertest.Collosion_detection(plr, obj);
         });
         assertEquals("the player is inside the object", exception.getMessage());
+    }
+    @Test
+    public void testCollosion_with_obj_a_bear() throws CollosionException {
+        Player plr = player;
+        ImageView bear_fig = new ImageView();
+        AnchorPane entity_pane = new AnchorPane();
+        Bear bear = new Bear(730, 314, bear_fig, entity_pane);
+        plr.setPosx(0);
+        plr.setPosy(0);
+        plr.setLastx(5);
+        plr.setLasty(5);
+        bear.setx(1);
+        bear.sety(1);
+        assertFalse( undertest.Collosion_detection(plr, bear));
+        assertEquals(5,plr.getPosx());
+        assertEquals(5,plr.getPosy());
     }
 
     // public static boolean Collosion_tp(Player plr)
