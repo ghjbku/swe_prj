@@ -42,6 +42,14 @@ public class GateEventTest {
         assertEquals(1, undertest.Gate_crossroad(player));
     }
 
+    @Test
+    public void testPlayer_fought_ret_1(){
+        player.setFought(true);
+        undertest.setcounter(5);
+        assertEquals(5,undertest.getcounter());
+        assertEquals(1,undertest.Gate_crossroad(player));
+    }
+
 
 
 
