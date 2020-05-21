@@ -22,9 +22,13 @@ public class Item {
     public String getName() {
         return name;
     }
-
     public int getid() {
         return id;
     }
+
+    public void setname(String n){name=n;}
+    public void setid(int i){id=i;}
+    public void setx(int value){x=value;}
+    public void sety(int value){y=value;}
 
 }
