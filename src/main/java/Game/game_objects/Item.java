@@ -27,11 +27,4 @@ public class Item {
         return id;
     }
 
-    public int getx() {
-        return x;
-    }
-
-    public int gety() {
-        return y;
-    }
 }
