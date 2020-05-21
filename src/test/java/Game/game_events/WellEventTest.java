@@ -42,6 +42,37 @@ public class WellEventTest {
         assertEquals(0, undertest.Well_crossroad(player));
     }
 
+    @Test
+    public void testWellEvent_false_branch(){
+        ArrayList<Item> item = player.getItems();
+        item.add(new Item("dagger", 0, 0, 0));
+        player.setItems(item);
+        //items size 1, not Rope
+        assertEquals(-1,undertest.Well_crossroad(player));
+
+        item.add(new Item("Note",1,0,0));
+        player.setItems(item);
+        //items size 2, none is Rope
+        assertEquals(-1,undertest.Well_crossroad(player));
+
+        item.remove(1);
+        item.add(new Item("Rope",2,0,0));
+        player.setItems(item);
+        //items size 2, one of them is rope
+        assertEquals(1,undertest.Well_crossroad(player));
+
+        item.add(new Item("Note",1,0,0));
+        player.setItems(item);
+        //items size 3, one of them is rope
+        assertEquals(1,undertest.Well_crossroad(player));
+
+        item.remove(1);
+        item.add(new Item("Dogsh*t",11,0,0));
+        player.setItems(item);
+        //item size is 3, but none is rope
+        assertEquals(-1,undertest.Well_crossroad(player));
+    }
+
 
 
 
