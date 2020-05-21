@@ -1507,7 +1507,7 @@ public class ForestController implements Initializable {
                     is_gate_event = true;
                     setpane();
                     setpic(event_fig, "city");
-                    eventfig_scale(1.7);
+                    eventfig_scale(1.9);
                     set_gate_event();
                 } else if (gateEvent.Gate_crossroad(player) == -1) {
                     logger.info("its -1 bruh");
@@ -1550,7 +1550,6 @@ public class ForestController implements Initializable {
                     end_stuff("Okay, you can come in then.\nHurry before another beast appears!");
                     setTpReady(true);
                 } else if (option == 2) {
-                   raiseScore();
                 }
                 break;
             case 1:
