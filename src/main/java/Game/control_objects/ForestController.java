@@ -2,6 +2,7 @@ package Game.control_objects;
 
 import Game.Game;
 import Game.game_events.Fight;
+import Game.game_events.GateEvent;
 import Game.game_events.SignEvent;
 import Game.game_events.WellEvent;
 import Game.game_objects.*;
@@ -35,11 +36,12 @@ public class ForestController implements Initializable {
     private boolean isset = false;
     private boolean tpready = false;
     private boolean can_move = true;
-    private boolean is_fight_event = false, is_sign_event = false, is_well_event = false;
+    private boolean is_fight_event = false, is_sign_event = false, is_well_event = false, is_gate_event = false;
     private Bear bear;
     private Fight fight = new Fight();
     private SignEvent signevent = new SignEvent();
     private WellEvent wellevent = new WellEvent();
+    private GateEvent gateEvent = new GateEvent();
     private XmlMethods xml_methods = new XmlMethods();
     private CityController cityController = new CityController();
     private Inventory inv = new Inventory(player);
@@ -376,21 +378,25 @@ public class ForestController implements Initializable {
         close_inventory();
     }
 
-    //todo
     public void open_inventory() {
         getInventory().setVisible(true);
 
         if (player.getItems().size() == 0) {
-        }
-        else if (player.getItems().size() == 1) {
+        } else if (player.getItems().size() == 1) {
             logger.info("slot id 0: " + inv.getslot(0));
             if (player.getitem(0).getid() == 1) {
                 getNote_fig().setImage(null);
                 getNote_fig_inv().setVisible(true);
-            } else if (player.getitem(1).getid() == 1) {
+            } else if (player.getitem(0).getid() == 0) {
+                getDagger_fig().setImage(null);
+                getDagger_fig_inv().setVisible(true);
+            }
+        } else if (player.getItems().size() == 2) {
+            logger.info("slot id 0: " + inv.getslot(0) + " slot id 1: " + inv.getslot(1));
+            if (player.getitem(0).getid() == 1) {
                 getNote_fig().setImage(null);
                 getNote_fig_inv().setVisible(true);
-            } else if (player.getitem(2).getid() == 1) {
+            } else if (player.getitem(1).getid() == 1) {
                 getNote_fig().setImage(null);
                 getNote_fig_inv().setVisible(true);
             }
@@ -400,12 +406,8 @@ public class ForestController implements Initializable {
             } else if (player.getitem(1).getid() == 0) {
                 getDagger_fig().setImage(null);
                 getDagger_fig_inv().setVisible(true);
-            } else if (player.getitem(2).getid() == 0) {
-                getDagger_fig().setImage(null);
-                getDagger_fig_inv().setVisible(true);
             }
-        }
-        else if (player.getItems().size() > 2) {
+        } else if (player.getItems().size() > 2) {
             logger.info("slot id 0: " + inv.getslot(0) + ", slot id 1: " + inv.getslot(1) + ", slot id 2: " + inv.getslot(2));
 
             if ((player.getitem(1).getid() == 1 && player.getitem(0).getid() == 0) ||
@@ -481,6 +483,9 @@ public class ForestController implements Initializable {
      * method that checks if the player's itemlist contains the items on the map, and if it does, makes the items disappear
      */
     private void isThere() {
+        if (player.getFought()) {
+            bear_fig.setVisible(false);
+        }
 
         if (player.getItems().isEmpty()) {
             return;
@@ -950,7 +955,6 @@ public class ForestController implements Initializable {
      */
     private void change_to_city() throws FileNotFoundException, JAXBException, URISyntaxException {
         if (Collosion.Collosion_tp(player)) {
-            setTpReady(true);
             if (tpready && player.getFought()) {
                 cityController.load_city(Game.getPrimarystage());
             }
@@ -984,6 +988,10 @@ public class ForestController implements Initializable {
             theWellEvent(wellevent.getcounter(), 1);
             wellevent.setcounter(wellevent.getcounter() + 1);
         }
+        if (is_gate_event) {
+            theGateEvent(gateEvent.getcounter(), 1);
+            gateEvent.setcounter(gateEvent.getcounter() + 1);
+        }
         if (is_fight_event) {
             logger.info("im here,inside fight");
             thefight(fight.getcounter(), 1);
@@ -1006,6 +1014,9 @@ public class ForestController implements Initializable {
         } else if (is_well_event) {
             theWellEvent(wellevent.getcounter(), 2);
             wellevent.setcounter(wellevent.getcounter() + 1);
+        } else if (is_gate_event) {
+            theGateEvent(gateEvent.getcounter(), 2);
+            gateEvent.setcounter(gateEvent.getcounter() + 1);
         } else if (is_fight_event) {
             thefight(fight.getcounter(), 2);
             fight_done(fight.getcounter());
@@ -1086,6 +1097,24 @@ public class ForestController implements Initializable {
                 }
             }
             if (wellevent.getcounter() >= 55) {
+                System.exit(0);
+            }
+
+        } else if (is_gate_event) {
+            if (gateEvent.getcounter() == -1) {
+                text_pane.setVisible(false);
+                event_fig.setVisible(false);
+                is_gate_event = false;
+                gateEvent.setcounter(0);
+            }
+            if (gateEvent.getcounter() > 0 && gateEvent.getcounter() < 54) {
+                if (text_pane.isVisible()) {
+                    text_pane.setVisible(false);
+                    event_fig.setVisible(false);
+                    is_gate_event = false;
+                }
+            }
+            if (gateEvent.getcounter() >= 55) {
                 System.exit(0);
             }
 
@@ -1230,7 +1259,7 @@ public class ForestController implements Initializable {
 
     private void start_well_event() {
         if (Collosion.Collosion_well(player)) {
-            logger.info("counter in well event: "+wellevent.getcounter());
+            logger.info("counter in well event: " + wellevent.getcounter());
             if (wellevent.Well_crossroad(player) == -1) {
 
                 get_text_pane().setDisable(false);
@@ -1379,7 +1408,7 @@ public class ForestController implements Initializable {
                 setText_pane_text("You just follow the 'road' forward...\n" +
                         "This time it doesn't take long until you reach a big 'room'. As you look around you see\n" +
                         "A skeleton, but it's different than the other one...as it's dead?\n" +
-                        "Well laying next to it is a bow with a few arrows.");
+                        "Well laying next to it is a bow ,but there are no arrows.");
                 setOption1("well...take it?");
                 getOption2().setVisible(false);
                 getOption3().setVisible(false);
@@ -1401,7 +1430,7 @@ public class ForestController implements Initializable {
             case 5:
                 if (option == 1) {
                     raiseScore();
-                    end_stuff("You take the bow, and as soon as the bow is in your hands, the walls behind the skeleton\n" +
+                    end_stuff("You take the bow, and as soon as you get the bow into your hands, the walls behind the skeleton\n" +
                             "suddenly start moving and reveal a path, which seems to go back to where you came from, above the ground.");
                     player.setWellevent_done(true);
                     wellevent_take_rope_give_bow();
@@ -1447,6 +1476,98 @@ public class ForestController implements Initializable {
     }
 
 
+    //sign event stuff
+
+    /**
+     * method to start the event when the player collides with the sign near the pond.
+     */
+    private void start_gate_event() {
+            if (Collosion.Collosion_tp(player)) {
+                logger.info("counter in gate event: " + gateEvent.getcounter());
+                if (gateEvent.Gate_crossroad(player) == 0) {
+
+                    get_text_pane().setDisable(false);
+                    can_move = false;
+                    is_gate_event = true;
+                    event_fig.setVisible(true);
+                    setpic(event_fig, "city");
+                    eventfig_scale(1.6);
+                    getOption1().setVisible(true);
+                    getOption2().setVisible(false);
+                    getOption3().setVisible(false);
+                    getOption4().setVisible(false);
+                    get_text_pane().setVisible(true);
+                    setText_pane_text("You reach the city gates, but they won't open it for you\n" +
+                            "The city guard opens a small window and tells you:\n" +
+                            "'We can't let you in until the bear is gone... It might rush in the moment the gate is open...'");
+                    setOption1("wonderful...");
+                    gateEvent.setcounter(-5);
+
+                } else if (gateEvent.Gate_crossroad(player) == 1) {
+                    is_gate_event = true;
+                    setpane();
+                    setpic(event_fig, "city");
+                    eventfig_scale(1.7);
+                    set_gate_event();
+                } else if (gateEvent.Gate_crossroad(player) == -1) {
+                    logger.info("its -1 bruh");
+                }
+            }
+    }
+    private void set_gate_event(){
+        getOption1().setVisible(true);
+        getOption2().setVisible(true);
+        getOption3().setVisible(false);
+        getOption4().setVisible(false);
+        setText_pane_text("You finally came back after the bear is dealt with...\n" +
+                "The guard opens the window and asks you if the bear is gone, and tells you that\n" +
+                "he won't open the gate unless you deal with it.\nYou tell him that:");
+        setOption1("'Yeah,he bear is gone for good...'");
+        setOption2("'Nah, it's not dead yet.(Lie)'");
+    }
+    private void theGateEvent(int round_counter, int option) throws FileNotFoundException, JAXBException {
+        switch (round_counter) {
+            case -5:
+                if (option == 1) {
+                    gateEvent.setcounter(-2);
+                    end_stuff("Go and kill the bear boss!");
+                    player.setPosx(749);
+                    player_fig.setLayoutX(player.getPosx());
+                    player.setPosy(49);
+                    player_fig.setLayoutY(player.getPosy());
+                }
+                break;
+
+            case 0:
+                logger.debug("case 0");
+                setText_pane_text("You decide to lie...\n" +
+                        "You probably have a good reason for doing so...\n" +
+                        "Maybe didn't do the other events yet?");
+                setOption1("I'll be back soon!");
+                getOption2().setVisible(false);
+                if (option == 1) {
+                    raiseScore();
+                    end_stuff("Okay, you can come in then.\nHurry before another beast appears!");
+                    setTpReady(true);
+                } else if (option == 2) {
+                   raiseScore();
+                }
+                break;
+            case 1:
+                logger.debug("case 1");
+                if (option == 1) {
+                    gateEvent.setcounter(-2);
+                    end_stuff("Go and kill that bear already!");
+                    player.setPosx(749);
+                    player_fig.setLayoutX(player.getPosx());
+                    player.setPosy(49);
+                    player_fig.setLayoutY(player.getPosy());
+                }
+                break;
+        }
+    }
+
+
     //start of fight_event stuff
 
 
@@ -1461,14 +1582,16 @@ public class ForestController implements Initializable {
             is_fight_event = true;
 
             if (fight.Fight_crossroad(player) == -1) {
+                logger.info("start fight after collosion, returned -1");
                 setpic(event_fig, "b");
                 no_weapon();
             } else if (fight.Fight_crossroad(player) == 0) {
-                logger.info("its inside fight");
+                logger.info("start fight after collosion, returned 0");
                 setpane();
                 setpic(event_fig, "b");
                 start_fight();
             } else if (fight.Fight_crossroad(player) == 1) {
+                logger.info("start fight after collosion, returned 1: already fought!");
             }
         }
     }
@@ -1685,6 +1808,7 @@ public class ForestController implements Initializable {
         Collosion.Collosion_detection_item(this, player);
         start_sign_event();
         start_well_event();
+        start_gate_event();
         change_to_city();
 
         //collosion detection between trees and player

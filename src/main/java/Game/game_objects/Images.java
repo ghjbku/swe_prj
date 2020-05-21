@@ -20,6 +20,8 @@ public class Images {
     private Image sign_image = new Image(sign_img.toExternalForm());
     URL well_img = new URL(getClass().getResource("/Game/pics/well.png").toExternalForm());
     private Image well_image = new Image(well_img.toExternalForm());
+    URL city_img = new URL(getClass().getResource("/Game/pics/city.png").toExternalForm());
+    private Image city_image = new Image(city_img.toExternalForm());
 
     public Image getimage(String str) {
         if (str.equals("p")) {
@@ -33,6 +35,9 @@ public class Images {
         }
         else if (str.equals("well")) {
             return well_image;
+        }
+        else if (str.equals("city")) {
+            return city_image;
         }
         return null;
     }
