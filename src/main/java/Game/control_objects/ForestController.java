@@ -484,11 +484,22 @@ public class ForestController implements Initializable {
      * method that gets called when the player collides with an item, then calls the raiseScore and isThere methods.
      *
      * @throws FileNotFoundException throws if the xml does not exists.
-     * @throws JAXBException
+     * @throws JAXBException throws if there is a problem with the xml file.
      */
     public void setcollided() throws FileNotFoundException, JAXBException {
         raiseScore();
         isThere();
+    }
+
+    /**
+     * called when the player collides with an item.
+     * @throws FileNotFoundException throws if the xml does not exists.
+     * @throws JAXBException throws if there is a problem with the xml file.
+     */
+    public void plr_collided_with_item() throws FileNotFoundException, JAXBException {
+        if (Collosion.Collosion_detection_item(player)){
+            setcollided();
+        }
     }
 
     /**
@@ -1901,7 +1912,7 @@ public class ForestController implements Initializable {
 
 
         //collosion detection between items and player
-        Collosion.Collosion_detection_item(this, player);
+        plr_collided_with_item();
         start_sign_event();
         start_well_event();
         start_gate_event();

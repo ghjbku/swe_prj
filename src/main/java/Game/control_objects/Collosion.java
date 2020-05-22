@@ -54,16 +54,10 @@ public class Collosion {
     }
 
     /**
-     * method that checks if the player collides with an item, adds them into the player's item data
-     * and calls the setcollided method of the ForestController class
-     *
-     * @param forestController
-     * @param plr              the player
-     * @throws FileNotFoundException the xml file is not found
-     * @throws JAXBException         problem with the xml save/load
-     * @throws MalformedURLException url wrong
+     * method that checks if the player collides with an item, adds them into the player's item data.
+     * @param plr the player.
      */
-    public static void Collosion_detection_item(ForestController forestController, Player plr) throws FileNotFoundException, JAXBException, MalformedURLException {
+    public static boolean Collosion_detection_item(Player plr) {
         final int d_x = 65, d_y = 216;
         final int n_x = 475, n_y = 16;
         if
@@ -77,7 +71,7 @@ public class Collosion {
                 logger.trace("item added");
                 item.add(new Item("dagger", 0, d_x, d_y));
                 plr.setItems(item);
-                forestController.setcollided();
+                return true;
             } else if (item.size() == 1) {
                 if (item.get(0).getid() == 0) {
                 } else if ((item.get(0).getid() == 1) ||
@@ -86,7 +80,7 @@ public class Collosion {
                     logger.trace("item added");
                     item.add(new Item("dagger", 0, d_x, d_y));
                     plr.setItems(item);
-                    forestController.setcollided();
+                    return true;
 
                 }
             } else if (item.size() == 2) {
@@ -96,9 +90,10 @@ public class Collosion {
                     logger.trace("item added");
                     item.add(new Item("dagger", 0, d_x, d_y));
                     plr.setItems(item);
-                    forestController.setcollided();
+                    return true;
                 }
             } else if (item.size() > 2) {
+                return false;
             }
 
         } else if (
@@ -111,14 +106,14 @@ public class Collosion {
                 logger.trace("item added");
                 item.add(new Item("Note", 1, n_x, n_y));
                 plr.setItems(item);
-                forestController.setcollided();
+                return true;
             } else if (item.size() == 1) {
                 if (item.get(0).getid() == 1) {
                 } else if ((item.get(0).getid() == 0) || (item.get(0).getid() == 2)) {
                     logger.trace("item added");
                     item.add(new Item("Note", 1, n_x, n_y));
                     plr.setItems(item);
-                    forestController.setcollided();
+                    return true;
                 }
             } else if (item.size() == 2) {
                 if (item.get(0).getid() == 1 || item.get(1).getid() == 1) {
@@ -127,12 +122,15 @@ public class Collosion {
                     logger.trace("item added");
                     item.add(new Item("Note", 1, n_x, n_y));
                     plr.setItems(item);
-                    forestController.setcollided();
+                    return true;
+
                 }
             } else if (item.size() > 2) {
+                return false;
             }
 
         }
+        return false;
     }
 
     /**

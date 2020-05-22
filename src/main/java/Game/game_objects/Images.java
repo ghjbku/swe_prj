@@ -1,7 +1,6 @@
 package Game.game_objects;
 
 import javafx.scene.image.Image;
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
