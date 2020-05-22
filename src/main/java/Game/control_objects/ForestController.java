@@ -372,7 +372,6 @@ public class ForestController implements Initializable {
         fig.setImage(images.getimage(str));
     }
 
-
     //inventory related stuff
 
 
@@ -1037,6 +1036,11 @@ public class ForestController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //init player data
+        try {
+            load();
+        } catch (JAXBException|FileNotFoundException e) {
+           logger.error("error : "+e);
+        }
 
         //initializing trees
         inittrees();
