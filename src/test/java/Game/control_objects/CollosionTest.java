@@ -1,9 +1,6 @@
 package Game.control_objects;
 
-import Game.game_objects.Bear;
-import Game.game_objects.Entity;
-import Game.game_objects.Player;
-import Game.game_objects.TreeObject;
+import Game.game_objects.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.junit.jupiter.api.AfterEach;
@@ -11,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,6 +50,84 @@ public class CollosionTest {
         });
         assertEquals("the player is inside the object", exception.getMessage());
     }
+
+    @Test
+    public void testCollosion_with_dagger(){
+        final int d_x = 65, d_y = 216;
+        Player plr = player;
+        ArrayList<Item> itemek=plr.getItems();
+
+        plr.setPosx(64);
+        plr.setPosy(215);
+        //itemsize 0, player "collides" with the dagger
+        assertTrue(undertest.Collosion_detection_item(plr));
+        System.out.println("size:"+plr.getItems().size());
+
+        itemek.remove(0);
+        Item random_item = new Item();
+        random_item.setname("stuff");
+        random_item.setid(1);
+        random_item.setx(0);
+        random_item.sety(0);
+        itemek.add(random_item);
+        plr.setItems(itemek);
+        //itemsize 1, not dagger
+        assertTrue(undertest.Collosion_detection_item(plr));
+        System.out.println("size:"+plr.getItems().size());
+
+        //itemsize 1, is dagger, doesnt return anything
+        itemek.remove(0);
+        itemek.remove(0);
+        itemek.add(new Item("dagger",0,0,0));
+        plr.setItems(itemek);
+        System.out.println("size:"+plr.getItems().size());
+
+        //itemsize 2, has dagger in it... doesnt return anything
+        itemek.add(random_item);
+        plr.setItems(itemek);
+        System.out.println("size:"+plr.getItems().size());
+
+        itemek.remove(0);
+        itemek.add(new Item("Note",2,0,0));
+        plr.setItems(itemek);
+        //itemsize 2, no dagger
+        assertTrue(undertest.Collosion_detection_item(plr));
+
+    }
+
+    @Test
+    public void testCollosion_with_note(){
+        final int n_x = 475, n_y = 16;
+
+        Player plr = player;
+        ArrayList<Item> itemek=plr.getItems();
+
+        plr.setPosx(n_x-1);
+        plr.setPosy(n_y-1);
+        System.out.println("size:"+plr.getItems().size());
+        //collosion with note, 0 itemsize
+        assertTrue(undertest.Collosion_detection_item(plr));
+        //now the itemsize is 1 and it is the note, it returns nothing
+        System.out.println("size:"+plr.getItems().size());
+
+        itemek.remove(0);
+        itemek.add(new Item("asd",0,0,0));
+        plr.setItems(itemek);
+        System.out.println("size:"+plr.getItems().size());
+        //itemsize 1, its not the note
+        assertTrue(undertest.Collosion_detection_item(plr));
+        //now the itemsize is 2, one of them is the note
+
+        itemek.remove(1);
+        itemek.add(new Item("asd2",2,0,0));
+        plr.setItems(itemek);
+        //itemsize 2, not the note
+        assertTrue(undertest.Collosion_detection_item(plr));
+        System.out.println("size:"+plr.getItems().size());
+        //itemsize3
+        assertFalse(undertest.Collosion_detection_item(plr));
+    }
+
     @Test
     public void testCollosion_with_obj_a_bear() throws CollosionException {
         Player plr = player;
