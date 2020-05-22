@@ -6,7 +6,8 @@ To run the project:
     mvn clean javafx:compile
     mvn javafx:run
     
-#source of pictures
+* source of pictures
+ 
  
  city:
  https://www.pinterest.at/pin/355995545533441285/
@@ -27,7 +28,9 @@ drawn on it
 bear_image:
 https://www.pinterest.com/pin/544513411169890481/
 
-#source of musics
+
+* source of musics
+
 
 Musics provided by No Copyright Music:
 https://www.youtube.com/c/royaltyfreezone
