@@ -1005,21 +1005,25 @@ public class ForestController implements Initializable {
                 musicplayer.dispose();
                 musicplayer = music_init("gate");
                 musicplayer.setAutoPlay(true);
+                musicplayer.setVolume(0.5);
         } else if (is_fight_event) {
             logger.trace("in is_fight");
             musicplayer.dispose();
             musicplayer = music_init("battle");
             musicplayer.setAutoPlay(true);
+            musicplayer.setVolume(0.3);
         } else if (is_sign_event) {
             logger.trace("in is_sign");
             musicplayer.dispose();
             musicplayer = music_init("sign");
             musicplayer.setAutoPlay(true);
+            musicplayer.setVolume(0.5);
         } else if (is_well_event) {
             logger.trace("in is_Well");
             musicplayer.dispose();
             musicplayer = music_init("well");
             musicplayer.setAutoPlay(true);
+            musicplayer.setVolume(0.5);
         }
 
         musicplayer.setOnEndOfMedia(new Runnable() {
