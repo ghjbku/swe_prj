@@ -1,6 +1,8 @@
 package Game.game_window;
 
 import Game.Game;
+import Game.control_objects.ForestController;
+import Game.game_objects.Player;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +17,7 @@ import java.io.IOException;
 public class ForestScene {
     private static Logger logger = LoggerFactory.getLogger(ForestScene.class);
     private static Scene game_scene;
+    private Game game=new Game();
 
     static {
         try {
@@ -27,7 +30,7 @@ public class ForestScene {
     /**
      * default constructor for the class
      */
-    public ForestScene() {
+    public ForestScene() throws IOException {
     }
 
     /**

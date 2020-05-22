@@ -15,14 +15,13 @@ import java.util.ArrayList;
  */
 public class Collosion {
     private static Logger logger = LoggerFactory.getLogger(Collosion.class);
-
     private static int dist = 10;
-    private CityController cityController = new CityController();
+
 
     /**
      * default constructor for the class
      */
-    public Collosion() throws MalformedURLException {
+    public Collosion() {
     }
 
     /**
@@ -55,6 +54,7 @@ public class Collosion {
 
     /**
      * method that checks if the player collides with an item, adds them into the player's item data.
+     *
      * @param plr the player.
      */
     public static boolean Collosion_detection_item(Player plr) {

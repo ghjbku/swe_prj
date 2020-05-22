@@ -31,11 +31,8 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     private static Logger logger = LoggerFactory.getLogger(Game.class);
     private static Stage primarystage;
     private XmlMethods xml_methods = new XmlMethods();
-    private ForestController forestController = new ForestController();
     //for later
     // CityController cityController = new CityController();
-
-
     private Scene game_scene = ForestScene.getGame_scene();
     private Button btnSubmit = new Button("Submit name"), btn_loaddata = new Button("Continue");
     private Button btnDone = new Button("Start");
@@ -43,8 +40,6 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     private Player player;
     private Label lbl_gender;
     static ArrayList<Item> item = new ArrayList<Item>();
-
-
     private TextField tfName;
     private RadioButton male = new RadioButton("Male?");
     private boolean isset = false;
@@ -94,7 +89,6 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     public void start_game() throws IOException, JAXBException {
         savetoxml();
         logger.trace("starting the game now...");
-        forestController.setPlayer(player);
         primarystage.setResizable(false);
         primarystage.setScene(game_scene);
         primarystage.show();
@@ -153,6 +147,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     public static Stage getPrimarystage() {
         return primarystage;
     }
+    public Player getPlayer(){return player;}
 
 
     @Override

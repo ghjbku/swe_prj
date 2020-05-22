@@ -22,6 +22,7 @@ import javafx.util.Duration;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -35,9 +36,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ForestController implements Initializable {
     //variables
     private static Logger logger = LoggerFactory.getLogger(ForestController.class);
-    private static Player player;
+    private Game game = new Game();
     private int incr = 2;
-    private boolean isset = false,is_common=false;
+    private boolean isset = false, is_common = false;
     private boolean tpready = false;
     private boolean can_move = true;
     private boolean is_fight_event = false, is_sign_event = false, is_well_event = false, is_gate_event = false;
@@ -47,6 +48,7 @@ public class ForestController implements Initializable {
     private WellEvent wellevent = new WellEvent();
     private GateEvent gateEvent = new GateEvent();
     private XmlMethods xml_methods = new XmlMethods();
+    private Player player = new Player();
     private CityController cityController = new CityController();
     private Inventory inv = new Inventory(player);
     private Images images = new Images();
@@ -241,7 +243,7 @@ public class ForestController implements Initializable {
     /**
      * default constructor for the class.
      */
-    public ForestController() throws MalformedURLException {
+    public ForestController() throws IOException {
     }
 
 
@@ -251,7 +253,7 @@ public class ForestController implements Initializable {
      * method that uses the <code>XmlMethods</code> class as its base to save the playerdata into the xml file.
      *
      * @throws FileNotFoundException throws if the xml does not exists.
-     * @throws JAXBException
+     * @throws JAXBException         throws if there is an error with the xml.
      */
     @FXML
     private void save() throws FileNotFoundException, JAXBException {
@@ -262,13 +264,12 @@ public class ForestController implements Initializable {
      * method that uses the <code>XmlMethods</code> class as its base to load the playerdata from the xml file.
      *
      * @throws FileNotFoundException throws if the xml does not exists.
-     * @throws JAXBException
+     * @throws JAXBException         throws if there is an error with the xml.
      */
     @FXML
     public void load() throws JAXBException, FileNotFoundException {
         Player loadplayer = xml_methods.load();
         logger.trace(loadplayer.getName());
-        setname();
         isset = true;
         if (loadplayer.getgender().equals("male")) {
             setpic(player_fig, "p");
@@ -276,7 +277,7 @@ public class ForestController implements Initializable {
         if (loadplayer.getFought()) {
             bear_fig.setVisible(false);
         }
-        player = loadplayer;
+        setPlayer(loadplayer);
         player_fig.setLayoutX(player.getPosx());
         player_fig.setLayoutY(player.getPosy());
         score_label.setText(String.valueOf(player.getscore()));
@@ -348,11 +349,22 @@ public class ForestController implements Initializable {
      * writes the name and gender of the player into the game.
      */
     @FXML
-    private void setname() {
+    private void setname() throws JAXBException, FileNotFoundException {
         if (isset == false) {
-            playername_label.setText(playername + ", " + player.getgender());
+            load();
             isset = true;
         }
+    }
+
+    /**
+     * method to set the player.
+     *
+     * @param player2 player object .
+     */
+    private void setPlayer(Player player2) {
+        player = player2;
+        playername = player.getName();
+        playername_label.setText(playername + ", " + player.getgender());
     }
 
     @FXML
@@ -442,19 +454,6 @@ public class ForestController implements Initializable {
         getDagger_desc().setVisible(false);
     }
 
-
-    /**
-     * method to set the main Scene's player to this scene.
-     *
-     * @param player2 player object from the Game class
-     */
-    public void setPlayer(Player player2) {
-        player = player2;
-        playername = player.getName();
-        playername_label.setText(playername + ", " + player.getgender());
-        boolean isok = true;
-    }
-
     /**
      * a constructor for TreeObject objects, that uses the getTree function as its return value.
      *
@@ -484,7 +483,7 @@ public class ForestController implements Initializable {
      * method that gets called when the player collides with an item, then calls the raiseScore and isThere methods.
      *
      * @throws FileNotFoundException throws if the xml does not exists.
-     * @throws JAXBException throws if there is a problem with the xml file.
+     * @throws JAXBException         throws if there is a problem with the xml file.
      */
     public void setcollided() throws FileNotFoundException, JAXBException {
         raiseScore();
@@ -493,11 +492,12 @@ public class ForestController implements Initializable {
 
     /**
      * called when the player collides with an item.
+     *
      * @throws FileNotFoundException throws if the xml does not exists.
-     * @throws JAXBException throws if there is a problem with the xml file.
+     * @throws JAXBException         throws if there is a problem with the xml file.
      */
     public void plr_collided_with_item() throws FileNotFoundException, JAXBException {
-        if (Collosion.Collosion_detection_item(player)){
+        if (Collosion.Collosion_detection_item(player)) {
             setcollided();
         }
     }
@@ -971,19 +971,19 @@ public class ForestController implements Initializable {
 
 
         if (name.equals("battle")) {
-            mp=new MediaPlayer(battlemusic);
+            mp = new MediaPlayer(battlemusic);
             return mp;
         } else if (name.equals("common")) {
-            mp=new MediaPlayer(media);
+            mp = new MediaPlayer(media);
             return mp;
         } else if (name.equals("well")) {
-            mp=new MediaPlayer(Wellmusic);
+            mp = new MediaPlayer(Wellmusic);
             return mp;
         } else if (name.equals("gate")) {
-            mp=new MediaPlayer(Gatemusic);
+            mp = new MediaPlayer(Gatemusic);
             return mp;
         } else if (name.equals("sign")) {
-            mp=new MediaPlayer(Signmusic);
+            mp = new MediaPlayer(Signmusic);
             return mp;
         }
         return null;
@@ -993,19 +993,19 @@ public class ForestController implements Initializable {
      * a method that plays the music.
      */
     private void setMusic_for_events() {
-        if (!is_common){
+        if (!is_common) {
             musicplayer = music_init("common");
             musicplayer.setAutoPlay(true);
             musicplayer.setVolume(0.5);
-            is_common=true;
+            is_common = true;
         }
 
         if (is_gate_event) {
             logger.trace("in is_gate");
-                musicplayer.dispose();
-                musicplayer = music_init("gate");
-                musicplayer.setAutoPlay(true);
-                musicplayer.setVolume(0.5);
+            musicplayer.dispose();
+            musicplayer = music_init("gate");
+            musicplayer.setAutoPlay(true);
+            musicplayer.setVolume(0.5);
         } else if (is_fight_event) {
             logger.trace("in is_fight");
             musicplayer.dispose();
@@ -1036,6 +1036,8 @@ public class ForestController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //init player data
+
         //initializing trees
         inittrees();
 
@@ -1059,7 +1061,7 @@ public class ForestController implements Initializable {
     private void change_to_city() throws FileNotFoundException, JAXBException, URISyntaxException {
         if (Collosion.Collosion_tp(player)) {
             if (tpready && player.getFought()) {
-                cityController.load_city(Game.getPrimarystage());
+                cityController.load_city(game.getPrimarystage());
             }
         }
     }
@@ -1180,7 +1182,7 @@ public class ForestController implements Initializable {
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
                     is_sign_event = false;
-                    is_common=false;
+                    is_common = false;
                 }
             }
             if (signevent.getcounter() > 54) {
@@ -1192,14 +1194,14 @@ public class ForestController implements Initializable {
                 event_fig.setVisible(false);
                 is_well_event = false;
                 wellevent.setcounter(0);
-                is_common=false;
+                is_common = false;
             }
             if (wellevent.getcounter() > 0 && wellevent.getcounter() < 54) {
                 if (text_pane.isVisible()) {
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
                     is_well_event = false;
-                    is_common=false;
+                    is_common = false;
                 }
             }
             if (wellevent.getcounter() >= 55) {
@@ -1212,14 +1214,14 @@ public class ForestController implements Initializable {
                 event_fig.setVisible(false);
                 is_gate_event = false;
                 gateEvent.setcounter(0);
-                is_common=false;
+                is_common = false;
             }
             if (gateEvent.getcounter() > 0 && gateEvent.getcounter() < 54) {
                 if (text_pane.isVisible()) {
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
                     is_gate_event = false;
-                    is_common=false;
+                    is_common = false;
                 }
             }
             if (gateEvent.getcounter() >= 55) {
@@ -1232,7 +1234,7 @@ public class ForestController implements Initializable {
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
                     is_fight_event = false;
-                    is_common=false;
+                    is_common = false;
                 }
             }
             if (fight.getcounter() > 54) {

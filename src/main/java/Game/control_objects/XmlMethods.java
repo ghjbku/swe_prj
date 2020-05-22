@@ -23,14 +23,13 @@ public class XmlMethods {
     /**
      * method to save the player's data into an xml file, outside of the jar
      *
-     * @param player the player object to save into the xml
+     * @param plr the player object to save into the xml
      * @throws JAXBException         if there is an error with the xml file
      * @throws FileNotFoundException if the file does not exist
      */
-    public void save(Player player) throws FileNotFoundException, JAXBException {
-
-        JAXBHelper.toXML(player, System.out);
-        JAXBHelper.toXML(player, new FileOutputStream(file.getParent() + "/player_data.xml"));
+    public void save(Player plr) throws FileNotFoundException, JAXBException {
+        JAXBHelper.toXML(plr, System.out);
+        JAXBHelper.toXML(plr, new FileOutputStream(file.getParent() + "/player_data.xml"));
     }
 
     /**
@@ -42,4 +41,5 @@ public class XmlMethods {
     public Player load() throws JAXBException, FileNotFoundException {
         return JAXBHelper.fromXML(Player.class, new FileInputStream(file.getParent() + "/player_data.xml"));
     }
+
 }
