@@ -6,7 +6,7 @@ To run the project:
     mvn clean javafx:compile
     mvn javafx:run
     
- #source of pictures
+#source of pictures
  
  city:
  https://www.pinterest.at/pin/355995545533441285/
