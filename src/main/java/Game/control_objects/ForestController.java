@@ -1227,7 +1227,7 @@ public class ForestController implements Initializable {
             }
 
         } else if (is_fight_event) {
-            if (fight.getcounter() >= 10 && fight.getcounter() < 55) {
+            if (fight.getcounter() >= 9 && fight.getcounter() < 55) {
                 if (text_pane.isVisible()) {
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
