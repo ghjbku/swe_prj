@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javafx.util.Duration;
+
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
@@ -36,7 +37,7 @@ public class ForestController implements Initializable {
     private static Logger logger = LoggerFactory.getLogger(ForestController.class);
     private static Player player;
     private int incr = 2;
-    private boolean isset = false;
+    private boolean isset = false,is_common=false;
     private boolean tpready = false;
     private boolean can_move = true;
     private boolean is_fight_event = false, is_sign_event = false, is_well_event = false, is_gate_event = false;
@@ -431,6 +432,7 @@ public class ForestController implements Initializable {
             }
         }
     }
+
     /**
      * method that runs when the player closes the inventory.
      */
@@ -945,63 +947,76 @@ public class ForestController implements Initializable {
 
     /**
      * function that is dealing with initializing the musics and returns the chosen one.
+     *
      * @param name the name of the music you want the function to return
      */
-    private Media music_init(String name){
-       Media media= new Media(getClass().getResource("/Game/music/Guardians.mp3").toExternalForm());
-       Media battlemusic=new Media(getClass().getResource("/Game/music/t_f_a_w.mp3").toExternalForm());
-       Media Wellmusic=new Media(getClass().getResource("/Game/music/Life.mp3").toExternalForm());
-        Media Gatemusic=new Media(getClass().getResource("/Game/music/The_Last_Stand.mp3").toExternalForm());
-        Media Signmusic=new Media(getClass().getResource("/Game/music/Titan_Striker.mp3 ").toExternalForm());
+    private MediaPlayer music_init(String name) {
+        Media media = new Media(getClass().getResource("/Game/music/Guardians.mp3").toExternalForm());
+        Media battlemusic = new Media(getClass().getResource("/Game/music/t_f_a_w.mp3").toExternalForm());
+        Media Wellmusic = new Media(getClass().getResource("/Game/music/Life.mp3").toExternalForm());
+        Media Gatemusic = new Media(getClass().getResource("/Game/music/The_Last_Stand.mp3").toExternalForm());
+        Media Signmusic = new Media(getClass().getResource("/Game/music/Titan_Striker.mp3 ").toExternalForm());
+        MediaPlayer mp;
 
-       if (name.equals("battle")){
-           return battlemusic;
-       }
-       else if (name.equals("common")){
-           return media;
-       }
-       else if (name.equals("well")){
-           return Wellmusic;
-       }
-       else if (name.equals("gate")){
-           return Gatemusic;
-       }
-       else if (name.equals("sign")){
-           return Signmusic;
-       }
-       return null;
+
+        if (name.equals("battle")) {
+            mp=new MediaPlayer(battlemusic);
+            return mp;
+        } else if (name.equals("common")) {
+            mp=new MediaPlayer(media);
+            return mp;
+        } else if (name.equals("well")) {
+            mp=new MediaPlayer(Wellmusic);
+            return mp;
+        } else if (name.equals("gate")) {
+            mp=new MediaPlayer(Gatemusic);
+            return mp;
+        } else if (name.equals("sign")) {
+            mp=new MediaPlayer(Signmusic);
+            return mp;
+        }
+        return null;
     }
 
     /**
-     * a method that plays the music it gets as parameter.
-     * @param med the music the method plays
+     * a method that plays the music.
      */
-    private void setMusic_for_events(Media med){
-
-       musicplayer = new MediaPlayer(med);
-        musicplayer.play();
-        musicplayer.setVolume(0.5);
-        if (musicplayer.getMedia().equals(music_init("common"))&& is_gate_event){
-            musicplayer=new MediaPlayer(music_init("gate"));
-        }
-        else if (musicplayer.getMedia().equals(music_init("common"))&& is_fight_event){
-            musicplayer=new MediaPlayer(music_init("battle"));
-        }
-        else if (musicplayer.getMedia().equals(music_init("common"))&& is_sign_event){
-            musicplayer=new MediaPlayer(music_init("sign"));
-        }
-        else if (musicplayer.getMedia().equals(music_init("common"))&& is_well_event){
-            musicplayer=new MediaPlayer(music_init("well"));
+    private void setMusic_for_events() {
+        if (!is_common){
+            musicplayer = music_init("common");
+            musicplayer.setAutoPlay(true);
+            musicplayer.setVolume(0.5);
+            is_common=true;
         }
 
+        if (is_gate_event) {
+            logger.trace("in is_gate");
+                musicplayer.dispose();
+                musicplayer = music_init("gate");
+                musicplayer.setAutoPlay(true);
+        } else if (is_fight_event) {
+            logger.trace("in is_fight");
+            musicplayer.dispose();
+            musicplayer = music_init("battle");
+            musicplayer.setAutoPlay(true);
+        } else if (is_sign_event) {
+            logger.trace("in is_sign");
+            musicplayer.dispose();
+            musicplayer = music_init("sign");
+            musicplayer.setAutoPlay(true);
+        } else if (is_well_event) {
+            logger.trace("in is_Well");
+            musicplayer.dispose();
+            musicplayer = music_init("well");
+            musicplayer.setAutoPlay(true);
+        }
 
         musicplayer.setOnEndOfMedia(new Runnable() {
             public void run() {
                 musicplayer.seek(Duration.ZERO);
             }
-            });
+        });
     }
-
 
 
     @Override
@@ -1010,7 +1025,7 @@ public class ForestController implements Initializable {
         inittrees();
 
         //init music
-       setMusic_for_events(music_init("common"));
+        setMusic_for_events();
 
         //init the bear
         bear = new Bear(730, 314, bear_fig, entity_pane);
@@ -1150,7 +1165,7 @@ public class ForestController implements Initializable {
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
                     is_sign_event = false;
-                    setMusic_for_events(music_init("common"));
+                    is_common=false;
                 }
             }
             if (signevent.getcounter() > 54) {
@@ -1162,14 +1177,14 @@ public class ForestController implements Initializable {
                 event_fig.setVisible(false);
                 is_well_event = false;
                 wellevent.setcounter(0);
-                setMusic_for_events(music_init("common"));
+                is_common=false;
             }
             if (wellevent.getcounter() > 0 && wellevent.getcounter() < 54) {
                 if (text_pane.isVisible()) {
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
                     is_well_event = false;
-                    setMusic_for_events(music_init("common"));
+                    is_common=false;
                 }
             }
             if (wellevent.getcounter() >= 55) {
@@ -1182,14 +1197,14 @@ public class ForestController implements Initializable {
                 event_fig.setVisible(false);
                 is_gate_event = false;
                 gateEvent.setcounter(0);
-                setMusic_for_events(music_init("common"));
+                is_common=false;
             }
             if (gateEvent.getcounter() > 0 && gateEvent.getcounter() < 54) {
                 if (text_pane.isVisible()) {
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
                     is_gate_event = false;
-                    setMusic_for_events(music_init("common"));
+                    is_common=false;
                 }
             }
             if (gateEvent.getcounter() >= 55) {
@@ -1202,7 +1217,7 @@ public class ForestController implements Initializable {
                     text_pane.setVisible(false);
                     event_fig.setVisible(false);
                     is_fight_event = false;
-                    setMusic_for_events(music_init("common"));
+                    is_common=false;
                 }
             }
             if (fight.getcounter() > 54) {
@@ -1561,39 +1576,40 @@ public class ForestController implements Initializable {
      * method to start the event when the player collides with the sign near the pond.
      */
     private void start_gate_event() {
-            if (Collosion.Collosion_tp(player)) {
-                logger.info("counter in gate event: " + gateEvent.getcounter());
-                if (gateEvent.Gate_crossroad(player) == 0) {
+        if (Collosion.Collosion_tp(player)) {
+            logger.info("counter in gate event: " + gateEvent.getcounter());
+            if (gateEvent.Gate_crossroad(player) == 0) {
 
-                    get_text_pane().setDisable(false);
-                    can_move = false;
-                    is_gate_event = true;
-                    event_fig.setVisible(true);
-                    setpic(event_fig, "city");
-                    eventfig_scale(1.6);
-                    getOption1().setVisible(true);
-                    getOption2().setVisible(false);
-                    getOption3().setVisible(false);
-                    getOption4().setVisible(false);
-                    get_text_pane().setVisible(true);
-                    setText_pane_text("You reach the city gates, but they won't open it for you\n" +
-                            "The city guard opens a small window and tells you:\n" +
-                            "'We can't let you in until the bear is gone... It might rush in the moment the gate is open...'");
-                    setOption1("wonderful...");
-                    gateEvent.setcounter(-5);
+                get_text_pane().setDisable(false);
+                can_move = false;
+                is_gate_event = true;
+                event_fig.setVisible(true);
+                setpic(event_fig, "city");
+                eventfig_scale(1.6);
+                getOption1().setVisible(true);
+                getOption2().setVisible(false);
+                getOption3().setVisible(false);
+                getOption4().setVisible(false);
+                get_text_pane().setVisible(true);
+                setText_pane_text("You reach the city gates, but they won't open it for you\n" +
+                        "The city guard opens a small window and tells you:\n" +
+                        "'We can't let you in until the bear is gone... It might rush in the moment the gate is open...'");
+                setOption1("wonderful...");
+                gateEvent.setcounter(-5);
 
-                } else if (gateEvent.Gate_crossroad(player) == 1) {
-                    is_gate_event = true;
-                    setpane();
-                    setpic(event_fig, "city");
-                    eventfig_scale(1.9);
-                    set_gate_event();
-                } else if (gateEvent.Gate_crossroad(player) == -1) {
-                    logger.info("its -1 bruh");
-                }
+            } else if (gateEvent.Gate_crossroad(player) == 1) {
+                is_gate_event = true;
+                setpane();
+                setpic(event_fig, "city");
+                eventfig_scale(1.9);
+                set_gate_event();
+            } else if (gateEvent.Gate_crossroad(player) == -1) {
+                logger.info("its -1 bruh");
             }
+        }
     }
-    private void set_gate_event(){
+
+    private void set_gate_event() {
         getOption1().setVisible(true);
         getOption2().setVisible(true);
         getOption3().setVisible(false);
@@ -1604,6 +1620,7 @@ public class ForestController implements Initializable {
         setOption1("'Yeah,he bear is gone for good...'");
         setOption2("'Nah, it's not dead yet.(Lie)'");
     }
+
     private void theGateEvent(int round_counter, int option) throws FileNotFoundException, JAXBException {
         switch (round_counter) {
             case -5:
@@ -1882,12 +1899,14 @@ public class ForestController implements Initializable {
         //collosion with bear
         start_fight_after_bear_collides();
 
+
         //collosion detection between items and player
         Collosion.Collosion_detection_item(this, player);
         start_sign_event();
         start_well_event();
         start_gate_event();
         change_to_city();
+        setMusic_for_events();
 
         //collosion detection between trees and player
         Collosion.Collosion_detection(player, getTree(tree));
