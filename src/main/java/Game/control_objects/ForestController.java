@@ -13,9 +13,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javafx.util.Duration;
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
@@ -46,6 +49,8 @@ public class ForestController implements Initializable {
     private CityController cityController = new CityController();
     private Inventory inv = new Inventory(player);
     private Images images = new Images();
+    private Media media = null;
+    private MediaPlayer musicplayer;
 
 
     //declaring the tree objects
@@ -232,8 +237,9 @@ public class ForestController implements Initializable {
     @FXML
     private ImageView tree_fig67;
 
+
     /**
-     * default constructor for the class
+     * default constructor for the class.
      */
     public ForestController() throws MalformedURLException {
     }
@@ -242,7 +248,7 @@ public class ForestController implements Initializable {
     //fxml methods
 
     /**
-     * method that uses the <code>XmlMethods</code> class as its base to save the playerdata into the xml file
+     * method that uses the <code>XmlMethods</code> class as its base to save the playerdata into the xml file.
      *
      * @throws FileNotFoundException throws if the xml does not exists.
      * @throws JAXBException
@@ -253,7 +259,7 @@ public class ForestController implements Initializable {
     }
 
     /**
-     * method that uses the <code>XmlMethods</code> class as its base to load the playerdata from the xml file
+     * method that uses the <code>XmlMethods</code> class as its base to load the playerdata from the xml file.
      *
      * @throws FileNotFoundException throws if the xml does not exists.
      * @throws JAXBException
@@ -339,7 +345,7 @@ public class ForestController implements Initializable {
 
 
     /**
-     * writes the name and gender of the player into the game
+     * writes the name and gender of the player into the game.
      */
     @FXML
     private void setname() {
@@ -378,6 +384,9 @@ public class ForestController implements Initializable {
         close_inventory();
     }
 
+    /**
+     * method that runs when the player opens the inventory.
+     */
     public void open_inventory() {
         getInventory().setVisible(true);
 
@@ -423,7 +432,9 @@ public class ForestController implements Initializable {
             }
         }
     }
-
+    /**
+     * method that runs when the player closes the inventory.
+     */
     public void close_inventory() {
         getInventory().setVisible(false);
         getNote_desc().setVisible(false);
@@ -432,7 +443,7 @@ public class ForestController implements Initializable {
 
 
     /**
-     * method to set the main Scene's player to this scene
+     * method to set the main Scene's player to this scene.
      *
      * @param player2 player object from the Game class
      */
@@ -444,7 +455,7 @@ public class ForestController implements Initializable {
     }
 
     /**
-     * a constructor for TreeObject objects, that uses the getTree function as its return value
+     * a constructor for TreeObject objects, that uses the getTree function as its return value.
      *
      * @param x    x coords of the tree object
      * @param y    y coords of the tree object
@@ -457,7 +468,7 @@ public class ForestController implements Initializable {
     }
 
     /**
-     * method that raises the player's score and then saves the data into the xml
+     * method that raises the player's score and then saves the data into the xml.
      *
      * @throws FileNotFoundException throws if the xml does not exists.
      * @throws JAXBException
@@ -469,7 +480,7 @@ public class ForestController implements Initializable {
     }
 
     /**
-     * method that gets called when the player collides with an item, then calls the raiseScore and isThere methods
+     * method that gets called when the player collides with an item, then calls the raiseScore and isThere methods.
      *
      * @throws FileNotFoundException throws if the xml does not exists.
      * @throws JAXBException
@@ -480,7 +491,7 @@ public class ForestController implements Initializable {
     }
 
     /**
-     * method that checks if the player's itemlist contains the items on the map, and if it does, makes the items disappear
+     * method that checks if the player's itemlist contains the items on the map, and if it does, makes the items disappear.
      */
     private void isThere() {
         if (player.getFought()) {
@@ -549,7 +560,7 @@ public class ForestController implements Initializable {
 
 
     /**
-     * method to initialize trees
+     * method to initialize trees.
      */
     public void inittrees() {
         tree = settrees((int) tree_fig.getLayoutX(), (int) tree_fig.getLayoutY(), tree_fig);
@@ -624,7 +635,7 @@ public class ForestController implements Initializable {
 
 
     /**
-     * method that deals with the player movement
+     * method that deals with the player movement.
      */
     private void movement() {
         AtomicBoolean presseda = new AtomicBoolean(false);
@@ -933,11 +944,48 @@ public class ForestController implements Initializable {
 
     }
 
+    /**
+     * function that is dealing with initializing the musics and returns the chosen one.
+     * @param name the name of the music you want the function to return
+     */
+    private Media music_init(String name){
+       media= new Media(getClass().getResource("/Game/music/Guardians.mp3").toExternalForm());
+       Media battlemusic=new Media(getClass().getResource("/Game/music/t_f_a_w.mp3").toExternalForm());
+
+       if (name.equals("battle")){
+           return battlemusic;
+       }
+       else if (name.equals("common")){
+           return media;
+       }
+       return null;
+    }
+
+    /**
+     * a method that plays the music it gets as parameter.
+     * @param med the music the method plays
+     */
+    private void setMusic_for_events(Media med){
+        musicplayer = new MediaPlayer(med);
+        musicplayer.setAutoPlay(true);
+        musicplayer.setVolume(0.5);
+
+        musicplayer.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                musicplayer.seek(Duration.ZERO);
+            }
+            });
+    }
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //initializing trees
         inittrees();
+
+        //init music
+       setMusic_for_events(music_init("common"));
 
         //init the bear
         bear = new Bear(730, 314, bear_fig, entity_pane);
