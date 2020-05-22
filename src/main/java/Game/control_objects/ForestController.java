@@ -49,7 +49,6 @@ public class ForestController implements Initializable {
     private CityController cityController = new CityController();
     private Inventory inv = new Inventory(player);
     private Images images = new Images();
-    private Media media = null;
     private MediaPlayer musicplayer;
 
 
@@ -949,10 +948,11 @@ public class ForestController implements Initializable {
      * @param name the name of the music you want the function to return
      */
     private Media music_init(String name){
-       media= new Media(getClass().getResource("/Game/music/Guardians.mp3").toExternalForm());
+       Media media= new Media(getClass().getResource("/Game/music/Guardians.mp3").toExternalForm());
        Media battlemusic=new Media(getClass().getResource("/Game/music/t_f_a_w.mp3").toExternalForm());
        Media Wellmusic=new Media(getClass().getResource("/Game/music/Life.mp3").toExternalForm());
         Media Gatemusic=new Media(getClass().getResource("/Game/music/The_Last_Stand.mp3").toExternalForm());
+        Media Signmusic=new Media(getClass().getResource("/Game/music/Titan_Striker.mp3 ").toExternalForm());
 
        if (name.equals("battle")){
            return battlemusic;
@@ -966,6 +966,9 @@ public class ForestController implements Initializable {
        else if (name.equals("gate")){
            return Gatemusic;
        }
+       else if (name.equals("sign")){
+           return Signmusic;
+       }
        return null;
     }
 
@@ -974,9 +977,23 @@ public class ForestController implements Initializable {
      * @param med the music the method plays
      */
     private void setMusic_for_events(Media med){
-        musicplayer = new MediaPlayer(med);
-        musicplayer.setAutoPlay(true);
+
+       musicplayer = new MediaPlayer(med);
+        musicplayer.play();
         musicplayer.setVolume(0.5);
+        if (musicplayer.getMedia().equals(music_init("common"))&& is_gate_event){
+            musicplayer=new MediaPlayer(music_init("gate"));
+        }
+        else if (musicplayer.getMedia().equals(music_init("common"))&& is_fight_event){
+            musicplayer=new MediaPlayer(music_init("battle"));
+        }
+        else if (musicplayer.getMedia().equals(music_init("common"))&& is_sign_event){
+            musicplayer=new MediaPlayer(music_init("sign"));
+        }
+        else if (musicplayer.getMedia().equals(music_init("common"))&& is_well_event){
+            musicplayer=new MediaPlayer(music_init("well"));
+        }
+
 
         musicplayer.setOnEndOfMedia(new Runnable() {
             public void run() {
@@ -1203,7 +1220,6 @@ public class ForestController implements Initializable {
         if (Collosion.Collosion_sign(player)) {
             if (signevent.Sign_crossroad(player) == 1) {
                 is_sign_event = true;
-                setMusic_for_events(music_init("battle"));
                 setpane();
                 setpic(event_fig, "ws");
                 eventfig_scale(1.1);
@@ -1323,7 +1339,6 @@ public class ForestController implements Initializable {
     private void start_well_event() {
         if (Collosion.Collosion_well(player)) {
             logger.info("counter in well event: " + wellevent.getcounter());
-            setMusic_for_events(music_init("well"));
             if (wellevent.Well_crossroad(player) == -1) {
 
                 get_text_pane().setDisable(false);
@@ -1548,7 +1563,6 @@ public class ForestController implements Initializable {
     private void start_gate_event() {
             if (Collosion.Collosion_tp(player)) {
                 logger.info("counter in gate event: " + gateEvent.getcounter());
-                setMusic_for_events(music_init("gate"));
                 if (gateEvent.Gate_crossroad(player) == 0) {
 
                     get_text_pane().setDisable(false);
@@ -1644,7 +1658,6 @@ public class ForestController implements Initializable {
         boolean can_start = Collosion.Collosion_detection(player, bear);
         if (can_start == false) {
             is_fight_event = true;
-            setMusic_for_events(music_init("battle"));
 
             if (fight.Fight_crossroad(player) == -1) {
                 logger.info("start fight after collosion, returned -1");
