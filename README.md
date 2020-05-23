@@ -1,4 +1,4 @@
-# Game project for swe class
+# Game project for swe class (link leadva)
 
 
 To run the project:
