@@ -17,7 +17,7 @@ import java.io.IOException;
 public class ForestScene {
     private static Logger logger = LoggerFactory.getLogger(ForestScene.class);
     private static Scene game_scene;
-    private Game game=new Game();
+    private Game game = new Game();
 
     static {
         try {
@@ -42,11 +42,13 @@ public class ForestScene {
         return game_scene;
     }
 
-
-    static void setRoot(String fxml) throws IOException {
-        game_scene.setRoot(loadFXML(fxml));
-    }
-
+    /**
+     * a function that loads the fxml file it gets as param.
+     *
+     * @param fxml the fxml file.
+     * @return the loaded fxml data.
+     * @throws IOException throws when the fxml file cant be loaded.
+     */
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("/Game/fxmls/" + fxml + ".fxml"));
         return fxmlLoader.load();

@@ -24,19 +24,28 @@ public class CityScene {
         }
     }
 
-
+    /**
+     * default constructor.
+     */
     public CityScene() {
     }
 
+    /**
+     * getter that returns the game_scene.
+     *
+     * @return game_scene.
+     */
     public static Scene getGame_scene() {
         return game_scene;
     }
 
-
-    static void setRoot(String fxml) throws IOException {
-        game_scene.setRoot(loadFXML(fxml));
-    }
-
+    /**
+     * a function that loads the fxml file it gets as param.
+     *
+     * @param fxml the fxml file.
+     * @return the loaded fxml data.
+     * @throws IOException throws when the fxml file cant be loaded.
+     */
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("/Game/fxmls/" + fxml + ".fxml"));
         return fxmlLoader.load();

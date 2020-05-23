@@ -46,17 +46,15 @@ public class Game extends Application implements EventHandler<ActionEvent> {
 
     /**
      * default constructor for the game class.
-     *
-     * @throws IOException
      */
-    public Game() throws IOException {
+    public Game() {
     }
 
     /**
      * method that uses the <code>XmlMethods</code> class as its base to save the playerdata into the xml file.
      *
-     * @throws FileNotFoundException
-     * @throws JAXBException
+     * @throws FileNotFoundException the xml file doesnt exists.
+     * @throws JAXBException         if there is an error with the xml file.
      */
     public void savetoxml() throws FileNotFoundException, JAXBException {
         xml_methods.save(player);
@@ -65,8 +63,8 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     /**
      * method that uses the <code>XmlMethods</code> class as its base to load the playerdata from the xml .
      *
-     * @throws JAXBException
-     * @throws FileNotFoundException
+     * @throws JAXBException         if there is an error with the xml file.
+     * @throws FileNotFoundException the xml file doesnt exists.
      */
     public void readxml() throws JAXBException, FileNotFoundException {
         Player loadplayer = xml_methods.load();
@@ -83,8 +81,8 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     /**
      * method to start the game and change the stage's scene from the main screen into the first level: ForestScene.
      *
-     * @throws IOException
-     * @throws JAXBException
+     * @throws IOException   error occured with the fxml file.
+     * @throws JAXBException if there is an error with the xml file.
      */
     public void start_game() throws IOException, JAXBException {
         savetoxml();
@@ -95,13 +93,21 @@ public class Game extends Application implements EventHandler<ActionEvent> {
 
     }
 
-
+    /**
+     * main method of the program.
+     *
+     * @param args optional arguments.
+     */
     public static void main(String[] args) {
         launch(args);
 
     }
 
-
+    /**
+     * start method of the program , that comes with the Application extension.
+     *
+     * @param primarystage the Stage.
+     */
     @Override
     public void start(Stage primarystage) {
         player = new Player();
@@ -147,9 +153,21 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     public static Stage getPrimarystage() {
         return primarystage;
     }
-    public Player getPlayer(){return player;}
 
+    /**
+     * getter that returns the player.
+     *
+     * @return player obj.
+     */
+    public Player getPlayer() {
+        return player;
+    }
 
+    /**
+     * an event handler method.
+     *
+     * @param actionEvent the event that happened.
+     */
     @Override
     public void handle(ActionEvent actionEvent) {
 

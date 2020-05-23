@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * controller class for the city_window fxml
+ * controller class for the city_window fxml.
  */
 public class CityController implements Initializable {
     private static Logger logger = LoggerFactory.getLogger(CityController.class);
@@ -25,7 +25,10 @@ public class CityController implements Initializable {
     private String playername;
     private XmlMethods xmlMethods = new XmlMethods();
 
-    public CityController() throws MalformedURLException {
+    /**
+     * default constructor.
+     */
+    public CityController() {
     }
 
     public void setPlayer(Player player2) {
@@ -34,7 +37,7 @@ public class CityController implements Initializable {
     }
 
     /**
-     * a method that loads the CityScene after the player uses the city gates in the ForestScene
+     * a method that loads the CityScene after the player uses the city gates in the ForestScene.
      *
      * @param primarystage the Game class's stage
      * @throws FileNotFoundException

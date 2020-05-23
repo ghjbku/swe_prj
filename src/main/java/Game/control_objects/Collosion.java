@@ -25,7 +25,7 @@ public class Collosion {
     }
 
     /**
-     * function that detects if the player collides with an object
+     * function that detects if the player collides with an object.
      *
      * @param plr the player
      * @param obj the object
@@ -134,7 +134,7 @@ public class Collosion {
     }
 
     /**
-     * checks the collosion between the player and the city gate teleporter
+     * checks the collosion between the player and the city gate teleporter.
      *
      * @param plr the player
      */
@@ -150,6 +150,11 @@ public class Collosion {
         return false;
     }
 
+    /**
+     * checks the collosion between the player and the wooden sign next to the water.
+     *
+     * @param plr the player
+     */
     public static boolean Collosion_sign(Player plr) {
         final int sign_x = 59, sign_y = 409;
         if (
@@ -162,6 +167,11 @@ public class Collosion {
         return false;
     }
 
+    /**
+     * checks the collosion between the player and the well at the bottom right corner.
+     *
+     * @param plr the player
+     */
     public static boolean Collosion_well(Player plr) {
         final int well_x = 725, well_y = 533;
         if (

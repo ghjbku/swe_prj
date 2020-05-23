@@ -284,61 +284,110 @@ public class ForestController implements Initializable {
         isThere();
     }
 
+
+    /**
+     * fires when the player clicks on option1 button.
+     *
+     * @throws FileNotFoundException throws when the xml file does not exists.
+     * @throws JAXBException         if there is an error with the xml file.
+     */
     @FXML
-    private void option1_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
+    private void option1_clicked() throws FileNotFoundException, JAXBException {
         option1();
     }
 
+    /**
+     * fires when the player clicks on option2 button.
+     *
+     * @throws FileNotFoundException throws when the xml file does not exists.
+     * @throws JAXBException         if there is an error with the xml file.
+     */
     @FXML
-    private void option2_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
+    private void option2_clicked() throws FileNotFoundException, JAXBException {
         option2();
     }
 
+    /**
+     * fires when the player clicks on option3 button.
+     *
+     * @throws FileNotFoundException throws when the xml file does not exists.
+     * @throws JAXBException         if there is an error with the xml file.
+     */
     @FXML
-    private void option3_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
+    private void option3_clicked() throws FileNotFoundException, JAXBException {
         option3();
     }
 
+    /**
+     * fires when the player clicks on option4 button.
+     *
+     * @throws FileNotFoundException throws when the xml file does not exists.
+     * @throws JAXBException         if there is an error with the xml file.
+     */
     @FXML
-    private void option4_clicked() throws FileNotFoundException, JAXBException, InterruptedException, URISyntaxException, MalformedURLException {
+    private void option4_clicked() throws FileNotFoundException, JAXBException {
         option4();
     }
 
+    /**
+     * method that gets called when the mouse is above the label.
+     */
     @FXML
     private void label_on_hover_in1() {
         option1.setStyle("-fx-background-color:black;-fx-text-fill: green");
     }
 
+    /**
+     * method that gets called when the mouse leaves the label.
+     */
     @FXML
     private void label_on_hover_out1() {
         option1.setStyle("-fx-background-color:gray;-fx-text-fill: black");
     }
 
+    /**
+     * method that gets called when the mouse is above the label.
+     */
     @FXML
     private void label_on_hover_in2() {
         option2.setStyle("-fx-background-color:black;-fx-text-fill: green");
     }
 
+    /**
+     * method that gets called when the mouse leaves the label.
+     */
     @FXML
     private void label_on_hover_out2() {
         option2.setStyle("-fx-background-color:gray;-fx-text-fill: black");
     }
 
+    /**
+     * method that gets called when the mouse is above the label.
+     */
     @FXML
     private void label_on_hover_in3() {
         option3.setStyle("-fx-background-color:black;-fx-text-fill: green");
     }
 
+    /**
+     * method that gets called when the mouse leaves the label.
+     */
     @FXML
     private void label_on_hover_out3() {
         option3.setStyle("-fx-background-color:gray;-fx-text-fill: black");
     }
 
+    /**
+     * method that gets called when the mouse is above the label.
+     */
     @FXML
     private void label_on_hover_in4() {
         option4.setStyle("-fx-background-color:black;-fx-text-fill: green");
     }
 
+    /**
+     * method that gets called when the mouse leaves the label.
+     */
     @FXML
     private void label_on_hover_out4() {
         option4.setStyle("-fx-background-color:gray;-fx-text-fill: black");
@@ -367,6 +416,13 @@ public class ForestController implements Initializable {
         playername_label.setText(playername + ", " + player.getgender());
     }
 
+
+    /**
+     * method that sets the picture of the fig it gets as parameter, with the image it gets from the images.getimage() method with the str param.
+     *
+     * @param fig the ImageView you want to set the picture to.
+     * @param str a string that is unique to choose the correct image from the images class.
+     */
     @FXML
     public void setpic(ImageView fig, String str) {
         fig.setImage(images.getimage(str));
@@ -375,21 +431,33 @@ public class ForestController implements Initializable {
     //inventory related stuff
 
 
+    /**
+     * opens the description of the note in the inventory.
+     */
     @FXML
     private void open_note_desc() {
         getNote_desc().setVisible(true);
     }
 
+    /**
+     * opens the description of the dagger in the inventory.
+     */
     @FXML
     private void open_dagger_desc() {
         getDagger_desc().setVisible(true);
     }
 
+    /**
+     * opens the inventory.
+     */
     @FXML
     private void open_inv() {
         open_inventory();
     }
 
+    /**
+     * closes the inventory.
+     */
     @FXML
     private void close_inv() {
         close_inventory();
@@ -1038,8 +1106,8 @@ public class ForestController implements Initializable {
         //init player data
         try {
             load();
-        } catch (JAXBException|FileNotFoundException e) {
-           logger.error("error : "+e);
+        } catch (JAXBException | FileNotFoundException e) {
+            logger.error("error : " + e);
         }
 
         //initializing trees
@@ -1086,6 +1154,13 @@ public class ForestController implements Initializable {
         can_move = false;
     }
 
+    /**
+     * a method that functions as a crossroad that chooses the correct "road" the program will take
+     * when they click on the option1 button.
+     *
+     * @throws FileNotFoundException throws when the xml file does not exists.
+     * @throws JAXBException         happens when there is an error with the xml file.
+     */
     public void option1() throws FileNotFoundException, JAXBException {
         if (is_sign_event) {
             theSignEvent(signevent.getcounter(), 1);
@@ -1116,7 +1191,14 @@ public class ForestController implements Initializable {
 
     }
 
-    public void option2() throws FileNotFoundException, JAXBException, MalformedURLException {
+    /**
+     * a method that functions as a crossroad that chooses the correct "road" the program will take
+     * when they click on the option2 button.
+     *
+     * @throws FileNotFoundException throws when the xml file does not exists.
+     * @throws JAXBException         happens when there is an error with the xml file.
+     */
+    public void option2() throws FileNotFoundException, JAXBException {
         if (is_sign_event) {
             theSignEvent(signevent.getcounter(), 2);
             signevent.setcounter(signevent.getcounter() + 1);
@@ -1133,7 +1215,14 @@ public class ForestController implements Initializable {
         }
     }
 
-    public void option3() throws FileNotFoundException, JAXBException, MalformedURLException {
+    /**
+     * a method that functions as a crossroad that chooses the correct "road" the program will take
+     * when they click on the option3 button.
+     *
+     * @throws FileNotFoundException throws when the xml file does not exists.
+     * @throws JAXBException         happens when there is an error with the xml file.
+     */
+    public void option3() throws FileNotFoundException, JAXBException {
         if (is_sign_event) {
             theSignEvent(signevent.getcounter(), 3);
             signevent.setcounter(signevent.getcounter() + 1);
@@ -1147,7 +1236,14 @@ public class ForestController implements Initializable {
         }
     }
 
-    public void option4() throws FileNotFoundException, JAXBException, MalformedURLException {
+    /**
+     * a method that functions as a crossroad that chooses the correct "road" the program will take
+     * when they click on the option4 button.
+     *
+     * @throws FileNotFoundException throws when the xml file does not exists.
+     * @throws JAXBException         happens when there is an error with the xml file.
+     */
+    public void option4() throws FileNotFoundException, JAXBException {
         if (is_sign_event) {
             theSignEvent(signevent.getcounter(), 4);
             signevent.setcounter(signevent.getcounter() + 1);
@@ -1358,11 +1454,21 @@ public class ForestController implements Initializable {
         }
     }
 
+    /**
+     * method that sets the scale of the event_fig object.
+     *
+     * @param scale the number you want to be the scale.
+     */
     private void eventfig_scale(double scale) {
         event_fig.setScaleX(scale);
         event_fig.setScaleY(scale);
     }
 
+    /**
+     * fires when the player choses the wrong option, ending up dead.
+     *
+     * @param str the string that will be displayed on the textfield.
+     */
     private void signevent_lost(String str) {
         end_stuff(str);
         signevent.setcounter(55);
@@ -1372,6 +1478,9 @@ public class ForestController implements Initializable {
 
     //well event stuff
 
+    /**
+     * a method that will be called when the player collides with the well.
+     */
     private void start_well_event() {
         if (Collosion.Collosion_well(player)) {
             logger.info("counter in well event: " + wellevent.getcounter());
@@ -1555,13 +1664,20 @@ public class ForestController implements Initializable {
         }
     }
 
-
+    /**
+     * happens when the player chooses the wrong option.
+     *
+     * @param str the string that will be displayed on the textfield.
+     */
     private void wellevent_lost(String str) {
         end_stuff(str);
         wellevent.setcounter(55);
         player.setWellevent_done(true);
     }
 
+    /**
+     * a method that deletes the rope from the player's inventory and replaces it with the bow.
+     */
     private void wellevent_take_rope_give_bow() {
         ArrayList<Item> item = player.getItems();
         if (item.size() == 1) {
@@ -1630,6 +1746,9 @@ public class ForestController implements Initializable {
         }
     }
 
+    /**
+     * this method will be called when the player already won the battle with the bear and collides with the city gate.
+     */
     private void set_gate_event() {
         getOption1().setVisible(true);
         getOption2().setVisible(true);
@@ -1642,6 +1761,15 @@ public class ForestController implements Initializable {
         setOption2("'Nah, it's not dead yet.(Lie)'");
     }
 
+    /**
+     * the main method of the GateEvent, this method runs through the options the player choses and the consequences
+     * of the choices.
+     *
+     * @param round_counter the round_counter variable of the GateEvent class.
+     * @param option        the option the player have chosen.
+     * @throws FileNotFoundException throws when the xml file does not exists.
+     * @throws JAXBException         if there is an error with the xml file.
+     */
     private void theGateEvent(int round_counter, int option) throws FileNotFoundException, JAXBException {
         switch (round_counter) {
             case -5:
@@ -1771,7 +1899,15 @@ public class ForestController implements Initializable {
         fight.run = true;
     }
 
-
+    /**
+     * the main method of the Fight event, this method runs through the options the player choses and the consequences
+     * of the choices.
+     *
+     * @param round_counter the round_counter variable of the Fight class
+     * @param option        the option the player chose.
+     * @throws FileNotFoundException throws when the xml file does not exists.
+     * @throws JAXBException         if there is an error with the xml file.
+     */
     private void thefight(int round_counter, int option) throws FileNotFoundException, JAXBException {
         switch (round_counter) {
             case 0:

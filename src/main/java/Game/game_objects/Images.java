@@ -1,10 +1,19 @@
 package Game.game_objects;
 
 import javafx.scene.image.Image;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * a class that contains all the images the game has.
+ */
 public class Images {
+    /**
+     * default constructor.
+     *
+     * @throws MalformedURLException throws when the url given is wrong.
+     */
     public Images() throws MalformedURLException {
     }
 
@@ -21,6 +30,12 @@ public class Images {
     URL city_img = new URL(getClass().getResource("/Game/pics/city.png").toExternalForm());
     private Image city_image = new Image(city_img.toExternalForm());
 
+    /**
+     * function that returns an Image based on the string it got as param.
+     *
+     * @param str the "unique identifier" of the Image the program needs.
+     * @return an Image.
+     */
     public Image getimage(String str) {
         if (str.equals("p")) {
             return playerm_image;
@@ -30,11 +45,9 @@ public class Images {
             return waterh_image;
         } else if (str.equals("ws")) {
             return sign_image;
-        }
-        else if (str.equals("well")) {
+        } else if (str.equals("well")) {
             return well_image;
-        }
-        else if (str.equals("city")) {
+        } else if (str.equals("city")) {
             return city_image;
         }
         return null;
