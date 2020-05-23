@@ -11,15 +11,18 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 /**
- * class that checks the collosion between objects and the player(later obj + obj as well)
+ * class that checks the collosion between objects and the player(later obj + obj as well).
  */
 public class Collosion {
+    /**
+     * an implementation of the logger log4j.
+     */
     private static Logger logger = LoggerFactory.getLogger(Collosion.class);
     private static int dist = 10;
 
 
     /**
-     * default constructor for the class
+     * default constructor for the class.
      */
     public Collosion() {
     }
@@ -27,10 +30,10 @@ public class Collosion {
     /**
      * function that detects if the player collides with an object.
      *
-     * @param plr the player
-     * @param obj the object
-     * @return returns true if the collosion happens with inanimate objects(trees),false if with mobs(bear)
-     * @throws CollosionException happens when the player is inside the object
+     * @param plr the player.
+     * @param obj the object.
+     * @return returns true if the collosion happens with inanimate objects(trees),false if with mobs(bear).
+     * @throws CollosionException happens when the player is inside the object.
      */
     public static boolean Collosion_detection(Player plr, Entity obj) throws CollosionException {
 
@@ -56,6 +59,7 @@ public class Collosion {
      * method that checks if the player collides with an item, adds them into the player's item data.
      *
      * @param plr the player.
+     * @return true if the item is added, false if not.
      */
     public static boolean Collosion_detection_item(Player plr) {
         final int d_x = 65, d_y = 216;
@@ -136,7 +140,8 @@ public class Collosion {
     /**
      * checks the collosion between the player and the city gate teleporter.
      *
-     * @param plr the player
+     * @param plr the player.
+     * @return true if collided, false if not.
      */
     public static boolean Collosion_tp(Player plr) {
         final int tp_x = 768, tp_y = 23;
@@ -153,7 +158,8 @@ public class Collosion {
     /**
      * checks the collosion between the player and the wooden sign next to the water.
      *
-     * @param plr the player
+     * @param plr the player.
+     * @return true if collided, false if not.
      */
     public static boolean Collosion_sign(Player plr) {
         final int sign_x = 59, sign_y = 409;
@@ -170,7 +176,8 @@ public class Collosion {
     /**
      * checks the collosion between the player and the well at the bottom right corner.
      *
-     * @param plr the player
+     * @param plr the player.
+     * @return true if collided, false if not.
      */
     public static boolean Collosion_well(Player plr) {
         final int well_x = 725, well_y = 533;

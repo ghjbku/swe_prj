@@ -10,9 +10,12 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 /**
- * the class that contains the city "level" of the game
+ * the class that contains the city "level" of the game.
  */
 public class CityScene {
+    /**
+     * an implementation of the logger log4j.
+     */
     private static Logger logger = LoggerFactory.getLogger(CityScene.class);
     private static Scene game_scene;
 

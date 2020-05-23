@@ -9,7 +9,13 @@ import org.slf4j.LoggerFactory;
  */
 public class Fight {
     private int round_counter = 0;
+    /**
+     * a boolean value that tells if the player ran away from the fight.
+     */
     public boolean run = false;
+    /**
+     * an implementation of the logger log4j.
+     */
     private static Logger logger = LoggerFactory.getLogger(Fight.class);
 
     /**

@@ -12,7 +12,7 @@ public class GateEvent {
     private static Logger logger = LoggerFactory.getLogger(GateEvent.class);
 
     /**
-     * default constructor
+     * default constructor.
      */
     public GateEvent() {
     }

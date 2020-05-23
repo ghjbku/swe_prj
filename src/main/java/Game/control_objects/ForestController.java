@@ -31,10 +31,13 @@ import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Controller class for the forest_window fxml file
+ * Controller class for the forest_window fxml file.
  */
 public class ForestController implements Initializable {
     //variables
+    /**
+     * an implementation of the logger log4j.
+     */
     private static Logger logger = LoggerFactory.getLogger(ForestController.class);
     private Game game = new Game();
     private int incr = 2;
@@ -242,6 +245,8 @@ public class ForestController implements Initializable {
 
     /**
      * default constructor for the class.
+     *
+     * @throws IOException error with reading the fxml.
      */
     public ForestController() throws IOException {
     }
@@ -538,7 +543,7 @@ public class ForestController implements Initializable {
      * method that raises the player's score and then saves the data into the xml.
      *
      * @throws FileNotFoundException throws if the xml does not exists.
-     * @throws JAXBException
+     * @throws JAXBException         error with the xml file.
      */
     public void raiseScore() throws FileNotFoundException, JAXBException {
         player.setscore(player.getscore() + 10);
@@ -1124,13 +1129,9 @@ public class ForestController implements Initializable {
     }
 
     /**
-     * method that changes the Game class's scene into the CityScene from the ForestScene
-     *
-     * @throws FileNotFoundException throws if the xml does not exists.
-     * @throws JAXBException
-     * @throws URISyntaxException
+     * method that changes the Game class's scene into the CityScene from the ForestScene.
      */
-    private void change_to_city() throws FileNotFoundException, JAXBException, URISyntaxException {
+    private void change_to_city() {
         if (Collosion.Collosion_tp(player)) {
             if (tpready && player.getFought()) {
                 cityController.load_city(game.getPrimarystage());
@@ -1273,7 +1274,7 @@ public class ForestController implements Initializable {
     }
 
     /**
-     * method that checks if the event is over
+     * method that checks if the event is over.
      */
     private void is_event_over() {
         if (is_sign_event) {
@@ -1361,7 +1362,7 @@ public class ForestController implements Initializable {
     }
 
     /**
-     * setting the beginning text for the event
+     * setting the beginning text for the event.
      */
     private void set_sign_event() {
         setText_pane_text("You see a Sign in front of you just beside a big pond and on it there is a strange drawing, but you\n" +
@@ -1375,7 +1376,7 @@ public class ForestController implements Initializable {
     }
 
     /**
-     * gets called when the player haven't triggered the sign event before
+     * gets called when the player haven't triggered the sign event before.
      *
      * @param round_counter the signevent's round_counter.
      * @param option        the option the player chooses.
@@ -1513,7 +1514,7 @@ public class ForestController implements Initializable {
     }
 
     /**
-     * setting the beginning text for the event
+     * setting the beginning text for the event.
      */
     private void set_well_event() {
         setText_pane_text("You see a well in front of you, and you remember having a rope with you.\nAfter climbing into the pipe" +
@@ -1525,7 +1526,7 @@ public class ForestController implements Initializable {
     }
 
     /**
-     * gets called when the player haven't triggered the well event before
+     * gets called when the player haven't triggered the well event before.
      *
      * @param round_counter the wellevent's round_counter.
      * @param option        the option the player chooses.
@@ -2045,7 +2046,7 @@ public class ForestController implements Initializable {
     }
 
     /**
-     * method for collosion detection
+     * method for collosion detection.
      *
      * @throws CollosionException    throws when the play and the object is in the same coordinates
      * @throws FileNotFoundException throws if the xml does not exists.
@@ -2138,83 +2139,186 @@ public class ForestController implements Initializable {
 
 
     //getters
+
+    /**
+     * getter for the tree obj.
+     *
+     * @param tree the tree it wants to return.
+     * @return the tree.
+     */
     public TreeObject getTree(TreeObject tree) {
         return tree;
     }
 
+    /**
+     * getter for the textfield.
+     *
+     * @return the text_pane_text var.
+     */
     public Label gettext_pane_text() {
         return text_pane_text;
     }
 
+    /**
+     * getter that returns the option1.
+     *
+     * @return option1 var.
+     */
     public Label getOption1() {
         return option1;
     }
 
+    /**
+     * getter that returns the option2.
+     *
+     * @return option2 var.
+     */
     public Label getOption2() {
         return option2;
     }
 
+    /**
+     * getter that returns the option3.
+     *
+     * @return option3 var.
+     */
     public Label getOption3() {
         return option3;
     }
 
+    /**
+     * getter that returns the option4.
+     *
+     * @return option4 var.
+     */
     public Label getOption4() {
         return option4;
     }
 
+    /**
+     * getter that returns a label.
+     *
+     * @return dagger_desc obj.
+     */
     public Label getDagger_desc() {
         return dagger_desc;
     }
 
+    /**
+     * getter that returns a label.
+     *
+     * @return note_desc obj.
+     */
     public Label getNote_desc() {
         return note_desc;
     }
 
+    /**
+     * getter for the textpane.
+     *
+     * @return text_pane.
+     */
     public AnchorPane get_text_pane() {
         return text_pane;
     }
 
+    /**
+     * getter that returns the inventory.
+     *
+     * @return inventory.
+     */
     public AnchorPane getInventory() {
         return inventory;
     }
 
+    /**
+     * getter for ImageView.
+     *
+     * @return note_fig;
+     */
     public ImageView getNote_fig() {
         return note_fig;
     }
 
+    /**
+     * getter for ImageView.
+     *
+     * @return note_fig_inv;
+     */
     public ImageView getNote_fig_inv() {
         return note_fig_inv;
     }
 
+    /**
+     * getter for ImageView.
+     *
+     * @return dagger_fig;
+     */
     public ImageView getDagger_fig() {
         return dagger_fig;
     }
 
+    /**
+     * getter for ImageView.
+     *
+     * @return note_fig_inv;
+     */
     public ImageView getDagger_fig_inv() {
         return dagger_fig_inv;
     }
 
     //setters
+
+    /**
+     * setter that sets the text of the text field.
+     *
+     * @param text the text to set.
+     */
     public void setText_pane_text(String text) {
         text_pane_text.setText(text);
     }
 
+    /**
+     * setter that sets the text of the label.
+     *
+     * @param text the text to set.
+     */
     public void setOption1(String text) {
         option1.setText("1. " + text);
     }
 
+    /**
+     * setter that sets the text of the label.
+     *
+     * @param text the text to set.
+     */
     public void setOption2(String text) {
         option2.setText("2. " + text);
     }
 
+    /**
+     * setter that sets the text of the label.
+     *
+     * @param text the text to set.
+     */
     public void setOption3(String text) {
         option3.setText("3. " + text);
     }
 
+    /**
+     * setter that sets the text of the label.
+     *
+     * @param text the text to set.
+     */
     public void setOption4(String text) {
         option4.setText("4. " + text);
     }
 
+    /**
+     * setter that sets the tpready variable's value.
+     *
+     * @param ready a boolean value.
+     */
     public void setTpReady(boolean ready) {
         tpready = ready;
     }

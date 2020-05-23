@@ -31,6 +31,10 @@ public class CityController implements Initializable {
     public CityController() {
     }
 
+    /**
+     * method that sets the controller's player to the player it gets as param.
+     * @param player2 the player obj.
+     */
     public void setPlayer(Player player2) {
         player = player2;
         playername = player.getName();
@@ -40,16 +44,18 @@ public class CityController implements Initializable {
      * a method that loads the CityScene after the player uses the city gates in the ForestScene.
      *
      * @param primarystage the Game class's stage
-     * @throws FileNotFoundException
-     * @throws JAXBException
-     * @throws URISyntaxException
      */
-    public void load_city(Stage primarystage) throws FileNotFoundException, JAXBException, URISyntaxException {
+    public void load_city(Stage primarystage) {
         logger.info("Loading the city scene!");
         primarystage.setScene(CityScene.getGame_scene());
         primarystage.show();
     }
 
+    /**
+     * method from the Initializable implementation.
+     * @param url an url.
+     * @param resourceBundle a resource bundle.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

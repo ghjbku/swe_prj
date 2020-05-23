@@ -34,7 +34,7 @@ public class JAXBHelper {
 
     /**
      * Deserializes an object from XML.
-     *
+     * @param <T> Template
      * @param clazz the class of the object
      * @param is the {@code InputStream} to read from
      * @return the resulting object

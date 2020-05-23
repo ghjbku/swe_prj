@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 /**
- * the class that contains the forest "level" of the game
+ * the class that contains the forest "level" of the game.
  */
 public class ForestScene {
     private static Logger logger = LoggerFactory.getLogger(ForestScene.class);
@@ -28,13 +28,13 @@ public class ForestScene {
     }
 
     /**
-     * default constructor for the class
+     * default constructor for the class.
      */
-    public ForestScene() throws IOException {
+    public ForestScene() {
     }
 
     /**
-     * getter function for the class's game_scene for the Game class to use
+     * getter function for the class's game_scene for the Game class to use.
      *
      * @return the game_scene Scene
      */
