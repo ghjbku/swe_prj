@@ -4,7 +4,7 @@
     <groupId>hu.unideb.inf</groupId>
     <artifactId>swe_proj</artifactId>
     <packaging>jar</packaging>
-    <version>1.1-alpha1</version>
+    <version>1.2-alpha2</version>
     <url>https://shrek.unideb.hu/~windsake/cppfiles</url>
 
     <description>RPG game project for Software Engineering class.</description>
