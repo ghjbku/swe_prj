@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 /**
@@ -47,7 +48,7 @@ public class Game extends Application implements EventHandler<ActionEvent> {
     /**
      * default constructor for the game class.
      */
-    public Game() {
+    public Game() throws URISyntaxException {
     }
 
     /**

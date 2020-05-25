@@ -248,7 +248,7 @@ public class ForestController implements Initializable {
      *
      * @throws IOException error with reading the fxml.
      */
-    public ForestController() throws IOException {
+    public ForestController() throws IOException, URISyntaxException {
     }
 
 

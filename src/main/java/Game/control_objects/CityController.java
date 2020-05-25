@@ -28,7 +28,7 @@ public class CityController implements Initializable {
     /**
      * default constructor.
      */
-    public CityController() {
+    public CityController() throws URISyntaxException {
     }
 
     /**

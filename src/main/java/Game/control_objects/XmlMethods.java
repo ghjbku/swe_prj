@@ -6,18 +6,19 @@ import jaxb.JAXBHelper;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
+import java.net.URISyntaxException;
 
 
 /**
  * Class for the xml saving and loading methods.
  */
 public class XmlMethods {
-    File file = new File(Game.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+    File file = new File(Game.class.getProtectionDomain().getCodeSource().getLocation().toURI());
 
     /**
      * default constructor for the class.
      */
-    public XmlMethods() {
+    public XmlMethods() throws URISyntaxException {
     }
 
     /**

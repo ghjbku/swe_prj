@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * the class that contains the forest "level" of the game.
@@ -30,7 +31,7 @@ public class ForestScene {
     /**
      * default constructor for the class.
      */
-    public ForestScene() {
+    public ForestScene() throws URISyntaxException {
     }
 
     /**
