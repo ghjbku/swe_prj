@@ -1038,7 +1038,7 @@ public class ForestController implements Initializable {
         Media battlemusic = new Media(getClass().getResource("/Game/music/t_f_a_w.mp3").toExternalForm());
         Media Wellmusic = new Media(getClass().getResource("/Game/music/Life.mp3").toExternalForm());
         Media Gatemusic = new Media(getClass().getResource("/Game/music/The_Last_Stand.mp3").toExternalForm());
-        Media Signmusic = new Media(getClass().getResource("/Game/music/Titan_Striker.mp3 ").toExternalForm());
+        Media Signmusic = new Media(getClass().getResource("/Game/music/Titan_Striker.mp3").toExternalForm());
         MediaPlayer mp;
 
 
